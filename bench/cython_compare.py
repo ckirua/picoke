@@ -84,7 +84,7 @@ def _worker(root: str, samples: int, iterations: int, warmups: int) -> None:
         ("1KiB", bytes(range(256)) * 4),
         ("1MiB", bytes(range(256)) * 4096),
     ):
-        encoded = base64.crypto.b64encode(payload).decode("ascii")
+        encoded = base64.b64encode(payload).decode("ascii")
         cases[f"Base64 bytes encode {size_name}"] = lambda p=payload: crypto.b64encode(p)
         cases[f"Base64 str encode {size_name}"] = lambda p=payload: crypto.b64encode_ascii(p)
         cases[f"Base64 str decode {size_name}"] = lambda e=encoded: crypto.b64decode(e)
