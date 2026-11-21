@@ -127,6 +127,36 @@ The ring allocates its reference slots upfront and retains immutable bytes
 without copying them. Popped bytes remain valid after the slot is reused.
 See the [queue benchmarks](bench/README.md#bounded-byte-fifo) for tradeoffs.
 
+## File I/O
+
+```python
+from contextlib import closing
+from picoke.io.files import read_jsonl, write_jsonl
+
+write_jsonl("events.jsonl", [{"event": "started"}, {"event": "finished"}])
+with closing(read_jsonl("events.jsonl")) as records:
+    print(next(records))
+```
+
+`read_json` and `write_json` handle one UTF-8 JSON document. `read_jsonl`
+streams one UTF-8 JSON value per line and raises `JSONLDecodeError` with
+the physical line number for invalid UTF-8, invalid JSON, or blank lines.
+`write_jsonl` overwrites the file with compact, LF-terminated records.
+
+Use `iter_lines(path, strip=True, skip_empty=True, comment_prefix="#")`
+for filtered text, or wrap it in `list()` for a snapshot. Close line and
+JSONL iterators explicitly when stopping early, as above.
+
+`read_toml` is available without extras; `write_toml` needs `picoke[toml]`.
+`read_yaml` and `write_yaml` use PyYAML's safe document APIs and need
+`picoke[yaml]`. Install both extras with `python3.15 -m pip install 'picoke[files]'`.
+
+Use `picoke.io.files.zip.read_zip` for bounded reads of selected archive
+members. It returns names and bytes without extracting files.
+
+Writes are not atomic. See the [file I/O contracts](docs/IO_FILES_PLAN.md)
+for error handling, ZIP limits, and performance results.
+
 ## Python support
 
 Target CPython **3.14 and newer**, with **3.15 as the default** for development

@@ -31,7 +31,8 @@ jobs:
           python -m pip install build pytest
           python -m build --sdist
           python -m pip wheel --no-deps dist/*.tar.gz -w wheelhouse
-          python -m pip install wheelhouse/*.whl
+          wheel=(wheelhouse/*.whl)
+          python -m pip install "${wheel[0]}[files]"
       - name: Test installed distribution outside the checkout
         working-directory: ${{ runner.temp }}
         run: python -I -m pytest "$GITHUB_WORKSPACE/tests" -q
