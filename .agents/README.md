@@ -13,6 +13,7 @@ Repository operating guide for coding agents and maintainers. Read this guide an
 | [`tests/`](../tests/) | Focused pytest coverage for the crypto APIs |
 | [`docs/`](../docs/) | Project plan and legacy feature inventory |
 | [`skills/use-picop/SKILL.md`](skills/use-picop/SKILL.md) | picop consumer skill and API catalog |
+| [`skills/release-picore/SKILL.md`](skills/release-picore/SKILL.md) | Branches, working versions, and release gate |
 
 ## Working rules
 
@@ -20,7 +21,7 @@ Repository operating guide for coding agents and maintainers. Read this guide an
 2. Before replacing or reviving legacy behavior, inspect its implementation, API, tests, dependencies, and benchmarks. Define equivalent workloads and a relevant baseline before making performance claims; document changed semantics and any build/measurement blocker.
 3. For multi-part work, keep [`docs/PLAN.md`](../docs/PLAN.md) current with owned slices, dependencies, test vectors, baselines, and completion criteria. Mark work complete only with evidence; distinguish implemented, planned, and verified support.
 4. Update tests and user-facing documentation alongside behavior. Run focused checks for the affected behavior and the supported interpreter versions where available; report unverified environments.
-5. Do not invent picop trackers, CI checks, release procedures, or performance guarantees. Do not publish or tag as part of ordinary development.
+5. Start each independent topic from current `origin/main`; target `main` with one scoped PR. Use the [release skill](skills/release-picore/SKILL.md) for branch, version, and release work. Do not publish or tag as part of ordinary development.
 
 ## picop skill
 
