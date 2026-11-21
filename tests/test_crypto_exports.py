@@ -1,7 +1,7 @@
 from importlib import import_module
 from importlib.machinery import EXTENSION_SUFFIXES
 
-from picore import crypto
+from picoke import crypto
 
 
 _MODULE_EXPORTS = {
@@ -17,7 +17,7 @@ _MODULE_EXPORTS = {
 def test_crypto_exports_are_native() -> None:
     assert set(crypto.__all__) == {name for names in _MODULE_EXPORTS.values() for name in names}
     for module_name, names in _MODULE_EXPORTS.items():
-        module = import_module(f"picore.crypto.{module_name}")
+        module = import_module(f"picoke.crypto.{module_name}")
         assert module.__file__ and module.__file__.endswith(tuple(EXTENSION_SUFFIXES))
         for name in names:
             assert getattr(crypto, name) is getattr(module, name)

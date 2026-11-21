@@ -1,6 +1,6 @@
 """Paired benchmark for the public token bucket and optional comparison arms.
 
-Run with the target interpreter and installed picore/picop:
+Run with the target interpreter and installed picoke/picop:
     python bench/ratelimit.py [--reference PATH] [--legacy-module DOTTED_MODULE]
     python bench/ratelimit.py --cpu-time  # exclude descheduling in synchronous batches
 """
@@ -33,7 +33,7 @@ class _PreflightError(Exception):
 def _load_reference(path):
     source = Path(path).expanduser().resolve()
     try:
-        name = "_picore_ratelimit_reference"
+        name = "_picoke_ratelimit_reference"
         for suffix in EXTENSION_SUFFIXES:
             if source.name.endswith(suffix):
                 name += "." + source.name.removesuffix(suffix)
@@ -171,9 +171,9 @@ def main():
     timer = time.thread_time_ns if args.cpu_time else time.perf_counter_ns
 
     try:
-        from picore.ratelimit import TokenBucket
+        from picoke.ratelimit import TokenBucket
     except Exception as exc:
-        parser.error(f"installed picore import failed ({type(exc).__name__})")
+        parser.error(f"installed picoke import failed ({type(exc).__name__})")
 
     arms = [("installed", TokenBucket, False)]
     if args.reference:

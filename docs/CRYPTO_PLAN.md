@@ -11,13 +11,13 @@ The six capabilities use Cython extensions. Base64 uses pybase64/libbase64 for l
 | Base64 | `b64encode`, `b64encode_ascii`, `b64decode`, `b64decode_ascii` | OpenSSL EVP encoding, fused native short decoding, and pybase64/libbase64 for large decoding, with stdlib delegation and strict errors. Legacy trailing-NUL decode defect is not preserved. |
 | Keccak | `keccak256` | OpenSSL `KECCAK-256` for exact bytes when supported, PyCryptodome otherwise; compare with published Ethereum vectors, not SHA3. |
 | Ed25519 | `ed25519_public_key`, `ed25519_sign`, `ed25519_verify` | PyCryptodome with canonical point and scalar checks and small-order public-key rejection; otherwise the provider's cofactored verification policy. |
-| secp256k1 | `privkey_to_pubkey`, `privkey_to_address`, `sign_recoverable`, `recover_pubkey` | Implemented using btclib-secp256k1/libsecp256k1. Legacy address derivation hashes the 65-byte SEC key including its prefix; picore hashes only coordinates, matching Ethereum. |
+| secp256k1 | `privkey_to_pubkey`, `privkey_to_address`, `sign_recoverable`, `recover_pubkey` | Implemented using btclib-secp256k1/libsecp256k1. Legacy address derivation hashes the 65-byte SEC key including its prefix; picoke hashes only coordinates, matching Ethereum. |
 | EIP-712 | `eip712_hash_full_message`, `eip712_hash_agent_message` | Fixed-schema encoder for canonical Agent inputs; generic and fallback inputs use eth-account with structural validation, canonical domain field ordering and non-mutating tuple-array normalization. Mutually recursive type graphs that the provider cannot resolve remain unsupported. |
 | Bitcoin messages | `bip137_signed_message_hash`, `bip137_sign_message`, `bip137_verify_message` | Implemented with Bitcoin message framing and double SHA-256, unlike legacy single SHA-256 of raw input. Verification compares public keys, not addresses; signing supports all BIP-137 header classes. |
 
 The [BIP-137 specification](https://github.com/bitcoin/bips/blob/master/bip-0137.mediawiki) describes header ranges 27–42 and its verification example uses a formatted Bitcoin message and double SHA-256. The legacy raw single-SHA-256 behavior is not interchangeable; migration and interoperability must be specified explicitly.
 
-Legacy uses OpenSSL EVP for Base64, hand-coded Cython Keccak and Python-big-integer curve arithmetic. The latter is not established constant-time; performance and security must not be inferred from Cython. Legacy EIP-712 performs permissive coercions, truncation and padding; characterize those differences against normative vectors. The legacy code is BSD-3-Clause: retain required notice and attribution if code is copied or adapted. Decide picore's license separately.
+Legacy uses OpenSSL EVP for Base64, hand-coded Cython Keccak and Python-big-integer curve arithmetic. The latter is not established constant-time; performance and security must not be inferred from Cython. Legacy EIP-712 performs permissive coercions, truncation and padding; characterize those differences against normative vectors. The legacy code is BSD-3-Clause: retain required notice and attribution if code is copied or adapted. Decide picoke's license separately.
 
 Picop's public helpers were assessed in matched Cython A/Bs, but none produced a stable improvement exceeding the consumer skill's measurement gate. The tested candidate substitutions were removed; production uses direct `PyBytes_CheckExact`/`PyBytes_GET_SIZE`, `PyBytes_FromStringAndSize`, `found.add(current)`, and `pending.append(_base_type(field["type"]))` arms instead. Picop was consulted and remains a runtime dependency; no performance gain is implied. See [benchmark findings and reproducible commands](../bench/README.md).
 
@@ -49,11 +49,11 @@ digest parity, validation order, and subclass dispatch.
 ### EIP-712 dependency and startup cost
 
 `eth-account` 0.14.0 depends on `eth-keyfile` 0.10.0 in the tested wheels;
-`eth-keyfile` requires PyCryptodome `>=3.6.6,<4`, and picore also directly
+`eth-keyfile` requires PyCryptodome `>=3.6.6,<4`, and picoke also directly
 requires `>=3.24.1,<4` for its crypto primitives. The generic EIP-712 API and
 noncanonical Agent inputs need the encoder; canonical Agent hashing does not.
 The hardened checkpoint eagerly loaded `eth_account.messages` from every
-`picore.crypto` import, including standalone Keccak.
+`picoke.crypto` import, including standalone Keccak.
 
 Median import-only milliseconds in nine fresh processes per target, measured
 with `perf_counter_ns` around each import from `/tmp` without `PYTHONPATH`.

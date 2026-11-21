@@ -3,12 +3,12 @@ import hashlib
 
 import pytest
 
-from picore.crypto.bip137 import (
+from picoke.crypto.bip137 import (
     bip137_signed_message_hash,
     bip137_sign_message,
     bip137_verify_message,
 )
-from picore.crypto.secp256k1 import privkey_to_pubkey
+from picoke.crypto.secp256k1 import privkey_to_pubkey
 
 
 def test_bitcoin_core_message_hash_vectors_and_compactsize_boundary():

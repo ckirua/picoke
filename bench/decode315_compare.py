@@ -19,7 +19,7 @@ import time
 import types
 from pathlib import Path
 
-VARIANTS = ("baseline", "cutoff_1024", "cutoff_2048", "cutoff_2732", "cutoff_3072", "cutoff_3584", "cached_2048", "picore")
+VARIANTS = ("baseline", "cutoff_1024", "cutoff_2048", "cutoff_2732", "cutoff_3072", "cutoff_3584", "cached_2048", "picoke")
 DEFAULT_SIZES = (767, 768, 769, 1022, 1023, 1024, 1025, 1533, 1534, 1535, 1536, 1537, 1538,
                  2046, 2047, 2048, 2049, 2301, 2302, 2303, 2304, 2305, 2306,
                  2685, 2686, 2687, 2688, 2689, 2690, 3071, 3072, 3073, 4095, 4096, 4097,
@@ -38,22 +38,22 @@ def _outcome(fn, arg):
 def _load(request):
     sys.path.insert(0, request["candidate_root"])
     sys.path.insert(0, request["baseline_root"])
-    picore = importlib.import_module("picore.crypto.base64")
+    picoke = importlib.import_module("picoke.crypto.base64")
     extension = importlib.import_module("_decode315_candidate")
     import pybase64
     pybase64_path = Path(pybase64.__file__).resolve()
     funcs = {name: getattr(extension, name) for name in VARIANTS[:-1]}
-    funcs["picore"] = getattr(picore, request["api"])
+    funcs["picoke"] = getattr(picoke, request["api"])
     extension_path = Path(extension.__file__).resolve()
-    picore_path = Path(picore.__file__).resolve()
+    picoke_path = Path(picoke.__file__).resolve()
     comparison_path = None
     if request["comparison_root"]:
         root = Path(request["comparison_root"]).resolve()
-        matches = list((root / "picore" / "crypto").glob("base64*.so"))
+        matches = list((root / "picoke" / "crypto").glob("base64*.so"))
         if len(matches) != 1:
             raise RuntimeError(f"Expected one comparison extension under {root}, got {matches}")
         comparison_path = matches[0].resolve()
-        package = types.ModuleType("_picore_benchmark_comparison")
+        package = types.ModuleType("_picoke_benchmark_comparison")
         package.__path__ = []
         sys.modules[package.__name__] = package
         name = package.__name__ + ".base64"
@@ -64,10 +64,10 @@ def _load(request):
         funcs["installed_candidate"] = getattr(comparison, request["api"])
     if not extension_path.is_relative_to(Path(request["candidate_root"]).resolve()):
         raise RuntimeError(f"candidate extension escaped candidate root: {extension_path}")
-    if not picore_path.is_relative_to(Path(request["baseline_root"]).resolve()):
-        raise RuntimeError(f"installed picore escaped baseline root: {picore_path}")
+    if not picoke_path.is_relative_to(Path(request["baseline_root"]).resolve()):
+        raise RuntimeError(f"installed picoke escaped baseline root: {picoke_path}")
     paths = {}
-    for label, path in (("extension", extension_path), ("picore", picore_path), ("pybase64", pybase64_path)):
+    for label, path in (("extension", extension_path), ("picoke", picoke_path), ("pybase64", pybase64_path)):
         paths[label] = {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     if comparison_path:
         paths["installed_candidate"] = {"path": str(comparison_path),
@@ -113,7 +113,7 @@ def _preflight(functions):
     cases = _probes()
     strict = lambda x: binascii.a2b_base64(x, strict_mode=True)
     for label, arg in cases.items():
-        expected = _outcome(strict, arg) if type(arg) is str else _outcome(functions["picore"], arg)
+        expected = _outcome(strict, arg) if type(arg) is str else _outcome(functions["picoke"], arg)
         actuals = {name: _outcome(fn, arg) for name, fn in functions.items()}
         observations[label] = {"strict_binascii": _outcome(strict, arg), "contract_reference": expected, **actuals}
         for name, actual in actuals.items():
@@ -124,7 +124,7 @@ def _preflight(functions):
 
 def _environment(paths):
     versions = {}
-    for package in ("picore", "pybase64", "Cython"):
+    for package in ("picoke", "pybase64", "Cython"):
         try: versions[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError: versions[package] = None
     cpu = platform.processor()
@@ -185,8 +185,8 @@ def _worker(request):
                 values[name].append(elapsed / count)
         result["timings"][str(size)] = {"iterations": count, "blocks_ns_call": values,
             "mean_ns_call": {name: statistics.mean(v) for name, v in values.items()},
-            "paired_ratios_vs_picore": {name: [a / b for a, b in zip(values[name], values["picore"])]
-                                         for name in names if name != "picore"}}
+            "paired_ratios_vs_picoke": {name: [a / b for a, b in zip(values[name], values["picoke"])]
+                                         for name in names if name != "picoke"}}
     return result
 
 
@@ -207,7 +207,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--candidate-root", required=True, help="directory containing _decode315_candidate extension")
-    parser.add_argument("--baseline-root", required=True, help="installed retained picore package root")
+    parser.add_argument("--baseline-root", required=True, help="installed retained picoke package root")
     parser.add_argument("--comparison-root", help="installed candidate package root to load alongside baseline")
     parser.add_argument("--api", choices=("b64decode", "b64decode_ascii"), default="b64decode")
     parser.add_argument("--samples", type=int, default=9)
@@ -250,13 +250,13 @@ def main():
                 print(f" {name:13} {summary[name]['mean_ns']:.1f} ± {summary[name]['stdev_ns']:.1f} ns")
             ratios = {}
             for name in variants:
-                if name == "picore":
+                if name == "picoke":
                     continue
-                paired = [s["timings"][key]["mean_ns_call"][name] / s["timings"][key]["mean_ns_call"]["picore"]
+                paired = [s["timings"][key]["mean_ns_call"][name] / s["timings"][key]["mean_ns_call"]["picoke"]
                           for s in report["samples"]]
                 ratios[name] = {"paired_ratios": paired, "paired_mean": statistics.mean(paired),
-                                "paired_stdev": statistics.stdev(paired), "mean_ratio": summary[name]["mean_ns"] / summary["picore"]["mean_ns"]}
-                print(f" {name}/picore: paired mean {ratios[name]['paired_mean']:.4f} ± {ratios[name]['paired_stdev']:.4f}; "
+                                "paired_stdev": statistics.stdev(paired), "mean_ratio": summary[name]["mean_ns"] / summary["picoke"]["mean_ns"]}
+                print(f" {name}/picoke: paired mean {ratios[name]['paired_mean']:.4f} ± {ratios[name]['paired_stdev']:.4f}; "
                       f"ratio of means {ratios[name]['mean_ratio']:.4f}")
             report["summary"][key] = {"backends": summary, "ratios": ratios}
     else:

@@ -5,7 +5,7 @@ from time import monotonic_ns
 
 import pytest
 
-import picore.ratelimit as ratelimit
+import picoke.ratelimit as ratelimit
 
 
 class FakeTime:

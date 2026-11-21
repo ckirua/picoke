@@ -2,7 +2,7 @@ import hashlib
 
 import pytest
 
-from picore.crypto.keccak import keccak256
+from picoke.crypto.keccak import keccak256
 
 
 @pytest.mark.parametrize(

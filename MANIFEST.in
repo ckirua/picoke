@@ -1,2 +1,2 @@
-include src/picore/crypto/*.pyx
-include src/picore/ratelimit.pyx
+include src/picoke/crypto/*.pyx
+include src/picoke/ratelimit.pyx

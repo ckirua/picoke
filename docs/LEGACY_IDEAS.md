@@ -2,11 +2,11 @@
 
 ## Source and purpose
 
-An earlier private Python utility tree is a source of practical use cases for picore, not a specification or codebase to port wholesale. Its module inventory and maturity labels do not establish picore support. Apart from the first crypto milestone described below, the items are candidates, not implemented features or commitments to preserve old names.
+An earlier private Python utility tree is a source of practical use cases for picoke, not a specification or codebase to port wholesale. Its module inventory and maturity labels do not establish picoke support. Apart from the first crypto milestone described below, the items are candidates, not implemented features or commitments to preserve old names.
 
 ## Candidate inventory
 
-| Area | Useful ideas from the earlier utility tree | Picore design questions |
+| Area | Useful ideas from the earlier utility tree | Picoke design questions |
 |---|---|---|
 | Rate limiting | Async token and leaky buckets, fixed and sliding windows; configurable capacity and time periods. | Monotonic time, precise refill/window semantics, invalid or impossible costs, fairness, cancellation, concurrency and clock control in tests. Compare with a straightforward asyncio implementation. |
 | In-process queues | Bounded SPSC byte and fixed-record rings with nonblocking push/pop and statistics. | Define SPSC ownership, full/empty behavior, payload bounds, data copying, memory ordering, and buffer lifetime. Compare with `queue` and suitable native baselines; verify free-threaded correctness separately. |
@@ -22,12 +22,12 @@ An earlier private Python utility tree is a source of practical use cases for pi
 ## Proposed sequence
 
 1. **Cryptography:** Base64, Keccak, Ed25519, secp256k1, EIP-712 and Bitcoin signed-message APIs are implemented. Follow the [crypto plan](CRYPTO_PLAN.md) for measured legacy comparisons, intentional differences and remaining review. Consult the [picop skill](../.agents/skills/use-picop/SKILL.md) when a measured use of its primitives is appropriate.
-2. **Protocol hardening:** expand interoperability vectors and obtain independent security review. The legacy Bitcoin raw single-SHA-256 and SEC-prefix Ethereum-address behavior intentionally differ from picore.
+2. **Protocol hardening:** expand interoperability vectors and obtain independent security review. The legacy Bitcoin raw single-SHA-256 and SEC-prefix Ethereum-address behavior intentionally differ from picoke.
 3. **Expand by demonstrated need:** consider rate limiting, in-process queues, files, time, logging, data and codecs as independent features. Isolate heavy or platform-specific integrations; do not inherit an earlier project's mandatory dependency set by default.
 4. **Specialized work:** defer shared-memory IPC, transports and archive extraction until concrete workloads justify lifecycle, platform, security and dependency maintenance.
 
 ## Acceptance before implementation
 
-For the chosen feature record its input/output and error contract, lifetime and concurrency rules, baseline, representative workload, dependency/ABI requirements and target platforms. Test edge cases and installed artifacts on CPython 3.14 and 3.15. Treat 3.14t/3.15t as separate builds and do not claim free-threaded support until verified with the GIL disabled. Record benchmark environment and results; legacy status or catalog coverage is not evidence of a picore speedup.
+For the chosen feature record its input/output and error contract, lifetime and concurrency rules, baseline, representative workload, dependency/ABI requirements and target platforms. Test edge cases and installed artifacts on CPython 3.14 and 3.15. Treat 3.14t/3.15t as separate builds and do not claim free-threaded support until verified with the GIL disabled. Record benchmark environment and results; legacy status or catalog coverage is not evidence of a picoke speedup.
 
-The historical source code was BSD-3-Clause. Ideas are inspiration; before copying or adapting code, review attribution, license and notice requirements, including those of each native or vendored dependency. Decide picore's own license independently.
+The historical source code was BSD-3-Clause. Ideas are inspiration; before copying or adapting code, review attribution, license and notice requirements, including those of each native or vendored dependency. Decide picoke's own license independently.

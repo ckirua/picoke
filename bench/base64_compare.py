@@ -3,7 +3,7 @@
 Example, with user-supplied compiled package roots::
 
     python bench/base64_compare.py --python .venv/bin/python \
-        --baseline-root /path/to/previous/picore \
+        --baseline-root /path/to/previous/picoke \
         --legacy-root /path/to/baseline/package
 
 The candidate is imported from --python's environment, or --candidate-root.
@@ -78,7 +78,7 @@ def _load(backend, root):
             sys.path.pop(0)
         name = f"{_legacy_package(root)}.crypto.encoding.base64"
     else:
-        name = "picore.crypto.base64"
+        name = "picoke.crypto.base64"
     module = importlib.import_module(name)
     origin = Path(module.__file__).resolve()
     if not any(str(origin).endswith(suffix) for suffix in importlib.machinery.EXTENSION_SUFFIXES):
@@ -263,8 +263,8 @@ def _run(args, backend, root, mode, eligible=()):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--python", default=sys.executable, help="same interpreter for all four implementations")
-    parser.add_argument("--candidate-root", help="optional directory containing compiled candidate picore/")
-    parser.add_argument("--baseline-root", required=True, help="directory containing previous compiled picore/")
+    parser.add_argument("--candidate-root", help="optional directory containing compiled candidate picoke/")
+    parser.add_argument("--baseline-root", required=True, help="directory containing previous compiled picoke/")
     parser.add_argument("--legacy-root", required=True, help="directory containing the compiled baseline package")
     parser.add_argument("--samples", type=int, default=7, help="fresh-process paired rounds, minimum 7")
     parser.add_argument("--sizes", type=int, nargs="+", default=SIZES, metavar="BYTES",

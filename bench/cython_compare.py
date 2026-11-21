@@ -1,4 +1,4 @@
-"""Compare compiled picore with its frozen pure-Python package in isolated processes."""
+"""Compare compiled picoke with its frozen pure-Python package in isolated processes."""
 from __future__ import annotations
 
 import argparse
@@ -54,12 +54,8 @@ def _versions() -> dict[str, str]:
 def _worker(root: str, samples: int, iterations: int, warmups: int) -> None:
     sys.path.insert(0, os.path.abspath(root))
     import base64
-    from picore.crypto import (
-        b64decode, b64decode_ascii, b64encode, b64encode_ascii, bip137_sign_message,
-        bip137_signed_message_hash, bip137_verify_message, eip712_hash_agent_message,
-        eip712_hash_full_message, ed25519_public_key, ed25519_sign, ed25519_verify,
-        keccak256, privkey_to_address, privkey_to_pubkey, recover_pubkey, sign_recoverable,
-    )
+    package = "picore" if (Path(root) / "picore" / "__init__.py").is_file() else "picoke"
+    crypto = importlib.import_module(f"{package}.crypto")
 
     secret = (1).to_bytes(32, "big")
     digest = bytes.fromhex("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08")
@@ -77,43 +73,43 @@ def _worker(root: str, samples: int, iterations: int, warmups: int) -> None:
         "message": {"from": "0x0000000000000000000000000000000000000001",
                     "to": "0x0000000000000000000000000000000000000002", "contents": "Hello"},
     }
-    pub = privkey_to_pubkey(secret)
-    r, s, v = sign_recoverable(secret, digest)
-    ed_pub = ed25519_public_key(seed)
-    ed_sig = ed25519_sign(message, seed)
-    bip_sig = bip137_sign_message(secret, message)
+    pub = crypto.privkey_to_pubkey(secret)
+    r, s, v = crypto.sign_recoverable(secret, digest)
+    ed_pub = crypto.ed25519_public_key(seed)
+    ed_sig = crypto.ed25519_sign(message, seed)
+    bip_sig = crypto.bip137_sign_message(secret, message)
     cases = {}
     for size_name, payload in (
         ("small", b"picore\x00"),
         ("1KiB", bytes(range(256)) * 4),
         ("1MiB", bytes(range(256)) * 4096),
     ):
-        encoded = base64.b64encode(payload).decode("ascii")
-        cases[f"Base64 bytes encode {size_name}"] = lambda p=payload: b64encode(p)
-        cases[f"Base64 str encode {size_name}"] = lambda p=payload: b64encode_ascii(p)
-        cases[f"Base64 str decode {size_name}"] = lambda e=encoded: b64decode(e)
-        cases[f"Base64 bytes decode {size_name}"] = lambda e=encoded: b64decode_ascii(e)
+        encoded = base64.crypto.b64encode(payload).decode("ascii")
+        cases[f"Base64 bytes encode {size_name}"] = lambda p=payload: crypto.b64encode(p)
+        cases[f"Base64 str encode {size_name}"] = lambda p=payload: crypto.b64encode_ascii(p)
+        cases[f"Base64 str decode {size_name}"] = lambda e=encoded: crypto.b64decode(e)
+        cases[f"Base64 bytes decode {size_name}"] = lambda e=encoded: crypto.b64decode_ascii(e)
     for size_name, payload in (
         ("empty", b""),
         ("12-byte", b"picore\x00data!"),
         ("200-byte", message.ljust(200, b"\x00")),
         ("1KiB", bytes(range(256)) * 4),
     ):
-        cases[f"Keccak-256 {size_name}"] = lambda p=payload: keccak256(p)
+        cases[f"Keccak-256 {size_name}"] = lambda p=payload: crypto.keccak256(p)
     cases.update({
-        "Keccak-256": lambda: keccak256(message),
-        "Ed25519 public key": lambda: ed25519_public_key(seed),
-        "Ed25519 sign": lambda: ed25519_sign(message, seed),
-        "Ed25519 verify": lambda: ed25519_verify(message, ed_sig, ed_pub),
-        "secp256k1 public key": lambda: privkey_to_pubkey(secret),
-        "Ethereum address": lambda: privkey_to_address(secret),
-        "secp256k1 sign": lambda: sign_recoverable(secret, digest),
-        "secp256k1 recover": lambda: recover_pubkey(digest, r, s, v - 27),
-        "EIP-712 full message": lambda: eip712_hash_full_message(full),
-        "EIP-712 Agent": lambda: eip712_hash_agent_message(domain, agent_source, connection_id),
-        "BIP137 message hash": lambda: bip137_signed_message_hash(message),
-        "BIP137 sign": lambda: bip137_sign_message(secret, message),
-        "BIP137 verify": lambda: bip137_verify_message(message, bip_sig, pub),
+        "Keccak-256": lambda: crypto.keccak256(message),
+        "Ed25519 public key": lambda: crypto.ed25519_public_key(seed),
+        "Ed25519 sign": lambda: crypto.ed25519_sign(message, seed),
+        "Ed25519 verify": lambda: crypto.ed25519_verify(message, ed_sig, ed_pub),
+        "secp256k1 public key": lambda: crypto.privkey_to_pubkey(secret),
+        "Ethereum address": lambda: crypto.privkey_to_address(secret),
+        "secp256k1 sign": lambda: crypto.sign_recoverable(secret, digest),
+        "secp256k1 recover": lambda: crypto.recover_pubkey(digest, r, s, v - 27),
+        "EIP-712 full message": lambda: crypto.eip712_hash_full_message(full),
+        "EIP-712 Agent": lambda: crypto.eip712_hash_agent_message(domain, agent_source, connection_id),
+        "BIP137 message hash": lambda: crypto.bip137_signed_message_hash(message),
+        "BIP137 sign": lambda: crypto.bip137_sign_message(secret, message),
+        "BIP137 verify": lambda: crypto.bip137_verify_message(message, bip_sig, pub),
     })
     outputs = {name: _jsonable(operation()) for name, operation in cases.items()}
     if outputs["Ed25519 verify"] is not True or outputs["BIP137 verify"] is not True:
@@ -143,7 +139,7 @@ def _worker(root: str, samples: int, iterations: int, warmups: int) -> None:
             values.append((time.perf_counter_ns() - start) / count)
         timings[name] = values
     origins = {name: module.__file__ for name, module in sys.modules.items()
-               if name.startswith("picore") and getattr(module, "__file__", None)}
+               if (name == package or name.startswith(f"{package}.")) and getattr(module, "__file__", None)}
     print(json.dumps({"outputs": outputs, "timings": timings, "iterations_used": iterations_used,
                       "origins": origins, "versions": _versions()}, sort_keys=True))
 

@@ -12,11 +12,11 @@ description: >-
 
 **3.0:** use `from picop…` / `from picop… cimport`. The `cypy` Python package and Cython cimport shims have been removed; rebuild downstream Cython extensions.
 
-This is a picore copy of the picop consumer skill. Its catalog is a snapshot;
+This is a picoke copy of the picop consumer skill. Its catalog is a snapshot;
 verify APIs against the picop version actually in use. Upstream-relative links
 in this skill target the picop repository at
 [`https://github.com/ckirua/picop`](https://github.com/ckirua/picop), not the
-picore tree. Upstream `main` may differ from the installed release; confirm
+picoke tree. Upstream `main` may differ from the installed release; confirm
 against the matching release or installed package.
 For native C extensions, verify a public C interface exists: a Cython `.pxd`
 and `cimport` do not by themselves provide a C header API.

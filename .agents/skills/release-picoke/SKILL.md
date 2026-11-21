@@ -1,15 +1,15 @@
 ---
-name: release-picore
+name: release-picoke
 description: >-
-  Organize picore topic branches, choose working versions, and prepare or ship
-  a picore release. Use for git/release workflow, version bumps, tags, GitHub
+  Organize picoke topic branches, choose working versions, and prepare or ship
+  a picoke release. Use for git/release workflow, version bumps, tags, GitHub
   Releases, or PyPI publishing. Preparing work is not approval to publish.
 ---
 
-# Release picore
+# Release picoke
 
 Follow the [working-version and release policy](../../../docs/RELEASE.md).
-This skill is for `ckirua/picore`, not the `picop` dependency. Use picop's
+This skill is for `ckirua/picoke`, not the `picop` dependency. Use picop's
 consumer skill separately for code and performance work.
 
 - **Ordinary work:** one short-lived topic branch from current `origin/main`,

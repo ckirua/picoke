@@ -4,7 +4,7 @@ from itertools import product
 
 import pytest
 
-from picore.crypto.base64 import (
+from picoke.crypto.base64 import (
     b64decode,
     b64decode_ascii,
     b64encode,

@@ -2,7 +2,8 @@
 
 These measurements used a focused historical Cython baseline with minimal package initializers and build configuration, not a full distribution. Reproducing that build requires a compatible source archive and license, a C compiler, OpenSSL headers/libcrypto, Cython, and picop. The build tool requires a fresh output directory and preserves the source license.
 
-From the repository root, install picore, Cython and setuptools separately under each interpreter, then:
+From the repository root, install `picoke`, Cython and setuptools separately
+under each interpreter, then run the checked-in benchmark scripts directly:
 
 ```bash
 .venv315/bin/python scripts/prepare_legacy_crypto.py \
@@ -14,6 +15,15 @@ From the repository root, install picore, Cython and setuptools separately under
 .venv315/bin/python bench/crypto_protocols.py --legacy-root /tmp/legacy-crypto-315
 .venv314/bin/python bench/crypto_protocols.py --legacy-root /tmp/legacy-crypto-314
 ```
+
+These current runners import `picoke`; the `picore` labels and paths below
+describe archived measurements and are not current install instructions.
+Historical reports under `results/` are immutable. To reproduce a measurement
+explicitly tied to an old picore snapshot, check out that snapshot (or extract
+its source archive) and run its pre-rename runner from that tree, using the
+original commands and `/tmp/picore-*` paths recorded below. Do not run the
+current `picoke` runners against an old snapshot or overwrite archived result
+files; preserve historical labels and report schemas when comparing results.
 
 Run measurements sequentially to avoid mutual interference. The harness checks matching outputs before timing; legacy decoding of a trailing NUL is checked separately and excluded from timing. Ed25519 verification compares valid signatures, not acceptance policies for adversarial inputs; the direct provider has a weaker acceptance policy. Signing includes a direct provider arm that imports the same raw seed for each call and a separately labeled pre-imported-key arm. Legacy behavior also differs for Ethereum address derivation (legacy hashes the SEC `0x04` prefix; Ethereum/picore hash coordinates only) and Bitcoin message hashing (legacy hashes raw input once; picore uses framed double SHA-256). These are intentional contract differences, not equivalent timing comparisons. The Bitcoin framed-hash benchmark instead uses an independent stdlib reference. Signature timing is excluded if the legacy and picore `(r, s, v)` outputs differ, even when both cross-recover correctly. Individual paired sample times and ratios are reported alongside the median and spread.
 

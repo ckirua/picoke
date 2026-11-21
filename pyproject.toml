@@ -3,8 +3,8 @@ requires = ["setuptools>=77", "Cython>=3.3.1,<4", "picop>=3.13,<4"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "picore"
-version = "0.1.0rc1"
+name = "picoke"
+version = "0.1.0rc2"
 readme = "README.md"
 requires-python = ">=3.14"
 license = "MIT"
@@ -18,8 +18,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/ckirua/picore"
-Changelog = "https://github.com/ckirua/picore/blob/main/CHANGELOG.md"
+Repository = "https://github.com/ckirua/picoke"
+Changelog = "https://github.com/ckirua/picoke/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 include-package-data = false
@@ -28,5 +28,5 @@ include-package-data = false
 where = ["src"]
 
 [tool.setuptools.package-data]
-picore = ["py.typed", "*.pyi"]
-"picore.crypto" = ["*.pyi"]
+picoke = ["py.typed", "*.pyi"]
+"picoke.crypto" = ["*.pyi"]

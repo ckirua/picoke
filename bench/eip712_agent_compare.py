@@ -100,7 +100,7 @@ def _elapsed_ns(fn: Callable[[], bytes], iterations: int) -> int:
 
 
 def _child(args: argparse.Namespace) -> int:
-    import picore.crypto.eip712 as eip712
+    import picoke.crypto.eip712 as eip712
     origin = Path(eip712.__file__).resolve()
     if origin.suffix not in {".so", ".pyd", ".dll", ".dylib"} or not origin.is_relative_to(Path(sys.prefix).resolve()):
         raise RuntimeError(f"eip712 native extension is not installed under sys.prefix: {origin}")
@@ -126,7 +126,7 @@ def _child(args: argparse.Namespace) -> int:
         digest = operations[label]().hex()
         preflight[label] = {"ok": digest == expected, "digest": digest, "expected": expected}
     # The specified direct-provider attribution uses same envelope per call,
-    # without picore validation; fixed schema is prepared above.
+    # without picoke validation; fixed schema is prepared above.
     d, s, c, _ = workloads["agent_historical"]
     direct_label = "direct_provider_historical"
     operations[direct_label] = _direct_operation(d, s, c)
@@ -139,7 +139,7 @@ def _child(args: argparse.Namespace) -> int:
         "python": sys.version,
         "versions": {
             name: importlib.metadata.version(name)
-            for name in ("picore", "eth-account", "eth-utils", "eth-abi", "pycryptodome")
+            for name in ("picoke", "eth-account", "eth-utils", "eth-abi", "pycryptodome")
         },
         "preflight": preflight,
     }
@@ -277,7 +277,7 @@ def main(argv: list[str] | None = None) -> int:
     candidate = _run(args.candidate_python, args, "--preflight-only")
     if baseline["python"] != candidate["python"]:
         raise RuntimeError("baseline and candidate Python versions differ")
-    for name in baseline["versions"].keys() - {"picore"}:
+    for name in baseline["versions"].keys() - {"picoke"}:
         if baseline["versions"][name] != candidate["versions"][name]:
             raise RuntimeError(f"baseline and candidate {name} versions differ")
     for label in baseline["preflight"]:

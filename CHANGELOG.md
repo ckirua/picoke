@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.1.0rc2
+
+- Renamed the distribution and import package from `picore` to `picoke`.
+
 ## 0.1.0rc1
 
 - Added Python APIs for Base64, Keccak-256, Ed25519, recoverable secp256k1, EIP-712, and Bitcoin signed messages.

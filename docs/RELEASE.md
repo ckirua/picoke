@@ -13,13 +13,13 @@
 1. Get explicit user approval to ship, including the exact version, full title, and publication target. Preparing a branch, CI build, or changelog is not approval to tag or publish.
 2. From current `main`, prepare `chore/release-<version>`: align package metadata, move the relevant changelog entries to the version heading, and prepare release notes including compatibility and supported platforms. Merge only after review and validation.
 3. Verify the exact release commit on clean, synced `main`. Require the [installed-wheel checks](../.github/workflows/check.yml) and build and validate the intended distribution artifacts from that commit. The Linux CPython 3.14 and 3.15 GIL checks do not certify other platforms, bundled libcrypto, or free-threaded builds. Rebuild and test each additional ABI or platform before claiming it. Confirm licensing, distribution metadata and vulnerability reporting before the first release.
-4. Once the target is approved and ready, use an annotated `picore-vX.Y.Z` tag on that exact commit and a matching GitHub Release. For a release candidate use `picore-vX.Y.ZrcN`; mark the GitHub release as a prerelease and never make it latest. Do not reuse or force-push tags.
+4. Once the target is approved and ready, use an annotated `picoke-vX.Y.Z` tag on that exact commit and a matching GitHub Release. For a release candidate use `picoke-vX.Y.ZrcN`; mark the GitHub release as a prerelease and never make it latest. Do not reuse or force-push tags.
 5. Confirm the approved artifacts exist on the selected release target. Install the exact version in a clean supported interpreter and smoke-test one public API; this does not replace the pre-release matrix.
 
 ## PyPI Trusted Publishing
 
 Create a [pending publisher in PyPI](https://pypi.org/manage/account/publishing/)
-for project `picore`, owner `ckirua`, repository `picore`, workflow
+for project `picoke`, owner `ckirua`, repository `picoke`, workflow
 `publish.yml`, and environment `pypi`. This does not reserve the name; the first
 successful upload creates the project. Use no API token.
 
@@ -29,7 +29,7 @@ prerelease tag when approved for PyPI). A GitHub-only release or tag push does
 not upload anything. First validate without uploading:
 
 ```bash
-gh workflow run publish.yml --ref main -f release-tag=picore-v0.1.0rc1 -f publish=false
+gh workflow run publish.yml --ref main -f release-tag=picoke-v0.1.0rc2 -f publish=false
 ```
 
 Only after the user approves that exact release for production PyPI, dispatch
@@ -40,5 +40,5 @@ version from PyPI in a clean environment. PyPI files cannot be overwritten.
 
 Only an sdist is published initially; installs require the source-build
 dependencies documented in the README. Portable wheels and free-threaded
-support are not implied. TestPyPI already has an unrelated `picore` project;
-use the validation-only mode rather than targeting that namespace.
+support are not implied. Use validation-only mode; no TestPyPI workflow is
+configured for this release.

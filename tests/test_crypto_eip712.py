@@ -4,7 +4,7 @@ import sys
 
 import pytest
 
-from picore.crypto.eip712 import eip712_hash_agent_message, eip712_hash_full_message
+from picoke.crypto.eip712 import eip712_hash_agent_message, eip712_hash_full_message
 
 
 MAIL = {
@@ -45,7 +45,7 @@ def test_account_provider_loads_only_for_generic_encoding(tmp_path) -> None:
         [sys.executable, "-I", "-c", """
 import json
 import sys
-from picore import crypto
+from picoke import crypto
 
 domain = {"name": "Agent", "version": "1", "chainId": 42161,
           "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"}

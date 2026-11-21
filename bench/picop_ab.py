@@ -23,7 +23,7 @@ import tempfile
 import time
 
 
-_SOURCE = Path(__file__).resolve().parents[1] / "src" / "picore" / "crypto"
+_SOURCE = Path(__file__).resolve().parents[1] / "src" / "picoke" / "crypto"
 _MODULE = "_picop_ab_native"
 _HEADER = """\
 import re
@@ -219,7 +219,7 @@ def main():
           f"CC={os.environ.get('CC') or sysconfig.get_config_var('CC')} | "
           f"CFLAGS={os.environ.get('CFLAGS') or sysconfig.get_config_var('CFLAGS')}", flush=True)
     print(f"{args.samples} paired samples, {args.warmups} warmup pairs, {args.iterations} iterations/block", flush=True)
-    with tempfile.TemporaryDirectory(prefix="picore-picop-ab-") as directory:
+    with tempfile.TemporaryDirectory(prefix="picoke-picop-ab-") as directory:
         module = _build(Path(directory))
         for case in _cases(module, args.iterations):
             _compare(case, args.samples, args.warmups)

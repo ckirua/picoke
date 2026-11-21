@@ -1,10 +1,10 @@
-name: Publish picore
+name: Publish picoke
 
 on:
   workflow_dispatch:
     inputs:
       release-tag:
-        description: Existing GitHub release tag (picore-vX.Y.Z or picore-vX.Y.ZrcN)
+        description: Existing GitHub release tag (picoke-vX.Y.Z or picoke-vX.Y.ZrcN)
         required: true
         type: string
       publish:
@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: picore-publish-${{ inputs.release-tag }}
+  group: picoke-publish-${{ inputs.release-tag }}
   cancel-in-progress: false
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
           TAG: ${{ inputs.release-tag }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          [[ "$TAG" =~ ^picore-v[0-9]+\.[0-9]+\.[0-9]+(rc[1-9][0-9]*)?$ ]]
+          [[ "$TAG" =~ ^picoke-v[0-9]+\.[0-9]+\.[0-9]+(rc[1-9][0-9]*)?$ ]]
           ref="refs/tags/$TAG"
           test "$(git cat-file -t "$ref")" = tag
           commit=$(git rev-parse "$ref^{commit}")
@@ -66,18 +66,18 @@ jobs:
           import tomllib
           with open('pyproject.toml', 'rb') as file:
               project = tomllib.load(file)['project']
-          assert project['name'] == 'picore'
-          assert project['version'] == os.environ['TAG'].removeprefix('picore-v')
+          assert project['name'] == 'picoke'
+          assert project['version'] == os.environ['TAG'].removeprefix('picoke-v')
           PY
           python -m pip install build twine
           python -m build --sdist
-          asset="dist/${TAG/picore-v/picore-}.tar.gz"
+          asset="dist/${TAG/picoke-v/picoke-}.tar.gz"
           test -f "$asset"
           python -m twine check --strict "$asset"
           printf 'sha256=%s\n' "$(sha256sum "$asset" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: picore-sdist
+          name: picoke-sdist
           path: dist/*.tar.gz
           if-no-files-found: error
 
@@ -100,7 +100,7 @@ jobs:
           allow-prereleases: true
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: picore-sdist
+          name: picoke-sdist
           path: ${{ runner.temp }}/dist
       - name: Install and test outside the checkout
         working-directory: ${{ runner.temp }}
@@ -124,7 +124,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: picore-sdist
+          name: picoke-sdist
           path: dist
       - name: Verify artifact checksum
         env:

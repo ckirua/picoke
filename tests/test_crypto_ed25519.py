@@ -1,6 +1,6 @@
 import pytest
 
-from picore.crypto.ed25519 import (
+from picoke.crypto.ed25519 import (
     ed25519_public_key,
     ed25519_sign,
     ed25519_verify,
