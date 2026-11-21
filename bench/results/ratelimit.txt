@@ -1,0 +1,137 @@
+Linux x86-64, Intel Core i7-6700; pinned to one logical CPU.
+
+=== Lock-only wheel vs. compiled baseline (CPython 3.14) ===
+Python: CPython 3.14.7 (cpython-314-x86_64-linux-gnu)
+Machine: Linux-7.0.0-43-generic-x86_64-with-glibc2.43 / x86_64 / unknown CPU
+GIL: enabled; picop: 3.13.0
+Arms: installed, legacy
+
+construction x4096 (ns/sample)
+  installed: median=7179446; samples=3075060,7905276,7179446,4887820,3424654,7236145,5926445,7181108,7361011
+  legacy: median=2999640; samples=3186476,3140737,3039440,2999640,1626774,1740064,3042877,2521095,1734504
+  paired legacy/installed: median=0.4234; ratios=1.0362,0.3973,0.4234,0.6137,0.4750,0.2405,0.5134,0.3511,0.2356
+
+uncontended (ns/sample)
+  installed: median=10153112; samples=4667974,12318034,11318404,6018946,5824453,6900111,10256082,10153112,10593365
+  legacy: median=9201828; samples=5417538,10993627,12950885,9623257,5576143,14831029,9201828,5218371,7597278
+  paired legacy/installed: median=0.9574; ratios=1.1606,0.8925,1.1442,1.5988,0.9574,2.1494,0.8972,0.5140,0.7172
+
+contention (ns/sample)
+  installed: median=38428989; samples=37556456,42292211,38428989,43020552,35871151,41683620,35470086,35872172,38938693
+  legacy: median=38657296; samples=40599460,38416599,41380696,37045258,38975978,38330353,38657296,38776105,36596218
+  paired legacy/installed: median=1.0768; ratios=1.0810,0.9084,1.0768,0.8611,1.0866,0.9196,1.0899,1.0810,0.9398
+
+=== Lock-only wheel vs. compiled baseline (CPython 3.15) ===
+Python: CPython 3.15.0rc2 (cpython-315-x86_64-linux-gnu)
+Machine: Linux-7.0.0-43-generic-x86_64-with-glibc2.43 / x86_64 / unknown CPU
+GIL: enabled; picop: 3.13.0
+Arms: installed, legacy
+
+construction x4096 (ns/sample)
+  installed: median=7969878; samples=7090275,7159689,7969878,8027758,8543281,8160615,8095722,7623599,3460846
+  legacy: median=3041433; samples=2897725,1142008,3153955,3204589,3524711,3239991,3041433,2915481,1474269
+  paired legacy/installed: median=0.3970; ratios=0.4087,0.1595,0.3957,0.3992,0.4126,0.3970,0.3757,0.3824,0.4260
+
+uncontended (ns/sample)
+  installed: median=8556638; samples=8556638,9262656,11014716,4935802,5372137,9718742,10846948,5298562,6763573
+  legacy: median=5751310; samples=9816781,7406774,4808990,5152521,5049014,5751310,11142261,4799788,11730399
+  paired legacy/installed: median=0.9399; ratios=1.1473,0.7996,0.4366,1.0439,0.9399,0.5918,1.0272,0.9059,1.7343
+
+contention (ns/sample)
+  installed: median=38138691; samples=38138691,37814813,39313884,40492450,40430234,37691535,37944431,38616498,37794431
+  legacy: median=40228658; samples=41895046,40228658,39542352,44472709,38545387,44885022,38649532,36513286,40648184
+  paired legacy/installed: median=1.0638; ratios=1.0985,1.0638,1.0058,1.0983,0.9534,1.1909,1.0186,0.9455,1.0755
+
+=== Lock-bypass wheel vs. lock-only snapshot (CPython 3.14) ===
+Python: CPython 3.14.7 (cpython-314-x86_64-linux-gnu)
+Machine: Linux-7.0.0-43-generic-x86_64-with-glibc2.43 / x86_64 / unknown CPU
+GIL: enabled; picop: 3.13.0
+Arms: installed, reference
+
+construction x4096 (ns/sample)
+  installed: median=11338881; samples=8621262,11759711,8595148,8895720,11506808,11338881,16253124,8060034,11403568
+  reference: median=8545260; samples=8374324,7951750,8334898,8545260,10475639,13511326,9483052,8541164,12855743
+  paired reference/installed: median=0.9697; ratios=0.9714,0.6762,0.9697,0.9606,0.9104,1.1916,0.5835,1.0597,1.1273
+
+uncontended (ns/sample)
+  installed: median=6269901; samples=9966984,4022311,5724086,9269975,6333750,5896108,6269901,6026257,6398613
+  reference: median=11254432; samples=12862533,10793754,11366895,10856137,11254432,10937626,12679722,19500676,11244116
+  paired reference/installed: median=1.8551; ratios=1.2905,2.6835,1.9858,1.1711,1.7769,1.8551,2.0223,3.2360,1.7573
+
+contention (ns/sample)
+  installed: median=37602019; samples=36969406,45682196,37127981,37602019,36236710,37264692,37822638,41404447,39833817
+  reference: median=38203560; samples=37445813,39412854,36930434,41229556,38202725,38203560,38470389,37129895,38998601
+  paired reference/installed: median=1.0129; ratios=1.0129,0.8628,0.9947,1.0965,1.0543,1.0252,1.0171,0.8968,0.9790
+
+=== Lock-bypass wheel vs. lock-only snapshot (CPython 3.15) ===
+Python: CPython 3.15.0rc2 (cpython-315-x86_64-linux-gnu)
+Machine: Linux-7.0.0-43-generic-x86_64-with-glibc2.43 / x86_64 / unknown CPU
+GIL: enabled; picop: 3.13.0
+Arms: installed, reference
+
+construction x4096 (ns/sample)
+  installed: median=7427730; samples=7427730,8151645,6346679,8479294,13385244,8343470,6996462,6023489,7329312
+  reference: median=7978612; samples=8958415,8228323,10638992,8687215,5328160,5767895,7978612,6914690,5869958
+  paired reference/installed: median=1.0245; ratios=1.2061,1.0094,1.6763,1.0245,0.3981,0.6913,1.1404,1.1480,0.8009
+
+uncontended (ns/sample)
+  installed: median=7014806; samples=7507731,6643984,6509846,8471774,10337286,5086347,6043674,7750026,7014806
+  reference: median=15063137; samples=13864089,13740958,10547231,46544375,27670196,29617459,27642578,15063137,12477557
+  paired reference/installed: median=2.0682; ratios=1.8466,2.0682,1.6202,5.4941,2.6767,5.8229,4.5738,1.9436,1.7787
+
+contention (ns/sample)
+  installed: median=39756866; samples=40938510,37917563,39756866,38960918,41929875,39185940,39999360,36493358,39872295
+  reference: median=40614106; samples=43644576,42521121,37336159,41275139,40906523,39445543,40614106,39913210,39740868
+  paired reference/installed: median=1.0154; ratios=1.0661,1.1214,0.9391,1.0594,0.9756,1.0066,1.0154,1.0937,0.9967
+
+=== Picop exact-int helper wheel vs. builtin snapshot (CPython 3.14) ===
+Python: CPython 3.14.7 (cpython-314-x86_64-linux-gnu)
+Machine: Linux-7.0.0-43-generic-x86_64-with-glibc2.43 / x86_64 / unknown CPU
+GIL: enabled; picop: 3.13.0
+Arms: installed, reference
+
+construction x4096 (ns/sample)
+  installed: median=8144729; samples=7820996,8293416,8062011,8144729,9116764,7665155,8020552,8178053,9177006
+  reference: median=8357097; samples=8357097,7872494,8713262,6028972,8748955,10669683,8834637,7150262,5006905
+  paired reference/installed: median=0.9597; ratios=1.0685,0.9492,1.0808,0.7402,0.9597,1.3920,1.1015,0.8743,0.5456
+
+uncontended (ns/sample)
+  installed: median=10544174; samples=12998340,9838214,10544174,12796120,10198345,12481231,12147764,6933444,7304517
+  reference: median=9306894; samples=10059649,5678881,11500320,11063444,7778884,6371233,13512346,9306894,8389674
+  paired reference/installed: median=0.8646; ratios=0.7739,0.5772,1.0907,0.8646,0.7628,0.5105,1.1123,1.3423,1.1486
+
+contention (ns/sample)
+  installed: median=40041911; samples=44087751,42821442,36502039,44927828,38939707,36937710,43452662,38703758,40041911
+  reference: median=39006688; samples=36415696,36447115,42302749,36886486,41003746,39006688,38156816,47130613,40253076
+  paired reference/installed: median=1.0053; ratios=0.8260,0.8511,1.1589,0.8210,1.0530,1.0560,0.8781,1.2177,1.0053
+
+=== Picop exact-int helper wheel vs. builtin snapshot (CPython 3.15) ===
+Python: CPython 3.15.0rc2 (cpython-315-x86_64-linux-gnu)
+Machine: Linux-7.0.0-43-generic-x86_64-with-glibc2.43 / x86_64 / unknown CPU
+GIL: enabled; picop: 3.13.0
+Arms: installed, reference
+
+construction x4096 (ns/sample)
+  installed: median=7828647; samples=7986764,7563488,7770627,7828647,7943749,12333506,8504168,6983998,6964166
+  reference: median=8129696; samples=7842614,8197968,8224205,8105208,8129696,9002607,10978993,7967780,7266032
+  paired reference/installed: median=1.0433; ratios=0.9820,1.0839,1.0584,1.0353,1.0234,0.7299,1.2910,1.1409,1.0433
+
+uncontended (ns/sample)
+  installed: median=11738187; samples=13022261,10127969,11096616,6155433,12541995,12008802,11275586,12113487,11738187
+  reference: median=10994403; samples=13888276,6410053,11855440,9337753,12508084,8222913,12557970,10994403,10265045
+  paired reference/installed: median=0.9973; ratios=1.0665,0.6329,1.0684,1.5170,0.9973,0.6847,1.1137,0.9076,0.8745
+
+contention (ns/sample)
+  installed: median=38543058; samples=40284869,39957104,37586088,37480008,36570370,42656667,38543058,39221338,37766164
+  reference: median=38999236; samples=36190442,37327469,36809789,39687119,38999236,37998772,43349840,40885634,39135238
+  paired reference/installed: median=1.0363; ratios=0.8984,0.9342,0.9793,1.0589,1.0664,0.8908,1.1247,1.0424,1.0363
+
+=== Cold imports: builtin wheel vs. picop helper wheel (CPython 3.14) ===
+cold import median ms (base, trial): 84.37 93.217
+trial/base paired median: 1.0921
+trial/base paired ratios: 1.1741 1.3659 1.2894 1.2422 1.0921 1.073 1.0004 1.0426 1.014
+
+=== Cold imports: builtin wheel vs. picop helper wheel (CPython 3.15) ===
+cold import median ms (base, trial): 68.955 85.203
+trial/base paired median: 1.1914
+trial/base paired ratios: 1.321 1.3154 1.037 1.1562 1.4484 1.1653 1.1914 1.2484 1.1888

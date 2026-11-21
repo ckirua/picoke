@@ -1,4 +1,4 @@
-"""Build the crypto extensions from Cython source."""
+"""Build picore's extensions from Cython source."""
 
 from Cython.Build import cythonize
 from setuptools import Extension, setup
@@ -6,7 +6,7 @@ from setuptools import Extension, setup
 modules = ("base64", "keccak", "ed25519", "secp256k1", "eip712", "bip137")
 setup(
     ext_modules=cythonize(
-        [
+        [Extension("picore.ratelimit", ["src/picore/ratelimit.pyx"])] + [
             Extension(
                 f"picore.crypto.{module}",
                 [f"src/picore/crypto/{module}.pyx"],

@@ -13,9 +13,9 @@ python3.15 -m pip install .
 Source builds require a C compiler, the target interpreter's development
 headers, and OpenSSL development headers (`openssl/evp.h`) and the libcrypto
 library discoverable by the compiler and linker. The isolated build installs
-Cython; it does not install these system development dependencies.
-Base64 encoding and Keccak-256 link libcrypto; dynamically linked builds
-need a compatible libcrypto shared library.
+Cython and picop's Cython declarations; it does not install these system
+development dependencies. Base64 encoding and Keccak-256 link libcrypto;
+dynamically linked builds need a compatible libcrypto shared library.
 Large Base64 decodes use the `pybase64` runtime dependency on CPython 3.14
 and 3.15; its libbase64 backend selects available SIMD implementations.
 
@@ -75,6 +75,32 @@ Bitcoin messages use the standard framed, double-SHA-256 digest. This deliberate
 `eth-account` loads on the first call that needs the generic encoder, after picore validates the input. Importing `picore.crypto` or hashing a canonical Agent message does not load it.
 
 `eth-account` currently constrains PyCryptodome to the 3.x series via `eth-keyfile`; picore therefore requires PyCryptodome 3.24.1 or newer, below 4. This increases the dependency footprint and differs from the earlier 4.5 baseline; see the [benchmark notes](bench/README.md).
+
+## Rate limiting
+
+```python
+from picore.ratelimit import TokenBucket
+
+# Allow a burst of 20 tokens, then refill continuously at 10 tokens per second.
+bucket = TokenBucket(20, refill_amount=10)
+
+async def handle_batch() -> None:
+    await bucket.acquire(3)
+```
+
+`TokenBucket(capacity, *, refill_amount=1, refill_period_ns=1_000_000_000)` starts
+full and uses a monotonic clock. Constructor settings are exact `int` values in
+`1..2**63 - 1`; acquisition costs are exact `int` values in `1..capacity`.
+Requests are served FIFO, so a large head request can delay smaller ones.
+Cancellation while waiting does not consume tokens; use `asyncio.timeout()` to
+bound a wait. Construct the bucket anywhere, but use it from one asyncio event
+loop only. Importing `picore.ratelimit` does not load the crypto providers.
+
+The Cython implementation uses picop's native nanosecond clock and fixed-width
+arithmetic when scaled capacity fits in 64 bits. Larger settings retain exact
+integer arithmetic. It only allocates a lock when an acquisition has to wait.
+See the [rate-limit benchmarks](bench/README.md#async-token-bucket) for
+workloads and measured tradeoffs.
 
 ## Python support
 
