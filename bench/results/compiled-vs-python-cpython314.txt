@@ -1,0 +1,33 @@
+Python executable: /tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python
+Compiled root: /home/kirua/pydev/picore
+Baseline root: /tmp/picore-python-baseline.bwf2p7pO
+Paired samples=7, iterations=50, warmups=1; deterministic outputs match.
+
+compiled versions: {"Crypto runtime": "3.24.1", "btclib-secp256k1": "0.8.0.16", "eth-account": "0.14.0", "picop": "3.13.0", "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pycryptodome": "3.24.1", "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]"}
+compiled module origins: {"picore": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/__init__.py", "picore.crypto": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/__init__.py", "picore.crypto.base64": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/base64.cpython-314-x86_64-linux-gnu.so", "picore.crypto.bip137": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/bip137.cpython-314-x86_64-linux-gnu.so", "picore.crypto.ed25519": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/ed25519.cpython-314-x86_64-linux-gnu.so", "picore.crypto.eip712": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/eip712.cpython-314-x86_64-linux-gnu.so", "picore.crypto.keccak": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/keccak.cpython-314-x86_64-linux-gnu.so", "picore.crypto.secp256k1": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/secp256k1.cpython-314-x86_64-linux-gnu.so"}
+
+baseline versions: {"Crypto runtime": "3.24.1", "btclib-secp256k1": "0.8.0.16", "eth-account": "0.14.0", "picop": "3.13.0", "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pycryptodome": "3.24.1", "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]"}
+baseline module origins: {"picore": "/tmp/picore-python-baseline.bwf2p7pO/picore/__init__.py", "picore.crypto": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/__init__.py", "picore.crypto.base64": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/base64.py", "picore.crypto.bip137": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/bip137.py", "picore.crypto.ed25519": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/ed25519.py", "picore.crypto.eip712": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/eip712.py", "picore.crypto.keccak": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/keccak.py", "picore.crypto.secp256k1": "/tmp/picore-python-baseline.bwf2p7pO/picore/crypto/secp256k1.py"}
+
+Times are per-call means across iterations; spread is min..max of paired sample means.
+BIP137 message hash: compiled mean 2619.5 ns (spread 1271.6..3572.5); baseline mean 2883.4 ns (spread 1383.2..4525.0); compiled/baseline 0.908x
+BIP137 sign: compiled mean 137051.1 ns (spread 94347.6..187855.1); baseline mean 140230.4 ns (spread 93623.4..184931.7); compiled/baseline 0.977x
+BIP137 verify: compiled mean 78122.9 ns (spread 46013.6..169311.6); baseline mean 73871.2 ns (spread 45035.0..95693.5); compiled/baseline 1.058x
+Base64 bytes decode 1KiB: compiled mean 7883.4 ns (spread 2844.1..10959.1); baseline mean 8655.1 ns (spread 2845.0..12947.5); compiled/baseline 0.911x
+Base64 bytes decode small: compiled mean 362.3 ns (spread 174.4..539.1); baseline mean 441.8 ns (spread 186.0..651.1); compiled/baseline 0.820x
+Base64 bytes encode 1KiB: compiled mean 2800.1 ns (spread 1839.9..3880.7); baseline mean 2840.4 ns (spread 1812.2..3929.1); compiled/baseline 0.986x
+Base64 bytes encode small: compiled mean 550.9 ns (spread 226.2..741.1); baseline mean 496.1 ns (spread 211.7..707.6); compiled/baseline 1.111x
+Base64 str decode 1KiB: compiled mean 7655.4 ns (spread 2824.7..10963.3); baseline mean 6892.6 ns (spread 2825.0..12718.4); compiled/baseline 1.111x
+Base64 str decode small: compiled mean 351.2 ns (spread 159.1..539.7); baseline mean 421.0 ns (spread 165.8..589.1); compiled/baseline 0.834x
+Base64 str encode 1KiB: compiled mean 3754.4 ns (spread 2496.5..4874.2); baseline mean 3529.5 ns (spread 2185.3..4805.1); compiled/baseline 1.064x
+Base64 str encode small: compiled mean 692.3 ns (spread 279.6..915.3); baseline mean 788.1 ns (spread 302.4..1214.8); compiled/baseline 0.878x
+EIP-712 Agent: compiled mean 254923.3 ns (spread 191139.4..364043.7); baseline mean 346736.3 ns (spread 242901.7..548818.8); compiled/baseline 0.735x
+EIP-712 full message: compiled mean 277038.0 ns (spread 209624.6..321799.3); baseline mean 333422.5 ns (spread 216906.5..418919.0); compiled/baseline 0.831x
+Ed25519 public key: compiled mean 1000276.1 ns (spread 748389.3..1300900.0); baseline mean 934536.3 ns (spread 732672.6..1254252.3); compiled/baseline 1.070x
+Ed25519 sign: compiled mean 1883716.5 ns (spread 1667026.8..2338385.9); baseline mean 1897949.5 ns (spread 1475791.1..2384631.8); compiled/baseline 0.993x
+Ed25519 verify: compiled mean 5184934.4 ns (spread 4107456.5..7089527.9); baseline mean 5051638.1 ns (spread 4021356.9..6806258.9); compiled/baseline 1.026x
+Ethereum address: compiled mean 33713.5 ns (spread 26419.5..61762.6); baseline mean 41976.1 ns (spread 27904.1..59489.9); compiled/baseline 0.803x
+Keccak-256: compiled mean 11892.2 ns (spread 5217.2..15866.7); baseline mean 8383.8 ns (spread 4840.4..16540.9); compiled/baseline 1.418x
+secp256k1 public key: compiled mean 22664.5 ns (spread 19308.2..38526.8); baseline mean 29382.9 ns (spread 20118.9..46083.1); compiled/baseline 0.771x
+secp256k1 recover: compiled mean 50188.4 ns (spread 39289.7..82482.5); baseline mean 68289.1 ns (spread 40470.6..137731.8); compiled/baseline 0.735x
+secp256k1 sign: compiled mean 134089.7 ns (spread 89631.8..185758.3); baseline mean 153264.3 ns (spread 98862.8..224236.4); compiled/baseline 0.875x

@@ -1,0 +1,21 @@
+Address mismatch: legacy=0x7d6e99bb8abf8cc013bb0e912d0b176596fe7b88, picore=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf; excluded from timing
+Python: 3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]; platform: Linux-7.0.0-43-generic-x86_64-with-glibc2.43
+btclib-secp256k1: 0.8.0.16; eth-account: 0.14.0
+Legacy: /tmp/picore-full315.loFUQpw6/crypto; samples=7, iterations=20, warmups=1
+Correctness checked before timing; Bitcoin signed-message hashes intentionally differ and are not compared.
+
+secp256k1 public key
+  legacy                       median      89659.9 ns/call  p25..p75 75339.9..166467.5  range 75191.8..228754.7  ratio-to-legacy 1.000x
+  picore                       median      38840.1 ns/call  p25..p75 37968.8..41137.8  range 36950.3..233804.7  ratio-to-legacy 0.433x
+
+secp256k1 sign
+  legacy                       median   30802807.6 ns/call  p25..p75 28669818.9..30961919.1  range 26553921.5..33389983.1  ratio-to-legacy 1.000x
+  picore                       median     178979.0 ns/call  p25..p75 94150.2..180691.7  range 85800.1..185456.2  ratio-to-legacy 0.006x
+
+secp256k1 recover
+  legacy                       median   65848041.8 ns/call  p25..p75 64582294.9..66364156.4  range 60558939.6..72642974.5  ratio-to-legacy 1.000x
+  picore                       median      83590.1 ns/call  p25..p75 44714.9..86259.9  range 40410.8..89264.9  ratio-to-legacy 0.001x
+
+EIP-712 Agent
+  legacy                       median      95490.3 ns/call  p25..p75 50044.0..95791.9  range 37144.2..101511.6  ratio-to-legacy 1.000x
+  picore                       median     380898.7 ns/call  p25..p75 318952.0..387552.0  range 276827.0..400743.4  ratio-to-legacy 3.989x

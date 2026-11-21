@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77", "Cython>=3.3.1,<4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "picore"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "picop>=3.13,<4",
+    "pybase64>=1.5.2,<1.6",
+    "pycryptodome>=3.24.1,<4",
+    "btclib-secp256k1>=0.8.0.16,<0.9",
+    "eth-account>=0.14,<0.15",
+]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+picore = ["py.typed"]
+"picore.crypto" = ["*.pyi"]

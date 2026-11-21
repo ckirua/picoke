@@ -1,0 +1,146 @@
+{
+  "raw": {
+    "baseline": [
+      {
+        "import_ns": 1222108800,
+        "first_fixed_ns": 122929,
+        "first_fallback_ns": 1173042,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 1124014205,
+        "first_fixed_ns": 159306,
+        "first_fallback_ns": 1305203,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 914253308,
+        "first_fixed_ns": 168163,
+        "first_fallback_ns": 1342242,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 1177847553,
+        "first_fixed_ns": 160412,
+        "first_fallback_ns": 1327216,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 980463978,
+        "first_fixed_ns": 108675,
+        "first_fallback_ns": 1320131,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 1211246918,
+        "first_fixed_ns": 148018,
+        "first_fallback_ns": 1139282,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 1023131611,
+        "first_fixed_ns": 156252,
+        "first_fallback_ns": 1340834,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 1110238787,
+        "first_fixed_ns": 155627,
+        "first_fallback_ns": 1336398,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      },
+      {
+        "import_ns": 1080959045,
+        "first_fixed_ns": 158540,
+        "first_fallback_ns": 1352619,
+        "loaded_after_import": true,
+        "loaded_after_fixed": true
+      }
+    ],
+    "lazy": [
+      {
+        "import_ns": 131665647,
+        "first_fixed_ns": 110594,
+        "first_fallback_ns": 1019678197,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 126267747,
+        "first_fixed_ns": 114347,
+        "first_fallback_ns": 882322572,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 91823967,
+        "first_fixed_ns": 103589,
+        "first_fallback_ns": 938907266,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 118134455,
+        "first_fixed_ns": 150920,
+        "first_fallback_ns": 838979952,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 119669178,
+        "first_fixed_ns": 163077,
+        "first_fallback_ns": 966841645,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 100343451,
+        "first_fixed_ns": 103469,
+        "first_fallback_ns": 839284387,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 108122010,
+        "first_fixed_ns": 154534,
+        "first_fallback_ns": 894129082,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 88994637,
+        "first_fixed_ns": 76289,
+        "first_fallback_ns": 967410650,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      },
+      {
+        "import_ns": 107073082,
+        "first_fixed_ns": 78819,
+        "first_fallback_ns": 896176198,
+        "loaded_after_import": false,
+        "loaded_after_fixed": false
+      }
+    ]
+  },
+  "median_ms": {
+    "baseline": {
+      "import_ns": 1110.238787,
+      "first_fixed_ns": 0.156252,
+      "first_fallback_ns": 1.327216
+    },
+    "lazy": {
+      "import_ns": 108.12201,
+      "first_fixed_ns": 0.110594,
+      "first_fallback_ns": 896.176198
+    }
+  }
+}

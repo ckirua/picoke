@@ -1,0 +1,122 @@
+Comparative microbenchmark (not a reproduction of legacy benchmark cases)
+Python: 3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]
+Implementation/platform: CPython / Linux-7.0.0-43-generic-x86_64-with-glibc2.43
+Machine/processor: x86_64 / unknown
+Legacy root: /tmp/picore-full315.loFUQpw6/crypto
+Counts: samples=7, iterations/sample=20, warmups=1, order=alternate
+Python OpenSSL: OpenSSL 3.5.8 25 Aug 2026; compiler: Clang 22.1.3 
+Python build CFLAGS: -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC
+Libraries: {'picop': '3.13.0', 'pycryptodome': '3.24.1', 'Crypto runtime': '3.24.1'}
+
+Base64 workload: 12 input bytes, 16 encoded bytes; nonzero terminal input
+
+encode -> bytes
+  legacy                       median        107.2 ns/call  p25..p75 98.9..109.7  range 97.1..120.8  ratio-to-legacy 1.000x
+  picore                       median        270.2 ns/call  p25..p75 268.9..270.9  range 266.6..289.7  ratio-to-legacy 2.519x
+  stdlib                       median        215.9 ns/call  p25..p75 215.4..220.1  range 213.6..223.6  ratio-to-legacy 2.014x
+
+encode -> ASCII str
+  legacy                       median        128.6 ns/call  p25..p75 124.8..129.9  range 123.2..133.2  ratio-to-legacy 1.000x
+  picore                       median        317.0 ns/call  p25..p75 315.8..317.5  range 313.3..319.5  ratio-to-legacy 2.465x
+  stdlib+decode                median        276.0 ns/call  p25..p75 273.6..276.6  range 273.4..279.6  ratio-to-legacy 2.146x
+
+decode str -> bytes
+  legacy                       median        135.7 ns/call  p25..p75 131.6..136.2  range 130.1..140.8  ratio-to-legacy 1.000x
+  picore                       median        169.0 ns/call  p25..p75 165.9..170.1  range 164.8..175.1  ratio-to-legacy 1.245x
+  stdlib                       median        400.4 ns/call  p25..p75 399.8..400.8  range 395.4..404.4  ratio-to-legacy 2.950x
+
+decode ASCII -> bytes
+  legacy                       median        135.3 ns/call  p25..p75 133.7..135.5  range 132.2..396.9  ratio-to-legacy 1.000x
+  picore                       median        183.2 ns/call  p25..p75 182.3..183.4  range 181.9..464.3  ratio-to-legacy 1.354x
+  stdlib                       median        403.7 ns/call  p25..p75 398.1..408.6  range 398.0..1206.2  ratio-to-legacy 2.983x
+
+Base64 workload: 1024 input bytes, 1368 encoded bytes; nonzero terminal input
+
+encode -> bytes
+  legacy                       median        876.8 ns/call  p25..p75 873.1..877.4  range 868.7..969.5  ratio-to-legacy 1.000x
+  picore                       median        907.0 ns/call  p25..p75 903.0..912.5  range 903.0..1390.5  ratio-to-legacy 1.035x
+  stdlib                       median        849.2 ns/call  p25..p75 846.8..849.6  range 844.8..853.7  ratio-to-legacy 0.969x
+
+encode -> ASCII str
+  legacy                       median       1475.9 ns/call  p25..p75 1067.0..1477.3  range 1065.3..1497.3  ratio-to-legacy 1.000x
+  picore                       median       1644.7 ns/call  p25..p75 1256.2..1646.2  range 1127.8..1936.8  ratio-to-legacy 1.114x
+  stdlib+decode                median       1573.3 ns/call  p25..p75 1568.3..1698.7  range 1080.3..1922.3  ratio-to-legacy 1.066x
+
+decode str -> bytes
+  legacy                       median       1740.6 ns/call  p25..p75 1385.8..1751.0  range 1382.1..1803.3  ratio-to-legacy 1.000x
+  picore                       median        956.7 ns/call  p25..p75 947.8..1246.7  range 943.8..1933.7  ratio-to-legacy 0.550x
+  stdlib                       median       1257.2 ns/call  p25..p75 1253.2..2012.4  range 1252.1..2832.8  ratio-to-legacy 0.722x
+
+decode ASCII -> bytes
+  legacy                       median       1385.5 ns/call  p25..p75 1380.5..1385.7  range 1380.0..1398.7  ratio-to-legacy 1.000x
+  picore                       median        964.5 ns/call  p25..p75 962.9..964.7  range 961.1..977.0  ratio-to-legacy 0.696x
+  stdlib                       median       1253.3 ns/call  p25..p75 1248.7..1254.5  range 1247.9..1715.2  ratio-to-legacy 0.905x
+
+Base64 workload: 1048576 input bytes, 1398104 encoded bytes; nonzero terminal input
+
+encode -> bytes
+  legacy                       median    3222478.6 ns/call  p25..p75 2657883.8..3260081.2  range 2431445.0..3359221.3  ratio-to-legacy 1.000x
+  picore                       median    1072063.2 ns/call  p25..p75 926187.8..1117262.9  range 739231.5..1163142.8  ratio-to-legacy 0.333x
+  stdlib                       median    1125565.1 ns/call  p25..p75 900548.2..1127263.0  range 671090.2..1150866.7  ratio-to-legacy 0.349x
+
+encode -> ASCII str
+  legacy                       median    4085531.9 ns/call  p25..p75 3302662.4..4124906.2  range 3299541.4..4574787.3  ratio-to-legacy 1.000x
+  picore                       median    2436063.6 ns/call  p25..p75 2202899.6..2591348.0  range 2131622.0..3281868.5  ratio-to-legacy 0.596x
+  stdlib+decode                median    2624160.2 ns/call  p25..p75 2486786.4..2632408.0  range 2313075.8..3275244.1  ratio-to-legacy 0.642x
+
+decode str -> bytes
+  legacy                       median    4148373.4 ns/call  p25..p75 3575312.6..4324284.5  range 3463638.8..4750042.2  ratio-to-legacy 1.000x
+  picore                       median    1271710.1 ns/call  p25..p75 1025463.8..1276509.9  range 774170.0..1749471.9  ratio-to-legacy 0.307x
+  stdlib                       median    1112093.8 ns/call  p25..p75 843902.7..1529432.1  range 828560.7..1586404.9  ratio-to-legacy 0.268x
+
+decode ASCII -> bytes
+  legacy                       median    4624441.0 ns/call  p25..p75 4114761.9..4645723.2  range 3754842.0..4756968.5  ratio-to-legacy 1.000x
+  picore                       median    1463114.5 ns/call  p25..p75 1381531.6..1480785.8  range 1261384.5..1495019.7  ratio-to-legacy 0.316x
+  stdlib                       median    1537973.6 ns/call  p25..p75 1412132.4..1577440.3  range 1305365.4..1583084.1  ratio-to-legacy 0.333x
+
+Terminal-NUL correctness: input=b'\x00', legacy decode=b'', picore decode=b'\x00'; excluded from timing.
+
+Keccak workload: 0 bytes (legacy Keccak-256)
+
+Keccak-256
+  legacy                       median      14339.9 ns/call  p25..p75 13912.3..14388.5  range 12867.5..15032.0  ratio-to-legacy 1.000x
+  picore                       median      13472.0 ns/call  p25..p75 13045.3..13796.2  range 7156.4..14081.8  ratio-to-legacy 0.939x
+  PyCryptodome direct          median      12784.4 ns/call  p25..p75 12737.2..12825.8  range 9872.2..12948.4  ratio-to-legacy 0.892x
+
+Keccak workload: 12 bytes (legacy Keccak-256)
+
+Keccak-256
+  legacy                       median      13972.6 ns/call  p25..p75 13536.0..14010.0  range 9809.0..14262.5  ratio-to-legacy 1.000x
+  picore                       median      15861.5 ns/call  p25..p75 15451.7..15868.5  range 11360.4..16630.4  ratio-to-legacy 1.135x
+  PyCryptodome direct          median      15009.5 ns/call  p25..p75 12337.8..15276.3  range 10575.5..15604.5  ratio-to-legacy 1.074x
+
+Keccak workload: 200 bytes (legacy Keccak-256)
+
+Keccak-256
+  legacy                       median      23932.2 ns/call  p25..p75 23453.5..23945.5  range 19298.7..101543.1  ratio-to-legacy 1.000x
+  picore                       median      16974.2 ns/call  p25..p75 16859.0..17148.7  range 16796.8..18105.0  ratio-to-legacy 0.709x
+  PyCryptodome direct          median      16323.0 ns/call  p25..p75 15887.8..16381.8  range 15682.0..16850.2  ratio-to-legacy 0.682x
+
+Keccak workload: 1024 bytes (legacy Keccak-256)
+
+Keccak-256
+  legacy                       median      84866.4 ns/call  p25..p75 79430.7..85899.4  range 77584.5..86527.0  ratio-to-legacy 1.000x
+  picore                       median      23517.8 ns/call  p25..p75 22618.8..23581.0  range 18065.8..23747.9  ratio-to-legacy 0.277x
+  PyCryptodome direct          median      22436.6 ns/call  p25..p75 22284.8..22449.0  range 19629.4..22768.1  ratio-to-legacy 0.264x
+
+Ed25519 workload: seed=bytes(range(32)), message=200 bytes; verify keys/signatures prepared outside timing
+
+public-key derivation
+  legacy                       median    3019043.3 ns/call  p25..p75 2940907.5..3215205.0  range 2693912.6..4091353.2  ratio-to-legacy 1.000x
+  picore                       median     860051.1 ns/call  p25..p75 640292.3..928720.1  range 563007.7..1034363.7  ratio-to-legacy 0.285x
+  PyCryptodome direct          median     775730.9 ns/call  p25..p75 589537.0..843380.4  range 558984.4..1037320.8  ratio-to-legacy 0.257x
+
+sign
+  legacy                       median    8898454.2 ns/call  p25..p75 7765913.1..8932696.7  range 6581637.2..8973625.2  ratio-to-legacy 1.000x
+  picore                       median    2716384.5 ns/call  p25..p75 1678175.9..2728011.4  range 1323612.6..4180015.0  ratio-to-legacy 0.305x
+  PyCryptodome direct          median    1598434.1 ns/call  p25..p75 1570143.9..1600943.9  range 765089.1..1643627.9  ratio-to-legacy 0.180x
+
+verify
+  legacy                       median    6123772.9 ns/call  p25..p75 5743259.9..6545678.2  range 5469346.8..7895297.5  ratio-to-legacy 1.000x
+  picore                       median    4279242.3 ns/call  p25..p75 3927053.1..4329732.0  range 3596455.4..6976068.2  ratio-to-legacy 0.699x
+  PyCryptodome direct          median    3525808.9 ns/call  p25..p75 3246273.8..3682095.4  range 3192526.1..5476128.3  ratio-to-legacy 0.576x

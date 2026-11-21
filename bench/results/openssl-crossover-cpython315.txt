@@ -1,0 +1,36 @@
+Method: complete public wrapper, fresh worker per backend/sample, alternating paired order; 
+preflight binary payloads and strict malformed-input outcomes against binascii.
+Round 1/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+Round 2/7: binascii -> picore -> openssl_memchr_scalar -> openssl_scalar -> openssl_memchr -> openssl
+Round 3/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+Round 4/7: binascii -> picore -> openssl_memchr_scalar -> openssl_scalar -> openssl_memchr -> openssl
+Round 5/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+Round 6/7: binascii -> picore -> openssl_memchr_scalar -> openssl_scalar -> openssl_memchr -> openssl
+Round 7/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+1536 decoded bytes: openssl 1244.9 ± 315.3 ns, openssl_memchr 402.1 ± 94.0 ns, openssl_scalar 2834.2 ± 678.1 ns, openssl_memchr_scalar 2331.7 ± 596.0 ns, picore 1970.8 ± 571.7 ns, binascii 2479.9 ± 600.6 ns; candidate/picore=0.632
+1537 decoded bytes: openssl 1326.8 ± 264.2 ns, openssl_memchr 458.9 ± 145.1 ns, openssl_scalar 3020.2 ± 801.3 ns, openssl_memchr_scalar 2253.0 ± 600.0 ns, picore 1708.9 ± 448.9 ns, binascii 2508.4 ± 407.4 ns; candidate/picore=0.776
+1538 decoded bytes: openssl 1295.2 ± 196.0 ns, openssl_memchr 512.8 ± 79.7 ns, openssl_scalar 3001.8 ± 538.4 ns, openssl_memchr_scalar 2169.9 ± 437.7 ns, picore 1771.1 ± 458.8 ns, binascii 2068.8 ± 511.2 ns; candidate/picore=0.731
+2046 decoded bytes: openssl 1681.8 ± 230.6 ns, openssl_memchr 583.2 ± 166.3 ns, openssl_scalar 3761.8 ± 866.1 ns, openssl_memchr_scalar 2867.3 ± 559.2 ns, picore 2738.9 ± 573.3 ns, binascii 2648.8 ± 817.6 ns; candidate/picore=0.614
+2047 decoded bytes: openssl 1580.4 ± 380.2 ns, openssl_memchr 633.0 ± 117.1 ns, openssl_scalar 4037.6 ± 584.1 ns, openssl_memchr_scalar 2836.2 ± 664.4 ns, picore 2915.1 ± 546.1 ns, binascii 2818.8 ± 693.9 ns; candidate/picore=0.542
+2048 decoded bytes: openssl 1754.2 ± 493.5 ns, openssl_memchr 598.3 ± 198.9 ns, openssl_scalar 3717.7 ± 615.2 ns, openssl_memchr_scalar 2914.8 ± 425.1 ns, picore 3538.9 ± 2573.5 ns, binascii 2477.5 ± 626.7 ns; candidate/picore=0.496
+3072 decoded bytes: openssl 2452.0 ± 280.1 ns, openssl_memchr 768.4 ± 157.8 ns, openssl_scalar 5398.3 ± 1252.5 ns, openssl_memchr_scalar 3964.4 ± 983.0 ns, picore 1459.1 ± 314.0 ns, binascii 4130.6 ± 738.5 ns; candidate/picore=1.681
+3073 decoded bytes: openssl 2262.8 ± 421.8 ns, openssl_memchr 793.9 ± 293.6 ns, openssl_scalar 5746.6 ± 864.0 ns, openssl_memchr_scalar 3988.9 ± 697.3 ns, picore 1710.6 ± 391.1 ns, binascii 3463.5 ± 1054.6 ns; candidate/picore=1.323
+3074 decoded bytes: openssl 2284.3 ± 490.6 ns, openssl_memchr 695.7 ± 213.6 ns, openssl_scalar 6371.0 ± 1241.4 ns, openssl_memchr_scalar 4199.9 ± 682.9 ns, picore 1789.1 ± 366.0 ns, binascii 4596.3 ± 1649.6 ns; candidate/picore=1.277
+4095 decoded bytes: openssl 2915.9 ± 615.0 ns, openssl_memchr 862.1 ± 110.3 ns, openssl_scalar 9038.8 ± 1906.9 ns, openssl_memchr_scalar 5934.8 ± 820.4 ns, picore 1511.1 ± 466.9 ns, binascii 5225.9 ± 1334.6 ns; candidate/picore=1.930
+4096 decoded bytes: openssl 3266.2 ± 378.0 ns, openssl_memchr 863.9 ± 236.0 ns, openssl_scalar 6802.2 ± 1552.8 ns, openssl_memchr_scalar 6016.3 ± 526.4 ns, picore 1432.5 ± 420.2 ns, binascii 4929.5 ± 936.8 ns; candidate/picore=2.280
+4097 decoded bytes: openssl 3502.3 ± 180.7 ns, openssl_memchr 971.5 ± 204.1 ns, openssl_scalar 7153.0 ± 1482.3 ns, openssl_memchr_scalar 6184.2 ± 1174.2 ns, picore 1810.8 ± 454.2 ns, binascii 4745.7 ± 886.0 ns; candidate/picore=1.934
+6144 decoded bytes: openssl 4149.9 ± 841.8 ns, openssl_memchr 1037.0 ± 310.5 ns, openssl_scalar 11237.3 ± 2898.8 ns, openssl_memchr_scalar 8495.2 ± 689.1 ns, picore 1932.8 ± 726.6 ns, binascii 7189.9 ± 1874.7 ns; candidate/picore=2.147
+6145 decoded bytes: openssl 4715.9 ± 635.5 ns, openssl_memchr 1136.6 ± 202.3 ns, openssl_scalar 11774.2 ± 1949.3 ns, openssl_memchr_scalar 8352.9 ± 1146.9 ns, picore 1905.9 ± 504.4 ns, binascii 8160.7 ± 1163.0 ns; candidate/picore=2.474
+6146 decoded bytes: openssl 4173.4 ± 608.7 ns, openssl_memchr 1066.4 ± 293.4 ns, openssl_scalar 11180.0 ± 1519.4 ns, openssl_memchr_scalar 7836.4 ± 1660.7 ns, picore 1687.3 ± 665.9 ns, binascii 6912.9 ± 1846.4 ns; candidate/picore=2.473
+8190 decoded bytes: openssl 5749.3 ± 714.9 ns, openssl_memchr 1399.8 ± 298.7 ns, openssl_scalar 15141.6 ± 3282.9 ns, openssl_memchr_scalar 11817.7 ± 773.6 ns, picore 2046.3 ± 724.4 ns, binascii 10072.9 ± 2536.7 ns; candidate/picore=2.810
+8191 decoded bytes: openssl 4963.8 ± 1092.3 ns, openssl_memchr 1555.3 ± 296.3 ns, openssl_scalar 15778.8 ± 2916.9 ns, openssl_memchr_scalar 11255.9 ± 1225.4 ns, picore 2487.0 ± 451.8 ns, binascii 10459.4 ± 1828.0 ns; candidate/picore=1.996
+8192 decoded bytes: openssl 5289.4 ± 1060.1 ns, openssl_memchr 1561.9 ± 403.9 ns, openssl_scalar 15302.5 ± 3072.5 ns, openssl_memchr_scalar 10797.0 ± 2424.5 ns, picore 2018.9 ± 439.1 ns, binascii 10854.4 ± 4430.6 ns; candidate/picore=2.620
+12288 decoded bytes: openssl 8701.4 ± 1263.4 ns, openssl_memchr 2084.0 ± 471.5 ns, openssl_scalar 21620.3 ± 4619.7 ns, openssl_memchr_scalar 16130.1 ± 1771.0 ns, picore 2499.7 ± 649.2 ns, binascii 14588.1 ± 2856.3 ns; candidate/picore=3.481
+12289 decoded bytes: openssl 8645.9 ± 1361.2 ns, openssl_memchr 2273.3 ± 288.1 ns, openssl_scalar 23288.7 ± 3538.2 ns, openssl_memchr_scalar 14923.9 ± 2678.0 ns, picore 2934.4 ± 551.2 ns, binascii 12959.3 ± 3599.0 ns; candidate/picore=2.946
+12290 decoded bytes: openssl 9547.3 ± 1682.1 ns, openssl_memchr 2135.5 ± 454.0 ns, openssl_scalar 21270.8 ± 6104.7 ns, openssl_memchr_scalar 18137.4 ± 870.1 ns, picore 2397.3 ± 742.1 ns, binascii 14359.8 ± 3096.7 ns; candidate/picore=3.982
+16383 decoded bytes: openssl 11810.4 ± 1675.9 ns, openssl_memchr 3060.0 ± 1019.4 ns, openssl_scalar 27972.9 ± 5700.4 ns, openssl_memchr_scalar 18594.1 ± 4683.7 ns, picore 2767.3 ± 843.4 ns, binascii 16735.7 ± 3788.8 ns; candidate/picore=4.268
+16384 decoded bytes: openssl 10288.4 ± 1863.3 ns, openssl_memchr 3284.3 ± 516.7 ns, openssl_scalar 27801.5 ± 5533.7 ns, openssl_memchr_scalar 19162.0 ± 3471.6 ns, picore 3491.8 ± 535.2 ns, binascii 18323.9 ± 4710.0 ns; candidate/picore=2.946
+16385 decoded bytes: openssl 10901.9 ± 1426.4 ns, openssl_memchr 2585.9 ± 584.8 ns, openssl_scalar 30897.6 ± 4290.9 ns, openssl_memchr_scalar 19412.9 ± 4580.1 ns, picore 3509.8 ± 540.1 ns, binascii 19005.9 ± 3898.0 ns; candidate/picore=3.106
+32766 decoded bytes: openssl 24634.4 ± 5252.3 ns, openssl_memchr 5467.2 ± 883.7 ns, openssl_scalar 54834.2 ± 11716.9 ns, openssl_memchr_scalar 37860.7 ± 10255.2 ns, picore 5165.3 ± 1548.6 ns, binascii 43978.5 ± 3337.3 ns; candidate/picore=4.769
+32767 decoded bytes: openssl 22892.4 ± 4440.0 ns, openssl_memchr 6001.0 ± 364.2 ns, openssl_scalar 53131.3 ± 9330.3 ns, openssl_memchr_scalar 40709.4 ± 8692.3 ns, picore 5620.0 ± 1154.5 ns, binascii 35398.9 ± 7209.6 ns; candidate/picore=4.073
+32768 decoded bytes: openssl 22498.0 ± 4032.0 ns, openssl_memchr 6527.1 ± 1973.5 ns, openssl_scalar 53048.6 ± 10777.3 ns, openssl_memchr_scalar 48458.8 ± 8492.5 ns, picore 5282.1 ± 1083.7 ns, binascii 42774.9 ± 10624.6 ns; candidate/picore=4.259

@@ -1,0 +1,189 @@
+ENVIRONMENT candidate: {"affinity": [4], "cache_tag": "cpython-315", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.15' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": ["/usr/lib/x86_64-linux-gnu/libcrypto.so.3"], "origins": {"picore.crypto.base64": {"backend": "candidate", "path": "/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/lib/python3.15/site-packages/picore/crypto/base64.cpython-315-x86_64-linux-gnu.so", "sha256": "4dad365ae75259cac362c09a56ed928a78113ea5dcce3c9cc72a969670cb9d5e", "source": "compiled extension"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+ENVIRONMENT previous: {"affinity": [4], "cache_tag": "cpython-315", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.15' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": [], "origins": {"picore.crypto.base64": {"backend": "previous", "path": "/tmp/picore-openssl-baseline.oMxWkD4o/315/picore/crypto/base64.cpython-315-x86_64-linux-gnu.so", "sha256": "66ed31849268a90638922124a93ad40543e7a8ca0a34d8107ab84fe0c7bece17", "source": "compiled extension"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+ENVIRONMENT legacy: {"affinity": [4], "cache_tag": "cpython-315", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.15' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": ["/usr/lib/x86_64-linux-gnu/libcrypto.so.3"], "origins": {"legacy_baseline.crypto.encoding.base64": {"backend": "legacy", "path": "/tmp/picore-full315.loFUQpw6/crypto/legacy_baseline/crypto/encoding/base64.cpython-315-x86_64-linux-gnu.so", "sha256": "9c7067943f2c9ba23b8738cf6c245016425488fda134b531bcebd7dd1b820a9a", "source": "compiled extension"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "binary/only-NUL/b64decode", "strict_stdlib": {"length": 1, "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "binary/only-NUL/b64decode_ascii", "strict_stdlib": {"length": 1, "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NUL/b64decode", "strict_stdlib": {"length": 2, "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NUL/b64decode_ascii", "strict_stdlib": {"length": 2, "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NULs/b64decode", "strict_stdlib": {"length": 6, "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NULs/b64decode_ascii", "strict_stdlib": {"length": 6, "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'!'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'!'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'===='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'===='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'=Zg=='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'=Zg=='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'A'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'A'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Z g=='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Z g=='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zg==\\n'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zg==\\n'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==\\x00'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==\\x00'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==x'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess data after padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==x'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess data after padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 2, "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zh=='/b64decode", "strict_stdlib": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 2, "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zh=='/b64decode_ascii", "strict_stdlib": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9='/b64decode", "strict_stdlib": {"length": 2, "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9='/b64decode_ascii", "strict_stdlib": {"length": 2, "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zm9v='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zm9v='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9v===='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9v===='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\u00e9'/b64decode", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\u00e9'/b64decode_ascii", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\ud83d\ude00'/b64decode", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\ud83d\ude00'/b64decode_ascii", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got str)"}, "backend": "legacy", "probe": "type/'abc'/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got str)"}, "backend": "legacy", "probe": "type/'abc'/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got int)"}, "backend": "legacy", "probe": "type/3/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got int)"}, "backend": "legacy", "probe": "type/3/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got int)"}, "backend": "legacy", "probe": "type/3/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got int)"}, "backend": "legacy", "probe": "type/3/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.AttributeError", "message": "'NoneType' object has no attribute 'encode'"}, "backend": "legacy", "probe": "type/None/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.AttributeError", "message": "'NoneType' object has no attribute 'encode'"}, "backend": "legacy", "probe": "type/None/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"not_run": "legacy None encode may reach unchecked native bytes helpers"}, "backend": "legacy", "probe": "type/None/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"not_run": "legacy None encode may reach unchecked native bytes helpers"}, "backend": "legacy", "probe": "type/None/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytes)"}, "backend": "legacy", "probe": "type/b'Zg=='/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytes)"}, "backend": "legacy", "probe": "type/b'Zg=='/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'Zg==')/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'Zg==')/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'abc')/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'abc')/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+ENVIRONMENT stdlib: {"affinity": [4], "cache_tag": "cpython-315", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.15' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": [], "origins": {"base64": {"backend": "stdlib", "path": "/home/kirua/.local/share/uv/python/cpython-3.15.0rc2-linux-x86_64-gnu/lib/python3.15/base64.py", "source": "Python standard library"}, "binascii": {"backend": "stdlib", "path": "built-in", "source": "Python standard library"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+METHOD: fresh process per backend per round; forward/reverse alternating paired order; adaptive batches; all correctness probes precede timing. Both decoders take str, return bytes.
+LIMITATIONS: Python-call microbenchmark, GC default, no automatic CPU pinning or frequency control; caps may yield short batches; process samples are not statistical independence guarantees. stdlib includes public type guards and ASCII conversion. Legacy behavior differences are not parity. Terminal-NUL data is correctness-only. No overall KEEP follows from this benchmark alone.
+Round 1/7: candidate -> previous -> legacy -> stdlib
+Round 2/7: stdlib -> legacy -> previous -> candidate
+Round 3/7: candidate -> previous -> legacy -> stdlib
+Round 4/7: stdlib -> legacy -> previous -> candidate
+Round 5/7: candidate -> previous -> legacy -> stdlib
+Round 6/7: stdlib -> legacy -> previous -> candidate
+Round 7/7: candidate -> previous -> legacy -> stdlib
+
+b64encode/12-byte
+  candidate mean=118.1 ns stdev=49.2 range=[63.1, 193.3]
+  previous  mean=406.9 ns stdev=119.0 range=[303.0, 663.7]
+  legacy    mean=138.4 ns stdev=54.5 range=[85.6, 213.0]
+  stdlib    mean=439.0 ns stdev=130.5 range=[237.9, 582.4]
+  candidate/previous: means=0.2903; paired mean=0.3008 stdev=0.1386 range=[0.1867, 0.5254]
+  candidate/legacy: means=0.8533; paired mean=0.9622 stdev=0.5313 range=[0.3386, 1.9423]
+  candidate/stdlib: means=0.2691; paired mean=0.2847 stdev=0.1168 range=[0.1137, 0.4692]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode_ascii/12-byte
+  candidate mean=146.2 ns stdev=43.5 range=[98.7, 196.0]
+  previous  mean=518.0 ns stdev=142.7 range=[392.8, 787.9]
+  legacy    mean=190.4 ns stdev=56.5 range=[114.4, 282.7]
+  stdlib    mean=604.6 ns stdev=153.7 range=[473.7, 925.8]
+  candidate/previous: means=0.2822; paired mean=0.3066 stdev=0.1354 range=[0.1324, 0.4829]
+  candidate/legacy: means=0.7677; paired mean=0.8475 stdev=0.4193 range=[0.3690, 1.6452]
+  candidate/stdlib: means=0.2418; paired mean=0.2481 stdev=0.0829 range=[0.1823, 0.4138]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode/12-byte
+  candidate mean=230.2 ns stdev=66.8 range=[145.6, 302.7]
+  previous  mean=269.4 ns stdev=89.0 range=[169.2, 372.0]
+  legacy    mean=152.7 ns stdev=67.8 range=[97.9, 299.6]
+  stdlib    mean=791.9 ns stdev=230.2 range=[538.7, 1155.5]
+  candidate/previous: means=0.8546; paired mean=0.9608 stdev=0.4467 range=[0.3913, 1.7232]
+  candidate/legacy: means=1.5075; paired mean=1.6636 stdev=0.5324 range=[0.5546, 2.1069]
+  candidate/stdlib: means=0.2907; paired mean=0.2926 stdev=0.0457 range=[0.2439, 0.3705]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/12-byte
+  candidate mean=258.6 ns stdev=87.1 range=[164.0, 369.4]
+  previous  mean=314.4 ns stdev=82.0 range=[208.5, 424.7]
+  legacy    mean=169.3 ns stdev=64.6 range=[112.9, 300.8]
+  stdlib    mean=930.5 ns stdev=283.1 range=[581.5, 1237.8]
+  candidate/previous: means=0.8227; paired mean=0.8477 stdev=0.2751 range=[0.4398, 1.2822]
+  candidate/legacy: means=1.5276; paired mean=1.6382 stdev=0.5661 range=[0.6652, 2.3832]
+  candidate/stdlib: means=0.2779; paired mean=0.3060 stdev=0.1601 range=[0.1549, 0.6352]
+  SKIP / no repeatable >=5% win established
+
+b64encode/1KiB
+  candidate mean=1297.6 ns stdev=221.9 range=[1027.7, 1654.3]
+  previous  mean=1336.5 ns stdev=143.4 range=[1160.3, 1544.8]
+  legacy    mean=1368.8 ns stdev=313.9 range=[978.6, 1751.0]
+  stdlib    mean=1720.9 ns stdev=405.9 range=[1274.9, 2244.6]
+  candidate/previous: means=0.9708; paired mean=0.9922 stdev=0.2570 range=[0.6652, 1.4258]
+  candidate/legacy: means=0.9480; paired mean=0.9949 stdev=0.2942 range=[0.5897, 1.4676]
+  candidate/stdlib: means=0.7540; paired mean=0.7979 stdev=0.2470 range=[0.4718, 1.1611]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1KiB
+  candidate mean=1137.1 ns stdev=255.4 range=[841.0, 1630.9]
+  previous  mean=1896.6 ns stdev=534.4 range=[1216.9, 2507.8]
+  legacy    mean=1515.9 ns stdev=327.4 range=[1286.5, 2231.8]
+  stdlib    mean=2081.9 ns stdev=565.1 range=[1412.3, 2597.3]
+  candidate/previous: means=0.5996; paired mean=0.6226 stdev=0.1386 range=[0.4158, 0.8154]
+  candidate/legacy: means=0.7501; paired mean=0.7746 stdev=0.2235 range=[0.4840, 1.1335]
+  candidate/stdlib: means=0.5462; paired mean=0.6055 stdev=0.2859 range=[0.3408, 1.0763]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode/1KiB
+  candidate mean=1477.3 ns stdev=404.8 range=[1001.3, 2001.1]
+  previous  mean=1575.3 ns stdev=371.9 range=[993.3, 2005.2]
+  legacy    mean=2009.6 ns stdev=315.4 range=[1670.4, 2614.9]
+  stdlib    mean=2547.3 ns stdev=803.3 range=[1248.8, 3412.5]
+  candidate/previous: means=0.9378; paired mean=0.9845 stdev=0.3372 range=[0.5569, 1.5168]
+  candidate/legacy: means=0.7351; paired mean=0.7521 stdev=0.2473 range=[0.4979, 1.1415]
+  candidate/stdlib: means=0.5800; paired mean=0.6357 stdev=0.2660 range=[0.3468, 1.1177]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/1KiB
+  candidate mean=1412.3 ns stdev=323.9 range=[1082.8, 2034.4]
+  previous  mean=1469.4 ns stdev=444.8 range=[936.1, 2032.5]
+  legacy    mean=1849.9 ns stdev=365.6 range=[1402.8, 2584.5]
+  stdlib    mean=2475.9 ns stdev=711.8 range=[1677.4, 3391.2]
+  candidate/previous: means=0.9612; paired mean=1.0717 stdev=0.5115 range=[0.6265, 2.0262]
+  candidate/legacy: means=0.7635; paired mean=0.7643 stdev=0.0948 range=[0.6340, 0.9404]
+  candidate/stdlib: means=0.5704; paired mean=0.6012 stdev=0.1665 range=[0.3771, 0.7820]
+  SKIP / no repeatable >=5% win established
+
+b64encode/1MiB
+  candidate mean=848286.8 ns stdev=177502.8 range=[648536.8, 1146174.7]
+  previous  mean=968689.1 ns stdev=150941.7 range=[805039.0, 1135583.6]
+  legacy    mean=1196280.1 ns stdev=344360.6 range=[966585.1, 1743934.4]
+  stdlib    mean=1006389.1 ns stdev=245218.4 range=[692755.5, 1377922.1]
+  candidate/previous: means=0.8757; paired mean=0.9042 stdev=0.2734 range=[0.5742, 1.2835]
+  candidate/legacy: means=0.7091; paired mean=0.7358 stdev=0.1728 range=[0.4957, 1.0502]
+  candidate/stdlib: means=0.8429; paired mean=0.8917 stdev=0.2918 range=[0.5555, 1.2817]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1MiB
+  candidate mean=956574.7 ns stdev=170918.8 range=[778472.6, 1313551.7]
+  previous  mean=1105204.8 ns stdev=248391.3 range=[902132.6, 1531613.2]
+  legacy    mean=1222998.4 ns stdev=240687.7 range=[1029695.7, 1620276.2]
+  stdlib    mean=1151643.3 ns stdev=311037.3 range=[774224.6, 1559421.3]
+  candidate/previous: means=0.8655; paired mean=0.9002 stdev=0.2624 range=[0.6363, 1.4434]
+  candidate/legacy: means=0.7822; paired mean=0.7892 stdev=0.0920 range=[0.6409, 0.9267]
+  candidate/stdlib: means=0.8306; paired mean=0.8713 stdev=0.2075 range=[0.5550, 1.1325]
+  SKIP / no repeatable >=5% win established
+
+b64decode/1MiB
+  candidate mean=1140439.8 ns stdev=295205.0 range=[815318.6, 1552598.2]
+  previous  mean=1203604.6 ns stdev=249931.7 range=[936082.4, 1474887.5]
+  legacy    mean=1726207.0 ns stdev=202171.3 range=[1553067.9, 2139658.3]
+  stdlib    mean=1345907.6 ns stdev=350985.2 range=[803993.8, 1888252.5]
+  candidate/previous: means=0.9475; paired mean=0.9457 stdev=0.1284 range=[0.8048, 1.1427]
+  candidate/legacy: means=0.6607; paired mean=0.6624 stdev=0.1597 range=[0.4531, 0.8999]
+  candidate/stdlib: means=0.8473; paired mean=0.9165 stdev=0.3786 range=[0.4714, 1.5508]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/1MiB
+  candidate mean=1224525.1 ns stdev=263854.3 range=[907903.0, 1493978.2]
+  previous  mean=1273040.2 ns stdev=294262.1 range=[839020.7, 1656930.3]
+  legacy    mean=1715930.2 ns stdev=264680.9 range=[1468181.9, 2127118.5]
+  stdlib    mean=1341373.6 ns stdev=329346.0 range=[986106.2, 1825355.6]
+  candidate/previous: means=0.9619; paired mean=0.9782 stdev=0.1582 range=[0.6974, 1.1080]
+  candidate/legacy: means=0.7136; paired mean=0.7235 stdev=0.1719 range=[0.4867, 0.9403]
+  candidate/stdlib: means=0.9129; paired mean=0.9713 stdev=0.3425 range=[0.5492, 1.4132]
+  SKIP / no repeatable >=5% win established

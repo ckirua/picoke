@@ -1,0 +1,354 @@
+Comparative microbenchmark (not a reproduction of legacy benchmark cases)
+Python: 3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]
+Implementation/platform: CPython / Linux-7.0.0-43-generic-x86_64-with-glibc2.43
+Machine/processor: x86_64 / Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+Legacy root: /tmp/picore-crypto-next.ivARKb/legacy3.15
+Counts: samples=7, iterations/sample=20, warmups=1, order=alternate
+Python OpenSSL: OpenSSL 3.5.8 25 Aug 2026; compiler: Clang 22.1.3 
+Python build CFLAGS: -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC
+Libraries: {'picop': '3.13.0', 'pycryptodome': '3.24.1', 'pybase64': '1.5.2', 'btclib-secp256k1': '0.8.0.16', 'eth-account': '0.14.0', 'Crypto runtime': '3.24.1'}
+Legacy Keccak origin: /tmp/picore-crypto-next.ivARKb/legacy3.15/legacy_baseline/crypto/hashes/keccak.cpython-315-x86_64-linux-gnu.so
+Picore Keccak origin: /tmp/picore-recheck.MT73wz/base3.15/lib/python3.15/site-packages/picore/crypto/keccak.cpython-315-x86_64-linux-gnu.so
+
+Base64 workload: 12 input bytes, 16 encoded bytes; nonzero terminal input
+
+Base64 workload: 1533 input bytes, 2044 encoded bytes; nonzero terminal input
+
+Base64 workload: 1536 input bytes, 2048 encoded bytes; nonzero terminal input
+
+Base64 workload: 1539 input bytes, 2052 encoded bytes; nonzero terminal input
+
+Base64 workload: 4096 input bytes, 5464 encoded bytes; nonzero terminal input
+
+Terminal-NUL correctness: input=b'\x00', legacy decode=b'', picore decode=b'\x00'; excluded from timing.
+Keccak 135B: legacy padding mismatch; legacy excluded (legacy=839e1dcbc5d91afd4db5b6ed02c71b4bae752529d0573bd5825eb41ce7e959a8, picore=a93561614e1ef350aec9c3d8e2efe1ea4be0fa9ac05166b7b1b90406308129c9)
+Keccak 136B: legacy padding mismatch; legacy excluded (legacy=a0e99d71601e87b4b842b0c1974777c5d293eb4d4cdb231f2db8f4bb836d247e, picore=5dec6c219df671269dfa33638c62a9b36525ead94ebab4d499cfa2841fb39466)
+
+Ed25519 workload: seed=bytes(range(32)), message=200 bytes; provider verification has a weaker acceptance policy
+
+encode -> bytes 12B
+  legacy                       median        104.3 ns/call  p25..p75 99.9..104.9  range 99.3..125.1  ratio-to-legacy 1.000x
+    samples ns/call: 125.1, 107.0, 104.9, 104.3, 99.9, 104.3, 99.3
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median         98.9 ns/call  p25..p75 97.9..102.5  range 93.0..114.3  ratio-to-legacy 0.948x
+    samples ns/call: 114.3, 102.7, 102.5, 97.9, 98.9, 93.0, 98.2
+    paired ratios to legacy: 0.914, 0.960, 0.978, 0.939, 0.990, 0.892, 0.989
+  stdlib                       median        211.6 ns/call  p25..p75 206.5..216.7  range 205.4..220.7  ratio-to-legacy 2.028x
+    samples ns/call: 220.7, 218.6, 206.5, 210.4, 216.7, 211.6, 205.4
+    paired ratios to legacy: 1.764, 2.043, 1.969, 2.017, 2.169, 2.028, 2.068
+
+encode -> ASCII str 12B
+  legacy                       median        129.6 ns/call  p25..p75 129.4..130.9  range 129.3..140.4  ratio-to-legacy 1.000x
+    samples ns/call: 140.4, 137.6, 129.5, 129.6, 129.3, 130.9, 129.4
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median        103.5 ns/call  p25..p75 102.4..104.5  range 101.1..107.3  ratio-to-legacy 0.799x
+    samples ns/call: 107.3, 104.5, 102.7, 101.1, 103.5, 102.4, 105.1
+    paired ratios to legacy: 0.764, 0.760, 0.793, 0.780, 0.800, 0.782, 0.812
+  stdlib+decode                median        270.0 ns/call  p25..p75 267.4..270.4  range 266.9..274.1  ratio-to-legacy 2.083x
+    samples ns/call: 274.1, 269.0, 270.0, 266.9, 270.5, 267.4, 270.4
+    paired ratios to legacy: 1.952, 1.956, 2.085, 2.059, 2.092, 2.042, 2.089
+
+decode str -> bytes 12B
+  legacy                       median        134.2 ns/call  p25..p75 133.4..135.6  range 133.4..139.2  ratio-to-legacy 1.000x
+    samples ns/call: 139.2, 133.4, 135.6, 133.8, 133.4, 136.3, 134.2
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median        141.3 ns/call  p25..p75 137.6..141.7  range 137.2..143.3  ratio-to-legacy 1.053x
+    samples ns/call: 142.2, 137.6, 143.3, 137.2, 141.7, 138.4, 141.3
+    paired ratios to legacy: 1.021, 1.031, 1.057, 1.025, 1.061, 1.015, 1.053
+  stdlib                       median        395.8 ns/call  p25..p75 391.9..396.9  range 391.6..397.9  ratio-to-legacy 2.950x
+    samples ns/call: 397.5, 391.9, 396.9, 391.6, 395.8, 391.9, 397.9
+    paired ratios to legacy: 2.856, 2.937, 2.928, 2.927, 2.966, 2.874, 2.966
+
+decode ASCII -> bytes 12B
+  legacy                       median        397.5 ns/call  p25..p75 395.9..397.5  range 395.8..400.9  ratio-to-legacy 1.000x
+    samples ns/call: 400.9, 397.5, 395.9, 396.5, 397.5, 395.8, 398.2
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median        379.2 ns/call  p25..p75 378.6..380.6  range 377.7..386.9  ratio-to-legacy 0.954x
+    samples ns/call: 386.9, 380.6, 377.7, 381.2, 378.9, 379.2, 378.6
+    paired ratios to legacy: 0.965, 0.958, 0.954, 0.962, 0.953, 0.958, 0.951
+  stdlib                       median        980.0 ns/call  p25..p75 979.6..986.5  range 979.3..1037.2  ratio-to-legacy 2.465x
+    samples ns/call: 979.6, 979.7, 979.3, 986.5, 987.5, 980.0, 1037.2
+    paired ratios to legacy: 2.443, 2.465, 2.474, 2.488, 2.484, 2.476, 2.604
+
+encode -> bytes 1533B
+  legacy                       median       1221.2 ns/call  p25..p75 1216.9..1223.8  range 1215.3..1759.8  ratio-to-legacy 1.000x
+    samples ns/call: 1225.7, 1219.0, 1223.8, 1216.9, 1215.3, 1221.2, 1759.8
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1140.0 ns/call  p25..p75 1135.2..1143.8  range 1132.7..1146.3  ratio-to-legacy 0.934x
+    samples ns/call: 1146.3, 1132.7, 1140.0, 1145.7, 1138.9, 1135.2, 1143.8
+    paired ratios to legacy: 0.935, 0.929, 0.932, 0.941, 0.937, 0.930, 0.650
+  stdlib                       median       1119.5 ns/call  p25..p75 1118.7..1120.2  range 1117.2..1130.8  ratio-to-legacy 0.917x
+    samples ns/call: 1119.4, 1120.2, 1118.7, 1125.2, 1117.2, 1119.5, 1130.8
+    paired ratios to legacy: 0.913, 0.919, 0.914, 0.925, 0.919, 0.917, 0.643
+
+encode -> ASCII str 1533B
+  legacy                       median       1546.3 ns/call  p25..p75 1528.3..1548.2  range 1517.8..2328.1  ratio-to-legacy 1.000x
+    samples ns/call: 1517.8, 2328.1, 1866.2, 1546.3, 1545.8, 1528.3, 1548.2
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1150.2 ns/call  p25..p75 1144.5..1150.3  range 1142.5..1379.8  ratio-to-legacy 0.744x
+    samples ns/call: 1150.3, 1275.8, 1379.8, 1150.2, 1147.8, 1142.5, 1144.5
+    paired ratios to legacy: 0.758, 0.548, 0.739, 0.744, 0.742, 0.748, 0.739
+  stdlib+decode                median       1464.3 ns/call  p25..p75 1461.2..1465.1  range 1459.2..2133.3  ratio-to-legacy 0.947x
+    samples ns/call: 1465.1, 1464.3, 2133.3, 1465.5, 1462.5, 1461.2, 1459.2
+    paired ratios to legacy: 0.965, 0.629, 1.143, 0.948, 0.946, 0.956, 0.943
+
+decode str -> bytes 1533B
+  legacy                       median       2359.9 ns/call  p25..p75 2005.2..2671.2  range 2000.8..2752.6  ratio-to-legacy 1.000x
+    samples ns/call: 2671.2, 2675.0, 2359.9, 2752.6, 2005.2, 2007.7, 2000.8
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1566.4 ns/call  p25..p75 1289.5..1568.5  range 1289.2..2287.5  ratio-to-legacy 0.664x
+    samples ns/call: 2287.5, 1566.4, 1575.3, 1568.5, 1295.8, 1289.2, 1289.5
+    paired ratios to legacy: 0.856, 0.586, 0.668, 0.570, 0.646, 0.642, 0.645
+  stdlib                       median       2306.2 ns/call  p25..p75 1648.8..2308.6  range 1645.8..2340.5  ratio-to-legacy 0.977x
+    samples ns/call: 2340.5, 2308.6, 2309.4, 2306.2, 1657.7, 1645.8, 1648.8
+    paired ratios to legacy: 0.876, 0.863, 0.979, 0.838, 0.827, 0.820, 0.824
+
+decode ASCII -> bytes 1533B
+  legacy                       median       2009.3 ns/call  p25..p75 2002.1..2014.5  range 1999.5..2072.3  ratio-to-legacy 1.000x
+    samples ns/call: 2014.5, 2009.3, 2072.3, 2020.3, 1999.5, 2003.8, 2002.1
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1309.1 ns/call  p25..p75 1304.8..1317.0  range 1304.3..1889.6  ratio-to-legacy 0.652x
+    samples ns/call: 1317.0, 1307.8, 1889.6, 1785.2, 1304.8, 1309.1, 1304.3
+    paired ratios to legacy: 0.654, 0.651, 0.912, 0.884, 0.653, 0.653, 0.651
+  stdlib                       median       1654.6 ns/call  p25..p75 1650.2..1655.2  range 1641.3..2328.2  ratio-to-legacy 0.823x
+    samples ns/call: 1650.2, 1650.3, 2328.2, 2312.1, 1655.2, 1641.3, 1654.6
+    paired ratios to legacy: 0.819, 0.821, 1.123, 1.144, 0.828, 0.819, 0.826
+
+encode -> bytes 1536B
+  legacy                       median       1218.5 ns/call  p25..p75 1217.7..1220.0  range 1215.5..1226.5  ratio-to-legacy 1.000x
+    samples ns/call: 1226.0, 1226.5, 1218.5, 1217.7, 1218.3, 1220.0, 1215.5
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1139.8 ns/call  p25..p75 1137.3..1141.2  range 1135.2..1706.0  ratio-to-legacy 0.935x
+    samples ns/call: 1706.0, 1137.3, 1139.8, 1138.1, 1141.2, 1135.2, 1142.0
+    paired ratios to legacy: 1.391, 0.927, 0.935, 0.935, 0.937, 0.930, 0.939
+  stdlib                       median       1123.4 ns/call  p25..p75 1119.4..1125.6  range 1119.2..1137.8  ratio-to-legacy 0.922x
+    samples ns/call: 1137.8, 1127.5, 1123.4, 1119.2, 1125.6, 1119.5, 1119.4
+    paired ratios to legacy: 0.928, 0.919, 0.922, 0.919, 0.924, 0.918, 0.921
+
+encode -> ASCII str 1536B
+  legacy                       median       2834.1 ns/call  p25..p75 2814.3..2847.2  range 2757.1..3187.3  ratio-to-legacy 1.000x
+    samples ns/call: 2814.3, 3187.3, 2822.9, 2834.1, 2757.1, 2890.2, 2847.2
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       2182.7 ns/call  p25..p75 2160.1..2193.8  range 2125.7..2276.6  ratio-to-legacy 0.770x
+    samples ns/call: 2182.7, 2160.1, 2125.7, 2193.8, 2171.7, 2276.6, 2196.5
+    paired ratios to legacy: 0.776, 0.678, 0.753, 0.774, 0.788, 0.788, 0.771
+  stdlib+decode                median       2744.9 ns/call  p25..p75 2665.5..2751.9  range 2436.8..2915.8  ratio-to-legacy 0.969x
+    samples ns/call: 2744.9, 2751.9, 2436.8, 2771.7, 2665.5, 2742.4, 2915.8
+    paired ratios to legacy: 0.975, 0.863, 0.863, 0.978, 0.967, 0.949, 1.024
+
+decode str -> bytes 1536B
+  legacy                       median       3604.6 ns/call  p25..p75 3240.2..3616.8  range 3146.2..3948.6  ratio-to-legacy 1.000x
+    samples ns/call: 3417.6, 3604.6, 3616.8, 3146.2, 3240.2, 3948.6, 3909.9
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1331.7 ns/call  p25..p75 1322.6..1928.8  range 1194.3..2297.2  ratio-to-legacy 0.369x
+    samples ns/call: 1322.6, 1331.7, 1324.2, 2005.7, 1194.3, 2297.2, 1928.8
+    paired ratios to legacy: 0.387, 0.369, 0.366, 0.637, 0.369, 0.582, 0.493
+  stdlib                       median       3411.8 ns/call  p25..p75 3165.5..3414.1  range 3150.7..3740.4  ratio-to-legacy 0.947x
+    samples ns/call: 3165.5, 3150.7, 3313.9, 3473.3, 3411.8, 3414.1, 3740.4
+    paired ratios to legacy: 0.926, 0.874, 0.916, 1.104, 1.053, 0.865, 0.957
+
+decode ASCII -> bytes 1536B
+  legacy                       median       3832.1 ns/call  p25..p75 3714.9..3879.8  range 3613.4..4194.7  ratio-to-legacy 1.000x
+    samples ns/call: 3879.8, 4194.7, 3832.1, 3886.9, 3813.4, 3714.9, 3613.4
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       2133.2 ns/call  p25..p75 2005.4..2137.5  range 1721.6..2175.7  ratio-to-legacy 0.557x
+    samples ns/call: 2005.4, 2133.2, 2175.7, 2165.8, 2137.5, 1721.6, 2043.7
+    paired ratios to legacy: 0.517, 0.509, 0.568, 0.557, 0.561, 0.463, 0.566
+  stdlib                       median       3654.8 ns/call  p25..p75 3625.2..3697.3  range 3389.8..3765.6  ratio-to-legacy 0.954x
+    samples ns/call: 3654.8, 3625.2, 3747.3, 3653.2, 3697.3, 3765.6, 3389.8
+    paired ratios to legacy: 0.942, 0.864, 0.978, 0.940, 0.970, 1.014, 0.938
+
+encode -> bytes 1539B
+  legacy                       median       1776.0 ns/call  p25..p75 1733.5..1844.8  range 1717.3..2310.1  ratio-to-legacy 1.000x
+    samples ns/call: 1717.3, 1733.5, 1776.0, 1756.6, 1844.8, 2310.1, 2267.5
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1637.0 ns/call  p25..p75 1560.8..1802.3  range 1526.8..2065.1  ratio-to-legacy 0.922x
+    samples ns/call: 1560.8, 1606.5, 1526.8, 1637.0, 1802.3, 2024.4, 2065.1
+    paired ratios to legacy: 0.909, 0.927, 0.860, 0.932, 0.977, 0.876, 0.911
+  stdlib                       median       1588.7 ns/call  p25..p75 1517.3..1937.8  range 1495.3..2259.2  ratio-to-legacy 0.895x
+    samples ns/call: 1588.7, 1549.8, 1517.3, 1495.3, 1937.8, 1958.2, 2259.2
+    paired ratios to legacy: 0.925, 0.894, 0.854, 0.851, 1.050, 0.848, 0.996
+
+encode -> ASCII str 1539B
+  legacy                       median       3013.8 ns/call  p25..p75 2901.5..3220.1  range 2853.9..3406.1  ratio-to-legacy 1.000x
+    samples ns/call: 2901.5, 2853.9, 2911.4, 3255.8, 3406.1, 3013.8, 3220.1
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       2408.8 ns/call  p25..p75 2243.7..2423.9  range 2051.7..2507.2  ratio-to-legacy 0.799x
+    samples ns/call: 2243.7, 2254.7, 2051.7, 2507.2, 2425.5, 2408.8, 2423.9
+    paired ratios to legacy: 0.773, 0.790, 0.705, 0.770, 0.712, 0.799, 0.753
+  stdlib+decode                median       3132.9 ns/call  p25..p75 2757.0..3198.1  range 2734.8..3214.3  ratio-to-legacy 1.040x
+    samples ns/call: 2757.0, 2734.8, 2821.7, 3132.9, 3214.3, 3201.6, 3198.1
+    paired ratios to legacy: 0.950, 0.958, 0.969, 0.962, 0.944, 1.062, 0.993
+
+decode str -> bytes 1539B
+  legacy                       median       3142.5 ns/call  p25..p75 2948.3..3145.5  range 2849.3..3653.8  ratio-to-legacy 1.000x
+    samples ns/call: 3653.8, 2948.3, 2849.3, 3145.5, 3176.8, 3093.8, 3142.5
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1251.2 ns/call  p25..p75 1228.3..1268.2  range 1216.5..1415.3  ratio-to-legacy 0.398x
+    samples ns/call: 1415.3, 1359.8, 1228.3, 1232.8, 1216.5, 1268.2, 1251.2
+    paired ratios to legacy: 0.387, 0.461, 0.431, 0.392, 0.383, 0.410, 0.398
+  stdlib                       median       2814.2 ns/call  p25..p75 2797.2..2851.2  range 2767.6..3144.6  ratio-to-legacy 0.896x
+    samples ns/call: 3144.6, 3017.6, 2805.4, 2814.2, 2767.6, 2851.2, 2797.2
+    paired ratios to legacy: 0.861, 1.023, 0.985, 0.895, 0.871, 0.922, 0.890
+
+decode ASCII -> bytes 1539B
+  legacy                       median       3273.9 ns/call  p25..p75 3136.8..3384.4  range 2714.5..3947.1  ratio-to-legacy 1.000x
+    samples ns/call: 3384.4, 3136.8, 2714.5, 3201.5, 3273.9, 3947.1, 3845.5
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1377.7 ns/call  p25..p75 1323.7..1430.2  range 1204.8..2424.5  ratio-to-legacy 0.421x
+    samples ns/call: 1430.2, 1323.7, 1364.0, 1204.8, 1377.7, 2424.5, 2106.7
+    paired ratios to legacy: 0.423, 0.422, 0.502, 0.376, 0.421, 0.614, 0.548
+  stdlib                       median       2932.3 ns/call  p25..p75 2702.9..2978.1  range 2339.8..3876.8  ratio-to-legacy 0.896x
+    samples ns/call: 2702.9, 2790.3, 2978.1, 2339.8, 3063.9, 2932.3, 3876.8
+    paired ratios to legacy: 0.799, 0.890, 1.097, 0.731, 0.936, 0.743, 1.008
+
+encode -> bytes 4096B
+  legacy                       median       6043.6 ns/call  p25..p75 5804.8..6056.4  range 5602.4..6076.1  ratio-to-legacy 1.000x
+    samples ns/call: 6034.0, 6043.6, 6060.6, 6076.1, 6056.4, 5602.4, 5804.8
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       5553.4 ns/call  p25..p75 5422.7..5583.5  range 5332.8..6063.4  ratio-to-legacy 0.919x
+    samples ns/call: 5426.9, 5422.7, 5583.5, 5726.1, 5553.4, 5332.8, 6063.4
+    paired ratios to legacy: 0.899, 0.897, 0.921, 0.942, 0.917, 0.952, 1.045
+  stdlib                       median       5147.1 ns/call  p25..p75 4859.1..5294.1  range 4807.6..5446.2  ratio-to-legacy 0.852x
+    samples ns/call: 4859.1, 5005.6, 5317.2, 5446.2, 5147.1, 4807.6, 5294.1
+    paired ratios to legacy: 0.805, 0.828, 0.877, 0.896, 0.850, 0.858, 0.912
+
+encode -> ASCII str 4096B
+  legacy                       median       6986.8 ns/call  p25..p75 6302.5..7080.5  range 6062.6..7418.7  ratio-to-legacy 1.000x
+    samples ns/call: 7205.8, 6982.2, 7080.5, 6986.8, 6302.5, 7418.7, 6062.6
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       5735.9 ns/call  p25..p75 5074.9..5760.2  range 4936.4..6066.1  ratio-to-legacy 0.821x
+    samples ns/call: 5735.9, 4936.4, 5787.9, 6066.1, 5605.4, 5760.2, 5074.9
+    paired ratios to legacy: 0.796, 0.707, 0.817, 0.868, 0.889, 0.776, 0.837
+  stdlib+decode                median       6500.6 ns/call  p25..p75 5942.1..6581.6  range 5862.0..7409.7  ratio-to-legacy 0.930x
+    samples ns/call: 7409.7, 6592.3, 5942.1, 6500.6, 6436.1, 6581.6, 5862.0
+    paired ratios to legacy: 1.028, 0.944, 0.839, 0.930, 1.021, 0.887, 0.967
+
+decode str -> bytes 4096B
+  legacy                       median       9136.5 ns/call  p25..p75 8597.5..9354.4  range 8417.0..9718.8  ratio-to-legacy 1.000x
+    samples ns/call: 9631.9, 8971.3, 8417.0, 9136.5, 8597.5, 9354.4, 9718.8
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       2388.6 ns/call  p25..p75 1975.3..2424.2  range 1961.8..2734.2  ratio-to-legacy 0.261x
+    samples ns/call: 2446.2, 2388.6, 1961.8, 2424.2, 1975.3, 2734.2, 2303.8
+    paired ratios to legacy: 0.254, 0.266, 0.233, 0.265, 0.230, 0.292, 0.237
+  stdlib                       median       7584.1 ns/call  p25..p75 7155.9..7637.8  range 7142.6..7876.9  ratio-to-legacy 0.830x
+    samples ns/call: 7142.6, 7155.9, 7312.4, 7734.8, 7637.8, 7876.9, 7584.1
+    paired ratios to legacy: 0.742, 0.798, 0.869, 0.847, 0.888, 0.842, 0.780
+
+decode ASCII -> bytes 4096B
+  legacy                       median       8955.6 ns/call  p25..p75 8847.5..9161.4  range 8706.5..9547.2  ratio-to-legacy 1.000x
+    samples ns/call: 8847.5, 8891.8, 9308.6, 8706.5, 8955.6, 9547.2, 9161.4
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       2460.3 ns/call  p25..p75 2441.6..2460.9  range 2417.8..2522.7  ratio-to-legacy 0.275x
+    samples ns/call: 2441.6, 2494.8, 2522.7, 2417.8, 2460.9, 2443.4, 2460.3
+    paired ratios to legacy: 0.276, 0.281, 0.271, 0.278, 0.275, 0.256, 0.269
+  stdlib                       median       7554.1 ns/call  p25..p75 6849.2..7682.1  range 6691.2..7790.6  ratio-to-legacy 0.844x
+    samples ns/call: 7510.9, 6691.2, 7734.1, 7682.1, 7790.6, 7554.1, 6849.2
+    paired ratios to legacy: 0.849, 0.753, 0.831, 0.882, 0.870, 0.791, 0.748
+
+Keccak-256 0B
+  legacy                       median      14712.5 ns/call  p25..p75 14513.9..15632.0  range 14154.5..18906.5  ratio-to-legacy 1.000x
+    samples ns/call: 16515.8, 18906.5, 14154.5, 15632.0, 14712.5, 14609.4, 14513.9
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      13757.9 ns/call  p25..p75 13146.3..13884.8  range 13088.4..16219.6  ratio-to-legacy 0.935x
+    samples ns/call: 14179.1, 16219.6, 13617.6, 13088.4, 13757.9, 13146.3, 13884.8
+    paired ratios to legacy: 0.859, 0.858, 0.962, 0.837, 0.935, 0.900, 0.957
+  PyCryptodome direct          median      12597.9 ns/call  p25..p75 12408.7..12764.0  range 12383.6..12954.8  ratio-to-legacy 0.856x
+    samples ns/call: 12383.6, 12764.0, 12764.5, 12408.7, 12579.0, 12954.8, 12597.9
+    paired ratios to legacy: 0.750, 0.675, 0.902, 0.794, 0.855, 0.887, 0.868
+
+Keccak-256 12B
+  legacy                       median      13680.0 ns/call  p25..p75 8682.1..13779.0  range 5423.5..14454.9  ratio-to-legacy 1.000x
+    samples ns/call: 13779.0, 8682.1, 5423.5, 14416.9, 14454.9, 13680.0, 11739.0
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      16243.3 ns/call  p25..p75 11134.5..16469.5  range 5463.9..20334.2  ratio-to-legacy 1.187x
+    samples ns/call: 17075.0, 20334.2, 5463.9, 11134.5, 16243.3, 15342.0, 16469.5
+    paired ratios to legacy: 1.239, 2.342, 1.007, 0.772, 1.124, 1.121, 1.403
+  PyCryptodome direct          median      14748.4 ns/call  p25..p75 4964.6..14930.2  range 4835.9..15203.4  ratio-to-legacy 1.078x
+    samples ns/call: 14748.4, 14673.0, 4964.6, 4835.9, 15203.4, 14930.2, 15099.9
+    paired ratios to legacy: 1.070, 1.690, 0.915, 0.335, 1.052, 1.091, 1.286
+
+Keccak-256 135B
+  picore                       median      15581.5 ns/call  p25..p75 15482.4..15704.5  range 14572.5..16282.7  ratio-to-picore 1.000x
+    samples ns/call: 15482.4, 15704.5, 16105.4, 16282.7, 14572.5, 15581.5, 15522.6
+    paired ratios to picore: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  PyCryptodome direct          median      15054.7 ns/call  p25..p75 15034.4..15194.4  range 15003.5..15377.1  ratio-to-picore 0.966x
+    samples ns/call: 15054.7, 15194.4, 15209.9, 15003.5, 15034.4, 15038.5, 15377.1
+    paired ratios to picore: 0.972, 0.968, 0.944, 0.921, 1.032, 0.965, 0.991
+
+Keccak-256 136B
+  picore                       median      16748.5 ns/call  p25..p75 16646.6..16786.7  range 16246.7..19436.8  ratio-to-picore 1.000x
+    samples ns/call: 19436.8, 17194.5, 16786.7, 16646.6, 16748.5, 16246.7, 16681.8
+    paired ratios to picore: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  PyCryptodome direct          median      15976.7 ns/call  p25..p75 15885.9..16283.4  range 15696.9..16570.8  ratio-to-picore 0.954x
+    samples ns/call: 16570.8, 15968.5, 15976.7, 16283.4, 16313.2, 15885.9, 15696.9
+    paired ratios to picore: 0.853, 0.929, 0.952, 0.978, 0.974, 0.978, 0.941
+
+Keccak-256 137B
+  legacy                       median      25234.8 ns/call  p25..p75 25046.1..25406.5  range 21056.8..25741.1  ratio-to-legacy 1.000x
+    samples ns/call: 25741.1, 25618.7, 25046.1, 25116.2, 25234.8, 21056.8, 25406.5
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      17241.6 ns/call  p25..p75 16708.3..17291.6  range 12776.2..18695.8  ratio-to-legacy 0.683x
+    samples ns/call: 17130.6, 16708.3, 17241.6, 12776.2, 18695.8, 17291.6, 17726.4
+    paired ratios to legacy: 0.665, 0.652, 0.688, 0.509, 0.741, 0.821, 0.698
+  PyCryptodome direct          median      16165.7 ns/call  p25..p75 15996.1..16239.3  range 15833.5..16711.5  ratio-to-legacy 0.641x
+    samples ns/call: 16029.4, 16426.0, 16711.5, 16239.3, 16165.7, 15996.1, 15833.5
+    paired ratios to legacy: 0.623, 0.641, 0.667, 0.647, 0.641, 0.760, 0.623
+
+Keccak-256 200B
+  legacy                       median      23655.7 ns/call  p25..p75 23307.1..23663.2  range 16869.0..23910.4  ratio-to-legacy 1.000x
+    samples ns/call: 23655.7, 23858.8, 23307.1, 23354.9, 16869.0, 23663.2, 23910.4
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      16993.7 ns/call  p25..p75 16558.5..16997.8  range 16279.8..17104.3  ratio-to-legacy 0.718x
+    samples ns/call: 16558.5, 16279.8, 17100.3, 16625.5, 17104.3, 16993.7, 16997.8
+    paired ratios to legacy: 0.700, 0.682, 0.734, 0.712, 1.014, 0.718, 0.711
+  PyCryptodome direct          median      15850.5 ns/call  p25..p75 15492.6..15875.5  range 15401.6..16107.3  ratio-to-legacy 0.670x
+    samples ns/call: 16107.3, 15999.4, 15401.6, 15492.6, 15834.0, 15875.5, 15850.5
+    paired ratios to legacy: 0.681, 0.671, 0.661, 0.663, 0.939, 0.671, 0.663
+
+Keccak-256 1024B
+  legacy                       median      83900.3 ns/call  p25..p75 73560.8..84485.9  range 67102.9..85120.7  ratio-to-legacy 1.000x
+    samples ns/call: 85120.7, 81859.9, 83900.3, 84677.4, 84485.9, 67102.9, 73560.8
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      22279.8 ns/call  p25..p75 17318.3..22308.7  range 16433.5..23061.7  ratio-to-legacy 0.266x
+    samples ns/call: 22489.4, 22122.3, 23061.7, 22279.8, 22308.7, 16433.5, 17318.3
+    paired ratios to legacy: 0.264, 0.270, 0.275, 0.263, 0.264, 0.245, 0.235
+  PyCryptodome direct          median      20696.8 ns/call  p25..p75 20575.6..21145.9  range 19152.7..21355.8  ratio-to-legacy 0.247x
+    samples ns/call: 21295.7, 20609.3, 19152.7, 20575.6, 21355.8, 21145.9, 20696.8
+    paired ratios to legacy: 0.250, 0.252, 0.228, 0.243, 0.253, 0.315, 0.281
+
+public-key derivation
+  legacy                       median    4441671.2 ns/call  p25..p75 3981003.6..4473808.5  range 3725178.0..4852259.7  ratio-to-legacy 1.000x
+    samples ns/call: 3725178.0, 4473808.5, 4441671.2, 4363217.5, 4852259.7, 4565360.5, 3981003.6
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median    1298075.7 ns/call  p25..p75 1236654.2..1340243.2  range 1049662.9..1500506.4  ratio-to-legacy 0.292x
+    samples ns/call: 1236654.2, 1340243.2, 1298075.7, 1291787.4, 1500506.4, 1412914.6, 1049662.9
+    paired ratios to legacy: 0.332, 0.300, 0.292, 0.296, 0.309, 0.309, 0.264
+  PyCryptodome direct          median    1111569.8 ns/call  p25..p75 1017330.2..1308081.6  range 944298.8..1348551.7  ratio-to-legacy 0.250x
+    samples ns/call: 944298.8, 1104212.6, 1111569.8, 1308081.6, 1310691.8, 1348551.7, 1017330.2
+    paired ratios to legacy: 0.253, 0.247, 0.250, 0.300, 0.270, 0.295, 0.256
+
+sign
+  legacy                       median    8296596.1 ns/call  p25..p75 6840699.2..8685503.2  range 6428514.7..10262529.9  ratio-to-legacy 1.000x
+    samples ns/call: 8685503.2, 6428514.7, 6840699.2, 8071339.8, 10262529.9, 8296596.1, 8840453.6
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median    2393736.4 ns/call  p25..p75 1961914.5..2744704.4  range 1960882.1..3140351.2  ratio-to-legacy 0.289x
+    samples ns/call: 2393736.4, 2976503.7, 1961914.5, 2273314.0, 1960882.1, 3140351.2, 2744704.4
+    paired ratios to legacy: 0.276, 0.463, 0.287, 0.282, 0.191, 0.379, 0.310
+  provider raw seed            median    2127291.0 ns/call  p25..p75 1979531.5..2199385.0  range 1718201.9..2558852.9  ratio-to-legacy 0.256x
+    samples ns/call: 2372113.1, 2558852.9, 2070413.2, 1718201.9, 2199385.0, 2127291.0, 1979531.5
+    paired ratios to legacy: 0.273, 0.398, 0.303, 0.213, 0.214, 0.256, 0.224
+  provider pre-imported        median    1268281.1 ns/call  p25..p75 831509.6..1296816.2  range 663985.3..1447955.0  ratio-to-legacy 0.153x
+    samples ns/call: 1268281.1, 1447955.0, 1262888.0, 1296816.2, 1365039.2, 663985.3, 831509.6
+    paired ratios to legacy: 0.146, 0.225, 0.185, 0.161, 0.133, 0.080, 0.094
+
+verify (valid signature only)
+  legacy                       median    7706129.2 ns/call  p25..p75 7655217.5..8238727.5  range 7136213.2..10677369.4  ratio-to-legacy 1.000x
+    samples ns/call: 7655217.5, 7136213.2, 10677369.4, 8238727.5, 8564826.4, 7680416.3, 7706129.2
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median    5833211.2 ns/call  p25..p75 5659477.2..5973342.0  range 4952334.8..7191265.5  ratio-to-legacy 0.757x
+    samples ns/call: 5833211.2, 5659477.2, 6349723.5, 7191265.5, 5973342.0, 5711491.3, 4952334.8
+    paired ratios to legacy: 0.762, 0.793, 0.595, 0.873, 0.697, 0.744, 0.643
+  provider weaker policy       median    4612755.2 ns/call  p25..p75 4006196.0..5018533.2  range 3900323.5..5780287.8  ratio-to-legacy 0.599x
+    samples ns/call: 4612755.2, 5780287.8, 3900323.5, 5018533.2, 4006196.0, 5154804.8, 4230148.3
+    paired ratios to legacy: 0.603, 0.810, 0.365, 0.609, 0.468, 0.671, 0.549

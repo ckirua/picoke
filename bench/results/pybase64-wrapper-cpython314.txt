@@ -1,0 +1,24 @@
+ENVIRONMENT {"affinity": [4], "candidate_module": "/tmp/picore-wrapper-candidate/314/_pybase64_wrapper_candidate.cpython-314-x86_64-linux-gnu.so", "candidate_sha256": "5965e2d3727dbd235ae3110c00d5331e0ab68e22849a088e160b4d7b72495c50", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python", "machine": "x86_64", "picore_module": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/base64.cpython-314-x86_64-linux-gnu.so", "picore_sha256": "44e8c4dc810923a5dad8b2fc7ac6be82edf444f21cd5a3cecb2929157c338276", "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pybase64_simd": "AVX2", "pybase64_version": "1.5.2", "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]"}
+Round 1/7: attr -> cached -> vector -> picore -> pybase64
+Round 2/7: pybase64 -> picore -> vector -> cached -> attr
+Round 3/7: attr -> cached -> vector -> picore -> pybase64
+Round 4/7: pybase64 -> picore -> vector -> cached -> attr
+Round 5/7: attr -> cached -> vector -> picore -> pybase64
+Round 6/7: pybase64 -> picore -> vector -> cached -> attr
+Round 7/7: attr -> cached -> vector -> picore -> pybase64
+1023 bytes: attr=1102.8ns, cached=1004.2ns, vector=840.2ns, picore=2431.8ns, pybase64=998.0ns
+1024 bytes: attr=1325.5ns, cached=1111.6ns, vector=821.3ns, picore=2404.3ns, pybase64=1049.9ns
+1025 bytes: attr=1142.2ns, cached=1050.3ns, vector=1092.9ns, picore=2634.5ns, pybase64=1016.1ns
+1533 bytes: attr=1231.9ns, cached=1068.1ns, vector=1167.6ns, picore=3258.8ns, pybase64=1128.4ns
+1534 bytes: attr=1021.5ns, cached=1290.0ns, vector=1081.7ns, picore=3592.4ns, pybase64=1084.8ns
+1535 bytes: attr=1120.9ns, cached=1346.2ns, vector=1274.5ns, picore=3371.4ns, pybase64=1044.7ns
+1536 bytes: attr=1289.5ns, cached=1044.1ns, vector=1143.0ns, picore=3342.5ns, pybase64=1256.1ns
+1537 bytes: attr=1222.9ns, cached=1021.8ns, vector=1029.3ns, picore=3680.0ns, pybase64=1161.4ns
+1538 bytes: attr=1228.6ns, cached=1051.5ns, vector=1205.5ns, picore=4032.4ns, pybase64=1274.3ns
+2046 bytes: attr=1359.4ns, cached=1357.2ns, vector=1316.2ns, picore=4548.5ns, pybase64=1160.2ns
+2047 bytes: attr=1497.5ns, cached=1042.1ns, vector=949.7ns, picore=4675.1ns, pybase64=952.6ns
+2048 bytes: attr=1206.3ns, cached=1168.6ns, vector=1168.3ns, picore=5014.5ns, pybase64=1404.9ns
+3072 bytes: attr=1210.7ns, cached=1685.7ns, vector=1480.2ns, picore=1418.9ns, pybase64=1552.4ns
+3073 bytes: attr=1409.3ns, cached=1437.6ns, vector=1519.7ns, picore=1531.8ns, pybase64=1497.1ns
+3074 bytes: attr=1488.1ns, cached=1386.0ns, vector=1273.2ns, picore=1412.4ns, pybase64=1653.7ns
+65536 bytes: attr=9506.7ns, cached=9093.8ns, vector=8792.2ns, picore=9570.6ns, pybase64=9643.6ns

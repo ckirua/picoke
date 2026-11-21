@@ -1,0 +1,27 @@
+Method: complete public wrapper, fresh worker per backend/sample, alternating paired order; 
+preflight binary payloads and strict malformed-input outcomes against binascii.
+Round 1/7: openssl_memchr -> picore -> pybase64_wrapper -> binascii
+Round 2/7: binascii -> pybase64_wrapper -> picore -> openssl_memchr
+Round 3/7: openssl_memchr -> picore -> pybase64_wrapper -> binascii
+Round 4/7: binascii -> pybase64_wrapper -> picore -> openssl_memchr
+Round 5/7: openssl_memchr -> picore -> pybase64_wrapper -> binascii
+Round 6/7: binascii -> pybase64_wrapper -> picore -> openssl_memchr
+Round 7/7: openssl_memchr -> picore -> pybase64_wrapper -> binascii
+1536 decoded bytes: openssl_memchr 443.2 ± 148.4 ns, picore 1898.8 ± 600.2 ns, pybase64_wrapper 1415.5 ± 588.2 ns, binascii 2384.1 ± 317.8 ns
+1537 decoded bytes: openssl_memchr 551.4 ± 155.2 ns, picore 2290.2 ± 579.9 ns, pybase64_wrapper 1741.6 ± 360.4 ns, binascii 2561.5 ± 244.3 ns
+1538 decoded bytes: openssl_memchr 513.0 ± 121.4 ns, picore 2232.8 ± 409.6 ns, pybase64_wrapper 1362.9 ± 284.6 ns, binascii 2319.7 ± 403.3 ns
+2046 decoded bytes: openssl_memchr 735.7 ± 43.7 ns, picore 2775.6 ± 746.8 ns, pybase64_wrapper 1461.2 ± 470.1 ns, binascii 2613.5 ± 526.7 ns
+2047 decoded bytes: openssl_memchr 579.6 ± 140.5 ns, picore 3065.3 ± 593.0 ns, pybase64_wrapper 1447.1 ± 336.5 ns, binascii 2949.7 ± 298.8 ns
+2048 decoded bytes: openssl_memchr 803.9 ± 108.4 ns, picore 3171.8 ± 397.1 ns, pybase64_wrapper 1532.0 ± 438.7 ns, binascii 2878.5 ± 637.3 ns
+3072 decoded bytes: openssl_memchr 828.6 ± 147.3 ns, picore 1575.7 ± 289.6 ns, pybase64_wrapper 1630.4 ± 359.3 ns, binascii 3871.5 ± 797.4 ns
+3073 decoded bytes: openssl_memchr 832.3 ± 220.4 ns, picore 1757.5 ± 1017.3 ns, pybase64_wrapper 1842.3 ± 287.5 ns, binascii 3851.9 ± 752.6 ns
+3074 decoded bytes: openssl_memchr 820.6 ± 194.2 ns, picore 1779.4 ± 471.8 ns, pybase64_wrapper 1407.1 ± 411.7 ns, binascii 4582.6 ± 817.6 ns
+6144 decoded bytes: openssl_memchr 1093.6 ± 330.5 ns, picore 2070.8 ± 349.7 ns, pybase64_wrapper 2146.9 ± 473.8 ns, binascii 8387.7 ± 897.8 ns
+6145 decoded bytes: openssl_memchr 1223.5 ± 377.0 ns, picore 1708.0 ± 488.4 ns, pybase64_wrapper 2099.7 ± 531.8 ns, binascii 8145.1 ± 2118.6 ns
+6146 decoded bytes: openssl_memchr 1282.7 ± 278.8 ns, picore 1795.8 ± 578.1 ns, pybase64_wrapper 2075.3 ± 456.9 ns, binascii 8406.8 ± 2609.4 ns
+12288 decoded bytes: openssl_memchr 2256.7 ± 485.5 ns, picore 3098.5 ± 414.9 ns, pybase64_wrapper 3110.9 ± 378.8 ns, binascii 13808.8 ± 3476.4 ns
+12289 decoded bytes: openssl_memchr 2208.7 ± 382.1 ns, picore 3162.9 ± 1361.3 ns, pybase64_wrapper 3019.4 ± 1076.3 ns, binascii 14299.5 ± 3411.5 ns
+12290 decoded bytes: openssl_memchr 2587.5 ± 1016.7 ns, picore 3198.8 ± 649.1 ns, pybase64_wrapper 3001.0 ± 641.9 ns, binascii 13421.1 ± 3625.9 ns
+32766 decoded bytes: openssl_memchr 5852.0 ± 827.2 ns, picore 5995.9 ± 892.3 ns, pybase64_wrapper 5497.8 ± 994.9 ns, binascii 41513.1 ± 6076.5 ns
+32767 decoded bytes: openssl_memchr 5822.4 ± 1189.0 ns, picore 5177.8 ± 1547.9 ns, pybase64_wrapper 5820.2 ± 1144.9 ns, binascii 41312.1 ± 12453.8 ns
+32768 decoded bytes: openssl_memchr 5463.4 ± 1287.2 ns, picore 5895.4 ± 1120.1 ns, pybase64_wrapper 4733.1 ± 1296.0 ns, binascii 39821.5 ± 9237.5 ns

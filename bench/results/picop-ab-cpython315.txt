@@ -1,0 +1,30 @@
+3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ] | Linux-7.0.0-43-generic-x86_64-with-glibc2.43 | CPU x86_64 | GIL enabled=True
+Cython 3.3.1 | picop 3.13.0 | setuptools 84.2.1 | CC=cc -pthread | CFLAGS=-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC
+9 paired samples, 2 warmup pairs, 50000 iterations/block
+Compiling _picop_ab_native.pyx because it changed.
+[1/1] Cythonizing _picop_ab_native.pyx
+running build_ext
+building '_picop_ab_native' extension
+cc -pthread -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC -fPIC -I/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/lib/python3.15/site-packages/picop -I/tmp/picore-cython-artifacts.ivNMGH6a/py315/check/include -I/home/kirua/.local/share/uv/python/cpython-3.15.0rc2-linux-x86_64-gnu/include/python3.15 -c _picop_ab_native.c -o build/temp.linux-x86_64-cpython-315/_picop_ab_native.o
+cc -pthread -shared -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL build/temp.linux-x86_64-cpython-315/_picop_ab_native.o -L/home/kirua/.local/share/uv/python/cpython-3.15.0rc2-linux-x86_64-gnu/lib -o build/lib.linux-x86_64-cpython-315/_picop_ab_native.cpython-315-x86_64-linux-gnu.so
+copying build/lib.linux-x86_64-cpython-315/_picop_ab_native.cpython-315-x86_64-linux-gnu.so -> 
+Signer bytes length (exact, direct_check): picop 3.05 ± 0.97, direct 2.97 ± 0.80 ns/op; mean ratio 1.028x; paired ratios 1.060, 0.991, 1.012, 1.008, 0.835, 0.992, 1.013, 1.268, 1.011
+Signer bytes length (exact, direct_length): picop 4.07 ± 2.50, direct 4.72 ± 3.35 ns/op; mean ratio 0.863x; paired ratios 0.515, 0.185, 1.092, 1.042, 1.003, 1.133, 0.725, 0.773, 4.410
+Signer bytes length (exact, direct_both): picop 2.82 ± 0.78, direct 4.35 ± 5.50 ns/op; mean ratio 0.648x; paired ratios 1.015, 0.960, 1.023, 0.959, 0.977, 1.650, 1.042, 0.972, 0.205
+Signer bytes length (incl. subtype, direct_check): picop 18.92 ± 4.97, direct 16.75 ± 6.26 ns/op; mean ratio 1.130x; paired ratios 0.924, 1.113, 0.994, 1.053, 2.043, 0.975, 1.390, 1.260, 1.017
+Signer bytes length (incl. subtype, direct_length): picop 20.46 ± 6.06, direct 22.57 ± 3.56 ns/op; mean ratio 0.906x; paired ratios 0.679, 0.927, 0.892, 1.105, 1.108, 0.766, 0.563, 1.007, 1.007
+Signer bytes length (incl. subtype, direct_both): picop 19.80 ± 3.71, direct 20.34 ± 4.43 ns/op; mean ratio 0.973x; paired ratios 0.991, 1.093, 0.891, 0.549, 0.946, 1.089, 1.231, 1.109, 1.116
+BIP-137 CompactSize (small): picop 22.13 ± 4.31, direct 22.67 ± 2.29 ns/op; mean ratio 0.976x; paired ratios 0.868, 1.082, 0.947, 1.000, 1.102, 0.717, 0.758, 1.252, 1.044
+BIP-137 CompactSize (width boundaries): picop 75.98 ± 22.37, direct 79.49 ± 23.69 ns/op; mean ratio 0.956x; paired ratios 0.845, 0.895, 1.094, 1.094, 0.871, 0.531, 1.197, 2.438, 0.546
+Base64 ASCII conversion (0 B payload): picop 58.65 ± 33.84, direct 62.41 ± 31.74 ns/op; mean ratio 0.940x; paired ratios 0.583, 1.065, 1.008, 1.372, 1.158, 0.565, 0.621, 1.204, 1.281
+Base64 public encode (0 B payload): picop 564.26 ± 164.99, direct 575.99 ± 142.83 ns/op; mean ratio 0.980x; paired ratios 1.440, 1.185, 0.780, 0.675, 1.242, 1.738, 1.268, 0.327, 0.875
+Base64 ASCII conversion (13 B payload): picop 134.60 ± 42.69, direct 127.23 ± 58.05 ns/op; mean ratio 1.058x; paired ratios 1.170, 1.338, 0.810, 0.955, 1.151, 2.275, 0.814, 1.056, 1.027
+Base64 public encode (13 B payload): picop 916.54 ± 172.29, direct 814.28 ± 141.72 ns/op; mean ratio 1.126x; paired ratios 1.047, 1.155, 1.294, 0.994, 1.318, 1.052, 1.414, 0.964, 0.979
+Base64 ASCII conversion (1024 B payload): picop 390.21 ± 116.68, direct 508.46 ± 128.12 ns/op; mean ratio 0.767x; paired ratios 1.025, 0.495, 0.658, 0.639, 0.802, 0.955, 0.797, 1.052, 0.581
+Base64 public encode (1024 B payload): picop 2455.81 ± 388.99, direct 2254.56 ± 423.17 ns/op; mean ratio 1.089x; paired ratios 0.725, 1.116, 1.159, 1.131, 1.147, 1.002, 1.450, 1.364, 0.924
+EIP-712 dependency closure (Agent, direct_list): picop 3886.39 ± 529.96, direct 3529.35 ± 785.99 ns/op; mean ratio 1.101x; paired ratios 1.090, 1.144, 1.661, 1.184, 1.104, 0.971, 0.866, 1.007, 1.166
+EIP-712 dependency closure (Agent, direct_set): picop 3653.43 ± 730.67, direct 3427.95 ± 410.87 ns/op; mean ratio 1.066x; paired ratios 0.832, 1.087, 1.458, 1.080, 1.179, 1.078, 1.138, 0.843, 0.912
+EIP-712 dependency closure (Agent, direct_all): picop 2851.95 ± 197.30, direct 2815.29 ± 295.46 ns/op; mean ratio 1.013x; paired ratios 0.978, 1.113, 0.937, 1.003, 0.815, 1.165, 1.094, 1.145, 0.949
+EIP-712 dependency closure (nested, direct_list): picop 7288.17 ± 950.74, direct 7443.69 ± 1047.42 ns/op; mean ratio 0.979x; paired ratios 0.855, 1.137, 0.882, 0.967, 0.980, 0.943, 1.022, 1.017, 1.046
+EIP-712 dependency closure (nested, direct_set): picop 7146.90 ± 742.51, direct 6826.84 ± 477.07 ns/op; mean ratio 1.047x; paired ratios 1.054, 1.017, 1.249, 1.152, 0.877, 1.022, 1.143, 1.018, 0.918
+EIP-712 dependency closure (nested, direct_all): picop 7237.04 ± 765.52, direct 7116.57 ± 504.03 ns/op; mean ratio 1.017x; paired ratios 1.000, 0.947, 1.272, 0.950, 0.807, 1.012, 1.074, 1.207, 0.937

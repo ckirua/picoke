@@ -1,0 +1,5391 @@
+{
+  "command": [
+    "bench/base64_compare.py",
+    "--python",
+    "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python",
+    "--baseline-root",
+    "/tmp/picore-openssl-baseline.oMxWkD4o/314",
+    "--legacy-root",
+    "/tmp/picore-full314.3VdPEH9L/crypto",
+    "--samples",
+    "7",
+    "--target-ms",
+    "20",
+    "--json-output",
+    "/tmp/picore-evp314.json"
+  ],
+  "configuration": {
+    "baseline_root": "/tmp/picore-openssl-baseline.oMxWkD4o/314",
+    "candidate_root": null,
+    "iterations": 1000000,
+    "json_output": "/tmp/picore-evp314.json",
+    "legacy_root": "/tmp/picore-full314.3VdPEH9L/crypto",
+    "python": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python",
+    "samples": 7,
+    "target_ms": 20.0,
+    "warmups": 1
+  },
+  "differences": [
+    {
+      "actual": {
+        "length": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "binary/only-NUL/b64decode",
+      "strict_stdlib": {
+        "length": 1,
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "binary/only-NUL/b64decode_ascii",
+      "strict_stdlib": {
+        "length": 1,
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 1,
+        "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "binary/terminal-NUL/b64decode",
+      "strict_stdlib": {
+        "length": 2,
+        "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 1,
+        "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "binary/terminal-NUL/b64decode_ascii",
+      "strict_stdlib": {
+        "length": 2,
+        "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 3,
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "binary/terminal-NULs/b64decode",
+      "strict_stdlib": {
+        "length": 6,
+        "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 3,
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "binary/terminal-NULs/b64decode_ascii",
+      "strict_stdlib": {
+        "length": 6,
+        "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'!'/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'!'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "length": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'===='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Leading padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "length": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'===='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Leading padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'=Zg=='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Leading padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'=Zg=='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Leading padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'A'/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'A'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Z g=='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Z g=='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg'/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Incorrect padding"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Incorrect padding"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Incorrect padding"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Incorrect padding"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "length": 1,
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==\\n'/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "length": 1,
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==\\n'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==\\x00'/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==\\x00'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Only base64 data is allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==x'/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess data after padding"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zg==x'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess data after padding"
+      }
+    },
+    {
+      "actual": {
+        "length": 2,
+        "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zh=='/b64decode",
+      "strict_stdlib": {
+        "length": 1,
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 2,
+        "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zh=='/b64decode_ascii",
+      "strict_stdlib": {
+        "length": 1,
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 3,
+        "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zm9='/b64decode",
+      "strict_stdlib": {
+        "length": 2,
+        "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "length": 3,
+        "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zm9='/b64decode_ascii",
+      "strict_stdlib": {
+        "length": 2,
+        "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+        "type": "bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zm9v='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.ValueError",
+        "message": "invalid base64"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zm9v='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "length": 3,
+        "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zm9v===='/b64decode",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "length": 3,
+        "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+        "type": "bytes"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'Zm9v===='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "binascii.Error",
+        "message": "Excess padding not allowed"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.UnicodeEncodeError",
+        "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'\u00e9'/b64decode",
+      "strict_stdlib": {
+        "error": "builtins.ValueError",
+        "message": "string argument should contain only ASCII characters"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.UnicodeEncodeError",
+        "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'\u00e9'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.ValueError",
+        "message": "string argument should contain only ASCII characters"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.UnicodeEncodeError",
+        "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'\ud83d\ude00'/b64decode",
+      "strict_stdlib": {
+        "error": "builtins.ValueError",
+        "message": "string argument should contain only ASCII characters"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.UnicodeEncodeError",
+        "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"
+      },
+      "backend": "legacy",
+      "probe": "syntax/'\ud83d\ude00'/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.ValueError",
+        "message": "string argument should contain only ASCII characters"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'data' has incorrect type (expected bytes, got str)"
+      },
+      "backend": "legacy",
+      "probe": "type/'abc'/b64encode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'data' has incorrect type (expected bytes, got str)"
+      },
+      "backend": "legacy",
+      "probe": "type/'abc'/b64encode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'text' has incorrect type (expected str, got int)"
+      },
+      "backend": "legacy",
+      "probe": "type/3/b64decode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'text' has incorrect type (expected str, got int)"
+      },
+      "backend": "legacy",
+      "probe": "type/3/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'data' has incorrect type (expected bytes, got int)"
+      },
+      "backend": "legacy",
+      "probe": "type/3/b64encode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'data' has incorrect type (expected bytes, got int)"
+      },
+      "backend": "legacy",
+      "probe": "type/3/b64encode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.AttributeError",
+        "message": "'NoneType' object has no attribute 'encode'"
+      },
+      "backend": "legacy",
+      "probe": "type/None/b64decode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.AttributeError",
+        "message": "'NoneType' object has no attribute 'encode'"
+      },
+      "backend": "legacy",
+      "probe": "type/None/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "not_run": "legacy None encode may reach unchecked native bytes helpers"
+      },
+      "backend": "legacy",
+      "probe": "type/None/b64encode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "not_run": "legacy None encode may reach unchecked native bytes helpers"
+      },
+      "backend": "legacy",
+      "probe": "type/None/b64encode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'text' has incorrect type (expected str, got bytes)"
+      },
+      "backend": "legacy",
+      "probe": "type/b'Zg=='/b64decode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'text' has incorrect type (expected str, got bytes)"
+      },
+      "backend": "legacy",
+      "probe": "type/b'Zg=='/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'text' has incorrect type (expected str, got bytearray)"
+      },
+      "backend": "legacy",
+      "probe": "type/bytearray(b'Zg==')/b64decode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'text' has incorrect type (expected str, got bytearray)"
+      },
+      "backend": "legacy",
+      "probe": "type/bytearray(b'Zg==')/b64decode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "text must be str"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"
+      },
+      "backend": "legacy",
+      "probe": "type/bytearray(b'abc')/b64encode",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    },
+    {
+      "actual": {
+        "error": "builtins.TypeError",
+        "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"
+      },
+      "backend": "legacy",
+      "probe": "type/bytearray(b'abc')/b64encode_ascii",
+      "strict_stdlib": {
+        "error": "builtins.TypeError",
+        "message": "data must be bytes"
+      }
+    }
+  ],
+  "preflight": {
+    "candidate": {
+      "checks": {
+        "probes": {
+          "binary/all-bytes/b64decode": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64decode_ascii": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode_ascii": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "str"
+          },
+          "binary/embedded-NUL/b64decode": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64decode_ascii": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "str"
+          },
+          "binary/empty/b64decode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64decode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "str"
+          },
+          "binary/only-NUL/b64decode": {
+            "length": 1,
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64decode_ascii": {
+            "length": 1,
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "str"
+          },
+          "binary/terminal-NUL/b64decode": {
+            "length": 2,
+            "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64decode_ascii": {
+            "length": 2,
+            "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "str"
+          },
+          "binary/terminal-NULs/b64decode": {
+            "length": 6,
+            "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64decode_ascii": {
+            "length": 6,
+            "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode_ascii": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "str"
+          },
+          "syntax/'!'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'!'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'===='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'===='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'=Zg=='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'=Zg=='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'A'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+          },
+          "syntax/'A'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+          },
+          "syntax/'Z g=='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Z g=='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg==='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zg==='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zg==\\n'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\n'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\x00'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\x00'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==x'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess data after padding"
+          },
+          "syntax/'Zg==x'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess data after padding"
+          },
+          "syntax/'Zh=='/b64decode": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zh=='/b64decode_ascii": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode": {
+            "length": 2,
+            "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode_ascii": {
+            "length": 2,
+            "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+            "type": "bytes"
+          },
+          "syntax/'Zm9v='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v===='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v===='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'\u00e9'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\u00e9'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\ud83d\ude00'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\ud83d\ude00'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "type/'abc'/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/'abc'/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/3/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/3/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/3/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/3/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/None/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/None/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/None/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/None/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/b'Zg=='/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/b'Zg=='/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'Zg==')/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'Zg==')/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'abc')/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/bytearray(b'abc')/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          }
+        },
+        "timed_equivalent": {
+          "b64decode/12-byte": true,
+          "b64decode/1KiB": true,
+          "b64decode/1MiB": true,
+          "b64decode_ascii/12-byte": true,
+          "b64decode_ascii/1KiB": true,
+          "b64decode_ascii/1MiB": true,
+          "b64encode/12-byte": true,
+          "b64encode/1KiB": true,
+          "b64encode/1MiB": true,
+          "b64encode_ascii/12-byte": true,
+          "b64encode_ascii/1KiB": true,
+          "b64encode_ascii/1MiB": true
+        }
+      },
+      "environment": {
+        "affinity": [
+          4
+        ],
+        "cache_tag": "cpython-314",
+        "clock": {
+          "adjustable": false,
+          "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+          "monotonic": true,
+          "resolution": 1e-09
+        },
+        "config": {
+          "CC": "cc -pthread",
+          "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC",
+          "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'",
+          "Py_GIL_DISABLED": 0
+        },
+        "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz",
+        "cpu_count": 8,
+        "environment": {
+          "PYTHONUNBUFFERED": "1"
+        },
+        "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python",
+        "gil_enabled": true,
+        "implementation": "CPython",
+        "loaded_crypto_libraries": [
+          "/usr/lib/x86_64-linux-gnu/libcrypto.so.3"
+        ],
+        "machine": "x86_64",
+        "origins": {
+          "picore.crypto.base64": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/picore/crypto/base64.cpython-314-x86_64-linux-gnu.so"
+        },
+        "package_metadata_versions": {
+          "Cython": "3.3.1",
+          "picop": "3.13.0",
+          "picore": "0.1.0"
+        },
+        "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+        "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+        "ssl_module_openssl": "OpenSSL 3.5.8 25 Aug 2026"
+      },
+      "timings": {}
+    },
+    "legacy": {
+      "checks": {
+        "probes": {
+          "binary/all-bytes/b64decode": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64decode_ascii": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode_ascii": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "str"
+          },
+          "binary/embedded-NUL/b64decode": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64decode_ascii": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "str"
+          },
+          "binary/empty/b64decode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64decode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "str"
+          },
+          "binary/only-NUL/b64decode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64decode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "str"
+          },
+          "binary/terminal-NUL/b64decode": {
+            "length": 1,
+            "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64decode_ascii": {
+            "length": 1,
+            "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "str"
+          },
+          "binary/terminal-NULs/b64decode": {
+            "length": 3,
+            "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64decode_ascii": {
+            "length": 3,
+            "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode_ascii": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "str"
+          },
+          "syntax/'!'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'!'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'===='/b64decode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "syntax/'===='/b64decode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "syntax/'=Zg=='/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'=Zg=='/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'A'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'A'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Z g=='/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Z g=='/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg='/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg='/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg==='/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg==='/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg==\\n'/b64decode": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zg==\\n'/b64decode_ascii": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zg==\\x00'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg==\\x00'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg==x'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zg==x'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zh=='/b64decode": {
+            "length": 2,
+            "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca",
+            "type": "bytes"
+          },
+          "syntax/'Zh=='/b64decode_ascii": {
+            "length": 2,
+            "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode": {
+            "length": 3,
+            "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode_ascii": {
+            "length": 3,
+            "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b",
+            "type": "bytes"
+          },
+          "syntax/'Zm9v='/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zm9v='/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "invalid base64"
+          },
+          "syntax/'Zm9v===='/b64decode": {
+            "length": 3,
+            "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+            "type": "bytes"
+          },
+          "syntax/'Zm9v===='/b64decode_ascii": {
+            "length": 3,
+            "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+            "type": "bytes"
+          },
+          "syntax/'\u00e9'/b64decode": {
+            "error": "builtins.UnicodeEncodeError",
+            "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"
+          },
+          "syntax/'\u00e9'/b64decode_ascii": {
+            "error": "builtins.UnicodeEncodeError",
+            "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"
+          },
+          "syntax/'\ud83d\ude00'/b64decode": {
+            "error": "builtins.UnicodeEncodeError",
+            "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"
+          },
+          "syntax/'\ud83d\ude00'/b64decode_ascii": {
+            "error": "builtins.UnicodeEncodeError",
+            "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"
+          },
+          "type/'abc'/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'data' has incorrect type (expected bytes, got str)"
+          },
+          "type/'abc'/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'data' has incorrect type (expected bytes, got str)"
+          },
+          "type/3/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'text' has incorrect type (expected str, got int)"
+          },
+          "type/3/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'text' has incorrect type (expected str, got int)"
+          },
+          "type/3/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'data' has incorrect type (expected bytes, got int)"
+          },
+          "type/3/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'data' has incorrect type (expected bytes, got int)"
+          },
+          "type/None/b64decode": {
+            "error": "builtins.AttributeError",
+            "message": "'NoneType' object has no attribute 'encode'"
+          },
+          "type/None/b64decode_ascii": {
+            "error": "builtins.AttributeError",
+            "message": "'NoneType' object has no attribute 'encode'"
+          },
+          "type/None/b64encode": {
+            "not_run": "legacy None encode may reach unchecked native bytes helpers"
+          },
+          "type/None/b64encode_ascii": {
+            "not_run": "legacy None encode may reach unchecked native bytes helpers"
+          },
+          "type/b'Zg=='/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'text' has incorrect type (expected str, got bytes)"
+          },
+          "type/b'Zg=='/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'text' has incorrect type (expected str, got bytes)"
+          },
+          "type/bytearray(b'Zg==')/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'text' has incorrect type (expected str, got bytearray)"
+          },
+          "type/bytearray(b'Zg==')/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'text' has incorrect type (expected str, got bytearray)"
+          },
+          "type/bytearray(b'abc')/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"
+          },
+          "type/bytearray(b'abc')/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"
+          }
+        },
+        "timed_equivalent": {
+          "b64decode/12-byte": true,
+          "b64decode/1KiB": true,
+          "b64decode/1MiB": true,
+          "b64decode_ascii/12-byte": true,
+          "b64decode_ascii/1KiB": true,
+          "b64decode_ascii/1MiB": true,
+          "b64encode/12-byte": true,
+          "b64encode/1KiB": true,
+          "b64encode/1MiB": true,
+          "b64encode_ascii/12-byte": true,
+          "b64encode_ascii/1KiB": true,
+          "b64encode_ascii/1MiB": true
+        }
+      },
+      "environment": {
+        "affinity": [
+          4
+        ],
+        "cache_tag": "cpython-314",
+        "clock": {
+          "adjustable": false,
+          "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+          "monotonic": true,
+          "resolution": 1e-09
+        },
+        "config": {
+          "CC": "cc -pthread",
+          "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC",
+          "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'",
+          "Py_GIL_DISABLED": 0
+        },
+        "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz",
+        "cpu_count": 8,
+        "environment": {
+          "PYTHONUNBUFFERED": "1"
+        },
+        "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python",
+        "gil_enabled": true,
+        "implementation": "CPython",
+        "loaded_crypto_libraries": [
+          "/usr/lib/x86_64-linux-gnu/libcrypto.so.3"
+        ],
+        "machine": "x86_64",
+        "origins": {
+          "legacy_baseline.crypto.encoding.base64": "/tmp/picore-full314.3VdPEH9L/crypto/legacy_baseline/crypto/encoding/base64.cpython-314-x86_64-linux-gnu.so"
+        },
+        "package_metadata_versions": {
+          "Cython": "3.3.1",
+          "picop": "3.13.0",
+          "picore": "0.1.0"
+        },
+        "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+        "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+        "ssl_module_openssl": "OpenSSL 3.5.8 25 Aug 2026"
+      },
+      "timings": {}
+    },
+    "previous": {
+      "checks": {
+        "probes": {
+          "binary/all-bytes/b64decode": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64decode_ascii": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode_ascii": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "str"
+          },
+          "binary/embedded-NUL/b64decode": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64decode_ascii": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "str"
+          },
+          "binary/empty/b64decode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64decode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "str"
+          },
+          "binary/only-NUL/b64decode": {
+            "length": 1,
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64decode_ascii": {
+            "length": 1,
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "str"
+          },
+          "binary/terminal-NUL/b64decode": {
+            "length": 2,
+            "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64decode_ascii": {
+            "length": 2,
+            "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "str"
+          },
+          "binary/terminal-NULs/b64decode": {
+            "length": 6,
+            "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64decode_ascii": {
+            "length": 6,
+            "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode_ascii": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "str"
+          },
+          "syntax/'!'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'!'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'===='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'===='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'=Zg=='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'=Zg=='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'A'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+          },
+          "syntax/'A'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+          },
+          "syntax/'Z g=='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Z g=='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg==='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zg==='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zg==\\n'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\n'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\x00'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\x00'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==x'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess data after padding"
+          },
+          "syntax/'Zg==x'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess data after padding"
+          },
+          "syntax/'Zh=='/b64decode": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zh=='/b64decode_ascii": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode": {
+            "length": 2,
+            "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode_ascii": {
+            "length": 2,
+            "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+            "type": "bytes"
+          },
+          "syntax/'Zm9v='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v===='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v===='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'\u00e9'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\u00e9'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\ud83d\ude00'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\ud83d\ude00'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "type/'abc'/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/'abc'/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/3/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/3/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/3/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/3/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/None/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/None/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/None/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/None/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/b'Zg=='/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/b'Zg=='/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'Zg==')/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'Zg==')/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'abc')/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/bytearray(b'abc')/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          }
+        },
+        "timed_equivalent": {
+          "b64decode/12-byte": true,
+          "b64decode/1KiB": true,
+          "b64decode/1MiB": true,
+          "b64decode_ascii/12-byte": true,
+          "b64decode_ascii/1KiB": true,
+          "b64decode_ascii/1MiB": true,
+          "b64encode/12-byte": true,
+          "b64encode/1KiB": true,
+          "b64encode/1MiB": true,
+          "b64encode_ascii/12-byte": true,
+          "b64encode_ascii/1KiB": true,
+          "b64encode_ascii/1MiB": true
+        }
+      },
+      "environment": {
+        "affinity": [
+          4
+        ],
+        "cache_tag": "cpython-314",
+        "clock": {
+          "adjustable": false,
+          "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+          "monotonic": true,
+          "resolution": 1e-09
+        },
+        "config": {
+          "CC": "cc -pthread",
+          "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC",
+          "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'",
+          "Py_GIL_DISABLED": 0
+        },
+        "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz",
+        "cpu_count": 8,
+        "environment": {
+          "PYTHONUNBUFFERED": "1"
+        },
+        "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python",
+        "gil_enabled": true,
+        "implementation": "CPython",
+        "loaded_crypto_libraries": [],
+        "machine": "x86_64",
+        "origins": {
+          "picore.crypto.base64": "/tmp/picore-openssl-baseline.oMxWkD4o/314/picore/crypto/base64.cpython-314-x86_64-linux-gnu.so"
+        },
+        "package_metadata_versions": {
+          "Cython": "3.3.1",
+          "picop": "3.13.0",
+          "picore": "0.1.0"
+        },
+        "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+        "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+        "ssl_module_openssl": "OpenSSL 3.5.8 25 Aug 2026"
+      },
+      "timings": {}
+    },
+    "stdlib": {
+      "checks": {
+        "probes": {
+          "binary/all-bytes/b64decode": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64decode_ascii": {
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "bytes"
+          },
+          "binary/all-bytes/b64encode_ascii": {
+            "length": 344,
+            "sha256": "ab7727e21f4bbba6508dd72804d97435a78eb44a1e277af1c0f65a8522de382e",
+            "type": "str"
+          },
+          "binary/embedded-NUL/b64decode": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64decode_ascii": {
+            "length": 3,
+            "sha256": "59b271ae1bbcb1d31d41929817f4b16fb439eb4f31520b5ad1d5ce98920a7138",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "bytes"
+          },
+          "binary/embedded-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "e6ed7e6cf9cbe7648ee9ff56358f389ac0d87b079c0f3c671870eb22fd183284",
+            "type": "str"
+          },
+          "binary/empty/b64decode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64decode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "bytes"
+          },
+          "binary/empty/b64encode_ascii": {
+            "length": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "type": "str"
+          },
+          "binary/only-NUL/b64decode": {
+            "length": 1,
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64decode_ascii": {
+            "length": 1,
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "bytes"
+          },
+          "binary/only-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "5ae215233ffde97b377345174ea52b64f6c4130369b714fc44aea521c84347a3",
+            "type": "str"
+          },
+          "binary/terminal-NUL/b64decode": {
+            "length": 2,
+            "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64decode_ascii": {
+            "length": 2,
+            "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "bytes"
+          },
+          "binary/terminal-NUL/b64encode_ascii": {
+            "length": 4,
+            "sha256": "aca8e079b67b850fe4c07c3577fdd0578d7b4ffe584f502351d6fdc36b859934",
+            "type": "str"
+          },
+          "binary/terminal-NULs/b64decode": {
+            "length": 6,
+            "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64decode_ascii": {
+            "length": 6,
+            "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "bytes"
+          },
+          "binary/terminal-NULs/b64encode_ascii": {
+            "length": 8,
+            "sha256": "19b0c3a4d009a31948c143196e94511ed5ca10df075bff5e2045d77161c67aa2",
+            "type": "str"
+          },
+          "syntax/'!'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'!'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'===='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'===='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'=Zg=='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'=Zg=='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Leading padding not allowed"
+          },
+          "syntax/'A'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+          },
+          "syntax/'A'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"
+          },
+          "syntax/'Z g=='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Z g=='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Incorrect padding"
+          },
+          "syntax/'Zg==='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zg==='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zg==\\n'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\n'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\x00'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==\\x00'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Only base64 data is allowed"
+          },
+          "syntax/'Zg==x'/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess data after padding"
+          },
+          "syntax/'Zg==x'/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess data after padding"
+          },
+          "syntax/'Zh=='/b64decode": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zh=='/b64decode_ascii": {
+            "length": 1,
+            "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode": {
+            "length": 2,
+            "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+            "type": "bytes"
+          },
+          "syntax/'Zm9='/b64decode_ascii": {
+            "length": 2,
+            "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf",
+            "type": "bytes"
+          },
+          "syntax/'Zm9v='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v===='/b64decode": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'Zm9v===='/b64decode_ascii": {
+            "error": "binascii.Error",
+            "message": "Excess padding not allowed"
+          },
+          "syntax/'\u00e9'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\u00e9'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\ud83d\ude00'/b64decode": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "syntax/'\ud83d\ude00'/b64decode_ascii": {
+            "error": "builtins.ValueError",
+            "message": "string argument should contain only ASCII characters"
+          },
+          "type/'abc'/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/'abc'/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/3/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/3/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/3/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/3/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/None/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/None/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/None/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/None/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/b'Zg=='/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/b'Zg=='/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'Zg==')/b64decode": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'Zg==')/b64decode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "text must be str"
+          },
+          "type/bytearray(b'abc')/b64encode": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          },
+          "type/bytearray(b'abc')/b64encode_ascii": {
+            "error": "builtins.TypeError",
+            "message": "data must be bytes"
+          }
+        },
+        "timed_equivalent": {
+          "b64decode/12-byte": true,
+          "b64decode/1KiB": true,
+          "b64decode/1MiB": true,
+          "b64decode_ascii/12-byte": true,
+          "b64decode_ascii/1KiB": true,
+          "b64decode_ascii/1MiB": true,
+          "b64encode/12-byte": true,
+          "b64encode/1KiB": true,
+          "b64encode/1MiB": true,
+          "b64encode_ascii/12-byte": true,
+          "b64encode_ascii/1KiB": true,
+          "b64encode_ascii/1MiB": true
+        }
+      },
+      "environment": {
+        "affinity": [
+          4
+        ],
+        "cache_tag": "cpython-314",
+        "clock": {
+          "adjustable": false,
+          "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+          "monotonic": true,
+          "resolution": 1e-09
+        },
+        "config": {
+          "CC": "cc -pthread",
+          "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC",
+          "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'",
+          "Py_GIL_DISABLED": 0
+        },
+        "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz",
+        "cpu_count": 8,
+        "environment": {
+          "PYTHONUNBUFFERED": "1"
+        },
+        "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python",
+        "gil_enabled": true,
+        "implementation": "CPython",
+        "loaded_crypto_libraries": [],
+        "machine": "x86_64",
+        "origins": {
+          "base64": "/home/kirua/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/base64.py",
+          "binascii": "built-in"
+        },
+        "package_metadata_versions": {
+          "Cython": "3.3.1",
+          "picop": "3.13.0",
+          "picore": "0.1.0"
+        },
+        "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+        "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+        "ssl_module_openssl": "OpenSSL 3.5.8 25 Aug 2026"
+      },
+      "timings": {}
+    }
+  },
+  "rounds": [
+    {
+      "order": [
+        "candidate",
+        "previous",
+        "legacy",
+        "stdlib"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 21240476,
+            "iterations": 131072,
+            "ns_per_call": 162.05197143554688
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 32008417,
+            "iterations": 16384,
+            "ns_per_call": 1953.6387329101562
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 29941470,
+            "iterations": 16,
+            "ns_per_call": 1871341.875
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 19493398,
+            "iterations": 131072,
+            "ns_per_call": 148.7228240966797
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 35063148,
+            "iterations": 16384,
+            "ns_per_call": 2140.084716796875
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 42250761,
+            "iterations": 16,
+            "ns_per_call": 2640672.5625
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 21138923,
+            "iterations": 262144,
+            "ns_per_call": 80.63859176635742
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 38518783,
+            "iterations": 32768,
+            "ns_per_call": 1175.4999694824219
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 30128224,
+            "iterations": 32,
+            "ns_per_call": 941507.0
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 24068438,
+            "iterations": 262144,
+            "ns_per_call": 91.81380462646484
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 31799435,
+            "iterations": 32768,
+            "ns_per_call": 970.4417419433594
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 27950103,
+            "iterations": 32,
+            "ns_per_call": 873440.71875
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 17343440,
+            "iterations": 131072,
+            "ns_per_call": 132.3199462890625
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 39280822,
+            "iterations": 16384,
+            "ns_per_call": 2397.5111083984375
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 26284011,
+            "iterations": 16,
+            "ns_per_call": 1642750.6875
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 43950250,
+            "iterations": 262144,
+            "ns_per_call": 167.65689849853516
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 27371970,
+            "iterations": 16384,
+            "ns_per_call": 1670.6524658203125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 24898888,
+            "iterations": 16,
+            "ns_per_call": 1556180.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 28995945,
+            "iterations": 131072,
+            "ns_per_call": 221.22150421142578
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 27766496,
+            "iterations": 32768,
+            "ns_per_call": 847.3662109375
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 9728688,
+            "iterations": 8,
+            "ns_per_call": 1216086.0
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 37192382,
+            "iterations": 131072,
+            "ns_per_call": 283.75535583496094
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 22926777,
+            "iterations": 16384,
+            "ns_per_call": 1399.3394165039062
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 34498368,
+            "iterations": 32,
+            "ns_per_call": 1078074.0
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 30008771,
+            "iterations": 131072,
+            "ns_per_call": 228.9487533569336
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 11747938,
+            "iterations": 4096,
+            "ns_per_call": 2868.14892578125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 73698947,
+            "iterations": 8,
+            "ns_per_call": 9212368.375
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 60848159,
+            "iterations": 131072,
+            "ns_per_call": 464.23461151123047
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 64410996,
+            "iterations": 8192,
+            "ns_per_call": 7862.67041015625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 37021332,
+            "iterations": 4,
+            "ns_per_call": 9255333.0
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 53451840,
+            "iterations": 131072,
+            "ns_per_call": 407.80517578125
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 30806176,
+            "iterations": 8192,
+            "ns_per_call": 3760.51953125
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32032594,
+            "iterations": 8,
+            "ns_per_call": 4004074.25
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 27620234,
+            "iterations": 65536,
+            "ns_per_call": 421.4513244628906
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 23361515,
+            "iterations": 8192,
+            "ns_per_call": 2851.7474365234375
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 49567252,
+            "iterations": 8,
+            "ns_per_call": 6195906.5
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 37737220,
+            "iterations": 65536,
+            "ns_per_call": 575.8242797851562
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 11493866,
+            "iterations": 2048,
+            "ns_per_call": 5612.2392578125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 27467012,
+            "iterations": 8,
+            "ns_per_call": 3433376.5
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 11119099,
+            "iterations": 32768,
+            "ns_per_call": 339.3279724121094
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 26802178,
+            "iterations": 4096,
+            "ns_per_call": 6543.50048828125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 31821330,
+            "iterations": 4,
+            "ns_per_call": 7955332.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 26825281,
+            "iterations": 131072,
+            "ns_per_call": 204.66065216064453
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 16202373,
+            "iterations": 8192,
+            "ns_per_call": 1977.8287353515625
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 20115507,
+            "iterations": 8,
+            "ns_per_call": 2514438.375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 31453015,
+            "iterations": 65536,
+            "ns_per_call": 479.93492126464844
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 43653880,
+            "iterations": 16384,
+            "ns_per_call": 2664.42138671875
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25879892,
+            "iterations": 8,
+            "ns_per_call": 3234986.5
+          }
+        }
+      }
+    },
+    {
+      "order": [
+        "stdlib",
+        "legacy",
+        "previous",
+        "candidate"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 72392774,
+            "iterations": 262144,
+            "ns_per_call": 276.1565170288086
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 33688165,
+            "iterations": 16384,
+            "ns_per_call": 2056.1624145507812
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 40637579,
+            "iterations": 16,
+            "ns_per_call": 2539848.6875
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 42892409,
+            "iterations": 131072,
+            "ns_per_call": 327.2431106567383
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 16713320,
+            "iterations": 8192,
+            "ns_per_call": 2040.2001953125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 13340859,
+            "iterations": 8,
+            "ns_per_call": 1667607.375
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 34288768,
+            "iterations": 262144,
+            "ns_per_call": 130.80126953125
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 24599848,
+            "iterations": 16384,
+            "ns_per_call": 1501.45556640625
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 35332083,
+            "iterations": 32,
+            "ns_per_call": 1104127.59375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 58705083,
+            "iterations": 524288,
+            "ns_per_call": 111.97105979919434
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 32197573,
+            "iterations": 32768,
+            "ns_per_call": 982.5919494628906
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 27042804,
+            "iterations": 32,
+            "ns_per_call": 845087.625
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 75034824,
+            "iterations": 262144,
+            "ns_per_call": 286.2351379394531
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 21358577,
+            "iterations": 8192,
+            "ns_per_call": 2607.2481689453125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 24781304,
+            "iterations": 16,
+            "ns_per_call": 1548831.5
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 36628105,
+            "iterations": 131072,
+            "ns_per_call": 279.4502639770508
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 21463036,
+            "iterations": 8192,
+            "ns_per_call": 2619.99951171875
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 26075676,
+            "iterations": 16,
+            "ns_per_call": 1629729.75
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 31615179,
+            "iterations": 262144,
+            "ns_per_call": 120.60233688354492
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 27030952,
+            "iterations": 16384,
+            "ns_per_call": 1649.83837890625
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 10383791,
+            "iterations": 8,
+            "ns_per_call": 1297973.875
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 12697548,
+            "iterations": 131072,
+            "ns_per_call": 96.87460327148438
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 35909924,
+            "iterations": 16384,
+            "ns_per_call": 2191.767822265625
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 34275512,
+            "iterations": 32,
+            "ns_per_call": 1071109.75
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 33782649,
+            "iterations": 131072,
+            "ns_per_call": 257.7411575317383
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 43447999,
+            "iterations": 8192,
+            "ns_per_call": 5303.7108154296875
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 23648925,
+            "iterations": 4,
+            "ns_per_call": 5912231.25
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 51925378,
+            "iterations": 131072,
+            "ns_per_call": 396.15919494628906
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 38960834,
+            "iterations": 8192,
+            "ns_per_call": 4755.961181640625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 35132224,
+            "iterations": 8,
+            "ns_per_call": 4391528.0
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 36863444,
+            "iterations": 131072,
+            "ns_per_call": 281.2457580566406
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 23825925,
+            "iterations": 8192,
+            "ns_per_call": 2908.4381103515625
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 22679680,
+            "iterations": 8,
+            "ns_per_call": 2834960.0
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 25167451,
+            "iterations": 65536,
+            "ns_per_call": 384.0248260498047
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 24755265,
+            "iterations": 8192,
+            "ns_per_call": 3021.8829345703125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 20388430,
+            "iterations": 8,
+            "ns_per_call": 2548553.75
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 36193206,
+            "iterations": 65536,
+            "ns_per_call": 552.2644958496094
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 86531028,
+            "iterations": 8192,
+            "ns_per_call": 10562.86962890625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 44892394,
+            "iterations": 8,
+            "ns_per_call": 5611549.25
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 28761039,
+            "iterations": 65536,
+            "ns_per_call": 438.85862731933594
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 21644489,
+            "iterations": 2048,
+            "ns_per_call": 10568.59814453125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 25407230,
+            "iterations": 4,
+            "ns_per_call": 6351807.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 43158602,
+            "iterations": 131072,
+            "ns_per_call": 329.2740020751953
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 15346185,
+            "iterations": 8192,
+            "ns_per_call": 1873.3135986328125
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32487531,
+            "iterations": 8,
+            "ns_per_call": 4060941.375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 33497941,
+            "iterations": 65536,
+            "ns_per_call": 511.1380157470703
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 24337839,
+            "iterations": 8192,
+            "ns_per_call": 2970.9276123046875
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25572990,
+            "iterations": 8,
+            "ns_per_call": 3196623.75
+          }
+        }
+      }
+    },
+    {
+      "order": [
+        "candidate",
+        "previous",
+        "legacy",
+        "stdlib"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 47263198,
+            "iterations": 262144,
+            "ns_per_call": 180.29479217529297
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 50017085,
+            "iterations": 16384,
+            "ns_per_call": 3052.8005981445312
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 28429879,
+            "iterations": 16,
+            "ns_per_call": 1776867.4375
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 25553864,
+            "iterations": 131072,
+            "ns_per_call": 194.96051025390625
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 18275953,
+            "iterations": 8192,
+            "ns_per_call": 2230.9512939453125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 29094048,
+            "iterations": 16,
+            "ns_per_call": 1818378.0
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 26109538,
+            "iterations": 262144,
+            "ns_per_call": 99.59998321533203
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 35053354,
+            "iterations": 32768,
+            "ns_per_call": 1069.7434692382812
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 26647725,
+            "iterations": 32,
+            "ns_per_call": 832741.40625
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 45355195,
+            "iterations": 262144,
+            "ns_per_call": 173.01633834838867
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 49011814,
+            "iterations": 32768,
+            "ns_per_call": 1495.7218627929688
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 28367044,
+            "iterations": 32,
+            "ns_per_call": 886470.125
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 37670377,
+            "iterations": 262144,
+            "ns_per_call": 143.7010841369629
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 21484628,
+            "iterations": 8192,
+            "ns_per_call": 2622.63525390625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 33444957,
+            "iterations": 16,
+            "ns_per_call": 2090309.8125
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 36460934,
+            "iterations": 262144,
+            "ns_per_call": 139.0874252319336
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 21516326,
+            "iterations": 8192,
+            "ns_per_call": 2626.504638671875
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 25979269,
+            "iterations": 16,
+            "ns_per_call": 1623704.3125
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 32856744,
+            "iterations": 262144,
+            "ns_per_call": 125.33853149414062
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 37870757,
+            "iterations": 32768,
+            "ns_per_call": 1155.7237854003906
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 13990408,
+            "iterations": 8,
+            "ns_per_call": 1748801.0
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 43327018,
+            "iterations": 262144,
+            "ns_per_call": 165.27945709228516
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 23811705,
+            "iterations": 16384,
+            "ns_per_call": 1453.3511352539062
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25904395,
+            "iterations": 16,
+            "ns_per_call": 1619024.6875
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 31143927,
+            "iterations": 131072,
+            "ns_per_call": 237.60930633544922
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 39267637,
+            "iterations": 8192,
+            "ns_per_call": 4793.4127197265625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 32511221,
+            "iterations": 8,
+            "ns_per_call": 4063902.625
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 26435859,
+            "iterations": 65536,
+            "ns_per_call": 403.3791961669922
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 19790852,
+            "iterations": 2048,
+            "ns_per_call": 9663.501953125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 30175289,
+            "iterations": 8,
+            "ns_per_call": 3771911.125
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 19995967,
+            "iterations": 65536,
+            "ns_per_call": 305.11424255371094
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 17907511,
+            "iterations": 8192,
+            "ns_per_call": 2185.9754638671875
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 24887610,
+            "iterations": 8,
+            "ns_per_call": 3110951.25
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 18982147,
+            "iterations": 65536,
+            "ns_per_call": 289.6445770263672
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 22794225,
+            "iterations": 8192,
+            "ns_per_call": 2782.4981689453125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 19941476,
+            "iterations": 8,
+            "ns_per_call": 2492684.5
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 62564542,
+            "iterations": 65536,
+            "ns_per_call": 954.6591491699219
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 19557657,
+            "iterations": 2048,
+            "ns_per_call": 9549.63720703125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 36090271,
+            "iterations": 4,
+            "ns_per_call": 9022567.75
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 21020804,
+            "iterations": 16384,
+            "ns_per_call": 1283.008056640625
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 20983141,
+            "iterations": 2048,
+            "ns_per_call": 10245.67431640625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 36102047,
+            "iterations": 4,
+            "ns_per_call": 9025511.75
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 33997667,
+            "iterations": 131072,
+            "ns_per_call": 259.3816146850586
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 30292270,
+            "iterations": 8192,
+            "ns_per_call": 3697.786865234375
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32672467,
+            "iterations": 8,
+            "ns_per_call": 4084058.375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 28055185,
+            "iterations": 65536,
+            "ns_per_call": 428.08815002441406
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 32618233,
+            "iterations": 8192,
+            "ns_per_call": 3981.7178955078125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 35771081,
+            "iterations": 8,
+            "ns_per_call": 4471385.125
+          }
+        }
+      }
+    },
+    {
+      "order": [
+        "stdlib",
+        "legacy",
+        "previous",
+        "candidate"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 19646437,
+            "iterations": 131072,
+            "ns_per_call": 149.89041900634766
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 36672501,
+            "iterations": 16384,
+            "ns_per_call": 2238.3118286132812
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 42479128,
+            "iterations": 16,
+            "ns_per_call": 2654945.5
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 31540097,
+            "iterations": 131072,
+            "ns_per_call": 240.63184356689453
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 22692586,
+            "iterations": 8192,
+            "ns_per_call": 2770.091064453125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 42278641,
+            "iterations": 16,
+            "ns_per_call": 2642415.0625
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 22397884,
+            "iterations": 131072,
+            "ns_per_call": 170.88229370117188
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 33200968,
+            "iterations": 32768,
+            "ns_per_call": 1013.213134765625
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 27140994,
+            "iterations": 32,
+            "ns_per_call": 848156.0625
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 8049412,
+            "iterations": 131072,
+            "ns_per_call": 61.412139892578125
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 31605957,
+            "iterations": 32768,
+            "ns_per_call": 964.5372619628906
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 27071799,
+            "iterations": 32,
+            "ns_per_call": 845993.71875
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 37537008,
+            "iterations": 131072,
+            "ns_per_call": 286.3846435546875
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 28867050,
+            "iterations": 16384,
+            "ns_per_call": 1761.9049072265625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 26804785,
+            "iterations": 16,
+            "ns_per_call": 1675299.0625
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 40647091,
+            "iterations": 131072,
+            "ns_per_call": 310.1126937866211
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 42413456,
+            "iterations": 16384,
+            "ns_per_call": 2588.7119140625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 31838867,
+            "iterations": 16,
+            "ns_per_call": 1989929.1875
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 13388830,
+            "iterations": 65536,
+            "ns_per_call": 204.29733276367188
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 19108213,
+            "iterations": 16384,
+            "ns_per_call": 1166.2727661132812
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 14062714,
+            "iterations": 8,
+            "ns_per_call": 1757839.25
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 37265935,
+            "iterations": 131072,
+            "ns_per_call": 284.31652069091797
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 20482122,
+            "iterations": 16384,
+            "ns_per_call": 1250.1295166015625
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 36409166,
+            "iterations": 32,
+            "ns_per_call": 1137786.4375
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 30483299,
+            "iterations": 131072,
+            "ns_per_call": 232.5691146850586
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 15500137,
+            "iterations": 4096,
+            "ns_per_call": 3784.213134765625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 15748110,
+            "iterations": 4,
+            "ns_per_call": 3937027.5
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 44018300,
+            "iterations": 131072,
+            "ns_per_call": 335.8329772949219
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 20480028,
+            "iterations": 2048,
+            "ns_per_call": 10000.013671875
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 29198782,
+            "iterations": 8,
+            "ns_per_call": 3649847.75
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 35966337,
+            "iterations": 65536,
+            "ns_per_call": 548.8027496337891
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 30938083,
+            "iterations": 8192,
+            "ns_per_call": 3776.6214599609375
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32733896,
+            "iterations": 8,
+            "ns_per_call": 4091737.0
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 17531575,
+            "iterations": 32768,
+            "ns_per_call": 535.0212097167969
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 35982474,
+            "iterations": 8192,
+            "ns_per_call": 4392.391845703125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 35321358,
+            "iterations": 8,
+            "ns_per_call": 4415169.75
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 30023025,
+            "iterations": 32768,
+            "ns_per_call": 916.2300109863281
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 21148415,
+            "iterations": 2048,
+            "ns_per_call": 10326.37451171875
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 38934128,
+            "iterations": 4,
+            "ns_per_call": 9733532.0
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 30720943,
+            "iterations": 32768,
+            "ns_per_call": 937.5287780761719
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 21784324,
+            "iterations": 2048,
+            "ns_per_call": 10636.876953125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 15390177,
+            "iterations": 4,
+            "ns_per_call": 3847544.25
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 32596606,
+            "iterations": 65536,
+            "ns_per_call": 497.3847351074219
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 35890988,
+            "iterations": 8192,
+            "ns_per_call": 4381.22412109375
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32171394,
+            "iterations": 8,
+            "ns_per_call": 4021424.25
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 35109391,
+            "iterations": 32768,
+            "ns_per_call": 1071.4535827636719
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 39201951,
+            "iterations": 8192,
+            "ns_per_call": 4785.3944091796875
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 35528451,
+            "iterations": 8,
+            "ns_per_call": 4441056.375
+          }
+        }
+      }
+    },
+    {
+      "order": [
+        "candidate",
+        "previous",
+        "legacy",
+        "stdlib"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 34909532,
+            "iterations": 131072,
+            "ns_per_call": 266.3385925292969
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 24336434,
+            "iterations": 8192,
+            "ns_per_call": 2970.756103515625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 20622432,
+            "iterations": 8,
+            "ns_per_call": 2577804.0
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 21290156,
+            "iterations": 65536,
+            "ns_per_call": 324.86199951171875
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 24079760,
+            "iterations": 8192,
+            "ns_per_call": 2939.423828125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 21555644,
+            "iterations": 8,
+            "ns_per_call": 2694455.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 23265794,
+            "iterations": 131072,
+            "ns_per_call": 177.50392150878906
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 26532311,
+            "iterations": 16384,
+            "ns_per_call": 1619.4037475585938
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 21911167,
+            "iterations": 16,
+            "ns_per_call": 1369447.9375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 23666800,
+            "iterations": 131072,
+            "ns_per_call": 180.5633544921875
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 26819242,
+            "iterations": 16384,
+            "ns_per_call": 1636.9166259765625
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 20923860,
+            "iterations": 16,
+            "ns_per_call": 1307741.25
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 54147876,
+            "iterations": 262144,
+            "ns_per_call": 206.55775451660156
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 21598413,
+            "iterations": 8192,
+            "ns_per_call": 2636.5250244140625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 34069758,
+            "iterations": 16,
+            "ns_per_call": 2129359.875
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 40676495,
+            "iterations": 131072,
+            "ns_per_call": 310.33702850341797
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 21475887,
+            "iterations": 8192,
+            "ns_per_call": 2621.5682373046875
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 25143768,
+            "iterations": 16,
+            "ns_per_call": 1571485.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 52077945,
+            "iterations": 262144,
+            "ns_per_call": 198.66159439086914
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 29103502,
+            "iterations": 16384,
+            "ns_per_call": 1776.3367919921875
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 14104668,
+            "iterations": 8,
+            "ns_per_call": 1763083.5
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 18818128,
+            "iterations": 131072,
+            "ns_per_call": 143.5709228515625
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 36765473,
+            "iterations": 16384,
+            "ns_per_call": 2243.9863891601562
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25609638,
+            "iterations": 16,
+            "ns_per_call": 1600602.375
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 34060341,
+            "iterations": 131072,
+            "ns_per_call": 259.85977935791016
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 56654394,
+            "iterations": 8192,
+            "ns_per_call": 6915.819580078125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 23260689,
+            "iterations": 4,
+            "ns_per_call": 5815172.25
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 43853691,
+            "iterations": 131072,
+            "ns_per_call": 334.57711029052734
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 31538320,
+            "iterations": 8192,
+            "ns_per_call": 3849.892578125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 40739444,
+            "iterations": 8,
+            "ns_per_call": 5092430.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 22974142,
+            "iterations": 65536,
+            "ns_per_call": 350.5575866699219
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 39462997,
+            "iterations": 16384,
+            "ns_per_call": 2408.6301879882812
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 18384176,
+            "iterations": 8,
+            "ns_per_call": 2298022.0
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 25109668,
+            "iterations": 65536,
+            "ns_per_call": 383.14312744140625
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 26885727,
+            "iterations": 8192,
+            "ns_per_call": 3281.9490966796875
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 26284305,
+            "iterations": 8,
+            "ns_per_call": 3285538.125
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 37090247,
+            "iterations": 65536,
+            "ns_per_call": 565.9522552490234
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 17005430,
+            "iterations": 2048,
+            "ns_per_call": 8303.4326171875
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 39607309,
+            "iterations": 4,
+            "ns_per_call": 9901827.25
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 32923371,
+            "iterations": 65536,
+            "ns_per_call": 502.3707733154297
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 19675906,
+            "iterations": 2048,
+            "ns_per_call": 9607.3759765625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 36517223,
+            "iterations": 4,
+            "ns_per_call": 9129305.75
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 16768375,
+            "iterations": 65536,
+            "ns_per_call": 255.86509704589844
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 43311950,
+            "iterations": 16384,
+            "ns_per_call": 2643.5516357421875
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32987971,
+            "iterations": 8,
+            "ns_per_call": 4123496.375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 20070614,
+            "iterations": 65536,
+            "ns_per_call": 306.2532653808594
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 47324451,
+            "iterations": 16384,
+            "ns_per_call": 2888.4552612304688
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 36002440,
+            "iterations": 8,
+            "ns_per_call": 4500305.0
+          }
+        }
+      }
+    },
+    {
+      "order": [
+        "stdlib",
+        "legacy",
+        "previous",
+        "candidate"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 37143566,
+            "iterations": 262144,
+            "ns_per_call": 141.69145965576172
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 32521251,
+            "iterations": 16384,
+            "ns_per_call": 1984.9396362304688
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 31779612,
+            "iterations": 16,
+            "ns_per_call": 1986225.75
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 24678613,
+            "iterations": 131072,
+            "ns_per_call": 188.28287506103516
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 32673140,
+            "iterations": 16384,
+            "ns_per_call": 1994.210205078125
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 29574612,
+            "iterations": 16,
+            "ns_per_call": 1848413.25
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 25025212,
+            "iterations": 262144,
+            "ns_per_call": 95.46360778808594
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 26566759,
+            "iterations": 16384,
+            "ns_per_call": 1621.5062866210938
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 28269021,
+            "iterations": 32,
+            "ns_per_call": 883406.90625
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 23283654,
+            "iterations": 262144,
+            "ns_per_call": 88.8200912475586
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 19090294,
+            "iterations": 16384,
+            "ns_per_call": 1165.1790771484375
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 41536459,
+            "iterations": 32,
+            "ns_per_call": 1298014.34375
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 38009128,
+            "iterations": 131072,
+            "ns_per_call": 289.98663330078125
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 21510201,
+            "iterations": 8192,
+            "ns_per_call": 2625.7569580078125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 35515589,
+            "iterations": 16,
+            "ns_per_call": 2219724.3125
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 38537524,
+            "iterations": 131072,
+            "ns_per_call": 294.0179748535156
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 21468870,
+            "iterations": 8192,
+            "ns_per_call": 2620.711669921875
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 34142063,
+            "iterations": 16,
+            "ns_per_call": 2133878.9375
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 25905968,
+            "iterations": 131072,
+            "ns_per_call": 197.6468505859375
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 28653299,
+            "iterations": 16384,
+            "ns_per_call": 1748.8585815429688
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 14527485,
+            "iterations": 8,
+            "ns_per_call": 1815935.625
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 40065956,
+            "iterations": 131072,
+            "ns_per_call": 305.6789855957031
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 37006880,
+            "iterations": 16384,
+            "ns_per_call": 2258.720703125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25737214,
+            "iterations": 16,
+            "ns_per_call": 1608575.875
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 31746520,
+            "iterations": 131072,
+            "ns_per_call": 242.20672607421875
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 13218231,
+            "iterations": 4096,
+            "ns_per_call": 3227.107177734375
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 24076546,
+            "iterations": 4,
+            "ns_per_call": 6019136.5
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 28137521,
+            "iterations": 131072,
+            "ns_per_call": 214.67224884033203
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 19788220,
+            "iterations": 4096,
+            "ns_per_call": 4831.1083984375
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 47675806,
+            "iterations": 8,
+            "ns_per_call": 5959475.75
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 31497879,
+            "iterations": 65536,
+            "ns_per_call": 480.61949157714844
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 44710363,
+            "iterations": 16384,
+            "ns_per_call": 2728.9039916992188
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 29676636,
+            "iterations": 8,
+            "ns_per_call": 3709579.5
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 27136813,
+            "iterations": 65536,
+            "ns_per_call": 414.0749053955078
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 35287606,
+            "iterations": 8192,
+            "ns_per_call": 4307.569091796875
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 21556828,
+            "iterations": 8,
+            "ns_per_call": 2694603.5
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 26235850,
+            "iterations": 65536,
+            "ns_per_call": 400.3273010253906
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 16514401,
+            "iterations": 4096,
+            "ns_per_call": 4031.836181640625
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 29245912,
+            "iterations": 8,
+            "ns_per_call": 3655739.0
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 30541969,
+            "iterations": 32768,
+            "ns_per_call": 932.0669250488281
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 24485028,
+            "iterations": 4096,
+            "ns_per_call": 5977.7900390625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 13203938,
+            "iterations": 4,
+            "ns_per_call": 3300984.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 52601336,
+            "iterations": 131072,
+            "ns_per_call": 401.31634521484375
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 30990505,
+            "iterations": 8192,
+            "ns_per_call": 3783.0206298828125
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 29400132,
+            "iterations": 8,
+            "ns_per_call": 3675016.5
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 28942618,
+            "iterations": 65536,
+            "ns_per_call": 441.6293029785156
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 19172999,
+            "iterations": 8192,
+            "ns_per_call": 2340.4539794921875
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25842350,
+            "iterations": 8,
+            "ns_per_call": 3230293.75
+          }
+        }
+      }
+    },
+    {
+      "order": [
+        "candidate",
+        "previous",
+        "legacy",
+        "stdlib"
+      ],
+      "results": {
+        "candidate": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 34380876,
+            "iterations": 131072,
+            "ns_per_call": 262.3052673339844
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 24540123,
+            "iterations": 8192,
+            "ns_per_call": 2995.6204833984375
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 12482218,
+            "iterations": 8,
+            "ns_per_call": 1560277.25
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 16033707,
+            "iterations": 131072,
+            "ns_per_call": 122.32747650146484
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 25305741,
+            "iterations": 8192,
+            "ns_per_call": 3089.0797119140625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 28537340,
+            "iterations": 16,
+            "ns_per_call": 1783583.75
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 12288398,
+            "iterations": 131072,
+            "ns_per_call": 93.75303649902344
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 35662825,
+            "iterations": 32768,
+            "ns_per_call": 1088.3430480957031
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 21395087,
+            "iterations": 16,
+            "ns_per_call": 1337192.9375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 47994237,
+            "iterations": 262144,
+            "ns_per_call": 183.0834846496582
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 32502786,
+            "iterations": 32768,
+            "ns_per_call": 991.9063110351562
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 34947932,
+            "iterations": 32,
+            "ns_per_call": 1092122.875
+          }
+        },
+        "legacy": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 15505504,
+            "iterations": 131072,
+            "ns_per_call": 118.297607421875
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 13046391,
+            "iterations": 8192,
+            "ns_per_call": 1592.5770263671875
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 35292479,
+            "iterations": 16,
+            "ns_per_call": 2205779.9375
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 66657309,
+            "iterations": 262144,
+            "ns_per_call": 254.2774543762207
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 22119776,
+            "iterations": 16384,
+            "ns_per_call": 1350.083984375
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 24907877,
+            "iterations": 16,
+            "ns_per_call": 1556742.3125
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 24790709,
+            "iterations": 262144,
+            "ns_per_call": 94.56904983520508
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 29315248,
+            "iterations": 16384,
+            "ns_per_call": 1789.2607421875
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 14091942,
+            "iterations": 8,
+            "ns_per_call": 1761492.75
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 35268849,
+            "iterations": 131072,
+            "ns_per_call": 269.07996368408203
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 36537923,
+            "iterations": 16384,
+            "ns_per_call": 2230.0978393554688
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 25541451,
+            "iterations": 16,
+            "ns_per_call": 1596340.6875
+          }
+        },
+        "previous": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 11981632,
+            "iterations": 65536,
+            "ns_per_call": 182.8251953125
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 38254139,
+            "iterations": 4096,
+            "ns_per_call": 9339.389404296875
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 38215285,
+            "iterations": 4,
+            "ns_per_call": 9553821.25
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 39118986,
+            "iterations": 131072,
+            "ns_per_call": 298.4541778564453
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 33542521,
+            "iterations": 4096,
+            "ns_per_call": 8189.092041015625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 30662808,
+            "iterations": 8,
+            "ns_per_call": 3832851.0
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 28172236,
+            "iterations": 65536,
+            "ns_per_call": 429.87420654296875
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 21812569,
+            "iterations": 8192,
+            "ns_per_call": 2662.6671142578125
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 31376495,
+            "iterations": 8,
+            "ns_per_call": 3922061.875
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 40125121,
+            "iterations": 65536,
+            "ns_per_call": 612.2607574462891
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 70484800,
+            "iterations": 16384,
+            "ns_per_call": 4302.05078125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 22551173,
+            "iterations": 8,
+            "ns_per_call": 2818896.625
+          }
+        },
+        "stdlib": {
+          "b64decode/12-byte": {
+            "elapsed_ns": 60572415,
+            "iterations": 65536,
+            "ns_per_call": 924.2617034912109
+          },
+          "b64decode/1KiB": {
+            "elapsed_ns": 20750869,
+            "iterations": 4096,
+            "ns_per_call": 5066.130126953125
+          },
+          "b64decode/1MiB": {
+            "elapsed_ns": 19111920,
+            "iterations": 4,
+            "ns_per_call": 4777980.0
+          },
+          "b64decode_ascii/12-byte": {
+            "elapsed_ns": 31487574,
+            "iterations": 32768,
+            "ns_per_call": 960.9244995117188
+          },
+          "b64decode_ascii/1KiB": {
+            "elapsed_ns": 40253089,
+            "iterations": 4096,
+            "ns_per_call": 9827.414306640625
+          },
+          "b64decode_ascii/1MiB": {
+            "elapsed_ns": 33155052,
+            "iterations": 8,
+            "ns_per_call": 4144381.5
+          },
+          "b64encode/12-byte": {
+            "elapsed_ns": 45044433,
+            "iterations": 131072,
+            "ns_per_call": 343.66175079345703
+          },
+          "b64encode/1KiB": {
+            "elapsed_ns": 30739106,
+            "iterations": 8192,
+            "ns_per_call": 3752.332275390625
+          },
+          "b64encode/1MiB": {
+            "elapsed_ns": 32885107,
+            "iterations": 8,
+            "ns_per_call": 4110638.375
+          },
+          "b64encode_ascii/12-byte": {
+            "elapsed_ns": 26020315,
+            "iterations": 65536,
+            "ns_per_call": 397.0384979248047
+          },
+          "b64encode_ascii/1KiB": {
+            "elapsed_ns": 23225505,
+            "iterations": 8192,
+            "ns_per_call": 2835.1446533203125
+          },
+          "b64encode_ascii/1MiB": {
+            "elapsed_ns": 36078372,
+            "iterations": 8,
+            "ns_per_call": 4509796.5
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "b64decode/12-byte": {
+      "backends": {
+        "candidate": {
+          "max_ns": 276.1565170288086,
+          "mean_ns": 205.53271702357702,
+          "min_ns": 141.69145965576172,
+          "samples_ns": [
+            162.05197143554688,
+            276.1565170288086,
+            180.29479217529297,
+            149.89041900634766,
+            266.3385925292969,
+            141.69145965576172,
+            262.3052673339844
+          ],
+          "stdev_ns": 60.010412499865694
+        },
+        "legacy": {
+          "max_ns": 289.98663330078125,
+          "mean_ns": 209.06897245134627,
+          "min_ns": 118.297607421875,
+          "samples_ns": [
+            132.3199462890625,
+            286.2351379394531,
+            143.7010841369629,
+            286.3846435546875,
+            206.55775451660156,
+            289.98663330078125,
+            118.297607421875
+          ],
+          "stdev_ns": 78.41037207752134
+        },
+        "previous": {
+          "max_ns": 259.85977935791016,
+          "mean_ns": 234.53714752197266,
+          "min_ns": 182.8251953125,
+          "samples_ns": [
+            228.9487533569336,
+            257.7411575317383,
+            237.60930633544922,
+            232.5691146850586,
+            259.85977935791016,
+            242.20672607421875,
+            182.8251953125
+          ],
+          "stdev_ns": 25.681224213037535
+        },
+        "stdlib": {
+          "max_ns": 954.6591491699219,
+          "mean_ns": 698.5027422223773,
+          "min_ns": 400.3273010253906,
+          "samples_ns": [
+            575.8242797851562,
+            552.2644958496094,
+            954.6591491699219,
+            916.2300109863281,
+            565.9522552490234,
+            400.3273010253906,
+            924.2617034912109
+          ],
+          "stdev_ns": 226.16448002685362
+        }
+      },
+      "decision": "SKIP / no repeatable >=5% win established",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 1.1375555870000609,
+          "paired_ratios": [
+            1.2246979837909895,
+            0.9647890158308361,
+            1.2546515794094655,
+            0.52338846505827,
+            1.2894146392741241,
+            0.4886137614101539,
+            2.217333664226587
+          ],
+          "paired_stdev": 0.5828753685196056,
+          "ratio_of_means": 0.9830856994880377
+        },
+        "previous": {
+          "paired_mean": 0.8896014036352123,
+          "paired_ratios": [
+            0.7078089269300633,
+            1.0714490447448333,
+            0.7587867451654379,
+            0.644498385821036,
+            1.0249319582560843,
+            0.585002167166669,
+            1.4347325973623626
+          ],
+          "paired_stdev": 0.30319633507610927,
+          "ratio_of_means": 0.8763333194555957
+        },
+        "stdlib": {
+          "paired_mean": 0.32032341991018115,
+          "paired_ratios": [
+            0.2814260827904122,
+            0.5000439447116124,
+            0.1888577638752634,
+            0.16359474936319707,
+            0.47060258185932274,
+            0.35393903761456175,
+            0.2837997791568984
+          ],
+          "paired_stdev": 0.1295552503514012,
+          "ratio_of_means": 0.29424754492680727
+        }
+      }
+    },
+    "b64decode/1KiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 3052.8005981445312,
+          "mean_ns": 2464.604256766183,
+          "min_ns": 1953.6387329101562,
+          "samples_ns": [
+            1953.6387329101562,
+            2056.1624145507812,
+            3052.8005981445312,
+            2238.3118286132812,
+            2970.756103515625,
+            1984.9396362304688,
+            2995.6204833984375
+          ],
+          "stdev_ns": 515.3218698380467
+        },
+        "legacy": {
+          "max_ns": 2636.5250244140625,
+          "mean_ns": 2320.594063895089,
+          "min_ns": 1592.5770263671875,
+          "samples_ns": [
+            2397.5111083984375,
+            2607.2481689453125,
+            2622.63525390625,
+            1761.9049072265625,
+            2636.5250244140625,
+            2625.7569580078125,
+            1592.5770263671875
+          ],
+          "stdev_ns": 449.88791800629235
+        },
+        "previous": {
+          "max_ns": 9339.389404296875,
+          "mean_ns": 5175.9716796875,
+          "min_ns": 2868.14892578125,
+          "samples_ns": [
+            2868.14892578125,
+            5303.7108154296875,
+            4793.4127197265625,
+            3784.213134765625,
+            6915.819580078125,
+            3227.107177734375,
+            9339.389404296875
+          ],
+          "stdev_ns": 2294.3734463724954
+        },
+        "stdlib": {
+          "max_ns": 10562.86962890625,
+          "mean_ns": 7636.07421875,
+          "min_ns": 4031.836181640625,
+          "samples_ns": [
+            5612.2392578125,
+            10562.86962890625,
+            9549.63720703125,
+            10326.37451171875,
+            8303.4326171875,
+            4031.836181640625,
+            5066.130126953125
+          ],
+          "stdev_ns": 2695.7370666036454
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 1.1145165928140737,
+          "paired_ratios": [
+            0.8148611808581806,
+            0.7886331800100728,
+            1.1640202706791107,
+            1.2703930952418068,
+            1.126769545521701,
+            0.7559494911274888,
+            1.8809893862601543
+          ],
+          "paired_stdev": 0.3955886978376907,
+          "ratio_of_means": 1.062057468435205
+        },
+        "previous": {
+          "paired_mean": 0.523226896953072,
+          "paired_ratios": [
+            0.6811496834593441,
+            0.3876837342957958,
+            0.6368741388742083,
+            0.591486723633475,
+            0.42955951483657207,
+            0.6150832702197442,
+            0.3207512133523643
+          ],
+          "paired_stdev": 0.14088661469872438,
+          "ratio_of_means": 0.47616262400318693
+        },
+        "stdlib": {
+          "paired_mean": 0.36008444630233094,
+          "paired_ratios": [
+            0.3481032513342334,
+            0.19465945209850044,
+            0.31967712824700834,
+            0.21675679359422445,
+            0.3577744579231457,
+            0.49231653936464304,
+            0.5913035015545614
+          ],
+          "paired_stdev": 0.14179648509814247,
+          "ratio_of_means": 0.32275802803415266
+        }
+      }
+    },
+    "b64decode/1MiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 2654945.5,
+          "mean_ns": 2138187.214285714,
+          "min_ns": 1560277.25,
+          "samples_ns": [
+            1871341.875,
+            2539848.6875,
+            1776867.4375,
+            2654945.5,
+            2577804.0,
+            1986225.75,
+            1560277.25
+          ],
+          "stdev_ns": 443558.4540291464
+        },
+        "legacy": {
+          "max_ns": 2219724.3125,
+          "mean_ns": 1930293.5982142857,
+          "min_ns": 1548831.5,
+          "samples_ns": [
+            1642750.6875,
+            1548831.5,
+            2090309.8125,
+            1675299.0625,
+            2129359.875,
+            2219724.3125,
+            2205779.9375
+          ],
+          "stdev_ns": 293857.0809120407
+        },
+        "previous": {
+          "max_ns": 9553821.25,
+          "mean_ns": 6359094.25,
+          "min_ns": 3937027.5,
+          "samples_ns": [
+            9212368.375,
+            5912231.25,
+            4063902.625,
+            3937027.5,
+            5815172.25,
+            6019136.5,
+            9553821.25
+          ],
+          "stdev_ns": 2239526.5395646794
+        },
+        "stdlib": {
+          "max_ns": 9901827.25,
+          "mean_ns": 6590938.821428572,
+          "min_ns": 3433376.5,
+          "samples_ns": [
+            3433376.5,
+            5611549.25,
+            9022567.75,
+            9733532.0,
+            9901827.25,
+            3655739.0,
+            4777980.0
+          ],
+          "stdev_ns": 2874668.524223147
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 1.1466535828084932,
+          "paired_ratios": [
+            1.1391514788210977,
+            1.639848290469299,
+            0.850049799735129,
+            1.5847591390865474,
+            1.2106004392517258,
+            0.8948074041514559,
+            0.7073585281441975
+          ],
+          "paired_stdev": 0.36141006880680343,
+          "ratio_of_means": 1.1077005157473199
+        },
+        "previous": {
+          "paired_mean": 0.38298563792666773,
+          "paired_ratios": [
+            0.2031336350029533,
+            0.4295922436220674,
+            0.43723179452411215,
+            0.6743527953513152,
+            0.44328936258079027,
+            0.32998516481558443,
+            0.1633144695898513
+          ],
+          "paired_stdev": 0.17178348588511685,
+          "ratio_of_means": 0.3362408434637864
+        },
+        "stdlib": {
+          "paired_mean": 0.37108043275015395,
+          "paired_ratios": [
+            0.54504417881348,
+            0.4526109589967512,
+            0.19693589305549963,
+            0.27276280593724866,
+            0.2603361919892109,
+            0.5433171651477308,
+            0.3265558353111566
+          ],
+          "paired_stdev": 0.1419010845200711,
+          "ratio_of_means": 0.32441314844768454
+        }
+      }
+    },
+    "b64decode_ascii/12-byte": {
+      "backends": {
+        "candidate": {
+          "max_ns": 327.2431106567383,
+          "mean_ns": 221.00437709263392,
+          "min_ns": 122.32747650146484,
+          "samples_ns": [
+            148.7228240966797,
+            327.2431106567383,
+            194.96051025390625,
+            240.63184356689453,
+            324.86199951171875,
+            188.28287506103516,
+            122.32747650146484
+          ],
+          "stdev_ns": 80.797117309295
+        },
+        "legacy": {
+          "max_ns": 310.33702850341797,
+          "mean_ns": 250.7056770324707,
+          "min_ns": 139.0874252319336,
+          "samples_ns": [
+            167.65689849853516,
+            279.4502639770508,
+            139.0874252319336,
+            310.1126937866211,
+            310.33702850341797,
+            294.0179748535156,
+            254.2774543762207
+          ],
+          "stdev_ns": 69.70866694490371
+        },
+        "previous": {
+          "max_ns": 464.23461151123047,
+          "mean_ns": 349.6156452723912,
+          "min_ns": 214.67224884033203,
+          "samples_ns": [
+            464.23461151123047,
+            396.15919494628906,
+            403.3791961669922,
+            335.8329772949219,
+            334.57711029052734,
+            214.67224884033203,
+            298.4541778564453
+          ],
+          "stdev_ns": 81.07369518166152
+        },
+        "stdlib": {
+          "max_ns": 1283.008056640625,
+          "mean_ns": 770.5836617606027,
+          "min_ns": 339.3279724121094,
+          "samples_ns": [
+            339.3279724121094,
+            438.85862731933594,
+            1283.008056640625,
+            937.5287780761719,
+            502.3707733154297,
+            932.0669250488281,
+            960.9244995117188
+          ],
+          "stdev_ns": 346.582609865333
+        }
+      },
+      "decision": "SKIP / no repeatable >=5% win established",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.9148591564099056,
+          "paired_ratios": [
+            0.887066535457705,
+            1.1710245179214158,
+            1.4017119802800444,
+            0.77594967374172,
+            1.0468038605587822,
+            0.6403787902928065,
+            0.48107873661686523
+          ],
+          "paired_stdev": 0.3171826412956538,
+          "ratio_of_means": 0.881529208706391
+        },
+        "previous": {
+          "paired_mean": 0.6577351290193676,
+          "paired_ratios": [
+            0.32036134404657995,
+            0.8260394175657229,
+            0.4833182080446109,
+            0.7165223781927063,
+            0.9709630142648654,
+            0.8770713311950971,
+            0.40987020982599087
+          ],
+          "paired_stdev": 0.2528773428511079,
+          "ratio_of_means": 0.6321352607674231
+        },
+        "stdlib": {
+          "paired_mean": 0.36693461800808064,
+          "paired_ratios": [
+            0.43828636654822484,
+            0.7456686283134625,
+            0.15195579579163576,
+            0.2566660876913837,
+            0.6466578407174648,
+            0.20200574658431486,
+            0.12730186041007796
+          ],
+          "paired_stdev": 0.24825257226850342,
+          "ratio_of_means": 0.28680127552625606
+        }
+      }
+    },
+    "b64decode_ascii/1KiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 3089.0797119140625,
+          "mean_ns": 2457.720145089286,
+          "min_ns": 1994.210205078125,
+          "samples_ns": [
+            2140.084716796875,
+            2040.2001953125,
+            2230.9512939453125,
+            2770.091064453125,
+            2939.423828125,
+            1994.210205078125,
+            3089.0797119140625
+          ],
+          "stdev_ns": 460.0198695422427
+        },
+        "legacy": {
+          "max_ns": 2626.504638671875,
+          "mean_ns": 2299.747488839286,
+          "min_ns": 1350.083984375,
+          "samples_ns": [
+            1670.6524658203125,
+            2619.99951171875,
+            2626.504638671875,
+            2588.7119140625,
+            2621.5682373046875,
+            2620.711669921875,
+            1350.083984375
+          ],
+          "stdev_ns": 547.2720151730107
+        },
+        "previous": {
+          "max_ns": 10000.013671875,
+          "mean_ns": 7021.748604910715,
+          "min_ns": 3849.892578125,
+          "samples_ns": [
+            7862.67041015625,
+            4755.961181640625,
+            9663.501953125,
+            10000.013671875,
+            3849.892578125,
+            4831.1083984375,
+            8189.092041015625
+          ],
+          "stdev_ns": 2513.7001796348804
+        },
+        "stdlib": {
+          "max_ns": 10636.876953125,
+          "mean_ns": 9058.175746372768,
+          "min_ns": 5977.7900390625,
+          "samples_ns": [
+            6543.50048828125,
+            10568.59814453125,
+            10245.67431640625,
+            10636.876953125,
+            9607.3759765625,
+            5977.7900390625,
+            9827.414306640625
+          ],
+          "stdev_ns": 1953.182991503603
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 1.164201152920657,
+          "paired_ratios": [
+            1.2809873750409635,
+            0.778702509747456,
+            0.8493993351838971,
+            1.0700654056580534,
+            1.1212463541086801,
+            0.7609422386925814,
+            2.288064852012968
+          ],
+          "paired_stdev": 0.5319370936666926,
+          "ratio_of_means": 1.068691305030941
+        },
+        "previous": {
+          "paired_mean": 0.39464926479921997,
+          "paired_ratios": [
+            0.2721829359695043,
+            0.4289774700408107,
+            0.23086364599159248,
+            0.27700872772244256,
+            0.7635080118408336,
+            0.41278523283044155,
+            0.3772188291989144
+          ],
+          "paired_stdev": 0.1795972164570867,
+          "ratio_of_means": 0.3500153997781208
+        },
+        "stdlib": {
+          "paired_mean": 0.2788798158819108,
+          "paired_ratios": [
+            0.32705502515504525,
+            0.1930435964554303,
+            0.21774567735116493,
+            0.2604233438687379,
+            0.30595490748939336,
+            0.333603253384068,
+            0.31433290746953607
+          ],
+          "paired_stdev": 0.055903739451157314,
+          "ratio_of_means": 0.27132617139532195
+        }
+      }
+    },
+    "b64decode_ascii/1MiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 2694455.5,
+          "mean_ns": 2156503.6428571427,
+          "min_ns": 1667607.375,
+          "samples_ns": [
+            2640672.5625,
+            1667607.375,
+            1818378.0,
+            2642415.0625,
+            2694455.5,
+            1848413.25,
+            1783583.75
+          ],
+          "stdev_ns": 473859.8771142808
+        },
+        "legacy": {
+          "max_ns": 2133878.9375,
+          "mean_ns": 1723092.9285714286,
+          "min_ns": 1556180.5,
+          "samples_ns": [
+            1556180.5,
+            1629729.75,
+            1623704.3125,
+            1989929.1875,
+            1571485.5,
+            2133878.9375,
+            1556742.3125
+          ],
+          "stdev_ns": 237015.686191516
+        },
+        "previous": {
+          "max_ns": 9255333.0,
+          "mean_ns": 5136196.732142857,
+          "min_ns": 3649847.75,
+          "samples_ns": [
+            9255333.0,
+            4391528.0,
+            3771911.125,
+            3649847.75,
+            5092430.5,
+            5959475.75,
+            3832851.0
+          ],
+          "stdev_ns": 1998780.3593773707
+        },
+        "stdlib": {
+          "max_ns": 9129305.75,
+          "mean_ns": 6250695.392857143,
+          "min_ns": 3300984.5,
+          "samples_ns": [
+            7955332.5,
+            6351807.5,
+            9025511.75,
+            3847544.25,
+            9129305.75,
+            3300984.5,
+            4144381.5
+          ],
+          "stdev_ns": 2510461.534973055
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 1.270636140970431,
+          "paired_ratios": [
+            1.6968934917896734,
+            1.0232416601586858,
+            1.119894789957331,
+            1.3278940170829572,
+            1.7145913850302787,
+            0.8662221729249343,
+            1.1457154698491565
+          ],
+          "paired_stdev": 0.32791077747299296,
+          "ratio_of_means": 1.2515306673825441
+        },
+        "previous": {
+          "paired_mean": 0.4536749870145756,
+          "paired_ratios": [
+            0.2853136199961687,
+            0.37973283444851086,
+            0.4820839992617801,
+            0.7239795310640013,
+            0.5291099210877792,
+            0.3101637337814488,
+            0.46534126946234017
+          ],
+          "paired_stdev": 0.14950285480572037,
+          "ratio_of_means": 0.4198639100721195
+        },
+        "stdlib": {
+          "paired_mean": 0.39545601934063446,
+          "paired_ratios": [
+            0.33193742216305855,
+            0.26254060359984144,
+            0.201470902744102,
+            0.6867796419755277,
+            0.29514352720632675,
+            0.5599581730844237,
+            0.43036186461116094
+          ],
+          "paired_stdev": 0.17442418180670635,
+          "ratio_of_means": 0.3450021969269922
+        }
+      }
+    },
+    "b64encode/12-byte": {
+      "backends": {
+        "candidate": {
+          "max_ns": 177.50392150878906,
+          "mean_ns": 121.23467200142997,
+          "min_ns": 80.63859176635742,
+          "samples_ns": [
+            80.63859176635742,
+            130.80126953125,
+            99.59998321533203,
+            170.88229370117188,
+            177.50392150878906,
+            95.46360778808594,
+            93.75303649902344
+          ],
+          "stdev_ns": 39.2813019530473
+        },
+        "legacy": {
+          "max_ns": 221.22150421142578,
+          "mean_ns": 166.04817145211356,
+          "min_ns": 94.56904983520508,
+          "samples_ns": [
+            221.22150421142578,
+            120.60233688354492,
+            125.33853149414062,
+            204.29733276367188,
+            198.66159439086914,
+            197.6468505859375,
+            94.56904983520508
+          ],
+          "stdev_ns": 50.66404109401822
+        },
+        "previous": {
+          "max_ns": 548.8027496337891,
+          "mean_ns": 400.5741729736328,
+          "min_ns": 281.2457580566406,
+          "samples_ns": [
+            407.80517578125,
+            281.2457580566406,
+            305.11424255371094,
+            548.8027496337891,
+            350.5575866699219,
+            480.61949157714844,
+            429.87420654296875
+          ],
+          "stdev_ns": 95.8673312149459
+        },
+        "stdlib": {
+          "max_ns": 497.3847351074219,
+          "mean_ns": 327.3634567260742,
+          "min_ns": 204.66065216064453,
+          "samples_ns": [
+            204.66065216064453,
+            329.2740020751953,
+            259.3816146850586,
+            497.3847351074219,
+            255.86509704589844,
+            401.31634521484375,
+            343.66175079345703
+          ],
+          "stdev_ns": 99.52811489202891
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.778291400107152,
+          "paired_ratios": [
+            0.36451515892998143,
+            1.0845666254174933,
+            0.7946477593762791,
+            0.8364391810188044,
+            0.8934989274250357,
+            0.48300090542843255,
+            0.991371243154038
+          ],
+          "paired_stdev": 0.262848580119901,
+          "ratio_of_means": 0.7301174770021042
+        },
+        "previous": {
+          "paired_mean": 0.31767026298442586,
+          "paired_ratios": [
+            0.19773802922406414,
+            0.46507819508128434,
+            0.32643505062795913,
+            0.3113728818144589,
+            0.5063473969996355,
+            0.1986261678127597,
+            0.21809411933081918
+          ],
+          "paired_stdev": 0.12643528221466768,
+          "ratio_of_means": 0.30265224315749895
+        },
+        "stdlib": {
+          "paired_mean": 0.3890324254001783,
+          "paired_ratios": [
+            0.39401121278095835,
+            0.39724141203646957,
+            0.3839901426177273,
+            0.3435615965662192,
+            0.6937402700023109,
+            0.2378762014713847,
+            0.2728061423261782
+          ],
+          "paired_stdev": 0.14798019019876152,
+          "ratio_of_means": 0.37033660755505377
+        }
+      }
+    },
+    "b64encode/1KiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 1621.5062866210938,
+          "mean_ns": 1298.4521745954241,
+          "min_ns": 1013.213134765625,
+          "samples_ns": [
+            1175.4999694824219,
+            1501.45556640625,
+            1069.7434692382812,
+            1013.213134765625,
+            1619.4037475585938,
+            1621.5062866210938,
+            1088.3430480957031
+          ],
+          "stdev_ns": 271.2674940904636
+        },
+        "legacy": {
+          "max_ns": 1789.2607421875,
+          "mean_ns": 1447.665322440011,
+          "min_ns": 847.3662109375,
+          "samples_ns": [
+            847.3662109375,
+            1649.83837890625,
+            1155.7237854003906,
+            1166.2727661132812,
+            1776.3367919921875,
+            1748.8585815429688,
+            1789.2607421875
+          ],
+          "stdev_ns": 383.2045460881749
+        },
+        "previous": {
+          "max_ns": 3776.6214599609375,
+          "mean_ns": 2918.822265625,
+          "min_ns": 2185.9754638671875,
+          "samples_ns": [
+            3760.51953125,
+            2908.4381103515625,
+            2185.9754638671875,
+            3776.6214599609375,
+            2408.6301879882812,
+            2728.9039916992188,
+            2662.6671142578125
+          ],
+          "stdev_ns": 624.9568490060666
+        },
+        "stdlib": {
+          "max_ns": 4381.22412109375,
+          "mean_ns": 3158.436837332589,
+          "min_ns": 1873.3135986328125,
+          "samples_ns": [
+            1977.8287353515625,
+            1873.3135986328125,
+            3697.786865234375,
+            4381.22412109375,
+            2643.5516357421875,
+            3783.0206298828125,
+            3752.332275390625
+          ],
+          "stdev_ns": 986.526558107996
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.9341093900229852,
+          "paired_ratios": [
+            1.387239607042963,
+            0.9100622131251611,
+            0.9256047878842242,
+            0.8687617204183353,
+            0.9116535528954557,
+            0.9271797638380139,
+            0.6082640849567433
+          ],
+          "paired_stdev": 0.2298460911303831,
+          "ratio_of_means": 0.8969284229361167
+        },
+        "previous": {
+          "paired_mean": 0.46596510039967276,
+          "paired_ratios": [
+            0.3125897790754685,
+            0.5162411952526502,
+            0.48936664062359087,
+            0.2682855948120638,
+            0.6723339081418475,
+            0.5941968979316943,
+            0.40874168696039426
+          ],
+          "paired_stdev": 0.1460493590491723,
+          "ratio_of_means": 0.4448548271977053
+        },
+        "stdlib": {
+          "paired_mean": 0.46394992195055657,
+          "paired_ratios": [
+            0.5943386039810341,
+            0.8014971799180057,
+            0.2892928955142682,
+            0.23126256652505636,
+            0.612586387821375,
+            0.42862739732702,
+            0.2900444225671365
+          ],
+          "paired_stdev": 0.21180629691206543,
+          "ratio_of_means": 0.41110594938856293
+        }
+      }
+    },
+    "b64encode/1MiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 1369447.9375,
+          "mean_ns": 1045225.6919642857,
+          "min_ns": 832741.40625,
+          "samples_ns": [
+            941507.0,
+            1104127.59375,
+            832741.40625,
+            848156.0625,
+            1369447.9375,
+            883406.90625,
+            1337192.9375
+          ],
+          "stdev_ns": 229042.6699712801
+        },
+        "legacy": {
+          "max_ns": 1815935.625,
+          "mean_ns": 1623030.2857142857,
+          "min_ns": 1216086.0,
+          "samples_ns": [
+            1216086.0,
+            1297973.875,
+            1748801.0,
+            1757839.25,
+            1763083.5,
+            1815935.625,
+            1761492.75
+          ],
+          "stdev_ns": 252076.79981124133
+        },
+        "previous": {
+          "max_ns": 4091737.0,
+          "mean_ns": 3424483.6964285714,
+          "min_ns": 2298022.0,
+          "samples_ns": [
+            4004074.25,
+            2834960.0,
+            3110951.25,
+            4091737.0,
+            2298022.0,
+            3709579.5,
+            3922061.875
+          ],
+          "stdev_ns": 686145.3416315119
+        },
+        "stdlib": {
+          "max_ns": 4123496.375,
+          "mean_ns": 3798573.375,
+          "min_ns": 2514438.375,
+          "samples_ns": [
+            2514438.375,
+            4060941.375,
+            4084058.375,
+            4021424.25,
+            4123496.375,
+            3675016.5,
+            4110638.375
+          ],
+          "stdev_ns": 586973.8331584057
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.6579825034258793,
+          "paired_ratios": [
+            0.7742108699549209,
+            0.8506547127152309,
+            0.4761784824288184,
+            0.48249921743413116,
+            0.7767345888609359,
+            0.48647479243654357,
+            0.759124860150574
+          ],
+          "paired_stdev": 0.16744423359206903,
+          "ratio_of_means": 0.6439964190220199
+        },
+        "previous": {
+          "paired_mean": 0.3249399257914135,
+          "paired_ratios": [
+            0.23513724801681687,
+            0.389468491178006,
+            0.26768063506298917,
+            0.2072850876046041,
+            0.5959246419311912,
+            0.2381420606432616,
+            0.3409413161030255
+          ],
+          "paired_stdev": 0.13575245502836128,
+          "ratio_of_means": 0.30522139528781
+        },
+        "stdlib": {
+          "paired_mean": 0.27984720352204834,
+          "paired_ratios": [
+            0.3744402763499821,
+            0.2718895674158803,
+            0.20390046610193224,
+            0.2109093718475488,
+            0.33210843734523715,
+            0.24038175236764242,
+            0.3253005532261154
+          ],
+          "paired_stdev": 0.06568392796191178,
+          "ratio_of_means": 0.2751626963015518
+        }
+      }
+    },
+    "b64encode_ascii/12-byte": {
+      "backends": {
+        "candidate": {
+          "max_ns": 183.0834846496582,
+          "mean_ns": 127.24003900800433,
+          "min_ns": 61.412139892578125,
+          "samples_ns": [
+            91.81380462646484,
+            111.97105979919434,
+            173.01633834838867,
+            61.412139892578125,
+            180.5633544921875,
+            88.8200912475586,
+            183.0834846496582
+          ],
+          "stdev_ns": 50.588042844562096
+        },
+        "legacy": {
+          "max_ns": 305.6789855957031,
+          "mean_ns": 221.22225843157088,
+          "min_ns": 96.87460327148438,
+          "samples_ns": [
+            283.75535583496094,
+            96.87460327148438,
+            165.27945709228516,
+            284.31652069091797,
+            143.5709228515625,
+            305.6789855957031,
+            269.07996368408203
+          ],
+          "stdev_ns": 83.60247125442694
+        },
+        "previous": {
+          "max_ns": 612.2607574462891,
+          "mean_ns": 434.23153250558033,
+          "min_ns": 289.6445770263672,
+          "samples_ns": [
+            421.4513244628906,
+            384.0248260498047,
+            289.6445770263672,
+            535.0212097167969,
+            383.14312744140625,
+            414.0749053955078,
+            612.2607574462891
+          ],
+          "stdev_ns": 106.81659788260527
+        },
+        "stdlib": {
+          "max_ns": 1071.4535827636719,
+          "mean_ns": 519.3622480119977,
+          "min_ns": 306.2532653808594,
+          "samples_ns": [
+            479.93492126464844,
+            511.1380157470703,
+            428.08815002441406,
+            1071.4535827636719,
+            306.2532653808594,
+            441.6293029785156,
+            397.0384979248047
+          ],
+          "stdev_ns": 252.05121966879838
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.7101205127085446,
+          "paired_ratios": [
+            0.3235667723567692,
+            1.1558350281487417,
+            1.0468109067649198,
+            0.21599919604861653,
+            1.2576596354323872,
+            0.29056655979954654,
+            0.6804054904088308
+          ],
+          "paired_stdev": 0.4439048534214378,
+          "ratio_of_means": 0.5751683393439481
+        },
+        "previous": {
+          "paired_mean": 0.3151926247538006,
+          "paired_ratios": [
+            0.2178515033580092,
+            0.2915724510599027,
+            0.5973401612578387,
+            0.11478449597369318,
+            0.47126867627242225,
+            0.21450247307965015,
+            0.2990286122750882
+          ],
+          "paired_stdev": 0.16561168072611937,
+          "ratio_of_means": 0.29302348973555753
+        },
+        "stdlib": {
+          "paired_mean": 0.303382054002408,
+          "paired_ratios": [
+            0.19130469686292395,
+            0.21906228132051458,
+            0.40416054109071103,
+            0.05731665923797995,
+            0.589588340446386,
+            0.20111910746982184,
+            0.46112275158851845
+          ],
+          "paired_stdev": 0.18602397529951634,
+          "ratio_of_means": 0.2449928532446297
+        }
+      }
+    },
+    "b64encode_ascii/1KiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 1636.9166259765625,
+          "mean_ns": 1172.470690046038,
+          "min_ns": 964.5372619628906,
+          "samples_ns": [
+            970.4417419433594,
+            982.5919494628906,
+            1495.7218627929688,
+            964.5372619628906,
+            1636.9166259765625,
+            1165.1790771484375,
+            991.9063110351562
+          ],
+          "stdev_ns": 280.76204431932723
+        },
+        "legacy": {
+          "max_ns": 2258.720703125,
+          "mean_ns": 1861.056117466518,
+          "min_ns": 1250.1295166015625,
+          "samples_ns": [
+            1399.3394165039062,
+            2191.767822265625,
+            1453.3511352539062,
+            1250.1295166015625,
+            2243.9863891601562,
+            2258.720703125,
+            2230.0978393554688
+          ],
+          "stdev_ns": 466.00638693144214
+        },
+        "previous": {
+          "max_ns": 4392.391845703125,
+          "mean_ns": 3562.8699079241073,
+          "min_ns": 2782.4981689453125,
+          "samples_ns": [
+            2851.7474365234375,
+            3021.8829345703125,
+            2782.4981689453125,
+            4392.391845703125,
+            3281.9490966796875,
+            4307.569091796875,
+            4302.05078125
+          ],
+          "stdev_ns": 738.8426209354691
+        },
+        "stdlib": {
+          "max_ns": 4785.3944091796875,
+          "mean_ns": 3209.502171107701,
+          "min_ns": 2340.4539794921875,
+          "samples_ns": [
+            2664.42138671875,
+            2970.9276123046875,
+            3981.7178955078125,
+            4785.3944091796875,
+            2888.4552612304688,
+            2340.4539794921875,
+            2835.1446533203125
+          ],
+          "stdev_ns": 859.4808298676882
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.6618030667341589,
+          "paired_ratios": [
+            0.6934998975215749,
+            0.44831023591138763,
+            1.029153813219171,
+            0.7715498667569698,
+            0.7294681616091271,
+            0.5158579701936504,
+            0.4447815219272316
+          ],
+          "paired_stdev": 0.2107730596842929,
+          "ratio_of_means": 0.6300028672118383
+        },
+        "previous": {
+          "paired_mean": 0.34606005764779485,
+          "paired_ratios": [
+            0.34029722601466555,
+            0.32515883994778483,
+            0.5375463960718121,
+            0.21959271755466286,
+            0.4987635632839685,
+            0.2704957372285329,
+            0.23056592343313737
+          ],
+          "paired_stdev": 0.12616014904017783,
+          "ratio_of_means": 0.32908040999149857
+        },
+        "stdlib": {
+          "paired_mean": 0.3837968808565884,
+          "paired_ratios": [
+            0.3642223211315924,
+            0.3307357423968496,
+            0.3756473718242187,
+            0.201558571663946,
+            0.5667100501599057,
+            0.4978431908331086,
+            0.34986091798649804
+          ],
+          "paired_stdev": 0.11838588143418786,
+          "ratio_of_means": 0.36531232183008033
+        }
+      }
+    },
+    "b64encode_ascii/1MiB": {
+      "backends": {
+        "candidate": {
+          "max_ns": 1307741.25,
+          "mean_ns": 1021267.2366071428,
+          "min_ns": 845087.625,
+          "samples_ns": [
+            873440.71875,
+            845087.625,
+            886470.125,
+            845993.71875,
+            1307741.25,
+            1298014.34375,
+            1092122.875
+          ],
+          "stdev_ns": 210340.93175955588
+        },
+        "legacy": {
+          "max_ns": 1619024.6875,
+          "mean_ns": 1387359.1160714286,
+          "min_ns": 1071109.75,
+          "samples_ns": [
+            1078074.0,
+            1071109.75,
+            1619024.6875,
+            1137786.4375,
+            1600602.375,
+            1608575.875,
+            1596340.6875
+          ],
+          "stdev_ns": 273772.7897803323
+        },
+        "previous": {
+          "max_ns": 6195906.5,
+          "mean_ns": 3493050.3928571427,
+          "min_ns": 2492684.5,
+          "samples_ns": [
+            6195906.5,
+            2548553.75,
+            2492684.5,
+            4415169.75,
+            3285538.125,
+            2694603.5,
+            2818896.625
+          ],
+          "stdev_ns": 1365259.6308295906
+        },
+        "stdlib": {
+          "max_ns": 4509796.5,
+          "mean_ns": 3940635.285714286,
+          "min_ns": 3196623.75,
+          "samples_ns": [
+            3234986.5,
+            3196623.75,
+            4471385.125,
+            4441056.375,
+            4500305.0,
+            3230293.75,
+            4509796.5
+          ],
+          "stdev_ns": 673964.6141621557
+        }
+      },
+      "decision": "KEEP evidence for this case only (all paired rounds >=5% faster)",
+      "ratios": {
+        "legacy": {
+          "paired_mean": 0.7426217732216561,
+          "paired_ratios": [
+            0.8101862383751023,
+            0.7889832251083514,
+            0.5475334204871413,
+            0.743543507698034,
+            0.8170306819643448,
+            0.8069338623830846,
+            0.6841414765355344
+          ],
+          "paired_stdev": 0.09820669677836567,
+          "ratio_of_means": 0.7361232032691402
+        },
+        "previous": {
+          "paired_mean": 0.3267103664030135,
+          "paired_ratios": [
+            0.14097060999064462,
+            0.3315949781322054,
+            0.3556286906746522,
+            0.19161068920396548,
+            0.3980295465297637,
+            0.4817088464963398,
+            0.3874292037935233
+          ],
+          "paired_stdev": 0.12000627782265254,
+          "ratio_of_means": 0.2923711718260659
+        },
+        "stdlib": {
+          "paired_mean": 0.2653852332682496,
+          "paired_ratios": [
+            0.26999825772070457,
+            0.26436881256356803,
+            0.19825403095869537,
+            0.19049380312133507,
+            0.29058947115806594,
+            0.40182548220266345,
+            0.24216677515271476
+          ],
+          "paired_stdev": 0.07062569135092703,
+          "ratio_of_means": 0.25916309492265693
+        }
+      }
+    }
+  }
+}

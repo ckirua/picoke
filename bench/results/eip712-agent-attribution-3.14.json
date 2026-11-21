@@ -1,0 +1,429 @@
+{
+  "schema": "picore.eip712-agent-benchmark.v1",
+  "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz",
+  "settings": {
+    "samples": 9,
+    "iterations": 1000,
+    "warmups": 2
+  },
+  "baseline": {
+    "origin": "/tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/picore/crypto/eip712.cpython-314-x86_64-linux-gnu.so",
+    "prefix": "/tmp/picore-eip712.jgcCVz/baseline3.14",
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "versions": {
+      "picore": "0.1.0",
+      "eth-account": "0.14.0",
+      "eth-utils": "6.0.0",
+      "eth-abi": "6.0.0",
+      "pycryptodome": "3.24.1"
+    }
+  },
+  "candidate": {
+    "origin": "/tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/picore/crypto/eip712.cpython-314-x86_64-linux-gnu.so",
+    "prefix": "/tmp/picore-eip712.jgcCVz/baseline3.14",
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "versions": {
+      "picore": "0.1.0",
+      "eth-account": "0.14.0",
+      "eth-utils": "6.0.0",
+      "eth-abi": "6.0.0",
+      "pycryptodome": "3.24.1"
+    }
+  },
+  "preflight": {
+    "agent_historical": {
+      "ok": true,
+      "digest": "bfc9eafb1f7fbe1f94e266c1e8b2835966533eb048e119c0feb1b18cd5c1c04d",
+      "expected": null
+    },
+    "agent_ethers_vector": {
+      "ok": true,
+      "digest": "b4213747a19486f4f2ceb0f7222b9733f612682fd3649afd6a605a21ac36f2da",
+      "expected": "b4213747a19486f4f2ceb0f7222b9733f612682fd3649afd6a605a21ac36f2da"
+    },
+    "agent_unicode": {
+      "ok": true,
+      "digest": "c9d8e78d05d679a184be3d808bb60fcbcf2ea9dc527617e075d3b3a8fae5f77b",
+      "expected": null
+    },
+    "full_mail": {
+      "ok": true,
+      "digest": "be609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2",
+      "expected": "be609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2"
+    },
+    "full_array_list": {
+      "ok": true,
+      "digest": "076a90553e534f54d979119bcbfd7ef5fdf0c10871ca96c5aaad45e4f783618d",
+      "expected": "076a90553e534f54d979119bcbfd7ef5fdf0c10871ca96c5aaad45e4f783618d"
+    },
+    "full_array_tuple": {
+      "ok": true,
+      "digest": "076a90553e534f54d979119bcbfd7ef5fdf0c10871ca96c5aaad45e4f783618d",
+      "expected": "076a90553e534f54d979119bcbfd7ef5fdf0c10871ca96c5aaad45e4f783618d"
+    },
+    "direct_provider_historical": {
+      "ok": true,
+      "digest": "bfc9eafb1f7fbe1f94e266c1e8b2835966533eb048e119c0feb1b18cd5c1c04d",
+      "expected": "bfc9eafb1f7fbe1f94e266c1e8b2835966533eb048e119c0feb1b18cd5c1c04d"
+    }
+  },
+  "raw_ns_per_call": {
+    "baseline": {
+      "agent_historical": [
+        349506.903,
+        309381.267,
+        343290.007,
+        320375.554,
+        367317.199,
+        317513.257,
+        352091.983,
+        379243.078,
+        527981.085
+      ],
+      "agent_ethers_vector": [
+        288996.813,
+        364246.59,
+        318092.551,
+        296527.911,
+        385003.636,
+        349343.779,
+        326148.272,
+        292786.443,
+        335590.229
+      ],
+      "agent_unicode": [
+        323669.438,
+        333152.91,
+        375913.713,
+        308455.871,
+        298449.123,
+        292726.262,
+        320008.256,
+        408186.494,
+        357917.818
+      ],
+      "full_mail": [
+        549240.566,
+        673294.066,
+        667119.619,
+        481071.334,
+        786856.346,
+        566888.137,
+        622136.209,
+        537874.662,
+        632982.38
+      ],
+      "full_array_list": [
+        424027.239,
+        409563.305,
+        476477.156,
+        406103.003,
+        411605.922,
+        420621.8,
+        355892.179,
+        405094.86,
+        420722.064
+      ],
+      "full_array_tuple": [
+        397866.81,
+        518239.72,
+        517288.403,
+        398797.164,
+        364980.257,
+        419672.235,
+        352475.431,
+        353907.332,
+        364276.197
+      ],
+      "direct_provider_historical": [
+        289011.162,
+        339363.176,
+        303396.791,
+        355123.441,
+        303262.03,
+        311537.306,
+        304874.005,
+        324845.233,
+        334801.424
+      ]
+    },
+    "candidate": {
+      "agent_historical": [
+        318625.479,
+        382015.383,
+        298740.042,
+        309751.84,
+        410940.448,
+        271686.066,
+        281843.912,
+        291009.943,
+        496358.421
+      ],
+      "agent_ethers_vector": [
+        295395.106,
+        358326.231,
+        337237.477,
+        318438.345,
+        298483.913,
+        361194.021,
+        365136.937,
+        321909.722,
+        351480.195
+      ],
+      "agent_unicode": [
+        362265.345,
+        364401.284,
+        274220.259,
+        394259.785,
+        284265.925,
+        381457.918,
+        337465.788,
+        325361.914,
+        304288.366
+      ],
+      "full_mail": [
+        624204.324,
+        578402.092,
+        616829.944,
+        581515.122,
+        539157.894,
+        818030.507,
+        612894.365,
+        579020.623,
+        660966.142
+      ],
+      "full_array_list": [
+        460183.314,
+        372239.701,
+        466299.268,
+        358057.597,
+        339489.419,
+        313171.699,
+        325336.383,
+        398719.91,
+        342735.726
+      ],
+      "full_array_tuple": [
+        365859.476,
+        337523.441,
+        449447.479,
+        347488.007,
+        488427.378,
+        393421.959,
+        386844.866,
+        410033.863,
+        379461.664
+      ],
+      "direct_provider_historical": [
+        278851.473,
+        252979.788,
+        346069.207,
+        402793.489,
+        383440.258,
+        404826.571,
+        314911.19,
+        296752.858,
+        515964.746
+      ]
+    }
+  },
+  "summaries_ns_per_call": {
+    "baseline": {
+      "agent_historical": {
+        "min": 309381.267,
+        "median": 349506.903,
+        "max": 527981.085
+      },
+      "agent_ethers_vector": {
+        "min": 288996.813,
+        "median": 326148.272,
+        "max": 385003.636
+      },
+      "agent_unicode": {
+        "min": 292726.262,
+        "median": 323669.438,
+        "max": 408186.494
+      },
+      "full_mail": {
+        "min": 481071.334,
+        "median": 622136.209,
+        "max": 786856.346
+      },
+      "full_array_list": {
+        "min": 355892.179,
+        "median": 411605.922,
+        "max": 476477.156
+      },
+      "full_array_tuple": {
+        "min": 352475.431,
+        "median": 397866.81,
+        "max": 518239.72
+      },
+      "direct_provider_historical": {
+        "min": 289011.162,
+        "median": 311537.306,
+        "max": 355123.441
+      }
+    },
+    "candidate": {
+      "agent_historical": {
+        "min": 271686.066,
+        "median": 309751.84,
+        "max": 496358.421
+      },
+      "agent_ethers_vector": {
+        "min": 295395.106,
+        "median": 337237.477,
+        "max": 365136.937
+      },
+      "agent_unicode": {
+        "min": 274220.259,
+        "median": 337465.788,
+        "max": 394259.785
+      },
+      "full_mail": {
+        "min": 539157.894,
+        "median": 612894.365,
+        "max": 818030.507
+      },
+      "full_array_list": {
+        "min": 313171.699,
+        "median": 358057.597,
+        "max": 466299.268
+      },
+      "full_array_tuple": {
+        "min": 337523.441,
+        "median": 386844.866,
+        "max": 488427.378
+      },
+      "direct_provider_historical": {
+        "min": 252979.788,
+        "median": 346069.207,
+        "max": 515964.746
+      }
+    }
+  },
+  "paired_candidate_over_baseline": {
+    "agent_historical": {
+      "raw": [
+        0.9116428781951698,
+        1.2347721848330266,
+        0.8702264438475193,
+        0.9668398107553487,
+        1.1187617925835265,
+        0.8556684170198285,
+        0.8004837531333396,
+        0.767344112210797,
+        0.9401064452905543
+      ],
+      "min": 0.767344112210797,
+      "median": 0.9116428781951698,
+      "max": 1.2347721848330266
+    },
+    "agent_ethers_vector": {
+      "raw": [
+        1.0221396662945208,
+        0.9837462884690287,
+        1.0601866530348272,
+        1.073889954999885,
+        0.7752755690857943,
+        1.033921434164139,
+        1.1195427612138322,
+        1.099469356236552,
+        1.0473493106380043
+      ],
+      "min": 0.7752755690857943,
+      "median": 1.0473493106380043,
+      "max": 1.1195427612138322
+    },
+    "agent_unicode": {
+      "raw": [
+        1.119244829658585,
+        1.0937958909018686,
+        0.7294766046483652,
+        1.278172413194236,
+        0.9524769989020875,
+        1.3031216105919463,
+        1.0545533800227955,
+        0.7970913265934761,
+        0.8501626649947893
+      ],
+      "min": 0.7294766046483652,
+      "median": 1.0545533800227955,
+      "max": 1.3031216105919463
+    },
+    "full_mail": {
+      "raw": [
+        1.1364862004748573,
+        0.8590631066099429,
+        0.924616705059007,
+        1.2087918795011803,
+        0.6852049891200852,
+        1.443019272424817,
+        0.9851449829373297,
+        1.0764973030092277,
+        1.0442093854176477
+      ],
+      "min": 0.6852049891200852,
+      "median": 1.0442093854176477,
+      "max": 1.443019272424817
+    },
+    "full_array_list": {
+      "raw": [
+        1.085268283908525,
+        0.9088697558000222,
+        0.9786392949340051,
+        0.8816915766564769,
+        0.8247923580652466,
+        0.744544621795637,
+        0.9141431090566337,
+        0.98426306865508,
+        0.8146369190658849
+      ],
+      "min": 0.744544621795637,
+      "median": 0.9088697558000222,
+      "max": 1.085268283908525
+    },
+    "full_array_tuple": {
+      "raw": [
+        0.919552641246954,
+        0.6512882513135041,
+        0.8688528031818258,
+        0.871340215949981,
+        1.3382295853882311,
+        0.9374505296973006,
+        1.097508739552403,
+        1.1585910376109416,
+        1.0416866847876969
+      ],
+      "min": 0.6512882513135041,
+      "median": 0.9374505296973006,
+      "max": 1.3382295853882311
+    },
+    "direct_provider_historical": {
+      "raw": [
+        0.9648467245012495,
+        0.7454544449454351,
+        1.1406488706072042,
+        1.1342351489548672,
+        1.2643859767079972,
+        1.2994481341505855,
+        1.0329224034695907,
+        0.9135207411216651,
+        1.5411067845398412
+      ],
+      "min": 0.7454544449454351,
+      "median": 1.1342351489548672,
+      "max": 1.5411067845398412
+    }
+  },
+  "direct_provider_attribution": {
+    "baseline_median_ns": 349506.903,
+    "direct_median_ns": 311537.306,
+    "estimated_removable_fraction": 0.1086376168083868
+  },
+  "profile": {
+    "agent_historical": "         925002 function calls (911002 primitive calls) in 0.871 seconds\n\n   Ordered by: cumulative time\n   List reduced from 114 to 30 due to restriction <30>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n     1000    0.023    0.000    0.871    0.001 /home/kirua/pydev/picore/bench/eip712_agent_compare.py:100(<lambda>)\n     1000    0.011    0.000    0.799    0.001 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/messages.py:213(encode_typed_data)\n     2000    0.016    0.000    0.642    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:184(encode_data)\n     1000    0.006    0.000    0.477    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:220(hash_domain)\n     1000    0.002    0.000    0.470    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:202(hash_struct)\n     8000    0.017    0.000    0.416    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/crypto.py:10(keccak)\n     8000    0.016    0.000    0.306    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_hash/main.py:39(__call__)\n     1000    0.003    0.000    0.295    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:211(hash_eip712_message)\n     8000    0.017    0.000    0.279    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_hash/backends/pycryptodome.py:35(keccak256)\n     6000    0.019    0.000    0.233    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:41(encode_field)\n     2000    0.006    0.000    0.219    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/codec.py:51(encode)\n10000/2000    0.008    0.000    0.206    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:93(__call__)\n     2000    0.038    0.000    0.204    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:132(encode)\n     8000    0.028    0.000    0.178    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:146(new)\n    12000    0.034    0.000    0.169    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/decorators.py:78(wrapper)\n     2000    0.004    0.000    0.168    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:180(hash_type)\n     8000    0.051    0.000    0.142    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:72(__init__)\n     8000    0.022    0.000    0.095    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:195(encode)\n     8000    0.039    0.000    0.082    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:108(digest)\n    12000    0.014    0.000    0.072    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/decorators.py:41(_assert_one_val)\n    12000    0.045    0.000    0.058    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/decorators.py:35(_has_one_val)\n     2000    0.012    0.000    0.052    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:161(encode_type)\n     8000    0.028    0.000    0.047    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:91(update)\n     2000    0.014    0.000    0.045    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:111(validate_value)\n     1000    0.002    0.000    0.043    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/address.py:95(to_canonical_address)\n    16000    0.021    0.000    0.039    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/cffi/api.py:235(new)\n    11000    0.019    0.000    0.039    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/conversions.py:118(to_bytes)\n   138000    0.034    0.000    0.037    0.000 {built-in method builtins.isinstance}\n     1000    0.002    0.000    0.035    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/address.py:67(to_normalized_address)\n8000/2000    0.023    0.000    0.035    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:125(find_type_dependencies)\n\n\n",
+    "direct_provider_historical": "         925002 function calls (911002 primitive calls) in 0.972 seconds\n\n   Ordered by: cumulative time\n   List reduced from 114 to 30 due to restriction <30>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n     1000    0.005    0.000    0.972    0.001 /home/kirua/pydev/picore/bench/eip712_agent_compare.py:69(direct)\n     1000    0.012    0.000    0.911    0.001 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/messages.py:213(encode_typed_data)\n     2000    0.019    0.000    0.735    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:184(encode_data)\n     1000    0.006    0.000    0.541    0.001 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:220(hash_domain)\n     1000    0.003    0.000    0.533    0.001 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:202(hash_struct)\n     8000    0.020    0.000    0.477    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/crypto.py:10(keccak)\n     8000    0.017    0.000    0.355    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_hash/main.py:39(__call__)\n     1000    0.003    0.000    0.341    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:211(hash_eip712_message)\n     8000    0.019    0.000    0.324    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_hash/backends/pycryptodome.py:35(keccak256)\n     6000    0.023    0.000    0.274    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:41(encode_field)\n     2000    0.009    0.000    0.248    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/codec.py:51(encode)\n10000/2000    0.010    0.000    0.231    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:93(__call__)\n     2000    0.042    0.000    0.228    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:132(encode)\n     8000    0.035    0.000    0.208    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:146(new)\n    12000    0.037    0.000    0.188    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/decorators.py:78(wrapper)\n     2000    0.005    0.000    0.187    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:180(hash_type)\n     8000    0.060    0.000    0.164    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:72(__init__)\n     8000    0.022    0.000    0.105    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:195(encode)\n     8000    0.043    0.000    0.095    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:108(digest)\n    12000    0.015    0.000    0.079    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/decorators.py:41(_assert_one_val)\n    12000    0.051    0.000    0.065    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/decorators.py:35(_has_one_val)\n     2000    0.012    0.000    0.058    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:161(encode_type)\n     8000    0.032    0.000    0.053    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/Crypto/Hash/keccak.py:91(update)\n     1000    0.002    0.000    0.049    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/address.py:95(to_canonical_address)\n     2000    0.014    0.000    0.048    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_abi/encoding.py:111(validate_value)\n    16000    0.024    0.000    0.048    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/cffi/api.py:235(new)\n    11000    0.021    0.000    0.042    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/conversions.py:118(to_bytes)\n8000/2000    0.026    0.000    0.040    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_account/_utils/encode_typed_data/encoding_and_hashing.py:125(find_type_dependencies)\n     1000    0.002    0.000    0.040    0.000 /tmp/picore-eip712.jgcCVz/baseline3.14/lib/python3.14/site-packages/eth_utils/address.py:67(to_normalized_address)\n   138000    0.037    0.000    0.040    0.000 {built-in method builtins.isinstance}\n\n\n"
+  }
+}
