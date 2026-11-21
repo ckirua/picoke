@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added `picoke.queues.ByteRing`, a bounded single-producer, single-consumer FIFO for immutable bytes on GIL-enabled CPython.
+
 ## 0.1.0rc2
 
 - Renamed the distribution and import package from `picore` to `picoke`.

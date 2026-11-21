@@ -29,6 +29,7 @@ picoke aims to provide practical Python utilities built on picop. Crypto now cov
 - Measure representative workloads before claiming a performance benefit, and consult picop's public API and safety constraints when a measured use justifies it.
 - Document public APIs and limitations; test installed artifacts rather than only the source tree.
 - `picoke.ratelimit.TokenBucket` delivers asyncio token-bucket limiting with weighted requests, FIFO ordering, and cancellation without debit. Its Cython implementation uses picop's native monotonic clock; see the [benchmark results](../bench/README.md#cython-implementation). Keep this API independent of future networking utilities.
+- `picoke.queues.ByteRing` provides a bounded in-process byte FIFO without payload copies. Keep async waiting and shared-memory IPC separate; see the [queue benchmarks](../bench/README.md#bounded-byte-fifo).
 
 ### 4. Harden and prepare a release
 

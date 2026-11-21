@@ -894,3 +894,61 @@ over Python-clock paired medians were 1.029× and 0.991×.
 did not improve on Cython's checked integer cast. `long_check_exact` is a
 direct wrapper around the same `PyLong_CheckExact` macro used by the extension;
 there is no distinct type-check operation to speed up.
+
+## Bounded byte FIFO
+
+The shipping Cython ring retains immutable `bytes` references in fixed-capacity
+slots. Compare the installed API with the equivalent guarded `collections.deque`
+implementation (no lock is needed for that baseline's single-producer,
+single-consumer contract):
+
+```bash
+python3.15 -m pip install 'Cython>=3.3.1,<4' .
+python3.15 bench/byte_ring.py --samples 12 --turns 350000 --threaded-items 65536
+```
+
+The selection run additionally compared a Cython copying slab
+(`bench/_byte_ring_native.pyx`, build with `cythonize -i` in a scratch directory)
+and a historical native FIFO built separately for each interpreter. Pass
+`--module-dir` and `--backend LABEL:MODULE:CLASS` for each comparison arm.
+Historical timings cover only the common byte workload: it requires
+power-of-two capacity and tracks drops, and its invalid-input policy differs.
+
+Twelve rotated samples, capacity 1,024, Linux GIL-enabled CPython 3.14.7 and
+3.15.0rc2, Intel Core i7-6700, Cython 3.3.1 and picop 3.13.0. Each round trip
+does one push and one pop from the same thread; the two-thread workload
+includes yielding while full or empty and checking every received item.
+
+| CPython | Payload | Deque round trip (ns) | Historical round trip (ns) | Installed `ByteRing` round trip (ns) |
+|---|---:|---:|---:|---:|
+| 3.14 | 32 B | 343 | 288 | 143 |
+| 3.14 | 4 KiB | 369 | 600 | 121 |
+| 3.15 | 32 B | 369 | 217 | 126 |
+| 3.15 | 4 KiB | 380 | 608 | 133 |
+
+The installed ring won all 12 paired round-trip samples against the deque
+and historical FIFO in every case. Two-thread medians were 243–265 ns/item
+versus 430–481 for the deque. At capacity 1,024, construction plus destruction
+took 1.7–2.1 µs versus 0.5–0.7 µs for the deque.
+[Raw installed-wheel samples](results/byte-ring-installed.json).
+
+Excluding already-owned payloads, tracked empty storage was about 8.2 KiB for
+the reference ring vs 0.86 KiB for the deque; full storage was about 8.3 vs
+9.2 KiB. In the selection run, the copying slab reserved about 4 MiB upfront
+and took about 4× as long as the reference ring per 4 KiB round trip.
+
+Picop audit (Cython call sites; see [raw candidate and constructor samples](results/byte-ring-selection.json)):
+
+- **SKIP** `bytes_check_exact` / `bytes_len` for push and `long_check_exact` /
+  `long_as_ssize` for construction. Their matched arm wraps the same CPython
+  operations and did not improve both interpreters consistently.
+- **SKIP** `list_get` / `list_set_item` for slot reads and writes. This arm
+  lost on the 3.15 round trip and did not reliably improve 3.14. Do not use
+  slot initialization helpers to overwrite live slots.
+- **SKIP** `long_is_positive` / `long_is_negative` for constructor sign
+  checks, and `list_new` with `lset` to initialize slots. Constructor runs
+  at capacities 1, 16, 1,024 and 65,536 found no consistent win across both
+  versions and capacities. In particular, sign checks reached 1.09× baseline
+  time at 1,024 on 3.15; explicit allocation and fill reached 1.20× on 3.14.
+- **SKIP** atomics and raw-memory picop helpers in the production ring:
+  there is no no-GIL access, raw allocation, or payload copy to replace.
