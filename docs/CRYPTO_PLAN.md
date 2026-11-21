@@ -8,8 +8,8 @@ The six capabilities use Cython extensions. Base64 uses pybase64/libbase64 for l
 
 | Workstream | Legacy public APIs | Current status / dependency |
 |---|---|---|
-| Base64 | `b64encode`, `b64encode_ascii`, `b64decode`, `b64decode_ascii` | Cython wrapper over pybase64/libbase64 and OpenSSL EVP with strict stdlib fallback; exact bytes/str contract and strict errors; legacy trailing-NUL decode defect is not preserved. |
-| Keccak | `keccak256` | Present using PyCryptodome; compare with legacy Cython and published Ethereum vectors, not SHA3. |
+| Base64 | `b64encode`, `b64encode_ascii`, `b64decode`, `b64decode_ascii` | OpenSSL EVP encoding, fused native short decoding, and pybase64/libbase64 for large decoding, with stdlib delegation and strict errors. Legacy trailing-NUL decode defect is not preserved. |
+| Keccak | `keccak256` | OpenSSL `KECCAK-256` for exact bytes when supported, PyCryptodome otherwise; compare with published Ethereum vectors, not SHA3. |
 | Ed25519 | `ed25519_public_key`, `ed25519_sign`, `ed25519_verify` | PyCryptodome with canonical point and scalar checks and small-order public-key rejection; otherwise the provider's cofactored verification policy. |
 | secp256k1 | `privkey_to_pubkey`, `privkey_to_address`, `sign_recoverable`, `recover_pubkey` | Implemented using btclib-secp256k1/libsecp256k1. Legacy address derivation hashes the 65-byte SEC key including its prefix; picore hashes only coordinates, matching Ethereum. |
 | EIP-712 | `eip712_hash_full_message`, `eip712_hash_agent_message` | Fixed-schema encoder for canonical Agent inputs; generic and fallback inputs use eth-account with structural validation, canonical domain field ordering and non-mutating tuple-array normalization. Mutually recursive type graphs that the provider cannot resolve remain unsupported. |
