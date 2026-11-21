@@ -745,3 +745,103 @@ Retained wheel SHA-256:
 (3.14) and
 `8429f8c972e0c3b0c4fc925bc0cf6c60656ecc78ac6287afa9644e3f2d869737`
 (3.15).
+
+## Async token bucket
+
+Run `python bench/ratelimit.py` with the installed wheel. Optionally pass
+`--reference PATH` for a standalone source snapshot or ABI-matched extension
+with the same API, or `--legacy-module "$LOCAL_TOKEN_BUCKET_MODULE"` for an
+ABI-matched Cython build on `PYTHONPATH`. The older constructor takes positional
+`(capacity, refill_amount, refill_period_seconds)`; only shared positive
+integral token workloads are compared, not validation or numerical precision.
+
+The harness times batches of 4,096 constructions, 4,096 uncontended unit
+acquisitions, and 32 tasks contending for a capacity-one bucket refilled every
+millisecond. It checks completion and FIFO before contention timing, excludes
+event-loop creation, and takes nine alternating paired samples after two
+warmups. Contended time includes task scheduling and timers, not just limiter
+overhead.
+Use `--cpu-time` to exclude descheduling from construction and uncontended
+acquisition timings. Contention always measures elapsed time.
+
+Measured serially on Linux x86-64 (Intel Core i7-6700, pinned to one logical
+CPU), with regular GIL-enabled CPython 3.14.7 and 3.15.0rc2, Cython 3.3.1 for
+the compiled baseline, and picop 3.13.0. No free-threaded result.
+
+### Python reference and early trials
+
+The initial Python reference passed 448 tests per wheel outside the checkout.
+[Raw samples and paired ratios](results/ratelimit.txt).
+
+| CPython | Workload | Lock-only (ms/batch) | Compiled baseline (ms/batch) | Median paired compiled / lock-only |
+|---|---|---:|---:|---:|
+| 3.14.7 | Construction | 7.179 | 3.000 | 0.423 |
+| 3.14.7 | Uncontended | 10.153 | 9.202 | 0.957 |
+| 3.14.7 | Contention | 38.429 | 38.657 | 1.077 |
+| 3.15.0rc2 | Construction | 7.970 | 3.041 | 0.397 |
+| 3.15.0rc2 | Uncontended | 8.557 | 5.751 | 0.940 |
+| 3.15.0rc2 | Contention | 38.139 | 40.229 | 1.064 |
+
+The Cython baseline won construction in 8/9 and 9/9 pairs, but uncontended
+in only 5/9 on each version. Ratios are medians of paired times, not quotients
+of the two batch medians; substantial sample variance makes the smaller
+differences inconclusive.
+
+**SKIP lock bypass.** Both versions passed the FIFO and cancellation tests;
+uncontended paired time was 0.539× and 0.484× the lock-only reference, winning
+9/9 pairs on each. On 3.14 the construction median rose from 8.545 to 11.339
+ms/batch (1.327×), above the 5% gate, although the paired median was only
+1.031×. The Python bypass did not ship; the Cython implementation below
+retests this design with lazy lock allocation.
+
+**SKIP `picop.cylong.long_check_exact`** for constructor settings and acquire
+cost. Exact-type behavior matched, but construction won only 4/9 pairs on
+3.14 and 7/9 on 3.15 (paired median helper/builtin ratios 1.042 and 0.958).
+Uncontended acquire won 4/9 on both. Nine fresh processes per arm timed
+`import picore.ratelimit` with `perf_counter_ns` started inside the process:
+
+| CPython | Builtin check (ms median) | Picop check (ms median) | Median paired picop / builtin |
+|---|---:|---:|---:|
+| 3.14.7 | 84.370 | 93.217 | 1.092 |
+| 3.15.0rc2 | 68.955 | 85.203 | 1.191 |
+
+**SKIP `picop.cytime.time_monotonic`** for the refill clock: its public Python
+API returns float seconds, not integer nanoseconds.
+
+### Cython implementation
+
+The retained implementation prevalidates the integer settings, uses native
+scaled credit when it fits in `uint64_t`, and uses Python integers otherwise.
+It allocates the asyncio lock only when an acquisition has to wait.
+
+| CPython | Workload | Cython wheel (ms/batch) | Compiled baseline (ms/batch) | Median paired baseline / wheel |
+|---|---|---:|---:|---:|
+| 3.14.7 | Construction | 1.286 | 2.569 | 1.700 |
+| 3.14.7 | Uncontended | 1.726 | 10.082 | 4.135 |
+| 3.14.7 | Contention | 38.494 | 39.752 | 1.033 |
+| 3.15.0rc2 | Construction | 1.385 | 2.999 | 2.195 |
+| 3.15.0rc2 | Uncontended | 3.035 | 11.241 | 3.754 |
+| 3.15.0rc2 | Contention | 41.568 | 38.724 | 0.955 |
+
+The wheel won all nine construction and uncontended pairs on both versions.
+Contention measured elapsed time; the wheel won on 3.14 but was slower on
+3.15 in this run. The current and compiled baseline APIs matched on the
+positive integral cases measured, not on validation policy.
+[Raw samples, including the Python reference](results/ratelimit-cython.txt).
+
+**KEEP `picop.cytime.time_monotonic_raw`** for the fixed-width path. The
+[CPython C API](https://docs.python.org/3.14/c-api/time.html) specifies
+signed 64-bit nanoseconds. Compared with the same extension using the Python
+nanosecond clock and timestamp arithmetic, this path used 0.700× and 0.782×
+the uncontended CPU time on 3.14 and 3.15, respectively (9/9 and 8/9 pairs).
+Construction and timer-dominated contention did not show a repeatable
+regression. Compared with the original lock-only Python module, fresh-process
+import medians were 81.45 vs 79.01 ms (Cython) on 3.14, and 77.25 vs 77.29 ms
+on 3.15.
+In a direct cold-import comparison of the two Cython clock variants, native
+over Python-clock paired medians were 1.029× and 0.991×.
+
+**SKIP `picop.cylong.long_as_int64`** for settings and costs. The consumer A/B
+did not improve on Cython's checked integer cast. `long_check_exact` is a
+direct wrapper around the same `PyLong_CheckExact` macro used by the extension;
+there is no distinct type-check operation to speed up.
