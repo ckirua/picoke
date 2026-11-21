@@ -13,10 +13,9 @@ python3.15 -m pip install .
 Source builds require a C compiler, the target interpreter's development
 headers, and OpenSSL development headers (`openssl/evp.h`) and the libcrypto
 library discoverable by the compiler and linker. The isolated build installs
-Cython; it does not install these system development dependencies. Only the
-Base64 extension links libcrypto, using its EVP Base64 APIs at runtime. A
-dynamically linked build also requires the compatible libcrypto shared library
-to be available when importing the extension.
+Cython; it does not install these system development dependencies.
+Base64 encoding and Keccak-256 link libcrypto; dynamically linked builds
+need a compatible libcrypto shared library.
 Large Base64 decodes use the `pybase64` runtime dependency on CPython 3.14
 and 3.15; its libbase64 backend selects available SIMD implementations.
 
@@ -44,6 +43,10 @@ assert ed25519_verify(b"message", signature, public_key)
 Generate production seeds with a cryptographically secure random source; the fixed seed above is only an example. Python `bytes` cannot be guaranteed erased from memory. Signing and key APIs accept bytes; seeds and public keys are 32 bytes, and signatures are 64 bytes. Verification returns `False` for invalid signatures, malformed or noncanonical point encodings, noncanonical scalars and small-order public keys; `TypeError` is raised for non-bytes arguments. Invalid seed lengths raise `ValueError`. Remaining verification follows PyCryptodome's cofactored RFC 8032 behavior; applications must authenticate public keys independently.
 
 `b64encode_ascii` returns a `str`; `b64encode` returns `bytes`. Both decoders, `b64decode` and `b64decode_ascii`, accept ASCII `str` and return `bytes`. Decoding follows `base64.b64decode(..., validate=True)` semantics, raising `ValueError` or `binascii.Error` for non-ASCII text, invalid alphabet or rejected padding. Excess-padding behavior follows the running Python version. Base64 is an encoding, not encryption.
+
+Short Base64 decodes combine validation and decoding in one native pass.
+Keccak-256 uses the OpenSSL `KECCAK-256` provider for exact `bytes` when
+available, and PyCryptodome otherwise, including for bytes subclasses.
 
 ### secp256k1 and Bitcoin messages
 
