@@ -4,8 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "picore"
-version = "0.1.0.dev0"
+version = "0.1.0rc1"
+readme = "README.md"
 requires-python = ">=3.14"
+license = "MIT"
+license-files = ["LICENSE"]
 dependencies = [
     "picop>=3.13,<4",
     "pybase64>=1.5.2,<1.6",
@@ -13,6 +16,10 @@ dependencies = [
     "btclib-secp256k1>=0.8.0.16,<0.9",
     "eth-account>=0.14,<0.15",
 ]
+
+[project.urls]
+Repository = "https://github.com/ckirua/picore"
+Changelog = "https://github.com/ckirua/picore/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 include-package-data = false
