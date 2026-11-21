@@ -6,7 +6,10 @@ from setuptools import Extension, setup
 modules = ("base64", "keccak", "ed25519", "secp256k1", "eip712", "bip137")
 setup(
     ext_modules=cythonize(
-        [Extension("picoke.ratelimit", ["src/picoke/ratelimit.pyx"])] + [
+        [
+            Extension("picoke.queues", ["src/picoke/queues.pyx"]),
+            Extension("picoke.ratelimit", ["src/picoke/ratelimit.pyx"]),
+        ] + [
             Extension(
                 f"picoke.crypto.{module}",
                 [f"src/picoke/crypto/{module}.pyx"],

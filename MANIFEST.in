@@ -1,2 +1,3 @@
 include src/picoke/crypto/*.pyx
+include src/picoke/queues.pyx
 include src/picoke/ratelimit.pyx

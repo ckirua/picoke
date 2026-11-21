@@ -103,6 +103,30 @@ integer arithmetic. It only allocates a lock when an acquisition has to wait.
 See the [rate-limit benchmarks](bench/README.md#async-token-bucket) for
 workloads and measured tradeoffs.
 
+## Queues
+
+```python
+from picoke.queues import ByteRing
+
+ring = ByteRing(capacity=1024, max_item_size=4096)
+assert ring.try_push(b"message")
+assert ring.try_pop() == b"message"
+assert ring.try_pop() is None
+```
+
+`ByteRing` is an in-process FIFO for one producer and one consumer, which
+may run on separate threads on GIL-enabled CPython. Neither method waits for
+space or data.
+`try_push` returns `False` when full, without evicting anything. `try_pop`
+returns `None` when empty; `b""` is a valid item.
+
+Capacity must be positive and maximum item size nonnegative. Both constructor
+arguments must be exact `int` values that fit `Py_ssize_t`, and items must be
+exact `bytes`. Oversized items raise `ValueError` even when the ring is full.
+The ring allocates its reference slots upfront and retains immutable bytes
+without copying them. Popped bytes remain valid after the slot is reused.
+See the [queue benchmarks](bench/README.md#bounded-byte-fifo) for tradeoffs.
+
 ## Python support
 
 Target CPython **3.14 and newer**, with **3.15 as the default** for development
