@@ -22,4 +22,5 @@ consumer skill separately for code and performance work.
 - **Release:** first confirm the exact version, title, and target. Prepare the
   version and notes on a topic branch, validate the exact merged `main`
   commit and artifacts, and tag only with explicit approval. Never use
-  picop's release script or assume a `picore-v*` tag publishes to PyPI.
+  picop's release script. For approved PyPI releases, use `publish.yml` from
+  `main`: validate the release tag first, then explicitly dispatch the upload.
