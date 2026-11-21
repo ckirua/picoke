@@ -16,4 +16,29 @@
 4. Once the target is approved and ready, use an annotated `picore-vX.Y.Z` tag on that exact commit and a matching GitHub Release. For a release candidate use `picore-vX.Y.ZrcN`; mark the GitHub release as a prerelease and never make it latest. Do not reuse or force-push tags.
 5. Confirm the approved artifacts exist on the selected release target. Install the exact version in a clean supported interpreter and smoke-test one public API; this does not replace the pre-release matrix.
 
-There is no picore publishing workflow or PyPI Trusted Publishing configuration in this checkout. The check workflow does not publish. Do not copy picop's publisher, use its credentials, or assume a tag uploads picore. Configure and validate publishing separately before any PyPI release.
+## PyPI Trusted Publishing
+
+Create a [pending publisher in PyPI](https://pypi.org/manage/account/publishing/)
+for project `picore`, owner `ckirua`, repository `picore`, workflow
+`publish.yml`, and environment `pypi`. This does not reserve the name; the first
+successful upload creates the project. Use no API token.
+
+[`publish.yml`](../.github/workflows/publish.yml) runs from `main` by manual
+dispatch. Pass an existing approved GitHub release tag (including a
+prerelease tag when approved for PyPI). A GitHub-only release or tag push does
+not upload anything. First validate without uploading:
+
+```bash
+gh workflow run publish.yml --ref main -f release-tag=picore-v0.1.0rc1 -f publish=false
+```
+
+Only after the user approves that exact release for production PyPI, dispatch
+again with `publish=true`. The run builds one sdist from the annotated release
+tag and tests that exact archive on Linux CPython 3.14 and 3.15 before an
+OIDC-only job uploads it. Verify the uploaded digest and install the exact
+version from PyPI in a clean environment. PyPI files cannot be overwritten.
+
+Only an sdist is published initially; installs require the source-build
+dependencies documented in the README. Portable wheels and free-threaded
+support are not implied. TestPyPI already has an unrelated `picore` project;
+use the validation-only mode rather than targeting that namespace.
