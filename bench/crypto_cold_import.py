@@ -9,7 +9,7 @@ import sys
 child = '''
 import json, sys, time
 start = time.perf_counter_ns()
-from picore import crypto
+from picoke import crypto
 loaded = 'eth_account.messages' in sys.modules
 imported = time.perf_counter_ns()
 domain = {'name': 'Agent', 'version': '1', 'chainId': 42161,

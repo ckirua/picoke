@@ -8,7 +8,7 @@ from cpython.unicode cimport PyUnicode_GET_LENGTH
 
 cdef object _cached_decode = pybase64.b64decode
 
-from picore.crypto.base64 import b64decode as _picore_b64decode
+from picoke.crypto.base64 import b64decode as _picoke_b64decode
 
 
 def baseline(text):
@@ -16,7 +16,7 @@ def baseline(text):
     if type(text) is not str:
         if not PyObject_IsInstance(text, str):
             raise TypeError("text must be str")
-        return _picore_b64decode(text)
+        return _picoke_b64decode(text)
     cdef Py_ssize_t size = PyUnicode_GET_LENGTH(text)
     if size >= 4096:
         try:
@@ -25,14 +25,14 @@ def baseline(text):
             return binascii.a2b_base64(text, strict_mode=True)
     if size >= 64:
         return binascii.a2b_base64(text, strict_mode=True)
-    return _picore_b64decode(text)
+    return _picoke_b64decode(text)
 
 
 cdef inline object _candidate(object text, Py_ssize_t threshold, bint cached=False):
     if type(text) is not str:
         if not PyObject_IsInstance(text, str):
             raise TypeError("text must be str")
-        return _picore_b64decode(text)
+        return _picoke_b64decode(text)
     cdef Py_ssize_t size = PyUnicode_GET_LENGTH(text)
     if size >= threshold:
         try:
@@ -43,7 +43,7 @@ cdef inline object _candidate(object text, Py_ssize_t threshold, bint cached=Fal
             return binascii.a2b_base64(text, strict_mode=True)
     if size >= 64:
         return binascii.a2b_base64(text, strict_mode=True)
-    return _picore_b64decode(text)
+    return _picoke_b64decode(text)
 
 
 def cutoff_1024(text):

@@ -1,4 +1,4 @@
-# Agent guidance (picore)
+# Agent guidance (picoke)
 
 Read [`.agents/README.md`](.agents/README.md) for repository orientation and [`docs/PLAN.md`](docs/PLAN.md) for current milestones. Distinguish implemented features from plans and verified results.
 
@@ -10,7 +10,7 @@ Read [`.agents/README.md`](.agents/README.md) for repository orientation and [`d
 
 ## Branches and versions
 
-- Follow the [release-picore skill](.agents/skills/release-picore/SKILL.md) for branch organization, working versions, and release changes. Use one topic branch per independent change; ordinary checkpoints do not bump package versions or authorize a PR, tag, or publication.
+- Follow the [release-picoke skill](.agents/skills/release-picoke/SKILL.md) for branch organization, working versions, and release changes. Use one topic branch per independent change; ordinary checkpoints do not bump package versions or authorize a PR, tag, or publication.
 
 ## Mandatory picop review
 

@@ -2,7 +2,7 @@
 
 import pytest
 
-from picore.crypto.secp256k1 import (
+from picoke.crypto.secp256k1 import (
     _ORDER,
     privkey_to_address,
     privkey_to_pubkey,

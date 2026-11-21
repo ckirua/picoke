@@ -1,8 +1,8 @@
-# picore project plan
+# picoke project plan
 
 ## Intent and status
 
-picore aims to provide practical CPython utilities built on picop. Crypto now covers Base64, Keccak-256, Ed25519, secp256k1, EIP-712 and Bitcoin signed messages; see the [crypto plan](CRYPTO_PLAN.md) for compatibility differences and remaining verification. The [legacy utility inventory](LEGACY_IDEAS.md) identifies further candidates. Picop is the low-level base, not a catalog to copy.
+picoke aims to provide practical Python utilities built on picop. Crypto now covers Base64, Keccak-256, Ed25519, secp256k1, EIP-712 and Bitcoin signed messages; see the [crypto plan](CRYPTO_PLAN.md) for compatibility differences and remaining verification. The [legacy utility inventory](LEGACY_IDEAS.md) identifies further candidates. Picop is the low-level base, not a catalog to copy.
 
 ## Compatibility target
 
@@ -28,7 +28,7 @@ picore aims to provide practical CPython utilities built on picop. Crypto now co
 - Select additional features by concrete need; define their behavior, dependencies and resource lifetime before implementation.
 - Measure representative workloads before claiming a performance benefit, and consult picop's public API and safety constraints when a measured use justifies it.
 - Document public APIs and limitations; test installed artifacts rather than only the source tree.
-- `picore.ratelimit.TokenBucket` delivers asyncio token-bucket limiting with weighted requests, FIFO ordering, and cancellation without debit. Its Cython implementation uses picop's native monotonic clock; see the [benchmark results](../bench/README.md#cython-implementation). Keep this API independent of future networking utilities.
+- `picoke.ratelimit.TokenBucket` delivers asyncio token-bucket limiting with weighted requests, FIFO ordering, and cancellation without debit. Its Cython implementation uses picop's native monotonic clock; see the [benchmark results](../bench/README.md#cython-implementation). Keep this API independent of future networking utilities.
 
 ### 4. Harden and prepare a release
 
@@ -43,4 +43,4 @@ picore aims to provide practical CPython utilities built on picop. Crypto now co
 - Project license, publishing target, and publishing configuration.
 - Which free-threaded configurations can be supported and verified.
 
-Update this plan as decisions are made; mark work complete only with evidence. Picop's existing trackers, benchmark numbers, and release status do not establish picore's.
+Update this plan as decisions are made; mark work complete only with evidence. Picop's existing trackers, benchmark numbers, and release status do not establish picoke's.

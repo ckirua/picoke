@@ -16,7 +16,7 @@ import sys
 import time
 from pathlib import Path
 
-BACKENDS = ("attr", "cached", "vector", "picore", "pybase64")
+BACKENDS = ("attr", "cached", "vector", "picoke", "pybase64")
 DEFAULT_SIZES = (8, 3072, 3073, 3074, 65536, 1048576)
 
 
@@ -24,7 +24,7 @@ def _worker(request):
     import base64
     import importlib.metadata
     import pybase64
-    import picore.crypto.base64 as picore_base64
+    import picoke.crypto.base64 as picoke_base64
 
     import sys
     sys.path.insert(0, request["candidate_root"])
@@ -33,7 +33,7 @@ def _worker(request):
         "attr": candidate.b64decode_attr,
         "cached": candidate.b64decode_cached,
         "vector": candidate.b64decode_vector,
-        "picore": picore_base64.b64decode,
+        "picoke": picoke_base64.b64decode,
         "pybase64": lambda text: pybase64.b64decode(text, validate=True),
     }
     def outcome(function, value):
@@ -70,7 +70,7 @@ def _worker(request):
     texts["wrong-type"] = b"Zm9v"
     for label, text in texts.items():
         probes[label] = {name: outcome(function, text) for name, function in functions.items()}
-    parity = {label: all(values[name] == values["picore"] for name in ("attr", "cached", "vector"))
+    parity = {label: all(values[name] == values["picoke"] for name in ("attr", "cached", "vector"))
               for label, values in probes.items()}
     result = {
         "probes": probes, "parity": parity,
@@ -78,8 +78,8 @@ def _worker(request):
                         "platform": platform.platform(), "machine": platform.machine(),
                         "affinity": sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None,
                         "pybase64_version": importlib.metadata.version("pybase64"),
-                        "picore_module": picore_base64.__file__, "candidate_module": candidate.__file__,
-                        "picore_sha256": hashlib.sha256(Path(picore_base64.__file__).read_bytes()).hexdigest(),
+                        "picoke_module": picoke_base64.__file__, "candidate_module": candidate.__file__,
+                        "picoke_sha256": hashlib.sha256(Path(picoke_base64.__file__).read_bytes()).hexdigest(),
                         "candidate_sha256": hashlib.sha256(Path(candidate.__file__).read_bytes()).hexdigest(),
                         "pybase64_simd": pybase64._pybase64._get_simd_name(pybase64._pybase64._get_simd_path())},
     }
@@ -90,7 +90,7 @@ def _worker(request):
             text = base64.b64encode(payload).decode("ascii")
             name = request["backend"]
             function = functions[name]
-            expected = functions["picore"](text)
+            expected = functions["picoke"](text)
             if type(expected) is not bytes or function(text) != expected:
                 raise RuntimeError(f"Non-equivalent output: {name}, {size}")
             key = f"{size}/{name}"

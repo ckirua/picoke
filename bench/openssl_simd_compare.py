@@ -1,4 +1,4 @@
-"""Compare experimental OpenSSL SIMD Base64 wrappers with picore and binascii.
+"""Compare experimental OpenSSL SIMD Base64 wrappers with picoke and binascii.
 
 Example:
   python bench/openssl_simd_compare.py --python /path/to/python \
@@ -27,7 +27,7 @@ from pathlib import Path
 OPENSSL_CAPS_SCALAR = ":~0x20:~0x0:~0x0:~0x0"
 
 BACKENDS = ("openssl", "openssl_memchr", "openssl_scalar",
-            "openssl_memchr_scalar", "picore", "binascii")
+            "openssl_memchr_scalar", "picoke", "binascii")
 DEFAULT_SIZES = (3072, 65536, 1048576, 8388608)
 
 
@@ -124,8 +124,8 @@ def _load(req):
             raise RuntimeError(f"Provider wrapper escaped requested root: {path}")
         return module.b64decode_attr, {"module": str(path),
                                        "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
-    if req["backend"] == "picore":
-        module = importlib.import_module("picore.crypto.base64")
+    if req["backend"] == "picoke":
+        module = importlib.import_module("picoke.crypto.base64")
         path = Path(module.__file__).resolve()
         return module.b64decode, {"module": str(path),
                                   "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
@@ -138,7 +138,7 @@ def _worker(req):
     reference = _checks(_stdlib_decode)
     differences = {key: {"actual": value, "expected": reference.get(key)}
                    for key, value in checks.items() if value != reference.get(key)}
-    if req["backend"] == "picore":
+    if req["backend"] == "picoke":
         fn(base64.b64encode(b"x" * 4096).decode("ascii"))
     cpu = platform.processor()
     cpuinfo = Path("/proc/cpuinfo")
@@ -219,7 +219,7 @@ def main():
     parser.add_argument("--candidate-root", required=True, help="directory containing _openssl_simd_candidate extension")
     parser.add_argument("--openssl-libdir", required=True, help="directory containing candidate's libcrypto")
     parser.add_argument("--wrapper-root", help="directory containing the compiled pybase64 wrapper candidate")
-    parser.add_argument("--backends", nargs="+", help="subset of backends, including picore and binascii")
+    parser.add_argument("--backends", nargs="+", help="subset of backends, including picoke and binascii")
     parser.add_argument("--samples", type=int, default=7)
     parser.add_argument("--sizes", type=int, nargs="+", default=DEFAULT_SIZES, metavar="DECODED_BYTES")
     parser.add_argument("--json-output", type=Path)
@@ -233,9 +233,9 @@ def main():
         args.wrapper_root = str(Path(args.wrapper_root).resolve())
     allowed = BACKENDS + (("pybase64_wrapper",) if args.wrapper_root else ())
     backends = tuple(args.backends) if args.backends else allowed
-    if (len(set(backends)) != len(backends) or not {"picore", "binascii"} <= set(backends)
+    if (len(set(backends)) != len(backends) or not {"picoke", "binascii"} <= set(backends)
             or not set(backends) <= set(allowed)):
-        parser.error("backends must be unique supported names and include picore and binascii")
+        parser.error("backends must be unique supported names and include picoke and binascii")
     preflight = {b: _run(args, b, "check") for b in backends}
     reference = preflight["binascii"]["checks"]
     report = {"configuration": {"python": args.python, "candidate_root": args.candidate_root,
@@ -271,12 +271,12 @@ def main():
             values = [r["results"][backend][key]["ns_per_call"] for r in report["rounds"]]
             per_backend[backend] = {"mean_ns": statistics.mean(values), "stdev_ns": statistics.stdev(values),
                                     "samples_ns": values}
-        ratios = {b: per_backend[b]["mean_ns"] / per_backend["picore"]["mean_ns"]
-                  for b in backends if b != "picore"}
+        ratios = {b: per_backend[b]["mean_ns"] / per_backend["picoke"]["mean_ns"]
+                  for b in backends if b != "picoke"}
         paired_ratios = {
             b: [row["results"][b][key]["ns_per_call"] /
-                row["results"]["picore"][key]["ns_per_call"] for row in report["rounds"]]
-            for b in backends if b != "picore"
+                row["results"]["picoke"][key]["ns_per_call"] for row in report["rounds"]]
+            for b in backends if b != "picoke"
         }
         report["summary"][key] = {"backends": per_backend, "openssl_over": ratios,
                                   "paired_ratios": paired_ratios}

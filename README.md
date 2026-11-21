@@ -1,6 +1,7 @@
-# picore
+# picoke
 
-picore provides practical Python utilities. Its six Cython crypto extensions cover Base64, Keccak-256, Ed25519, recoverable secp256k1, EIP-712, and Bitcoin signed messages. The extensions use the CPython C API where needed and delegate underlying operations to OpenSSL libcrypto, pybase64, the standard library, PyCryptodome, btclib-secp256k1, and eth-account. [picop](https://github.com/ckirua/picop) is a runtime dependency. No independent security audit is implied.
+picoke provides practical Python utilities. Its six Cython crypto extensions cover Base64, Keccak-256, Ed25519, recoverable secp256k1, EIP-712, and Bitcoin signed messages. The extensions use the CPython C API where needed and delegate underlying operations to OpenSSL libcrypto, pybase64, the standard library, PyCryptodome, btclib-secp256k1, and eth-account. [picop](https://github.com/ckirua/picop) is a runtime dependency. No independent security audit is implied.
+
 
 ## Installation
 
@@ -26,7 +27,7 @@ claimed. There is no pure-Python fallback for the crypto extensions.
 ## Cryptography
 
 ```python
-from picore.crypto import (
+from picoke.crypto import (
     b64decode, b64encode, ed25519_public_key, ed25519_sign,
     ed25519_verify, keccak256,
 )
@@ -51,7 +52,7 @@ available, and PyCryptodome otherwise, including for bytes subclasses.
 ### secp256k1 and Bitcoin messages
 
 ```python
-from picore.crypto import (
+from picoke.crypto import (
     bip137_sign_message, bip137_verify_message, privkey_to_address,
     privkey_to_pubkey, recover_pubkey, sign_recoverable,
 )
@@ -66,20 +67,20 @@ assert bip137_verify_message(message, signature, public_key)
 
 `sign_recoverable(private_key, digest)` accepts a 32-byte digest and returns `(r, s, v)` with `v = 27 + recovery_id`; `recover_pubkey(digest, r, s, recovery_id)` accepts IDs 0–3. Bitcoin signing accepts the `address_type` keyword: `p2pkh-uncompressed` (default), `p2pkh`, `p2sh-p2wpkh`, or `p2wpkh`. Verification checks the recovered public key and header/key compression; it does **not** validate a Bitcoin address or prove that the header matches an address.
 
-Bitcoin messages use the standard framed, double-SHA-256 digest. This deliberately differs from the legacy function of the same name, which hashes raw input once. Legacy Ethereum addresses also differ: legacy hashed the `0x04` SEC prefix; picore hashes the 64-byte coordinates as Ethereum requires.
+Bitcoin messages use the standard framed, double-SHA-256 digest. This deliberately differs from the legacy function of the same name, which hashes raw input once. Legacy Ethereum addresses also differ: legacy hashed the `0x04` SEC prefix; picoke hashes the 64-byte coordinates as Ethereum requires.
 
 ### EIP-712
 
 `eip712_hash_full_message(full_message)` hashes an EIP-712 envelope with `types`, `primaryType`, `domain` and `message`; `eip712_hash_agent_message(domain, source, connection_id)` uses the legacy Agent schema but requires exactly 32 bytes for `connection_id`. Array values may be lists or tuples. `EIP712Domain` fields must be unique and in canonical order (`name`, `version`, `chainId`, `verifyingContract`, `salt`, omitting absent fields). Canonical Agent inputs use a fixed-schema Cython encoder; other Agent inputs and generic envelopes use eth-account. Mutually recursive type graphs that eth-account cannot resolve remain unsupported. Check the typed data and authenticate the domain before signing: a digest alone does not establish trust.
 
-`eth-account` loads on the first call that needs the generic encoder, after picore validates the input. Importing `picore.crypto` or hashing a canonical Agent message does not load it.
+`eth-account` loads on the first call that needs the generic encoder, after picoke validates the input. Importing `picoke.crypto` or hashing a canonical Agent message does not load it.
 
-`eth-account` currently constrains PyCryptodome to the 3.x series via `eth-keyfile`; picore therefore requires PyCryptodome 3.24.1 or newer, below 4. This increases the dependency footprint and differs from the earlier 4.5 baseline; see the [benchmark notes](bench/README.md).
+`eth-account` currently constrains PyCryptodome to the 3.x series via `eth-keyfile`; picoke therefore requires PyCryptodome 3.24.1 or newer, below 4. This increases the dependency footprint and differs from the earlier 4.5 baseline; see the [benchmark notes](bench/README.md).
 
 ## Rate limiting
 
 ```python
-from picore.ratelimit import TokenBucket
+from picoke.ratelimit import TokenBucket
 
 # Allow a burst of 20 tokens, then refill continuously at 10 tokens per second.
 bucket = TokenBucket(20, refill_amount=10)
@@ -94,7 +95,7 @@ full and uses a monotonic clock. Constructor settings are exact `int` values in
 Requests are served FIFO, so a large head request can delay smaller ones.
 Cancellation while waiting does not consume tokens; use `asyncio.timeout()` to
 bound a wait. Construct the bucket anywhere, but use it from one asyncio event
-loop only. Importing `picore.ratelimit` does not load the crypto providers.
+loop only. Importing `picoke.ratelimit` does not load the crypto providers.
 
 The Cython implementation uses picop's native nanosecond clock and fixed-width
 arithmetic when scaled capacity fits in 64 bits. Larger settings retain exact

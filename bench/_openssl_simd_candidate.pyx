@@ -124,7 +124,7 @@ def b64decode_memchr(text: str) -> bytes:
 
 
 def b64decode(text: str) -> bytes:
-    """Strictly decode standard Base64, matching picore's public contract."""
+    """Strictly decode standard Base64, matching picoke's public contract."""
     if type(text) is str:
         return _decode_exact(text)
     if not PyObject_IsInstance(text, str):
@@ -134,5 +134,5 @@ def b64decode(text: str) -> bytes:
 
 
 def b64decode_ascii(text: str) -> bytes:
-    """Strict decoding alias retained for the public picore API."""
+    """Strict decoding alias retained for the public picoke API."""
     return b64decode(text)

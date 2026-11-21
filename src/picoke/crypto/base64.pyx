@@ -27,7 +27,7 @@ cdef extern from "openssl/evp.h":
 cdef extern from *:
     """
     /* Compact ASCII only, with a nonempty multiple of four bytes. */
-    static int picore_decode_quartets(const unsigned char *src, Py_ssize_t n,
+    static int picoke_decode_quartets(const unsigned char *src, Py_ssize_t n,
                                      int pad, unsigned char *out) {
         static const unsigned char sextet[128] = {
             255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
@@ -58,7 +58,7 @@ cdef extern from *:
         return 1;
     }
     """
-    bint picore_decode_quartets(const unsigned char *, Py_ssize_t, int, unsigned char *) noexcept
+    bint picoke_decode_quartets(const unsigned char *, Py_ssize_t, int, unsigned char *) noexcept
 
 
 cdef object _encode_exact(bytes data, bint ascii_result):
@@ -142,7 +142,7 @@ cdef object _decode_exact(object text):
     out = <unsigned char *>PyBytes_AS_STRING(result)
     # No intermediate pad bytes or second validation pass. Delegate unusual
     # input to binascii so its version-specific strict error policy stays intact.
-    if not picore_decode_quartets(source, size, padding, out):
+    if not picoke_decode_quartets(source, size, padding, out):
         return binascii.a2b_base64(text, strict_mode=True)
     return result
 

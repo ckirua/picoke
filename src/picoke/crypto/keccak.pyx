@@ -22,7 +22,7 @@ cdef extern from *:
     """
     #include <openssl/evp.h>
     #include <string.h>
-    static int picore_digest_keccak256(const EVP_MD *md, const char *data,
+    static int picoke_digest_keccak256(const EVP_MD *md, const char *data,
                                        size_t size, char *out) {
         unsigned char digest[EVP_MAX_MD_SIZE];
         unsigned int written = 0;
@@ -31,7 +31,7 @@ cdef extern from *:
         memcpy(out, digest, 32);
         return 1;
     }
-    static EVP_MD *picore_fetch_keccak256(void) {
+    static EVP_MD *picoke_fetch_keccak256(void) {
     #if OPENSSL_VERSION_NUMBER >= 0x30000000L && !defined(LIBRESSL_VERSION_NUMBER)
         EVP_MD *md = EVP_MD_fetch(NULL, "KECCAK-256", NULL);
         if (md != NULL && EVP_MD_get_size(md) != 32) {
@@ -43,7 +43,7 @@ cdef extern from *:
         return NULL;
     #endif
     }
-    static void picore_free_keccak256(EVP_MD *md) {
+    static void picoke_free_keccak256(EVP_MD *md) {
     #if OPENSSL_VERSION_NUMBER >= 0x30000000L && !defined(LIBRESSL_VERSION_NUMBER)
         EVP_MD_free(md);
     #else
@@ -51,9 +51,9 @@ cdef extern from *:
     #endif
     }
     """
-    EVP_MD *picore_fetch_keccak256() noexcept
-    void picore_free_keccak256(EVP_MD *) noexcept
-    int picore_digest_keccak256(const EVP_MD *, const char *, size_t, char *) noexcept
+    EVP_MD *picoke_fetch_keccak256() noexcept
+    void picoke_free_keccak256(EVP_MD *) noexcept
+    int picoke_digest_keccak256(const EVP_MD *, const char *, size_t, char *) noexcept
 
 
 cdef inline void _restore_error_queue(int marked) noexcept:
@@ -68,11 +68,11 @@ cdef class _DigestMethod:
 
     def __cinit__(self):
         cdef int marked = ERR_set_mark()
-        self.md = picore_fetch_keccak256()
+        self.md = picoke_fetch_keccak256()
         _restore_error_queue(marked)
 
     def __dealloc__(self):
-        picore_free_keccak256(self.md)
+        picoke_free_keccak256(self.md)
 
 
 # Cache only the immutable algorithm handle, never a digest context or input.
@@ -90,7 +90,7 @@ def keccak256(data: bytes) -> bytes:
             _method = _DigestMethod()
         if _method.md != NULL:
             marked = ERR_set_mark()
-            ok = picore_digest_keccak256(_method.md, PyBytes_AS_STRING(data),
+            ok = picoke_digest_keccak256(_method.md, PyBytes_AS_STRING(data),
                                         PyBytes_GET_SIZE(data), result)
             _restore_error_queue(marked)
             if ok:

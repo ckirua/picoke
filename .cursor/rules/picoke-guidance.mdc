@@ -1,9 +1,9 @@
 ---
-description: picore project guidance and picop skill discovery
+description: picoke project guidance and picop skill discovery
 alwaysApply: true
 ---
 Follow [AGENTS.md](../../AGENTS.md) and [`.agents/README.md`](../../.agents/README.md), including Python 3.14+ support, legacy-first investigation, and evidence-based benchmarks and plans.
 
 Follow the [mandatory picop review](../../AGENTS.md#mandatory-picop-review), including for delegated work. Read [use-picop](../skills/use-picop/SKILL.md) before implementing or reviewing Python, Cython, or CPython C extension code. Use picop wherever it measurably improves performance without changing behavior, regardless of call frequency. Record **KEEP**, **SKIP**, or **UNMEASURED**.
 
-Follow [release-picore](../skills/release-picore/SKILL.md) for branch management, working versions, and release preparation. Never publish or tag as part of ordinary development.
+Follow [release-picoke](../skills/release-picoke/SKILL.md) for branch management, working versions, and release preparation. Never publish or tag as part of ordinary development.

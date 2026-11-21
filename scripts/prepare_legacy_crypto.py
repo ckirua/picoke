@@ -55,7 +55,7 @@ def fetch_snapshot(destination: Path, archive_location: str, source_root: str, p
         archive_file_context = archive_path.open("rb")
     else:
         request = urllib.request.Request(
-            archive_location, headers={"User-Agent": "picore-legacy-bench"}
+            archive_location, headers={"User-Agent": "picoke-legacy-bench"}
         )
         archive_file_context = urllib.request.urlopen(request)
     with archive_file_context as downloaded, tempfile.TemporaryFile() as archive_file:
