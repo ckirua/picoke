@@ -1,0 +1,671 @@
+ENVIRONMENT candidate: {"affinity": [4], "cache_tag": "cpython-314", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": ["/usr/lib/x86_64-linux-gnu/libcrypto.so.3"], "origins": {"picore.crypto.base64": {"backend": "candidate", "path": "/tmp/picore-threshold-new/314/picore/crypto/base64.cpython-314-x86_64-linux-gnu.so", "sha256": "07ed825a2d986cc44f07df75702a79046695acbfe12b4118faf7df861d200e2c", "source": "compiled extension"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0", "pybase64": "1.5.2"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pybase64_simd": {"active_path": "AVX2", "origin": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/pybase64/_pybase64.cpython-314-x86_64-linux-gnu.so"}, "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+ENVIRONMENT previous: {"affinity": [4], "cache_tag": "cpython-314", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": ["/usr/lib/x86_64-linux-gnu/libcrypto.so.3"], "origins": {"picore.crypto.base64": {"backend": "previous", "path": "/tmp/picore-threshold-prior/314/picore/crypto/base64.cpython-314-x86_64-linux-gnu.so", "sha256": "44e8c4dc810923a5dad8b2fc7ac6be82edf444f21cd5a3cecb2929157c338276", "source": "compiled extension"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0", "pybase64": "1.5.2"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pybase64_simd": {"active_path": "AVX2", "origin": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/lib/python3.14/site-packages/pybase64/_pybase64.cpython-314-x86_64-linux-gnu.so"}, "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+ENVIRONMENT legacy: {"affinity": [4], "cache_tag": "cpython-314", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": ["/usr/lib/x86_64-linux-gnu/libcrypto.so.3"], "origins": {"legacy_baseline.crypto.encoding.base64": {"backend": "legacy", "path": "/tmp/picore-full314.3VdPEH9L/crypto/legacy_baseline/crypto/encoding/base64.cpython-314-x86_64-linux-gnu.so", "sha256": "56b814a2464bb86fb92608f44f8cf89324a456175055423fe887b23759a30437", "source": "compiled extension"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0", "pybase64": "1.5.2"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pybase64_simd": null, "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "binary/only-NUL/b64decode", "strict_stdlib": {"length": 1, "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "binary/only-NUL/b64decode_ascii", "strict_stdlib": {"length": 1, "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NUL/b64decode", "strict_stdlib": {"length": 2, "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NUL/b64decode_ascii", "strict_stdlib": {"length": 2, "sha256": "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NULs/b64decode", "strict_stdlib": {"length": 6, "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", "type": "bytes"}, "backend": "legacy", "probe": "binary/terminal-NULs/b64decode_ascii", "strict_stdlib": {"length": 6, "sha256": "dd0b251b2bf91037a1e4fc8416a24ae00bcb9a8c252dc7e2361f2fc015f51c16", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'!'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'!'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'===='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'===='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'=Zg=='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'=Zg=='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Leading padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'A'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'A'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Invalid base64-encoded string: number of data characters (1) cannot be 1 more than a multiple of 4"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Z g=='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Z g=='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Incorrect padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zg==\\n'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zg==\\n'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==\\x00'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==\\x00'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Only base64 data is allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==x'/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess data after padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zg==x'/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess data after padding"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 2, "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zh=='/b64decode", "strict_stdlib": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 2, "sha256": "f0d5b4d85390981d713e2a89c5716f604631d9f24c25666866041dd80e048aca", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zh=='/b64decode_ascii", "strict_stdlib": {"length": 1, "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9='/b64decode", "strict_stdlib": {"length": 2, "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "3cdb1aef9559c06e047ed768e884f536626825a0be7faff65ea025cf2a1f267b", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9='/b64decode_ascii", "strict_stdlib": {"length": 2, "sha256": "9c3aee7110b787f0fb5f81633a36392bd277ea945d44c874a9a23601aefe20cf", "type": "bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zm9v='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.ValueError", "message": "invalid base64"}, "backend": "legacy", "probe": "syntax/'Zm9v='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9v===='/b64decode", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"length": 3, "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae", "type": "bytes"}, "backend": "legacy", "probe": "syntax/'Zm9v===='/b64decode_ascii", "strict_stdlib": {"error": "binascii.Error", "message": "Excess padding not allowed"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\u00e9'/b64decode", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\xe9' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\u00e9'/b64decode_ascii", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\ud83d\ude00'/b64decode", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.UnicodeEncodeError", "message": "'ascii' codec can't encode character '\\U0001f600' in position 0: ordinal not in range(128)"}, "backend": "legacy", "probe": "syntax/'\ud83d\ude00'/b64decode_ascii", "strict_stdlib": {"error": "builtins.ValueError", "message": "string argument should contain only ASCII characters"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got str)"}, "backend": "legacy", "probe": "type/'abc'/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got str)"}, "backend": "legacy", "probe": "type/'abc'/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got int)"}, "backend": "legacy", "probe": "type/3/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got int)"}, "backend": "legacy", "probe": "type/3/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got int)"}, "backend": "legacy", "probe": "type/3/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got int)"}, "backend": "legacy", "probe": "type/3/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.AttributeError", "message": "'NoneType' object has no attribute 'encode'"}, "backend": "legacy", "probe": "type/None/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.AttributeError", "message": "'NoneType' object has no attribute 'encode'"}, "backend": "legacy", "probe": "type/None/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"not_run": "legacy None encode may reach unchecked native bytes helpers"}, "backend": "legacy", "probe": "type/None/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"not_run": "legacy None encode may reach unchecked native bytes helpers"}, "backend": "legacy", "probe": "type/None/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytes)"}, "backend": "legacy", "probe": "type/b'Zg=='/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytes)"}, "backend": "legacy", "probe": "type/b'Zg=='/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'Zg==')/b64decode", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'text' has incorrect type (expected str, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'Zg==')/b64decode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "text must be str"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'abc')/b64encode", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+BEHAVIOR DIFFERENCE {"actual": {"error": "builtins.TypeError", "message": "Argument 'data' has incorrect type (expected bytes, got bytearray)"}, "backend": "legacy", "probe": "type/bytearray(b'abc')/b64encode_ascii", "strict_stdlib": {"error": "builtins.TypeError", "message": "data must be bytes"}}
+ENVIRONMENT stdlib: {"affinity": [4], "cache_tag": "cpython-314", "clock": {"adjustable": false, "implementation": "clock_gettime(CLOCK_MONOTONIC)", "monotonic": true, "resolution": 1e-09}, "config": {"CC": "cc -pthread", "CFLAGS": "-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC", "CONFIG_ARGS": "'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--with-tail-call-interp' 'MODULE_BUILDTYPE=static' '--enable-loadable-sqlite-extensions' '--enable-static-libpython-for-interpreter' '--enable-shared' '--with-mimalloc' '--enable-optimizations' '--enable-bolt' '--enable-experimental-jit=yes-off' '--with-lto' '--with-build-python=/tools/host/bin/python3.14' 'ac_cv_func_explicit_bzero=no' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4 --ignore test.test_bytes.BytesTest.test_from_format' 'BOLT_COMMON_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.*' 'BOLT_APPLY_FLAGS=-update-debug-sections -skip-funcs=RC4_options/1,sha256_update/.*,sha512_update/.*,PyBlake2_blake2b_compress/.*,PyBlake2_blake2s_compress/.*,update_block.* -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-strategy=cdsplit -icf=safe -inline-all -split-eh -reorder-functions-use-hot-size -peepholes=none -jump-tables=aggressive -inline-ap -indirect-call-promotion=all -dyno-stats -frame-opt=hot'", "Py_GIL_DISABLED": 0}, "cpu": "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", "cpu_count": 8, "environment": {"PYTHONUNBUFFERED": "1"}, "evp_provider_version": "not resolved; mapped library paths reported separately", "executable": "/tmp/picore-cython-artifacts.ivNMGH6a/py314/check/bin/python", "gil_enabled": true, "implementation": "CPython", "machine": "x86_64", "mapped_crypto_library_paths": [], "origins": {"base64": {"backend": "stdlib", "path": "/home/kirua/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/base64.py", "source": "Python standard library"}, "binascii": {"backend": "stdlib", "path": "built-in", "source": "Python standard library"}}, "package_metadata_versions": {"Cython": "3.3.1", "picop": "3.13.0", "pybase64": "1.5.2"}, "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43", "pybase64_simd": null, "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]", "ssl_module_openssl_version": "OpenSSL 3.5.8 25 Aug 2026"}
+METHOD: fresh process per backend per round; forward/reverse alternating paired order; adaptive batches; all correctness probes precede timing. Both decoders take str, return bytes.
+LIMITATIONS: Python-call microbenchmark, GC default, no automatic CPU pinning or frequency control; caps may yield short batches; process samples are not statistical independence guarantees. stdlib includes public type guards and ASCII conversion. Legacy behavior differences are not parity. Terminal-NUL data is correctness-only. No overall KEEP follows from this benchmark alone.
+Round 1/9: candidate -> previous -> legacy -> stdlib
+Round 2/9: stdlib -> legacy -> previous -> candidate
+Round 3/9: candidate -> previous -> legacy -> stdlib
+Round 4/9: stdlib -> legacy -> previous -> candidate
+Round 5/9: candidate -> previous -> legacy -> stdlib
+Round 6/9: stdlib -> legacy -> previous -> candidate
+Round 7/9: candidate -> previous -> legacy -> stdlib
+Round 8/9: stdlib -> legacy -> previous -> candidate
+Round 9/9: candidate -> previous -> legacy -> stdlib
+
+b64encode/12-byte
+  candidate mean=140.9 ns stdev=25.6 range=[105.3, 173.2]
+  previous  mean=149.9 ns stdev=34.1 range=[93.0, 209.6]
+  legacy    mean=174.6 ns stdev=28.0 range=[135.6, 228.2]
+  stdlib    mean=443.6 ns stdev=112.4 range=[269.1, 556.7]
+  candidate/previous: means=0.9400; paired mean=0.9774 stdev=0.2277 range=[0.5024, 1.2696]
+  candidate/legacy: means=0.8070; paired mean=0.8292 stdev=0.2232 range=[0.5154, 1.2771]
+  candidate/stdlib: means=0.3175; paired mean=0.3362 stdev=0.0997 range=[0.2195, 0.4856]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/12-byte
+  candidate mean=165.5 ns stdev=53.2 range=[110.5, 297.8]
+  previous  mean=158.8 ns stdev=30.0 range=[111.1, 191.2]
+  legacy    mean=234.1 ns stdev=67.8 range=[95.5, 298.7]
+  stdlib    mean=629.4 ns stdev=122.8 range=[501.9, 837.5]
+  candidate/previous: means=1.0424; paired mean=1.0760 stdev=0.3610 range=[0.6253, 1.6704]
+  candidate/legacy: means=0.7072; paired mean=0.7776 stdev=0.3425 range=[0.3864, 1.4842]
+  candidate/stdlib: means=0.2630; paired mean=0.2712 stdev=0.1044 range=[0.1809, 0.5279]
+  SKIP / no repeatable >=5% win established
+
+b64decode/12-byte
+  candidate mean=263.8 ns stdev=51.4 range=[165.4, 345.3]
+  previous  mean=269.5 ns stdev=14.9 range=[240.1, 290.5]
+  legacy    mean=251.4 ns stdev=76.0 range=[171.3, 373.8]
+  stdlib    mean=684.2 ns stdev=112.0 range=[522.3, 836.8]
+  candidate/previous: means=0.9790; paired mean=0.9770 stdev=0.1805 range=[0.6890, 1.3308]
+  candidate/legacy: means=1.0493; paired mean=1.1386 stdev=0.3716 range=[0.4611, 1.5775]
+  candidate/stdlib: means=0.3856; paired mean=0.3939 stdev=0.0882 range=[0.2030, 0.5173]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/12-byte
+  candidate mean=332.9 ns stdev=56.3 range=[245.2, 404.1]
+  previous  mean=286.7 ns stdev=66.4 range=[165.9, 379.3]
+  legacy    mean=271.9 ns stdev=26.6 range=[232.9, 313.4]
+  stdlib    mean=823.5 ns stdev=228.5 range=[520.1, 1276.4]
+  candidate/previous: means=1.1612; paired mean=1.2103 stdev=0.2928 range=[0.7814, 1.7137]
+  candidate/legacy: means=1.2243; paired mean=1.2273 stdev=0.1931 range=[0.9497, 1.4880]
+  candidate/stdlib: means=0.4042; paired mean=0.4470 stdev=0.1844 range=[0.1921, 0.7395]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64encode/1KiB
+  candidate mean=1546.6 ns stdev=244.6 range=[1296.7, 2133.8]
+  previous  mean=1490.7 ns stdev=365.5 range=[779.5, 2213.3]
+  legacy    mean=1632.1 ns stdev=215.9 range=[1310.4, 2054.0]
+  stdlib    mean=3096.2 ns stdev=782.8 range=[1965.4, 4058.9]
+  candidate/previous: means=1.0376; paired mean=1.0964 stdev=0.3173 range=[0.6658, 1.7521]
+  candidate/legacy: means=0.9476; paired mean=0.9600 stdev=0.1781 range=[0.7353, 1.2532]
+  candidate/stdlib: means=0.4995; paired mean=0.5285 stdev=0.1458 range=[0.3487, 0.7113]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1KiB
+  candidate mean=1710.5 ns stdev=897.7 range=[906.4, 3747.5]
+  previous  mean=1477.1 ns stdev=258.1 range=[1173.1, 1894.8]
+  legacy    mean=2304.1 ns stdev=780.2 range=[1281.5, 3990.8]
+  stdlib    mean=4022.5 ns stdev=586.7 range=[2752.7, 4477.2]
+  candidate/previous: means=1.1580; paired mean=1.1842 stdev=0.6759 range=[0.6258, 2.8281]
+  candidate/legacy: means=0.7424; paired mean=0.7971 stdev=0.4158 range=[0.3838, 1.5095]
+  candidate/stdlib: means=0.4252; paired mean=0.4295 stdev=0.2151 range=[0.2025, 0.9160]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode/1KiB
+  candidate mean=2838.4 ns stdev=549.2 range=[1719.6, 3615.5]
+  previous  mean=3158.8 ns stdev=353.6 range=[2719.8, 3732.8]
+  legacy    mean=2604.4 ns stdev=699.9 range=[1973.7, 4241.7]
+  stdlib    mean=7366.2 ns stdev=2189.6 range=[3938.2, 10461.8]
+  candidate/previous: means=0.8986; paired mean=0.9047 stdev=0.2001 range=[0.6201, 1.3293]
+  candidate/legacy: means=1.0898; paired mean=1.1650 stdev=0.3949 range=[0.5700, 1.7865]
+  candidate/stdlib: means=0.3853; paired mean=0.4144 stdev=0.1446 range=[0.2824, 0.7377]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/1KiB
+  candidate mean=2830.3 ns stdev=384.3 range=[1858.7, 3048.6]
+  previous  mean=2814.1 ns stdev=673.5 range=[1973.7, 4027.0]
+  legacy    mean=2815.6 ns stdev=1027.4 range=[1779.8, 4827.8]
+  stdlib    mean=9024.8 ns stdev=1714.1 range=[5823.5, 10951.2]
+  candidate/previous: means=1.0058; paired mean=1.0609 stdev=0.3156 range=[0.7163, 1.5183]
+  candidate/legacy: means=1.0052; paired mean=1.1037 stdev=0.3698 range=[0.6202, 1.7000]
+  candidate/stdlib: means=0.3136; paired mean=0.3184 stdev=0.0423 range=[0.2693, 0.4051]
+  SKIP / no repeatable >=5% win established
+
+b64encode/1533-byte
+  candidate mean=1849.8 ns stdev=206.9 range=[1446.1, 2201.5]
+  previous  mean=2082.8 ns stdev=497.4 range=[1252.9, 2958.3]
+  legacy    mean=2312.1 ns stdev=143.0 range=[2086.0, 2595.6]
+  stdlib    mean=5127.2 ns stdev=187.2 range=[4948.4, 5570.4]
+  candidate/previous: means=0.8881; paired mean=0.9358 stdev=0.2484 range=[0.5943, 1.4299]
+  candidate/legacy: means=0.8000; paired mean=0.8030 stdev=0.1066 range=[0.6383, 0.9601]
+  candidate/stdlib: means=0.3608; paired mean=0.3613 stdev=0.0441 range=[0.2826, 0.4414]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1533-byte
+  candidate mean=2036.9 ns stdev=206.6 range=[1696.0, 2283.6]
+  previous  mean=1941.5 ns stdev=306.5 range=[1471.6, 2311.2]
+  legacy    mean=2577.2 ns stdev=566.5 range=[1637.4, 3298.8]
+  stdlib    mean=5741.6 ns stdev=438.5 range=[4690.0, 6120.1]
+  candidate/previous: means=1.0492; paired mean=1.0661 stdev=0.1595 range=[0.9112, 1.3897]
+  candidate/legacy: means=0.7904; paired mean=0.8287 stdev=0.2148 range=[0.5929, 1.2408]
+  candidate/stdlib: means=0.3548; paired mean=0.3573 stdev=0.0501 range=[0.2840, 0.4376]
+  SKIP / no repeatable >=5% win established
+
+b64decode/1533-byte
+  candidate mean=3892.5 ns stdev=654.5 range=[2512.8, 4985.5]
+  previous  mean=3836.9 ns stdev=415.2 range=[3369.9, 4477.5]
+  legacy    mean=3110.9 ns stdev=521.8 range=[2465.7, 3906.3]
+  stdlib    mean=12528.2 ns stdev=3437.9 range=[6428.9, 19177.5]
+  candidate/previous: means=1.0145; paired mean=1.0268 stdev=0.2077 range=[0.6244, 1.2437]
+  candidate/legacy: means=1.2512; paired mean=1.2835 stdev=0.2920 range=[0.6974, 1.6704]
+  candidate/stdlib: means=0.3107; paired mean=0.3352 stdev=0.1279 range=[0.1873, 0.6406]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/1533-byte
+  candidate mean=3720.9 ns stdev=315.8 range=[3338.0, 4242.6]
+  previous  mean=3893.9 ns stdev=810.9 range=[2481.4, 4868.1]
+  legacy    mean=3503.1 ns stdev=246.7 range=[2982.2, 3794.4]
+  stdlib    mean=12342.8 ns stdev=3071.8 range=[6850.8, 17215.6]
+  candidate/previous: means=0.9556; paired mean=1.0010 stdev=0.2581 range=[0.6857, 1.4900]
+  candidate/legacy: means=1.0622; paired mean=1.0666 stdev=0.1136 range=[0.9270, 1.2397]
+  candidate/stdlib: means=0.3015; paired mean=0.3258 stdev=0.1195 range=[0.1939, 0.6031]
+  SKIP / no repeatable >=5% win established
+
+b64encode/1534-byte
+  candidate mean=2040.4 ns stdev=344.3 range=[1318.7, 2509.0]
+  previous  mean=1891.9 ns stdev=457.1 range=[1130.7, 2359.5]
+  legacy    mean=2348.7 ns stdev=511.9 range=[1614.2, 3461.9]
+  stdlib    mean=5086.2 ns stdev=232.7 range=[4788.4, 5574.1]
+  candidate/previous: means=1.0785; paired mean=1.1506 stdev=0.3915 range=[0.6660, 1.9617]
+  candidate/legacy: means=0.8687; paired mean=0.9035 stdev=0.2549 range=[0.6269, 1.4153]
+  candidate/stdlib: means=0.4012; paired mean=0.4018 stdev=0.0709 range=[0.2754, 0.5094]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64encode_ascii/1534-byte
+  candidate mean=2087.0 ns stdev=326.2 range=[1388.8, 2615.2]
+  previous  mean=1945.1 ns stdev=293.2 range=[1474.9, 2223.9]
+  legacy    mean=2826.6 ns stdev=185.1 range=[2474.8, 3110.0]
+  stdlib    mean=6142.6 ns stdev=782.4 range=[5165.9, 7948.4]
+  candidate/previous: means=1.0729; paired mean=1.1009 stdev=0.2749 range=[0.7075, 1.6021]
+  candidate/legacy: means=0.7383; paired mean=0.7444 stdev=0.1510 range=[0.4843, 1.0568]
+  candidate/stdlib: means=0.3398; paired mean=0.3427 stdev=0.0599 range=[0.2566, 0.4388]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode/1534-byte
+  candidate mean=1446.9 ns stdev=351.2 range=[766.2, 1758.2]
+  previous  mean=4219.6 ns stdev=264.4 range=[3665.9, 4502.4]
+  legacy    mean=3428.5 ns stdev=283.2 range=[2937.2, 3796.7]
+  stdlib    mean=14157.6 ns stdev=2113.6 range=[12149.5, 19057.7]
+  candidate/previous: means=0.3429; paired mean=0.3441 stdev=0.0863 range=[0.1814, 0.4484]
+  candidate/legacy: means=0.4220; paired mean=0.4214 stdev=0.0991 range=[0.2609, 0.5439]
+  candidate/stdlib: means=0.1022; paired mean=0.1033 stdev=0.0258 range=[0.0521, 0.1336]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/1534-byte
+  candidate mean=1507.6 ns stdev=211.7 range=[1223.4, 1828.7]
+  previous  mean=3962.6 ns stdev=384.8 range=[3314.3, 4473.5]
+  legacy    mean=2887.9 ns stdev=642.8 range=[2079.0, 4100.9]
+  stdlib    mean=12577.8 ns stdev=3677.5 range=[6743.3, 18221.3]
+  candidate/previous: means=0.3804; paired mean=0.3827 stdev=0.0573 range=[0.2799, 0.4609]
+  candidate/legacy: means=0.5220; paired mean=0.5450 stdev=0.1430 range=[0.3673, 0.7811]
+  candidate/stdlib: means=0.1199; paired mean=0.1299 stdev=0.0428 range=[0.0861, 0.2014]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/1535-byte
+  candidate mean=2134.8 ns stdev=197.5 range=[1825.4, 2466.0]
+  previous  mean=2008.1 ns stdev=192.3 range=[1581.1, 2171.7]
+  legacy    mean=2064.6 ns stdev=320.6 range=[1569.0, 2417.3]
+  stdlib    mean=5008.6 ns stdev=695.6 range=[4228.0, 6542.6]
+  candidate/previous: means=1.0631; paired mean=1.0748 stdev=0.1676 range=[0.8606, 1.4266]
+  candidate/legacy: means=1.0340; paired mean=1.0568 stdev=0.1884 range=[0.7551, 1.4024]
+  candidate/stdlib: means=0.4262; paired mean=0.4319 stdev=0.0611 range=[0.3308, 0.5335]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64encode_ascii/1535-byte
+  candidate mean=1953.7 ns stdev=296.1 range=[1420.4, 2266.1]
+  previous  mean=1925.6 ns stdev=371.0 range=[1157.3, 2232.7]
+  legacy    mean=2565.1 ns stdev=521.6 range=[1624.9, 3176.3]
+  stdlib    mean=5473.5 ns stdev=1058.5 range=[3464.1, 6860.5]
+  candidate/previous: means=1.0146; paired mean=1.0730 stdev=0.3773 range=[0.7365, 1.9184]
+  candidate/legacy: means=0.7617; paired mean=0.7987 stdev=0.2519 range=[0.5251, 1.3947]
+  candidate/stdlib: means=0.3569; paired mean=0.3716 stdev=0.1085 range=[0.2349, 0.6265]
+  SKIP / no repeatable >=5% win established
+
+b64decode/1535-byte
+  candidate mean=1410.8 ns stdev=269.4 range=[992.0, 1754.7]
+  previous  mean=3872.1 ns stdev=574.6 range=[2899.0, 4507.3]
+  legacy    mean=3289.3 ns stdev=344.8 range=[2789.0, 3756.1]
+  stdlib    mean=14434.5 ns stdev=5584.2 range=[8998.2, 26157.5]
+  candidate/previous: means=0.3644; paired mean=0.3666 stdev=0.0650 range=[0.2663, 0.4842]
+  candidate/legacy: means=0.4289; paired mean=0.4338 stdev=0.0986 range=[0.2820, 0.5729]
+  candidate/stdlib: means=0.0977; paired mean=0.1063 stdev=0.0331 range=[0.0585, 0.1554]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/1535-byte
+  candidate mean=1615.8 ns stdev=176.0 range=[1279.5, 1763.4]
+  previous  mean=4171.2 ns stdev=780.3 range=[2714.2, 5582.9]
+  legacy    mean=3242.8 ns stdev=550.6 range=[2416.5, 3979.4]
+  stdlib    mean=11962.7 ns stdev=3600.8 range=[5491.0, 15433.3]
+  candidate/previous: means=0.3874; paired mean=0.3957 stdev=0.0599 range=[0.2951, 0.5005]
+  candidate/legacy: means=0.4983; paired mean=0.5161 stdev=0.1308 range=[0.3714, 0.7179]
+  candidate/stdlib: means=0.1351; paired mean=0.1536 stdev=0.0732 range=[0.0855, 0.3137]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/1536-byte
+  candidate mean=2174.1 ns stdev=216.0 range=[1795.7, 2467.9]
+  previous  mean=2326.3 ns stdev=1094.1 range=[1116.7, 5035.7]
+  legacy    mean=2094.0 ns stdev=385.5 range=[1233.6, 2471.9]
+  stdlib    mean=4632.8 ns stdev=849.2 range=[2967.1, 5664.7]
+  candidate/previous: means=0.9346; paired mean=1.0741 stdev=0.4103 range=[0.4284, 1.9511]
+  candidate/legacy: means=1.0383; paired mean=1.0729 stdev=0.2381 range=[0.8726, 1.6195]
+  candidate/stdlib: means=0.4693; paired mean=0.4852 stdev=0.1090 range=[0.3527, 0.6892]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1536-byte
+  candidate mean=2295.8 ns stdev=715.7 range=[1434.2, 3846.4]
+  previous  mean=2142.2 ns stdev=246.2 range=[1823.4, 2455.5]
+  legacy    mean=2792.9 ns stdev=234.9 range=[2334.3, 3095.3]
+  stdlib    mean=6017.4 ns stdev=919.0 range=[4755.4, 8017.0]
+  candidate/previous: means=1.0717; paired mean=1.0577 stdev=0.2391 range=[0.7833, 1.5665]
+  candidate/legacy: means=0.8220; paired mean=0.8189 stdev=0.2306 range=[0.5357, 1.3074]
+  candidate/stdlib: means=0.3815; paired mean=0.3874 stdev=0.1360 range=[0.2467, 0.7088]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode/1536-byte
+  candidate mean=1568.8 ns stdev=561.8 range=[937.7, 2823.5]
+  previous  mean=4222.0 ns stdev=645.7 range=[3491.2, 5726.3]
+  legacy    mean=3255.4 ns stdev=498.1 range=[2651.8, 4149.0]
+  stdlib    mean=14805.0 ns stdev=5874.5 range=[7113.1, 27122.4]
+  candidate/previous: means=0.3716; paired mean=0.3789 stdev=0.1663 range=[0.2574, 0.8088]
+  candidate/legacy: means=0.4819; paired mean=0.4943 stdev=0.2203 range=[0.3096, 1.0460]
+  candidate/stdlib: means=0.1060; paired mean=0.1196 stdev=0.0559 range=[0.0496, 0.2257]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/1536-byte
+  candidate mean=1522.5 ns stdev=310.0 range=[1042.6, 1844.2]
+  previous  mean=3786.0 ns stdev=539.1 range=[2722.3, 4606.9]
+  legacy    mean=3272.6 ns stdev=544.3 range=[2435.6, 4191.8]
+  stdlib    mean=13161.1 ns stdev=3265.3 range=[6867.5, 16793.7]
+  candidate/previous: means=0.4021; paired mean=0.4110 stdev=0.1163 range=[0.2705, 0.6701]
+  candidate/legacy: means=0.4652; paired mean=0.4749 stdev=0.1228 range=[0.3140, 0.7369]
+  candidate/stdlib: means=0.1157; paired mean=0.1236 stdev=0.0418 range=[0.0668, 0.2025]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/1537-byte
+  candidate mean=2139.2 ns stdev=441.0 range=[1235.4, 2692.1]
+  previous  mean=2348.6 ns stdev=462.5 range=[1651.8, 3154.3]
+  legacy    mean=1988.9 ns stdev=346.6 range=[1554.7, 2444.9]
+  stdlib    mean=4880.1 ns stdev=1177.1 range=[2557.2, 6176.2]
+  candidate/previous: means=0.9108; paired mean=0.9531 stdev=0.3345 range=[0.5666, 1.6299]
+  candidate/legacy: means=1.0756; paired mean=1.0883 stdev=0.2311 range=[0.7946, 1.3926]
+  candidate/stdlib: means=0.4384; paired mean=0.4540 stdev=0.1119 range=[0.3080, 0.6839]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1537-byte
+  candidate mean=1996.9 ns stdev=466.5 range=[1268.1, 2563.4]
+  previous  mean=2121.1 ns stdev=239.3 range=[1824.3, 2543.8]
+  legacy    mean=2304.5 ns stdev=487.5 range=[1540.8, 2889.2]
+  stdlib    mean=5331.5 ns stdev=900.0 range=[3814.0, 6399.4]
+  candidate/previous: means=0.9414; paired mean=0.9393 stdev=0.1910 range=[0.6542, 1.1970]
+  candidate/legacy: means=0.8665; paired mean=0.8815 stdev=0.2041 range=[0.5646, 1.2290]
+  candidate/stdlib: means=0.3745; paired mean=0.3779 stdev=0.0726 range=[0.1982, 0.4512]
+  SKIP / no repeatable >=5% win established
+
+b64decode/1537-byte
+  candidate mean=1334.3 ns stdev=255.9 range=[920.9, 1596.8]
+  previous  mean=4125.2 ns stdev=1012.8 range=[2993.9, 6369.9]
+  legacy    mean=3275.6 ns stdev=570.1 range=[1978.7, 3858.9]
+  stdlib    mean=12089.3 ns stdev=2505.4 range=[7000.5, 15357.4]
+  candidate/previous: means=0.3235; paired mean=0.3457 stdev=0.1212 range=[0.1808, 0.5029]
+  candidate/legacy: means=0.4074; paired mean=0.4103 stdev=0.0525 range=[0.2835, 0.4654]
+  candidate/stdlib: means=0.1104; paired mean=0.1144 stdev=0.0291 range=[0.0750, 0.1577]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/1537-byte
+  candidate mean=1369.9 ns stdev=416.3 range=[599.5, 1808.3]
+  previous  mean=4491.7 ns stdev=709.5 range=[3843.7, 6139.8]
+  legacy    mean=3302.5 ns stdev=370.5 range=[2556.5, 3882.4]
+  stdlib    mean=14400.6 ns stdev=3679.1 range=[9491.9, 21254.6]
+  candidate/previous: means=0.3050; paired mean=0.3088 stdev=0.1033 range=[0.1397, 0.4702]
+  candidate/legacy: means=0.4148; paired mean=0.4187 stdev=0.1417 range=[0.2004, 0.6645]
+  candidate/stdlib: means=0.0951; paired mean=0.0988 stdev=0.0391 range=[0.0554, 0.1790]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/1538-byte
+  candidate mean=1918.2 ns stdev=409.2 range=[1213.4, 2265.5]
+  previous  mean=2363.0 ns stdev=293.2 range=[1935.5, 2904.1]
+  legacy    mean=2040.9 ns stdev=341.2 range=[1607.4, 2535.3]
+  stdlib    mean=4798.8 ns stdev=761.0 range=[3666.7, 5897.8]
+  candidate/previous: means=0.8118; paired mean=0.8143 stdev=0.1693 range=[0.5304, 1.0300]
+  candidate/legacy: means=0.9399; paired mean=0.9547 stdev=0.2344 range=[0.6499, 1.2675]
+  candidate/stdlib: means=0.3997; paired mean=0.4028 stdev=0.0892 range=[0.2865, 0.5954]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/1538-byte
+  candidate mean=1935.3 ns stdev=337.5 range=[1436.1, 2321.5]
+  previous  mean=2512.1 ns stdev=654.3 range=[1820.6, 3726.8]
+  legacy    mean=2405.2 ns stdev=457.1 range=[1678.6, 2882.9]
+  stdlib    mean=5582.0 ns stdev=1488.0 range=[3223.6, 8415.6]
+  candidate/previous: means=0.7704; paired mean=0.8087 stdev=0.2084 range=[0.4221, 1.0256]
+  candidate/legacy: means=0.8046; paired mean=0.8325 stdev=0.2323 range=[0.6105, 1.3513]
+  candidate/stdlib: means=0.3467; paired mean=0.3585 stdev=0.0629 range=[0.2450, 0.4455]
+  SKIP / no repeatable >=5% win established
+
+b64decode/1538-byte
+  candidate mean=1356.9 ns stdev=300.1 range=[851.4, 1638.5]
+  previous  mean=4300.6 ns stdev=786.0 range=[3206.0, 6191.8]
+  legacy    mean=3201.4 ns stdev=557.9 range=[2197.7, 3768.8]
+  stdlib    mean=12399.9 ns stdev=2696.4 range=[6903.0, 15208.2]
+  candidate/previous: means=0.3155; paired mean=0.3249 stdev=0.0992 range=[0.1950, 0.5111]
+  candidate/legacy: means=0.4238; paired mean=0.4487 stdev=0.1725 range=[0.2259, 0.7455]
+  candidate/stdlib: means=0.1094; paired mean=0.1171 stdev=0.0469 range=[0.0659, 0.2101]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/1538-byte
+  candidate mean=1608.7 ns stdev=204.4 range=[1328.6, 1926.1]
+  previous  mean=4359.5 ns stdev=990.5 range=[2538.1, 5822.8]
+  legacy    mean=3354.9 ns stdev=300.3 range=[2657.2, 3734.4]
+  stdlib    mean=12575.9 ns stdev=1764.4 range=[9981.4, 15237.2]
+  candidate/previous: means=0.3690; paired mean=0.3879 stdev=0.1019 range=[0.2564, 0.5503]
+  candidate/legacy: means=0.4795; paired mean=0.4840 stdev=0.0837 range=[0.3848, 0.6510]
+  candidate/stdlib: means=0.1279; paired mean=0.1313 stdev=0.0312 range=[0.0872, 0.1930]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/2046-byte
+  candidate mean=2614.0 ns stdev=270.0 range=[2165.0, 2908.1]
+  previous  mean=2908.9 ns stdev=776.9 range=[1908.9, 4369.5]
+  legacy    mean=2829.6 ns stdev=563.8 range=[2108.4, 4170.9]
+  stdlib    mean=6092.7 ns stdev=1629.8 range=[3755.2, 9408.6]
+  candidate/previous: means=0.8986; paired mean=0.9494 stdev=0.2511 range=[0.6198, 1.4865]
+  candidate/legacy: means=0.9238; paired mean=0.9579 stdev=0.2129 range=[0.5322, 1.2886]
+  candidate/stdlib: means=0.4290; paired mean=0.4652 stdev=0.1622 range=[0.2301, 0.7744]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/2046-byte
+  candidate mean=2588.5 ns stdev=609.3 range=[1583.9, 3562.0]
+  previous  mean=2507.9 ns stdev=403.3 range=[1788.5, 2885.4]
+  legacy    mean=3344.4 ns stdev=296.3 range=[3010.2, 3739.2]
+  stdlib    mean=7315.3 ns stdev=2928.6 range=[3946.5, 12424.0]
+  candidate/previous: means=1.0322; paired mean=1.0275 stdev=0.1506 range=[0.8243, 1.2345]
+  candidate/legacy: means=0.7740; paired mean=0.7793 stdev=0.2063 range=[0.5186, 1.1833]
+  candidate/stdlib: means=0.3538; paired mean=0.4120 stdev=0.2210 range=[0.1864, 0.8024]
+  SKIP / no repeatable >=5% win established
+
+b64decode/2046-byte
+  candidate mean=1438.8 ns stdev=355.2 range=[913.9, 1978.2]
+  previous  mean=5487.9 ns stdev=1052.1 range=[3805.5, 7019.5]
+  legacy    mean=3847.8 ns stdev=1280.7 range=[2598.4, 6391.2]
+  stdlib    mean=17234.2 ns stdev=5095.7 range=[6595.1, 22540.1]
+  candidate/previous: means=0.2622; paired mean=0.2663 stdev=0.0640 range=[0.1551, 0.3736]
+  candidate/legacy: means=0.3739; paired mean=0.3925 stdev=0.1052 range=[0.2638, 0.5554]
+  candidate/stdlib: means=0.0835; paired mean=0.1010 stdev=0.0782 range=[0.0517, 0.2999]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/2046-byte
+  candidate mean=1562.9 ns stdev=403.5 range=[721.9, 2174.5]
+  previous  mean=5438.9 ns stdev=1682.3 range=[3583.9, 9027.3]
+  legacy    mean=4391.0 ns stdev=625.1 range=[3289.7, 5358.4]
+  stdlib    mean=17938.5 ns stdev=4211.4 range=[9216.5, 22997.6]
+  candidate/previous: means=0.2874; paired mean=0.2973 stdev=0.0785 range=[0.1889, 0.4053]
+  candidate/legacy: means=0.3559; paired mean=0.3578 stdev=0.0940 range=[0.2009, 0.4944]
+  candidate/stdlib: means=0.0871; paired mean=0.0941 stdev=0.0429 range=[0.0433, 0.1850]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/2047-byte
+  candidate mean=2578.6 ns stdev=395.3 range=[1894.5, 3129.7]
+  previous  mean=2525.1 ns stdev=584.2 range=[1613.7, 3122.7]
+  legacy    mean=2669.0 ns stdev=497.5 range=[1644.1, 3193.4]
+  stdlib    mean=5770.4 ns stdev=1232.8 range=[3686.7, 7456.8]
+  candidate/previous: means=1.0212; paired mean=1.0661 stdev=0.2775 range=[0.7836, 1.6305]
+  candidate/legacy: means=0.9661; paired mean=1.0065 stdev=0.2739 range=[0.5933, 1.5152]
+  candidate/stdlib: means=0.4469; paired mean=0.4660 stdev=0.1284 range=[0.2845, 0.7598]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/2047-byte
+  candidate mean=2663.8 ns stdev=485.3 range=[2001.7, 3370.4]
+  previous  mean=2853.5 ns stdev=234.7 range=[2526.7, 3353.5]
+  legacy    mean=3162.1 ns stdev=490.6 range=[2601.3, 3758.5]
+  stdlib    mean=7397.8 ns stdev=1764.3 range=[4125.1, 10250.5]
+  candidate/previous: means=0.9335; paired mean=0.9370 stdev=0.1737 range=[0.6643, 1.1949]
+  candidate/legacy: means=0.8424; paired mean=0.8518 stdev=0.1694 range=[0.6756, 1.2272]
+  candidate/stdlib: means=0.3601; paired mean=0.3883 stdev=0.1541 range=[0.2572, 0.7088]
+  SKIP / no repeatable >=5% win established
+
+b64decode/2047-byte
+  candidate mean=1454.2 ns stdev=677.4 range=[700.8, 2910.6]
+  previous  mean=5481.9 ns stdev=872.1 range=[3696.3, 6992.4]
+  legacy    mean=4380.2 ns stdev=782.5 range=[2548.7, 5473.6]
+  stdlib    mean=13831.9 ns stdev=5413.7 range=[6574.6, 21580.6]
+  candidate/previous: means=0.2653; paired mean=0.2605 stdev=0.0899 range=[0.1319, 0.4163]
+  candidate/legacy: means=0.3320; paired mean=0.3290 stdev=0.1290 range=[0.1517, 0.6168]
+  candidate/stdlib: means=0.1051; paired mean=0.1195 stdev=0.0678 range=[0.0504, 0.2287]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/2047-byte
+  candidate mean=1655.2 ns stdev=392.2 range=[693.9, 2028.0]
+  previous  mean=5727.6 ns stdev=1680.6 range=[3758.8, 8748.2]
+  legacy    mean=4256.3 ns stdev=629.1 range=[3123.6, 5218.8]
+  stdlib    mean=14122.7 ns stdev=4651.7 range=[7447.3, 18873.7]
+  candidate/previous: means=0.2890; paired mean=0.2999 stdev=0.0846 range=[0.1796, 0.4178]
+  candidate/legacy: means=0.3889; paired mean=0.3942 stdev=0.1015 range=[0.1704, 0.4935]
+  candidate/stdlib: means=0.1172; paired mean=0.1293 stdev=0.0604 range=[0.0825, 0.2577]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/2KiB
+  candidate mean=2655.2 ns stdev=611.3 range=[1658.2, 3472.5]
+  previous  mean=2607.0 ns stdev=723.7 range=[1500.1, 3724.8]
+  legacy    mean=2957.5 ns stdev=225.0 range=[2416.6, 3268.4]
+  stdlib    mean=5713.1 ns stdev=590.6 range=[4782.8, 6486.9]
+  candidate/previous: means=1.0185; paired mean=1.1052 stdev=0.4550 range=[0.6365, 1.8698]
+  candidate/legacy: means=0.8978; paired mean=0.9026 stdev=0.2161 range=[0.5499, 1.1700]
+  candidate/stdlib: means=0.4648; paired mean=0.4695 stdev=0.1232 range=[0.3045, 0.6606]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/2KiB
+  candidate mean=2731.6 ns stdev=828.7 range=[1757.7, 4704.1]
+  previous  mean=3011.4 ns stdev=1358.7 range=[1886.0, 6535.9]
+  legacy    mean=3227.9 ns stdev=375.0 range=[2715.0, 3639.5]
+  stdlib    mean=7449.2 ns stdev=1494.5 range=[5679.3, 9859.1]
+  candidate/previous: means=0.9071; paired mean=1.0063 stdev=0.4192 range=[0.4442, 1.7880]
+  candidate/legacy: means=0.8462; paired mean=0.8487 stdev=0.2274 range=[0.5198, 1.3129]
+  candidate/stdlib: means=0.3667; paired mean=0.3724 stdev=0.0992 range=[0.2469, 0.5107]
+  SKIP / no repeatable >=5% win established
+
+b64decode/2KiB
+  candidate mean=1401.6 ns stdev=365.8 range=[799.5, 2070.0]
+  previous  mean=5498.1 ns stdev=2489.6 range=[3201.9, 11720.1]
+  legacy    mean=4526.5 ns stdev=484.3 range=[3617.8, 5388.5]
+  stdlib    mean=16190.1 ns stdev=5539.9 range=[8081.4, 25101.0]
+  candidate/previous: means=0.2549; paired mean=0.2837 stdev=0.1036 range=[0.1065, 0.4647]
+  candidate/legacy: means=0.3096; paired mean=0.3125 stdev=0.0908 range=[0.1962, 0.4571]
+  candidate/stdlib: means=0.0866; paired mean=0.0940 stdev=0.0334 range=[0.0596, 0.1477]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64decode_ascii/2KiB
+  candidate mean=1514.3 ns stdev=382.5 range=[929.7, 1955.3]
+  previous  mean=4945.2 ns stdev=1211.3 range=[3487.2, 7237.4]
+  legacy    mean=4131.5 ns stdev=830.8 range=[2671.6, 5026.1]
+  stdlib    mean=13913.1 ns stdev=4045.5 range=[8362.3, 18830.0]
+  candidate/previous: means=0.3062; paired mean=0.3132 stdev=0.0803 range=[0.1954, 0.4827]
+  candidate/legacy: means=0.3665; paired mean=0.3843 stdev=0.1380 range=[0.2013, 0.6638]
+  candidate/stdlib: means=0.1088; paired mean=0.1172 stdev=0.0469 range=[0.0602, 0.2048]
+  KEEP evidence for this case only (all paired rounds >=5% faster)
+
+b64encode/3KiB
+  candidate mean=3693.2 ns stdev=648.5 range=[2581.2, 4246.5]
+  previous  mean=3864.7 ns stdev=582.6 range=[2778.5, 4733.0]
+  legacy    mean=4331.6 ns stdev=793.9 range=[3425.9, 6265.7]
+  stdlib    mean=9079.2 ns stdev=736.2 range=[8344.2, 10791.9]
+  candidate/previous: means=0.9556; paired mean=0.9816 stdev=0.2670 range=[0.6294, 1.4877]
+  candidate/legacy: means=0.8526; paired mean=0.8738 stdev=0.2096 range=[0.5935, 1.1657]
+  candidate/stdlib: means=0.4068; paired mean=0.4099 stdev=0.0836 range=[0.2731, 0.4912]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/3KiB
+  candidate mean=4192.6 ns stdev=757.4 range=[3385.9, 5994.3]
+  previous  mean=3580.6 ns stdev=821.3 range=[2203.8, 4810.3]
+  legacy    mean=5101.3 ns stdev=574.4 range=[3796.3, 5926.0]
+  stdlib    mean=10214.3 ns stdev=858.8 range=[8535.9, 11057.8]
+  candidate/previous: means=1.1709; paired mean=1.2088 stdev=0.2531 range=[0.9157, 1.5719]
+  candidate/legacy: means=0.8219; paired mean=0.8258 stdev=0.1338 range=[0.6516, 1.0494]
+  candidate/stdlib: means=0.4105; paired mean=0.4112 stdev=0.0678 range=[0.3252, 0.5569]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode/3KiB
+  candidate mean=1629.4 ns stdev=259.5 range=[1066.6, 1938.6]
+  previous  mean=1781.7 ns stdev=223.2 range=[1285.0, 2035.8]
+  legacy    mean=6176.0 ns stdev=853.0 range=[4854.3, 7922.0]
+  stdlib    mean=24769.1 ns stdev=5297.9 range=[13275.8, 30616.3]
+  candidate/previous: means=0.9146; paired mean=0.9378 stdev=0.2373 range=[0.5239, 1.3624]
+  candidate/legacy: means=0.2638; paired mean=0.2698 stdev=0.0628 range=[0.1680, 0.3456]
+  candidate/stdlib: means=0.0658; paired mean=0.0698 stdev=0.0239 range=[0.0374, 0.1243]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/3KiB
+  candidate mean=1630.8 ns stdev=440.0 range=[913.8, 2335.2]
+  previous  mean=1793.6 ns stdev=524.9 range=[1051.3, 2544.1]
+  legacy    mean=6576.5 ns stdev=1344.3 range=[5229.3, 9799.6]
+  stdlib    mean=23017.5 ns stdev=6055.6 range=[13457.3, 30105.9]
+  candidate/previous: means=0.9093; paired mean=0.9790 stdev=0.3593 range=[0.4244, 1.6352]
+  candidate/legacy: means=0.2480; paired mean=0.2540 stdev=0.0817 range=[0.1426, 0.4295]
+  candidate/stdlib: means=0.0709; paired mean=0.0779 stdev=0.0362 range=[0.0340, 0.1526]
+  SKIP / no repeatable >=5% win established
+
+b64encode/3073-byte
+  candidate mean=3665.8 ns stdev=649.0 range=[2672.7, 4345.5]
+  previous  mean=3983.9 ns stdev=326.0 range=[3527.8, 4567.9]
+  legacy    mean=3861.1 ns stdev=533.6 range=[2851.9, 4440.1]
+  stdlib    mean=8774.5 ns stdev=935.5 range=[6654.0, 9694.4]
+  candidate/previous: means=0.9202; paired mean=0.9258 stdev=0.1767 range=[0.5851, 1.1711]
+  candidate/legacy: means=0.9494; paired mean=0.9792 stdev=0.2771 range=[0.6435, 1.4486]
+  candidate/stdlib: means=0.4178; paired mean=0.4191 stdev=0.0665 range=[0.2895, 0.5060]
+  SKIP / no repeatable >=5% win established
+
+b64encode_ascii/3073-byte
+  candidate mean=4430.2 ns stdev=1828.8 range=[2235.9, 8761.1]
+  previous  mean=3566.2 ns stdev=741.7 range=[2459.4, 4144.6]
+  legacy    mean=5051.2 ns stdev=1608.8 range=[3293.8, 8379.8]
+  stdlib    mean=9133.9 ns stdev=1310.2 range=[6994.1, 10434.0]
+  candidate/previous: means=1.2423; paired mean=1.3500 stdev=0.7817 range=[0.5521, 3.1399]
+  candidate/legacy: means=0.8771; paired mean=0.9795 stdev=0.6015 range=[0.4428, 2.4026]
+  candidate/stdlib: means=0.4850; paired mean=0.5037 stdev=0.2620 range=[0.2849, 1.1221]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode/3073-byte
+  candidate mean=1897.9 ns stdev=1289.6 range=[810.6, 5131.9]
+  previous  mean=1599.7 ns stdev=356.9 range=[816.2, 1975.5]
+  legacy    mean=7272.4 ns stdev=1884.1 range=[4954.8, 11519.4]
+  stdlib    mean=22644.3 ns stdev=5934.5 range=[15904.8, 35753.2]
+  candidate/previous: means=1.1864; paired mean=1.1740 stdev=0.6555 range=[0.5065, 2.7729]
+  candidate/legacy: means=0.2610; paired mean=0.2832 stdev=0.2209 range=[0.0809, 0.8377]
+  candidate/stdlib: means=0.0838; paired mean=0.0863 stdev=0.0562 range=[0.0354, 0.2241]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode_ascii/3073-byte
+  candidate mean=1676.5 ns stdev=313.5 range=[1141.4, 2150.3]
+  previous  mean=1658.1 ns stdev=299.1 range=[1213.9, 1921.1]
+  legacy    mean=6271.5 ns stdev=822.6 range=[4740.7, 7542.7]
+  stdlib    mean=23536.2 ns stdev=6562.4 range=[10591.6, 32185.0]
+  candidate/previous: means=1.0111; paired mean=1.0576 stdev=0.3297 range=[0.6010, 1.5400]
+  candidate/legacy: means=0.2673; paired mean=0.2725 stdev=0.0696 range=[0.1964, 0.4078]
+  candidate/stdlib: means=0.0712; paired mean=0.0785 stdev=0.0368 range=[0.0549, 0.1679]
+  SKIP / no repeatable >=5% win established
+
+b64encode/3074-byte
+  candidate mean=3845.1 ns stdev=901.9 range=[2166.9, 5385.8]
+  previous  mean=3658.4 ns stdev=746.4 range=[2479.5, 4567.5]
+  legacy    mean=4020.5 ns stdev=643.6 range=[2728.7, 4808.9]
+  stdlib    mean=8513.7 ns stdev=1117.4 range=[6196.8, 9739.7]
+  candidate/previous: means=1.0510; paired mean=1.1216 stdev=0.4629 range=[0.5136, 2.1120]
+  candidate/legacy: means=0.9564; paired mean=0.9750 stdev=0.2473 range=[0.5168, 1.2920]
+  candidate/stdlib: means=0.4516; paired mean=0.4576 stdev=0.1270 range=[0.2810, 0.7169]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64encode_ascii/3074-byte
+  candidate mean=3932.8 ns stdev=378.3 range=[3274.6, 4344.4]
+  previous  mean=3362.2 ns stdev=787.0 range=[2241.8, 4076.1]
+  legacy    mean=4846.6 ns stdev=1095.7 range=[3017.4, 6712.1]
+  stdlib    mean=10105.4 ns stdev=1514.9 range=[7408.9, 12952.7]
+  candidate/previous: means=1.1697; paired mean=1.2425 stdev=0.3766 range=[0.8044, 1.9379]
+  candidate/legacy: means=0.8115; paired mean=0.8572 stdev=0.2509 range=[0.5961, 1.3776]
+  candidate/stdlib: means=0.3892; paired mean=0.3979 stdev=0.0796 range=[0.3170, 0.5611]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode/3074-byte
+  candidate mean=1638.3 ns stdev=239.1 range=[1191.6, 1964.7]
+  previous  mean=1694.1 ns stdev=359.2 range=[1082.8, 2117.2]
+  legacy    mean=6671.5 ns stdev=1076.7 range=[5597.6, 8933.5]
+  stdlib    mean=26439.5 ns stdev=3547.4 range=[21584.4, 32357.6]
+  candidate/previous: means=0.9671; paired mean=1.0172 stdev=0.2915 range=[0.6352, 1.4921]
+  candidate/legacy: means=0.2456; paired mean=0.2483 stdev=0.0379 range=[0.1853, 0.3046]
+  candidate/stdlib: means=0.0620; paired mean=0.0630 stdev=0.0121 range=[0.0413, 0.0758]
+  SKIP / no repeatable >=5% win established
+
+b64decode_ascii/3074-byte
+  candidate mean=1851.9 ns stdev=280.4 range=[1452.4, 2369.9]
+  previous  mean=1751.9 ns stdev=312.8 range=[1371.1, 2327.0]
+  legacy    mean=7286.2 ns stdev=2958.8 range=[3828.3, 13888.2]
+  stdlib    mean=21741.2 ns stdev=5884.0 range=[10127.0, 30237.8]
+  candidate/previous: means=1.0571; paired mean=1.0810 stdev=0.2215 range=[0.7923, 1.4994]
+  candidate/legacy: means=0.2542; paired mean=0.2973 stdev=0.1447 range=[0.1046, 0.6190]
+  candidate/stdlib: means=0.0852; paired mean=0.0934 stdev=0.0398 range=[0.0597, 0.1907]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64encode/64KiB
+  candidate mean=83231.8 ns stdev=19794.9 range=[62723.3, 117854.4]
+  previous  mean=76872.3 ns stdev=8506.1 range=[57653.4, 88214.0]
+  legacy    mean=78910.8 ns stdev=23327.8 range=[51095.1, 128733.3]
+  stdlib    mean=156284.6 ns stdev=25271.2 range=[125198.4, 186572.0]
+  candidate/previous: means=1.0827; paired mean=1.1128 stdev=0.3920 range=[0.7895, 2.0127]
+  candidate/legacy: means=1.0548; paired mean=1.1545 stdev=0.4860 range=[0.5773, 2.1010]
+  candidate/stdlib: means=0.5326; paired mean=0.5594 stdev=0.2187 range=[0.3362, 0.9413]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64encode_ascii/64KiB
+  candidate mean=80605.4 ns stdev=26610.7 range=[46718.1, 138718.8]
+  previous  mean=80086.9 ns stdev=8368.6 range=[68141.0, 95124.7]
+  legacy    mean=92951.6 ns stdev=15344.0 range=[69128.5, 124072.0]
+  stdlib    mean=199264.1 ns stdev=50626.7 range=[120293.2, 277791.8]
+  candidate/previous: means=1.0065; paired mean=1.0262 stdev=0.4037 range=[0.6208, 1.9279]
+  candidate/legacy: means=0.8672; paired mean=0.8886 stdev=0.3284 range=[0.5127, 1.5398]
+  candidate/stdlib: means=0.4045; paired mean=0.4110 stdev=0.1064 range=[0.2878, 0.6230]
+  SKIP / no repeatable >=5% win established
+
+b64decode/64KiB
+  candidate mean=10890.8 ns stdev=3280.3 range=[6494.9, 17981.1]
+  previous  mean=9208.0 ns stdev=2090.6 range=[5873.4, 11786.9]
+  legacy    mean=130693.5 ns stdev=40025.4 range=[78292.8, 201145.5]
+  stdlib    mean=489454.6 ns stdev=85688.7 range=[338405.2, 587929.8]
+  candidate/previous: means=1.1827; paired mean=1.1975 stdev=0.2799 range=[0.8761, 1.6328]
+  candidate/legacy: means=0.0833; paired mean=0.0919 stdev=0.0398 range=[0.0323, 0.1525]
+  candidate/stdlib: means=0.0223; paired mean=0.0226 stdev=0.0071 range=[0.0158, 0.0361]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent
+
+b64decode_ascii/64KiB
+  candidate mean=10668.0 ns stdev=1217.5 range=[9099.9, 13151.9]
+  previous  mean=9504.7 ns stdev=1999.7 range=[7139.8, 12086.3]
+  legacy    mean=125894.4 ns stdev=12263.3 range=[108192.5, 148860.5]
+  stdlib    mean=512462.2 ns stdev=107156.1 range=[317516.3, 671740.8]
+  candidate/previous: means=1.1224; paired mean=1.1738 stdev=0.3059 range=[0.7529, 1.7413]
+  candidate/legacy: means=0.0847; paired mean=0.0854 stdev=0.0123 range=[0.0672, 0.1014]
+  candidate/stdlib: means=0.0208; paired mean=0.0218 stdev=0.0056 range=[0.0152, 0.0319]
+  INCONCLUSIVE / mean suggests regression but paired rounds are inconsistent

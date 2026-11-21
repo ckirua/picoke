@@ -1,0 +1,13 @@
+Method: complete public wrapper, fresh worker per backend/sample, alternating paired order; 
+preflight binary payloads and strict malformed-input outcomes against binascii.
+Round 1/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+Round 2/7: binascii -> picore -> openssl_memchr_scalar -> openssl_scalar -> openssl_memchr -> openssl
+Round 3/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+Round 4/7: binascii -> picore -> openssl_memchr_scalar -> openssl_scalar -> openssl_memchr -> openssl
+Round 5/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+Round 6/7: binascii -> picore -> openssl_memchr_scalar -> openssl_scalar -> openssl_memchr -> openssl
+Round 7/7: openssl -> openssl_memchr -> openssl_scalar -> openssl_memchr_scalar -> picore -> binascii
+3072 decoded bytes: openssl 2417.9 ± 229.8 ns, openssl_memchr 723.0 ± 150.9 ns, openssl_scalar 5697.3 ± 866.1 ns, openssl_memchr_scalar 4084.1 ± 540.3 ns, picore 1665.5 ± 320.2 ns, binascii 4031.4 ± 658.0 ns; candidate/picore=1.452
+65536 decoded bytes: openssl 48798.2 ± 1032.3 ns, openssl_memchr 11562.1 ± 732.4 ns, openssl_scalar 112817.6 ± 17380.8 ns, openssl_memchr_scalar 76880.9 ± 7723.6 ns, picore 10855.9 ± 2978.1 ns, binascii 86073.4 ± 8440.8 ns; candidate/picore=4.495
+1048576 decoded bytes: openssl 711577.5 ± 62661.9 ns, openssl_memchr 198381.8 ± 20459.4 ns, openssl_scalar 1708122.0 ± 316407.7 ns, openssl_memchr_scalar 1349164.3 ± 226199.0 ns, picore 156351.0 ± 47471.9 ns, binascii 1239390.0 ± 176612.8 ns; candidate/picore=4.551
+8388608 decoded bytes: openssl 7977456.4 ± 882866.7 ns, openssl_memchr 3089557.0 ± 244880.5 ns, openssl_scalar 16389709.7 ± 1657273.4 ns, openssl_memchr_scalar 13271354.9 ± 2205658.8 ns, picore 2212475.6 ± 240778.4 ns, binascii 12559015.6 ± 1932123.2 ns; candidate/picore=3.606

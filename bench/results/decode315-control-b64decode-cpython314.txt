@@ -1,0 +1,199 @@
+fresh process 1/9 complete
+fresh process 2/9 complete
+fresh process 3/9 complete
+fresh process 4/9 complete
+fresh process 5/9 complete
+fresh process 6/9 complete
+fresh process 7/9 complete
+fresh process 8/9 complete
+fresh process 9/9 complete
+
+1024 decoded bytes
+ baseline      8940.7 ± 1260.4 ns
+ cached_2048   8535.7 ± 1417.8 ns
+ cutoff_1024   1492.6 ± 324.0 ns
+ cutoff_2048   8731.1 ± 1463.7 ns
+ cutoff_2732   8798.0 ± 1947.2 ns
+ cutoff_3072   8332.4 ± 681.3 ns
+ cutoff_3584   8312.1 ± 1097.6 ns
+ installed_candidate 2799.4 ± 264.9 ns
+ picore        2840.9 ± 326.5 ns
+ baseline/picore: paired mean 3.1636 ± 0.4197; ratio of means 3.1472
+ cached_2048/picore: paired mean 2.9923 ± 0.2768; ratio of means 3.0046
+ cutoff_1024/picore: paired mean 0.5298 ± 0.1187; ratio of means 0.5254
+ cutoff_2048/picore: paired mean 3.0914 ± 0.5058; ratio of means 3.0734
+ cutoff_2732/picore: paired mean 3.1134 ± 0.6691; ratio of means 3.0969
+ cutoff_3072/picore: paired mean 2.9606 ± 0.3478; ratio of means 2.9330
+ cutoff_3584/picore: paired mean 2.9248 ± 0.1740; ratio of means 2.9259
+ installed_candidate/picore: paired mean 0.9893 ± 0.0599; ratio of means 0.9854
+
+1533 decoded bytes
+ baseline      10081.7 ± 2100.7 ns
+ cached_2048   9840.9 ± 3425.0 ns
+ cutoff_1024   1301.3 ± 211.8 ns
+ cutoff_2048   11155.7 ± 2019.9 ns
+ cutoff_2732   11391.1 ± 2289.2 ns
+ cutoff_3072   11412.3 ± 2403.6 ns
+ cutoff_3584   10184.3 ± 3108.0 ns
+ installed_candidate 3478.1 ± 644.6 ns
+ picore        3433.4 ± 732.0 ns
+ baseline/picore: paired mean 2.9517 ± 0.2707; ratio of means 2.9364
+ cached_2048/picore: paired mean 2.7969 ± 0.4584; ratio of means 2.8662
+ cutoff_1024/picore: paired mean 0.3858 ± 0.0564; ratio of means 0.3790
+ cutoff_2048/picore: paired mean 3.3015 ± 0.5586; ratio of means 3.2492
+ cutoff_2732/picore: paired mean 3.3642 ± 0.6209; ratio of means 3.3178
+ cutoff_3072/picore: paired mean 3.3605 ± 0.5709; ratio of means 3.3239
+ cutoff_3584/picore: paired mean 2.9439 ± 0.5364; ratio of means 2.9663
+ installed_candidate/picore: paired mean 1.0329 ± 0.1945; ratio of means 1.0130
+
+1534 decoded bytes
+ baseline      10235.5 ± 3261.8 ns
+ cached_2048   1149.0 ± 304.3 ns
+ cutoff_1024   1197.3 ± 357.9 ns
+ cutoff_2048   1210.6 ± 395.3 ns
+ cutoff_2732   11558.0 ± 5693.5 ns
+ cutoff_3072   14499.5 ± 14055.0 ns
+ cutoff_3584   11410.4 ± 5633.3 ns
+ installed_candidate 1230.0 ± 377.8 ns
+ picore        1205.4 ± 368.5 ns
+ baseline/picore: paired mean 8.5426 ± 1.4602; ratio of means 8.4917
+ cached_2048/picore: paired mean 0.9698 ± 0.1262; ratio of means 0.9533
+ cutoff_1024/picore: paired mean 1.0027 ± 0.1415; ratio of means 0.9933
+ cutoff_2048/picore: paired mean 1.0021 ± 0.1325; ratio of means 1.0043
+ cutoff_2732/picore: paired mean 9.3151 ± 1.9354; ratio of means 9.5889
+ cutoff_3072/picore: paired mean 11.1036 ± 6.8978; ratio of means 12.0293
+ cutoff_3584/picore: paired mean 9.2665 ± 2.3765; ratio of means 9.4664
+ installed_candidate/picore: paired mean 1.0224 ± 0.0791; ratio of means 1.0205
+
+1535 decoded bytes
+ baseline      12115.4 ± 4236.8 ns
+ cached_2048   1226.5 ± 335.2 ns
+ cutoff_1024   1277.9 ± 315.1 ns
+ cutoff_2048   1213.6 ± 327.6 ns
+ cutoff_2732   10470.2 ± 3803.9 ns
+ cutoff_3072   11015.6 ± 4011.6 ns
+ cutoff_3584   11044.4 ± 3759.5 ns
+ installed_candidate 1353.4 ± 567.9 ns
+ picore        1441.1 ± 721.2 ns
+ baseline/picore: paired mean 8.7478 ± 0.9257; ratio of means 8.4068
+ cached_2048/picore: paired mean 0.9074 ± 0.1456; ratio of means 0.8511
+ cutoff_1024/picore: paired mean 0.9627 ± 0.2191; ratio of means 0.8867
+ cutoff_2048/picore: paired mean 0.9122 ± 0.2213; ratio of means 0.8421
+ cutoff_2732/picore: paired mean 7.6195 ± 1.8657; ratio of means 7.2652
+ cutoff_3072/picore: paired mean 7.9325 ± 1.2853; ratio of means 7.6436
+ cutoff_3584/picore: paired mean 8.1036 ± 1.7590; ratio of means 7.6636
+ installed_candidate/picore: paired mean 0.9927 ± 0.2849; ratio of means 0.9391
+
+1536 decoded bytes
+ baseline      10829.1 ± 4280.0 ns
+ cached_2048   1060.7 ± 315.3 ns
+ cutoff_1024   1299.4 ± 668.6 ns
+ cutoff_2048   1081.4 ± 302.2 ns
+ cutoff_2732   10590.2 ± 5259.6 ns
+ cutoff_3072   10904.4 ± 4321.1 ns
+ cutoff_3584   10115.5 ± 4331.1 ns
+ installed_candidate 1176.3 ± 335.3 ns
+ picore        1256.6 ± 527.0 ns
+ baseline/picore: paired mean 8.8596 ± 1.6668; ratio of means 8.6175
+ cached_2048/picore: paired mean 0.9009 ± 0.1945; ratio of means 0.8441
+ cutoff_1024/picore: paired mean 1.0650 ± 0.3247; ratio of means 1.0340
+ cutoff_2048/picore: paired mean 0.9282 ± 0.2425; ratio of means 0.8606
+ cutoff_2732/picore: paired mean 8.6551 ± 2.6371; ratio of means 8.4274
+ cutoff_3072/picore: paired mean 9.3117 ± 2.7319; ratio of means 8.6775
+ cutoff_3584/picore: paired mean 8.4355 ± 2.2520; ratio of means 8.0497
+ installed_candidate/picore: paired mean 0.9867 ± 0.1592; ratio of means 0.9361
+
+1537 decoded bytes
+ baseline      10427.0 ± 4303.6 ns
+ cached_2048   1126.1 ± 363.9 ns
+ cutoff_1024   1250.7 ± 385.3 ns
+ cutoff_2048   1230.7 ± 398.5 ns
+ cutoff_2732   10721.4 ± 3233.4 ns
+ cutoff_3072   10481.1 ± 3876.9 ns
+ cutoff_3584   10105.3 ± 4233.5 ns
+ installed_candidate 1217.5 ± 390.1 ns
+ picore        1217.1 ± 395.9 ns
+ baseline/picore: paired mean 8.3662 ± 1.2399; ratio of means 8.5673
+ cached_2048/picore: paired mean 0.9267 ± 0.0581; ratio of means 0.9253
+ cutoff_1024/picore: paired mean 1.0353 ± 0.1302; ratio of means 1.0277
+ cutoff_2048/picore: paired mean 1.0186 ± 0.1556; ratio of means 1.0112
+ cutoff_2732/picore: paired mean 9.0082 ± 2.0655; ratio of means 8.8092
+ cutoff_3072/picore: paired mean 8.6049 ± 1.7119; ratio of means 8.6118
+ cutoff_3584/picore: paired mean 8.1571 ± 1.5587; ratio of means 8.3030
+ installed_candidate/picore: paired mean 1.0050 ± 0.0987; ratio of means 1.0003
+
+1538 decoded bytes
+ baseline      9087.5 ± 3312.7 ns
+ cached_2048   1065.1 ± 298.0 ns
+ cutoff_1024   1120.3 ± 252.9 ns
+ cutoff_2048   1081.3 ± 251.5 ns
+ cutoff_2732   9660.5 ± 3056.6 ns
+ cutoff_3072   8847.8 ± 3032.4 ns
+ cutoff_3584   8931.5 ± 3564.6 ns
+ installed_candidate 1098.3 ± 309.8 ns
+ picore        1119.3 ± 305.6 ns
+ baseline/picore: paired mean 7.9999 ± 1.5007; ratio of means 8.1193
+ cached_2048/picore: paired mean 0.9539 ± 0.0779; ratio of means 0.9516
+ cutoff_1024/picore: paired mean 1.0204 ± 0.1300; ratio of means 1.0009
+ cutoff_2048/picore: paired mean 0.9972 ± 0.2254; ratio of means 0.9661
+ cutoff_2732/picore: paired mean 8.6600 ± 1.8178; ratio of means 8.6312
+ cutoff_3072/picore: paired mean 7.8531 ± 1.0673; ratio of means 7.9050
+ cutoff_3584/picore: paired mean 7.8509 ± 1.5182; ratio of means 7.9798
+ installed_candidate/picore: paired mean 0.9821 ± 0.0726; ratio of means 0.9812
+
+2047 decoded bytes
+ baseline      11613.2 ± 4298.0 ns
+ cached_2048   1039.5 ± 346.3 ns
+ cutoff_1024   1148.8 ± 379.7 ns
+ cutoff_2048   1188.5 ± 379.7 ns
+ cutoff_2732   1220.6 ± 363.2 ns
+ cutoff_3072   12136.0 ± 3964.0 ns
+ cutoff_3584   12482.4 ± 4355.1 ns
+ installed_candidate 1171.9 ± 333.4 ns
+ picore        1150.1 ± 346.2 ns
+ baseline/picore: paired mean 9.8977 ± 0.9490; ratio of means 10.0974
+ cached_2048/picore: paired mean 0.9002 ± 0.0631; ratio of means 0.9038
+ cutoff_1024/picore: paired mean 0.9998 ± 0.1202; ratio of means 0.9989
+ cutoff_2048/picore: paired mean 1.0419 ± 0.1724; ratio of means 1.0334
+ cutoff_2732/picore: paired mean 1.0803 ± 0.2059; ratio of means 1.0613
+ cutoff_3072/picore: paired mean 10.6387 ± 2.0534; ratio of means 10.5520
+ cutoff_3584/picore: paired mean 10.7731 ± 1.2778; ratio of means 10.8532
+ installed_candidate/picore: paired mean 1.0272 ± 0.0737; ratio of means 1.0189
+
+3072 decoded bytes
+ baseline      1375.0 ± 400.1 ns
+ cached_2048   1379.4 ± 295.4 ns
+ cutoff_1024   1398.4 ± 381.7 ns
+ cutoff_2048   1397.7 ± 378.2 ns
+ cutoff_2732   1333.2 ± 387.0 ns
+ cutoff_3072   1323.4 ± 365.8 ns
+ cutoff_3584   1383.0 ± 343.3 ns
+ installed_candidate 1440.0 ± 411.0 ns
+ picore        1397.7 ± 393.1 ns
+ baseline/picore: paired mean 0.9899 ± 0.1146; ratio of means 0.9838
+ cached_2048/picore: paired mean 1.0143 ± 0.1498; ratio of means 0.9870
+ cutoff_1024/picore: paired mean 1.0058 ± 0.1061; ratio of means 1.0005
+ cutoff_2048/picore: paired mean 1.0057 ± 0.0513; ratio of means 1.0000
+ cutoff_2732/picore: paired mean 0.9617 ± 0.1146; ratio of means 0.9538
+ cutoff_3072/picore: paired mean 0.9660 ± 0.1861; ratio of means 0.9468
+ cutoff_3584/picore: paired mean 1.0152 ± 0.1877; ratio of means 0.9895
+ installed_candidate/picore: paired mean 1.0356 ± 0.0908; ratio of means 1.0303
+
+65536 decoded bytes
+ baseline      9284.0 ± 1208.2 ns
+ cached_2048   8765.3 ± 1118.0 ns
+ cutoff_1024   9362.4 ± 1361.0 ns
+ cutoff_2048   9207.9 ± 1450.8 ns
+ cutoff_2732   8977.9 ± 1353.4 ns
+ cutoff_3072   8775.6 ± 1456.5 ns
+ cutoff_3584   8704.8 ± 1408.8 ns
+ installed_candidate 9215.0 ± 1184.2 ns
+ picore        9014.8 ± 1486.6 ns
+ baseline/picore: paired mean 1.0394 ± 0.1000; ratio of means 1.0299
+ cached_2048/picore: paired mean 0.9821 ± 0.0996; ratio of means 0.9723
+ cutoff_1024/picore: paired mean 1.0569 ± 0.1914; ratio of means 1.0386
+ cutoff_2048/picore: paired mean 1.0386 ± 0.1955; ratio of means 1.0214
+ cutoff_2732/picore: paired mean 1.0074 ± 0.1416; ratio of means 0.9959
+ cutoff_3072/picore: paired mean 0.9806 ± 0.1201; ratio of means 0.9735
+ cutoff_3584/picore: paired mean 0.9741 ± 0.1255; ratio of means 0.9656
+ installed_candidate/picore: paired mean 1.0307 ± 0.0889; ratio of means 1.0222

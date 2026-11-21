@@ -1,0 +1,39 @@
+Address mismatch: legacy=0x7d6e99bb8abf8cc013bb0e912d0b176596fe7b88, picore=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf; excluded from timing
+Python: 3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]; platform: Linux-7.0.0-43-generic-x86_64-with-glibc2.43; CPU: Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+btclib-secp256k1: 0.8.0.16; eth-account: 0.14.0
+Legacy origin: /tmp/picore-crypto-next.ivARKb/legacy3.15/legacy_baseline/crypto/curves/secp256k1.cpython-315-x86_64-linux-gnu.so; picore origin: /tmp/picore-crypto-next.ivARKb/env3.15/lib/python3.15/site-packages/picore/crypto/secp256k1.cpython-315-x86_64-linux-gnu.so
+Legacy root: /tmp/picore-crypto-next.ivARKb/legacy3.15; samples=7, iterations=20, warmups=1
+Correctness checked before timing; legacy Bitcoin raw hash differs and is excluded.
+Signatures differ despite successful cross-recovery; signing excluded from timing.
+
+secp256k1 public key
+  legacy                       median      46073.7 ns/call  p25..p75 43023.4..46185.8  range 39420.7..49927.4  ratio-to-legacy 1.000x
+    samples ns/call: 46073.7, 45746.5, 39420.7, 43023.4, 46185.8, 46300.9, 49927.4
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      21423.3 ns/call  p25..p75 19779.7..21438.2  range 19685.6..41771.8  ratio-to-legacy 0.465x
+    samples ns/call: 21423.3, 20267.8, 21438.2, 19779.7, 19685.6, 22858.1, 41771.8
+    paired ratios to legacy: 0.465, 0.443, 0.544, 0.460, 0.426, 0.494, 0.837
+
+secp256k1 recover
+  legacy                       median   62697521.1 ns/call  p25..p75 55041310.5..65619807.5  range 54736187.2..76654596.5  ratio-to-legacy 1.000x
+    samples ns/call: 76654596.5, 67988388.5, 62697521.1, 55041310.5, 54736187.2, 65619807.5, 57482932.4
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median      74806.8 ns/call  p25..p75 46802.3..80383.8  range 44152.0..89714.0  ratio-to-legacy 0.001x
+    samples ns/call: 89714.0, 83395.1, 80383.8, 74806.8, 74738.6, 46802.3, 44152.0
+    paired ratios to legacy: 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001
+
+EIP-712 Agent
+  legacy                       median      43847.6 ns/call  p25..p75 39889.8..61885.6  range 37049.7..81936.2  ratio-to-legacy 1.000x
+    samples ns/call: 43847.6, 61885.6, 43547.3, 77357.6, 81936.2, 39889.8, 37049.7
+    paired ratios to legacy: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median     267784.0 ns/call  p25..p75 220914.1..326034.3  range 205718.2..387036.5  ratio-to-legacy 6.107x
+    samples ns/call: 326034.3, 339837.2, 205718.2, 265115.0, 387036.5, 267784.0, 220914.1
+    paired ratios to legacy: 7.436, 5.491, 4.724, 3.427, 4.724, 6.713, 5.963
+
+Bitcoin framed double-SHA-256
+  stdlib reference             median       1248.2 ns/call  p25..p75 1234.3..1255.8  range 1230.0..1267.2  ratio-to-stdlib reference 1.000x
+    samples ns/call: 1267.2, 1248.2, 1256.8, 1255.8, 1234.3, 1238.5, 1230.0
+    paired ratios to stdlib reference: 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000
+  picore                       median       1163.2 ns/call  p25..p75 1160.8..1163.8  range 1157.2..1174.6  ratio-to-stdlib reference 0.932x
+    samples ns/call: 1173.9, 1163.8, 1157.2, 1161.5, 1163.2, 1160.8, 1174.6
+    paired ratios to stdlib reference: 0.926, 0.932, 0.921, 0.925, 0.942, 0.937, 0.955

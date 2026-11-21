@@ -1,0 +1,18 @@
+3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ] | Linux-7.0.0-43-generic-x86_64-with-glibc2.43 | CPU x86_64 | GIL enabled=True
+Cython 3.3.1 | picop 3.13.0 | setuptools 84.2.1 | CC=cc -pthread | CFLAGS=-fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC
+9 paired samples, 2 warmup pairs, 50000 iterations/block
+Compiling _picop_ab_native.pyx because it changed.
+[1/1] Cythonizing _picop_ab_native.pyx
+warning: /tmp/picore-recheck.MT73wz/base3.14/lib/python3.14/site-packages/picop/cylist.pxd:51:23: noexcept clause is ignored for function returning Python object
+warning: /tmp/picore-recheck.MT73wz/base3.14/lib/python3.14/site-packages/picop/cylist.pxd:169:28: noexcept clause is ignored for function returning Python object
+running build_ext
+building '_picop_ab_native' extension
+cc -pthread -fno-strict-overflow -Wsign-compare -Wunreachable-code -DNDEBUG -g -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC -fPIC -I/tmp/picore-recheck.MT73wz/base3.14/lib/python3.14/site-packages/picop -I/tmp/picore-recheck.MT73wz/base3.14/include -I/home/kirua/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/include/python3.14 -c _picop_ab_native.c -o build/temp.linux-x86_64-cpython-314/_picop_ab_native.o
+cc -pthread -shared -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL build/temp.linux-x86_64-cpython-314/_picop_ab_native.o -L/home/kirua/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib -o build/lib.linux-x86_64-cpython-314/_picop_ab_native.cpython-314-x86_64-linux-gnu.so
+copying build/lib.linux-x86_64-cpython-314/_picop_ab_native.cpython-314-x86_64-linux-gnu.so -> 
+Signer bytes length (exact): picop 3.14 ± 0.71, direct 2.11 ± 0.29 ns/op; mean ratio 1.488x; paired ratios 1.434, 1.765, 1.484, 1.445, 1.564, 1.332, 1.504, 1.343, 1.423
+Signer bytes length (incl. subtype): picop 15.11 ± 4.44, direct 14.28 ± 4.10 ns/op; mean ratio 1.058x; paired ratios 1.184, 0.866, 0.693, 0.655, 0.994, 1.679, 1.859, 1.127, 1.016
+BIP-137 CompactSize (small): picop 12.93 ± 4.23, direct 11.92 ± 5.57 ns/op; mean ratio 1.085x; paired ratios 1.518, 1.109, 0.950, 1.293, 1.046, 0.646, 1.434, 1.574, 0.925
+BIP-137 CompactSize (width boundaries): picop 62.54 ± 17.50, direct 60.65 ± 18.48 ns/op; mean ratio 1.031x; paired ratios 1.023, 0.875, 0.943, 1.502, 0.564, 0.836, 1.273, 1.337, 1.312
+EIP-712 dependency closure (Agent): picop 2148.55 ± 604.93, direct 2310.38 ± 623.76 ns/op; mean ratio 0.930x; paired ratios 0.933, 1.019, 0.938, 0.739, 0.934, 0.972, 0.929, 1.031, 0.897
+EIP-712 dependency closure (nested): picop 4831.96 ± 1062.73, direct 4799.40 ± 808.47 ns/op; mean ratio 1.007x; paired ratios 1.067, 1.001, 1.467, 0.988, 1.022, 0.782, 1.037, 0.823, 0.933
