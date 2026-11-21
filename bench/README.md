@@ -746,6 +746,45 @@ Retained wheel SHA-256:
 `8429f8c972e0c3b0c4fc925bc0cf6c60656ecc78ac6287afa9644e3f2d869737`
 (3.15).
 
+## Native architecture pass
+
+Control: `1e62da248a`. CPython 3.14.7 and 3.15.0rc2, regular GIL builds,
+Linux x86-64, OpenSSL 3.5.5. Each candidate compiled as an extension for
+its target ABI. Thread CPU time excludes descheduling; nine pairs alternate
+order after two warmups. Each row verifies equal outputs before timing.
+[All samples and rejection cases](results/crypto-native-design.txt).
+
+| Call site | Input | Trial/control, 3.14 | Trial/control, 3.15 |
+|---|---|---:|---:|
+| Base64 decode | 32 decoded bytes | 0.536× | 0.486× |
+| Keccak-256 | 32 bytes | 0.140× | 0.136× |
+| Keccak-256 | 64 KiB | 0.767× | 0.798× |
+| EIP-712 Agent | Canonical fixed schema | 0.145× | 0.188× |
+
+- **Base64: keep fused short decode.** One loop checks the alphabet and
+  writes the exact result instead of scanning and then calling EVP. Large SIMD
+  and version-specific stdlib thresholds are unchanged. Malformed input
+  still goes through strict binascii and showed no repeatable timing direction.
+- **Keccak and EIP-712: keep the native provider.** Cache the EVP algorithm
+  handle, not the digest context or caller input. EIP-712 uses the same
+  fast path for all six canonical Agent digests. Generic schema handling and
+  fallback stay unchanged. Paired cold crypto import ratios were 0.987× and
+  0.944×; raw medians were noisy, so no startup speedup is claimed.
+- **BIP-137: keep the current frame.** Segmented EVP avoids copying the message
+  but adds digest-context work. A single-allocation frame removes temporaries
+  but still copies the payload. Neither won consistently across sizes and
+  both ABIs; at 1 MiB their paired ratios were 0.891×/1.027× and
+  0.967×/1.042× respectively.
+- **Ed25519:** verification must preserve the cofactored acceptance policy,
+  not merely pass ordinary signatures. Native private-key derivation and
+  signing are separate candidates; not measured in this pass.
+- **secp256k1:** a compact-signature bridge could avoid converting to Python
+  integers and back in Bitcoin signing and verification. Keep provider checks;
+  a direct raw signing call is not equivalent. Bridge not measured here.
+
+Picop's byte buffer/length helpers do the same direct C-API operations used
+here; no new picop substitution was identified.
+
 ## Async token bucket
 
 Run `python bench/ratelimit.py` with the installed wheel. Optionally pass

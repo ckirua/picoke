@@ -10,7 +10,7 @@ setup(
             Extension(
                 f"picore.crypto.{module}",
                 [f"src/picore/crypto/{module}.pyx"],
-                libraries=["crypto"] if module == "base64" else [],
+                libraries=["crypto"] if module in ("base64", "keccak") else [],
             )
             for module in modules
         ],

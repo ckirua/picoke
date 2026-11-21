@@ -33,14 +33,14 @@ picore aims to provide practical CPython utilities built on picop. Crypto now co
 ### 4. Harden and prepare a release
 
 - Validate each claimed platform and ABI, including free-threaded correctness and concurrency with the GIL disabled if claimed. Investigate import-time GIL state and use separate builds.
-- Establish versioning, changelog, artifact and release checks, and vulnerability reporting before the first release. Document actual limitations and support evidence.
+- Follow the [working-version and release policy](RELEASE.md). Finish distribution and vulnerability reporting setup before the first release; document actual support evidence.
 - Done when the documented release checklist passes and the release is explicitly approved.
 
 ## Open decisions
 
 - Specifications and provider choices for later protocol work and other legacy candidates.
 - Supported platforms and dependency maintenance policy.
-- Project license and distribution/release process.
+- Project license, publishing target, and publishing configuration.
 - Which free-threaded configurations can be supported and verified.
 
 Update this plan as decisions are made; mark work complete only with evidence. Picop's existing trackers, benchmark numbers, and release status do not establish picore's.

@@ -11,7 +11,6 @@ from cpython.bytes cimport (
 from cpython.object cimport PyObject_IsInstance
 from cpython.unicode cimport PyUnicode_DecodeASCII, PyUnicode_GET_LENGTH
 from libc.limits cimport INT_MAX
-from libc.string cimport memcpy, strspn
 
 
 cdef extern from "Python.h":
@@ -23,7 +22,43 @@ cdef extern from "Python.h":
 
 cdef extern from "openssl/evp.h":
     int EVP_EncodeBlock(unsigned char *out, const unsigned char *data, int size)
-    int EVP_DecodeBlock(unsigned char *out, const unsigned char *data, int size)
+
+
+cdef extern from *:
+    """
+    /* Compact ASCII only, with a nonempty multiple of four bytes. */
+    static int picore_decode_quartets(const unsigned char *src, Py_ssize_t n,
+                                     int pad, unsigned char *out) {
+        static const unsigned char sextet[128] = {
+            255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+            255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+            255,255,255,255,255,255,255,255,255,255,255, 62,255,255,255, 63,
+             52, 53, 54, 55, 56, 57, 58, 59, 60, 61,255,255,255,255,255,255,
+            255,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
+             15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,255,255,255,255,255,
+            255, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+             41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,255,255,255,255,255
+        };
+        const unsigned char *end = src + n - (pad ? 4 : 0);
+        for (; src < end; src += 4, out += 3) {
+            unsigned a = sextet[src[0]], b = sextet[src[1]];
+            unsigned c = sextet[src[2]], d = sextet[src[3]];
+            if ((a | b | c | d) & 128) return 0;
+            out[0] = (unsigned char)((a << 2) | (b >> 4));
+            out[1] = (unsigned char)((b << 4) | (c >> 2));
+            out[2] = (unsigned char)((c << 6) | d);
+        }
+        if (pad) {
+            unsigned a = sextet[src[0]], b = sextet[src[1]];
+            unsigned c = pad == 1 ? sextet[src[2]] : 0;
+            if ((a | b | c) & 128) return 0;
+            out[0] = (unsigned char)((a << 2) | (b >> 4));
+            if (pad == 1) out[1] = (unsigned char)((b << 4) | (c >> 2));
+        }
+        return 1;
+    }
+    """
+    bint picore_decode_quartets(const unsigned char *, Py_ssize_t, int, unsigned char *) noexcept
 
 
 cdef object _encode_exact(bytes data, bint ascii_result):
@@ -67,14 +102,10 @@ cdef object _encode_exact(bytes data, bint ascii_result):
 
 cdef object _decode_exact(object text):
     cdef Py_ssize_t size
-    cdef Py_ssize_t payload_size
     cdef Py_ssize_t output_size
-    cdef Py_ssize_t prefix_size
     cdef int padding = 0
-    cdef int written
     cdef const unsigned char *source
     cdef unsigned char *out
-    cdef unsigned char tail[3]
     cdef object result
 
     # libbase64's runtime-selected SIMD path combines validation and decoding.
@@ -106,35 +137,13 @@ cdef object _decode_exact(object text):
         padding = 1
         if source[size - 2] == 61:
             padding = 2
-    payload_size = size - padding
-    # EVP accepts whitespace and interior padding that strict binascii rejects.
-    # Keep only the ordinary alphabet/padding shape native; let this runtime's
-    # binascii decide every unusual form and supply its exact error message.
-    if strspn(
-        <const char *>source,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-    ) != <size_t>payload_size:
-        return binascii.a2b_base64(text, strict_mode=True)
     output_size = (size // 4) * 3 - padding
     result = PyBytes_FromStringAndSize(NULL, output_size)
     out = <unsigned char *>PyBytes_AS_STRING(result)
-    if padding:
-        # EVP always writes three bytes per quartet, including padded bytes.
-        # Decode the final quartet separately rather than overrunning the
-        # exact-size Python result or discarding real trailing zero bytes.
-        prefix_size = size - 4
-        if prefix_size:
-            written = EVP_DecodeBlock(out, source, <int>prefix_size)
-            if written != (prefix_size // 4) * 3:
-                return binascii.a2b_base64(text, strict_mode=True)
-        written = EVP_DecodeBlock(tail, source + prefix_size, 4)
-        if written != 3:
-            return binascii.a2b_base64(text, strict_mode=True)
-        memcpy(out + (prefix_size // 4) * 3, tail, 3 - padding)
-    else:
-        written = EVP_DecodeBlock(out, source, <int>size)
-        if written != output_size:
-            return binascii.a2b_base64(text, strict_mode=True)
+    # No intermediate pad bytes or second validation pass. Delegate unusual
+    # input to binascii so its version-specific strict error policy stays intact.
+    if not picore_decode_quartets(source, size, padding, out):
+        return binascii.a2b_base64(text, strict_mode=True)
     return result
 
 
