@@ -8,6 +8,10 @@ Read [`.agents/README.md`](.agents/README.md) for repository orientation and [`d
 - Package metadata must retain `requires-python = ">=3.14"`; validate separately on 3.14 and 3.15. Validate newer interpreters before claiming compatibility.
 - Treat free-threaded builds as a separate ABI and support goal. Do not claim support until build, import, correctness, and concurrency are tested with the GIL disabled.
 
+## Branches and versions
+
+- Follow the [release-picore skill](.agents/skills/release-picore/SKILL.md) for branch organization, working versions, and release changes. Use one topic branch per independent change; ordinary checkpoints do not bump package versions or authorize a PR, tag, or publication.
+
 ## Mandatory picop review
 
 - Before implementing or reviewing Python, Cython, or CPython C extension code, read the [`use-picop` skill](.agents/skills/use-picop/SKILL.md). This applies to subagents too; include it in relevant task handoffs.
