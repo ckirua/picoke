@@ -952,3 +952,234 @@ Picop audit (Cython call sites; see [raw candidate and constructor samples](resu
   time at 1,024 on 3.15; explicit allocation and fill reached 1.20× on 3.14.
 - **SKIP** atomics and raw-memory picop helpers in the production ring:
   there is no no-GIL access, raw allocation, or payload copy to replace.
+
+## File utilities
+
+From a checkout, install `picoke[files]` for each interpreter, then run
+`python -I bench/files.py` in each environment, sequentially. The benchmark
+prints seven alternating warm-cache sample pairs after one warm-up per arm.
+Median elapsed time and throughput are per complete API call; throughput
+counts records/physical lines (bytes for ZIP reads). Each arm is traced
+separately for peak Python allocation, not RSS or all native memory. Output
+checks, fixture generation, and tracing are outside the timed samples.
+
+Document comparisons use the same providers with 32 and 4,096 ASCII/UTF-8
+values. Filtered lines materialize each result, including decoding and
+filtering. ZIP uses 32 stored or deflated entries at 256 B or 64 KiB each;
+the direct control reads matching entries but does not enforce size limits
+or reject duplicate names. Local decisions require six of seven pair wins
+and a 5% median gain on each interpreter for the target workload, without
+regressing the other representative workload by more than 5% or materially
+increasing memory.
+
+Measured on Linux x86-64 (Intel i7-6700; regular-GIL CPython 3.14.7 and
+3.15.0rc2), with picop 3.13.0, tomli-w 1.2.0, and PyYAML 6.0.4.
+Initial baseline samples: [3.14](results/files-3.14.txt),
+[3.15](results/files-3.15.txt). These precede JSONL decoder reuse.
+Final installed decoder samples: [3.14](results/files-jsonl-decoder-3.14.txt),
+[3.15](results/files-jsonl-decoder-3.15.txt).
+Some pairs vary substantially; treat small timing gaps as inconclusive.
+
+| Candidate (trial/control median time) | CPython 3.14 | CPython 3.15 | Decision |
+|---|---:|---:|---|
+| Reuse a strict stdlib decoder per JSONL iterator, 4,096 UTF-8 records | 0.450× | 0.469× | **KEEP**: the installed change won all seven pairs for both sizes and text profiles on both runtimes, with lower traced peak. |
+| 64 KiB JSONL batching, 4,096 UTF-8 records | 1.068× | 1.071× | **SKIP**: slower; peak traced memory more than doubled. The trial flushed complete lines even on serialization or input-iterator failure. |
+| Local binding, 4,096 filtered UTF-8 lines | 1.061× | 0.990× | **SKIP**: inconsistent, even though the 3.14 ASCII fixture improved. |
+| Single-pass normalization, 4,096 filtered ASCII lines | 0.665× | 0.745× | **SKIP**: only five pair wins on 3.15; unfiltered 3.15 runs regressed. |
+| picop `str_endswith` / `str_startswith`, 4,096 filtered ASCII lines | 1.135× | 1.196× | **SKIP**: no repeatable win; no equivalent helper for Unicode whitespace stripping. |
+| picop `long_check_exact`, ZIP limit setup | 1.121× | 1.085× | **SKIP**: slower than `type(limit) is int`, including the once-per-call setup. |
+| picop `set_add`, `set_contains`, `list_append`, `bytes_len`, ZIP container operations with 32 entries | 1.375× | 1.485× | **SKIP**: the combined isolated trial lost every pair; does not justify a production substitution. |
+
+There is no matching public picop helper for JSON serialization, TOML/YAML
+document parsing, or bounded ZIP decompression. No native or mmap backend
+was added.
+
+### Same-contract optimization pass
+
+Trials compared the original public calls to one candidate at a time with
+the same fixtures. Both CPython lanes were pinned to CPU 4. Keep criteria:
+at least 6/7 paired wins and a 5% lower median on the target on both
+interpreters; at most 5% slower on guard workloads; no traced-peak or
+measured RSS increase beyond the larger of 5% and 64 KiB. The raw logs
+include individual paired ratios and the edge-case checks:
+[3.14](results/files-opt-candidates-3.14.txt),
+[3.15](results/files-opt-candidates-3.15.txt).
+
+- **YAML:** the LibYAML loader and dumper reduced valid-fixture median time
+  to 13–14% and 18–22% of the originals, respectively. Both broke parity:
+  the loader accepted a trailing tab and rejected an escaped surrogate;
+  the dumper escaped literal astral characters and failed on lone
+  surrogates. Lazy `safe_load`/`safe_dump` function imports also failed the
+  timing gate. The Python safe provider stays in place.
+- **JSON:** per-document decoder construction and a shared encoder missed
+  the gate. Combining the two writes with `+` or picop `str_concat` added
+  about 0.9–1.0 MiB of traced peak on the 1 MiB string guard.
+- **JSONL:** reusing the encoder passed the scratch gate on both runtimes.
+  Installed writer medians were 28–29% lower for 4,096 UTF-8 records,
+  but the candidate won only 5/7 pairs on each ABI, so it was reverted.
+  Byte-level BOM checks (`bytes.startswith` and picop
+  `bytes_startswith`) did not consistently beat the Unicode check. Using
+  picop `str_concat` on top of encoder reuse also missed the gate against
+  the same encoder with `+`.
+- **Text lines:** hoisting `strip is True` improved the large filtered
+  target on both interpreters, but missed the guard thresholds on 3.15.
+- **TOML:** explicit UTF-8 decoding plus `loads` and the binary writer
+  both missed the timing gate.
+- **ZIP:** the single-chunk path preserved EOF, CRC, and size limits, but
+  missed the target on both interpreters and the large deflated guard on
+  3.15.
+
+No candidate was retained. The original wheels passed 519 tests on each
+interpreter, and base installs still read TOML without the optional
+providers. The final paired runs compare the same implementation from
+the snapshot and installed wheels; median gaps show measurement variation,
+not speedups or regressions. Installed-wheel reports also include the
+rejected JSONL writer and fresh-process RSS:
+[3.14](results/files-opt-installed-3.14.txt),
+[3.15](results/files-opt-installed-3.15.txt).
+
+### Calibrated file optimization pass
+
+CPython 3.14.7 and 3.15.0rc2, GIL enabled, Linux x86-64, Intel Core
+i7-6700, pinned to CPU 4. Both wheels used picop 3.13.0, PyYAML 6.0.4,
+and `tomli-w` 1.2.0. All six scratch trials passed differential checks
+before timing.
+
+Each fixture has nine paired samples from three processes. A sample sums
+eight alternating block pairs. A/A compares the installed baseline to
+the same implementation from a source snapshot. It requires a median
+ratio within 0.95–1.05 and at least 7/9 ratios within 0.90–1.10; on failure,
+retry once with 16 pairs and retain that count for the trial. To ship,
+the target must reach ≤0.95 with ≥8/9 wins on both ABIs, each calibrated
+guard must stay ≤1.05, and traced peak and applicable separate-process
+RSS must grow by no more than the larger of 5% and 64 KiB.
+
+Scratch results are median paired trial/control ratios, not ratios of
+separate medians. Below 1.00 is faster. No trial qualified.
+
+| Trial target | 3.14 ratio (wins) | 3.15 ratio (wins) | Decision |
+|---|---:|---:|---|
+| YAML read, 4,096 UTF-8 records, 256 KiB raw buffer | 1.021 (2/9) | 0.994 (6/9) | Target misses; small documents add ~128 KiB of traced peak, and one small guard per ABI fails A/A. |
+| JSON read, 32 ASCII records, guarded default decoder | 0.970 (7/9) | 0.929 (8/9) | 1 MiB guards take 1.81–2.40× as long; 3.14 target and one A/A guard miss. |
+| JSONL write, 4,096 UTF-8 records, one encoder per call | 0.617 (9/9) | 0.664 (9/9) | Empty write is >8% slower on both; 3.15 large ASCII guard fails A/A. |
+| Text lines, 4,096 UTF-8 lines, exact-`True` strip fast path | 0.963 (6/9) | 1.002 (3/9) | Both targets miss; 3.14 target fails A/A and 3.15 unfiltered ASCII guard is 1.107×. |
+| TOML lazy import, cold JSONL read of 32 UTF-8 records | 0.866 (8/9) | 0.937 (8/9) | All three wheel-vs-source cold fixtures fail A/A on both ABIs; the apparent gain is inconclusive. |
+| ZIP read, one 4 MiB stored member, effective byte budget | 1.001 (4/9) | 1.041 (2/9) | Stable A/A on both; target misses on both. |
+
+No new picop substitutions:
+
+- **YAML — SKIP:** `file_from_fd` takes an existing descriptor instead of a
+  path; `file_getline` does not replace the provider's live UTF-8 stream.
+- **JSON — UNMEASURED:** `str_contains` is available for the discarded
+  literal guards; the catalog also reports a loss at 4 KiB. **SKIP**
+  `str_concat` on the unchanged writer: the earlier trial raised peak
+  memory.
+- **JSONL — SKIP:** no JSON encoder helper. The previous `str_concat`
+  writer and `bytes_startswith` reader trials did not qualify.
+- **Text lines — SKIP:** no equivalent Unicode `strip` helper; the
+  previous `str_endswith`/`str_startswith` comparison did not qualify.
+- **TOML — SKIP:** no provider helper. `mod_import` is a specialized
+  bytes-name import, not a way to avoid import on unrelated calls;
+  `mod_import_object` is documented as slower in Python.
+- **ZIP — SKIP:** no bounded member stream helper; the catalog reports
+  `BytesWriter` losing to `bytes.join` for materialized chunks.
+  Prior `long_check_exact` and `bytes_len`/`list_append`/`set_add`/
+  `set_contains` trials showed no repeatable two-ABI improvement.
+
+The unchanged installed wheels passed all 519 tests on each ABI. The
+base installs read TOML and reported the required optional extra before
+touching paths for TOML writes and YAML. No file operation changed.
+
+| Final same-code control target | 3.14 ratio | 3.15 ratio |
+|---|---:|---:|
+| YAML read | 0.976 | 1.067 |
+| JSON read | 1.004 | 1.041 |
+| JSONL write | 0.967 | 0.978 |
+| Text lines | 0.957 | 1.006 |
+| Cold JSONL import and read | 1.004 | 1.022 |
+| ZIP read | 0.969 | 0.956 |
+
+These ratios measure variation, not speedups or regressions. The raw
+records include A/A attempts, scratch trials, final installed samples,
+traced peaks, and separate-process RSS where applicable:
+[3.14](results/files-calibrated-3.14.jsonl),
+[3.15](results/files-calibrated-3.15.jsonl).
+The standard `bench/files.py` also completed all 55 comparisons per ABI:
+[3.14](results/files-calibrated-canonical-3.14.txt),
+[3.15](results/files-calibrated-canonical-3.15.txt).
+
+### JSONL: defer encoder creation until the first record
+
+Empty inputs still open and truncate the file, but never construct a JSON
+encoder. Nonempty writes reuse one bound stdlib encoder per call. A
+manual `next()` loop also avoided encoder construction on empty input but
+added iterator overhead; a shared encoder would add import-time work and
+shared mutable configuration. Neither was adopted. No picop change:
+there is no equivalent JSON encoder, and the existing `str_concat`
+comparison did not qualify.
+
+The first wall-time pass found a noisy 32-record UTF-8 A/A guard on 3.15.
+The follow-up measured thread CPU time and wall time together to separate
+scheduling delays from the actual writes. It kept the same fixture
+matrix, interleaving and per-ABI gates. All CPU-time A/A controls passed.
+The installed-wheel wall-time ratios below are medians of nine paired
+ratios, with a value below 1.00 indicating lower elapsed time.
+
+| Write workload | CPython 3.14.7 | CPython 3.15.0rc2 |
+|---|---:|---:|
+| Empty iterable | 1.028× | 1.002× |
+| 4,096 UTF-8 records | 0.645× | 0.667× |
+
+The large target won 9/9 pairs on both ABIs. Traced peaks stayed within
+the memory gate. The 3.15 single-record >64 KiB guard initially measured
+1.056× with two calls per block; the separately calibrated confirmation
+at 32 calls per block measured 0.920× CPU / 0.920× wall. The median over
+all 18 installed CPU ratios was 0.982×. Both results are retained in the
+raw logs; the isolated short-block miss did not reproduce.
+
+Differential writer checks passed on both fresh wheels, as did the 12
+focused tests per ABI. Raw timings, parity, and traced peaks:
+[3.14](results/files-jsonl-lazy-encoder-3.14.jsonl),
+[3.15](results/files-jsonl-lazy-encoder-3.15.jsonl).
+
+### Historical comparison
+
+A focused scratch build compiled the historical file extensions separately
+for both CPython ABIs, using native stdio/mmap for lines, orjson for JSON
+decoding, an in-house TOML subset, vendored libyaml for YAML, and libzip for
+ZIP. The comparison measures successful calls with matched data, not
+equivalent input/error contracts:
+
+- Both JSON writers use stdlib serialization; historical JSON is pretty
+  printed while picoke writes compact JSON. Historical JSONL skips blanks
+  and batches writes; the measured JSONL fixtures contain no blanks and
+  output bytes were checked for equality.
+- TOML readers use arrays of tables. Both writers use matched nested
+  tables: the historical writer stringifies dicts inside arrays instead
+  of round-tripping them. YAML writers were checked for equal parsed values,
+  not identical text.
+- Line tests include disk reading and list materialization on LF fixtures,
+  not cached access. The historical readers have different newline and
+  line-length behavior.
+- The historical ZIP API takes bytes, so its measured arm includes reading
+  the compressed archive and adapting entries to the same result type. Both
+  arms select the same entries with limits, but only picoke enforces the
+  full preflight and selected-duplicate contract.
+
+Representative medians in milliseconds, shown as historical → picoke.
+The JSONL read row uses the final installed decoder samples linked above.
+Original matched-input data for all formats:
+[3.14](results/files-historical-3.14.txt), [3.15](results/files-historical-3.15.txt).
+
+| Workload | CPython 3.14 | CPython 3.15 |
+|---|---:|---:|
+| JSON read, 4,096 UTF-8 records | 1.00 → 3.85 | 1.11 → 2.81 |
+| JSON write, 4,096 UTF-8 records | 2.68 → 2.05 | 2.40 → 2.96 |
+| JSONL read, 4,096 UTF-8 records | 3.63 → 9.54 | 5.12 → 7.62 |
+| JSONL write, 4,096 UTF-8 records | 18.14 → 17.43 | 17.90 → 19.96 |
+| TOML read, 4,096 UTF-8 tables | 977.05 → 46.39 | 999.20 → 80.40 |
+| TOML write, 4,096 UTF-8 nested tables | 5.58 → 29.17 | 5.78 → 33.56 |
+| YAML read, 4,096 UTF-8 records | 58.26 → 815.91 | 39.08 → 830.70 |
+| YAML write, 4,096 UTF-8 records | 12.66 → 472.51 | 14.40 → 560.17 |
+| Filtered lines, 4,096 UTF-8 lines (mmap control) | 1.18 → 2.03 | 1.12 → 2.04 |
+| ZIP read, 32 × 64 KiB deflated | 4.52 → 6.19 | 4.78 → 6.26 |

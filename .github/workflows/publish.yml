@@ -110,7 +110,8 @@ jobs:
           printf '%s  %s\n' "$SHA256" dist/*.tar.gz | sha256sum --check --strict
           sudo apt-get update
           sudo apt-get install -y libssl-dev
-          python -m pip install pytest dist/*.tar.gz
+          sdist=(dist/*.tar.gz)
+          python -m pip install pytest "${sdist[0]}[files]"
           python -I -m pytest "$GITHUB_WORKSPACE/tests" -q
 
   publish:

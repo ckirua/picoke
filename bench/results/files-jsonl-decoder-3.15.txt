@@ -1,0 +1,9 @@
+3.15.0rc2, final installed JSONL reader, warm cache
+jsonl 32 ASCII read prior/final: 191.18/100.70 us; 167384/317773 units/s; 143101/138203 B peak; ratio 0.527, wins 7/7; pairs [0.491, 0.692, 0.367, 0.298, 0.632, 0.726, 0.485]
+jsonl 32 ASCII read historical/final: 35.23/76.24 us; 908389/419708 units/s; 137595/138208 B peak; ratio 2.164, wins 0/7; pairs [2.686, 1.508, 1.915, 1.892, 2.461, 2.19, 1.453]
+jsonl 32 UTF-8 read prior/final: 163.71/103.11 us; 195470/310353 units/s; 144157/139329 B peak; ratio 0.630, wins 7/7; pairs [0.414, 0.489, 0.487, 0.93, 0.505, 0.445, 0.499]
+jsonl 32 UTF-8 read historical/final: 66.00/121.37 us; 484822/263666 units/s; 138493/139113 B peak; ratio 1.839, wins 0/7; pairs [1.827, 1.666, 2.092, 1.904, 2.054, 2.068, 2.293]
+jsonl 4096 ASCII read prior/final: 17921.79/9294.73 us; 228549/440680 units/s; 1625542/1565486 B peak; ratio 0.519, wins 7/7; pairs [0.519, 0.453, 0.551, 0.329, 0.381, 0.517, 0.482]
+jsonl 4096 ASCII read historical/final: 5980.17/11025.77 us; 684930/371493 units/s; 1206699/1565486 B peak; ratio 1.844, wins 0/7; pairs [3.447, 2.132, 2.151, 1.535, 2.113, 1.17, 2.133]
+jsonl 4096 UTF-8 read prior/final: 18542.62/8692.06 us; 220897/471235 units/s; 1747728/1687280 B peak; ratio 0.469, wins 7/7; pairs [0.499, 0.572, 0.613, 0.307, 0.513, 0.587, 0.314]
+jsonl 4096 UTF-8 read historical/final: 5115.32/7621.83 us; 800732/537404 units/s; 1328553/1687280 B peak; ratio 1.490, wins 1/7; pairs [1.131, 2.59, 1.731, 2.645, 1.306, 2.111, 0.658]
