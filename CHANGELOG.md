@@ -6,6 +6,7 @@
 - Added JSON, streaming JSON Lines, filtered text lines, TOML, and YAML file helpers under `picoke.io.files`. TOML writing and YAML use optional extras.
 - Added bounded ZIP member reads under `picoke.io.files.zip`, without filesystem extraction.
 - JSON Lines writes reuse one encoder per nonempty call; empty inputs still truncate without creating an encoder.
+- Added `picoke.logging.JSONFormatter` for compact structured events with standard-library logging handlers.
 
 ## 0.1.0rc2
 

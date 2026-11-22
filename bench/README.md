@@ -1183,3 +1183,44 @@ Original matched-input data for all formats:
 | YAML write, 4,096 UTF-8 records | 12.66 → 472.51 | 14.40 → 560.17 |
 | Filtered lines, 4,096 UTF-8 lines (mmap control) | 1.18 → 2.03 | 1.12 → 2.04 |
 | ZIP read, 32 × 64 KiB deflated | 4.52 → 6.19 | 4.78 → 6.26 |
+
+## Structured JSON logging
+
+Run `python -I -B bench/structured_logging.py --calls 256` with an installed
+wheel. Results below use CPython 3.14.7 and 3.15.0rc2, GIL enabled, on Linux
+x86-64, pinned to CPU 4. The independent reference uses stdlib `logging`,
+`datetime`, and compact strict `json` output with the same schema. Formatter
+strings and handler sink bytes matched before timing. Enabled measurements
+include `Logger.info`, record creation, formatting, encoding to an in-memory
+sink, and the sink reset. They do not measure disk or terminal IO.
+
+| Median time per call | CPython 3.14 | CPython 3.15 |
+|---|---:|---:|
+| Plain record, formatter only | 10.2 µs | 10.3 µs |
+| Plain record, enabled handler | 34.1 µs | 34.5 µs |
+| Nested fields, formatter only | 22.2 µs | 19.1 µs |
+| Nested fields, enabled handler | 44.7 µs | 37.3 µs |
+| Exception record, enabled handler | 254.0 µs | 247.8 µs |
+| Disabled INFO call | 0.40 µs | 0.21 µs |
+| Fresh-process import, construction, and first format | 0.49 ms | 0.75 ms |
+
+Warm measurements use nine samples of eight alternating block pairs,
+measured by thread CPU time. Cold results use wall time and exclude both
+process startup and loading the benchmark's stdlib dependencies. Same-code
+controls for some fixtures varied outside the 0.95–1.05 median or 7/9
+within 0.90–1.10 gates. The absolute timings describe this run, not a general
+speedup claim.
+
+Picop 3.13.0 review: **SKIP** `str_concat` for the timestamp's `Z` suffix.
+At the complete formatter call site, its paired median ratios were
+1.094/1.021 on plain events and 1.014/1.028 on nested events
+(3.14/3.15; higher is slower). Some controls were noisy; no win was shown.
+**UNMEASURED** `str_check` as a mapping-key predicate: its C-level check is
+not a direct replacement for `isinstance` across arbitrary objects.
+Exact dict/list predicates do not replace the subclass-aware container
+checks; no catalog helper replaces strict JSON encoding. No Cython or new
+dependency was added.
+
+Complete paired samples, cold times, byte parity and picop probe:
+[3.14](results/structured-logging-3.14.json),
+[3.15](results/structured-logging-3.15.json).

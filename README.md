@@ -157,6 +157,33 @@ members. It returns names and bytes without extracting files.
 Writes are not atomic. See the [file I/O contracts](docs/IO_FILES_PLAN.md)
 for error handling, ZIP limits, and performance results.
 
+## Structured logging
+
+`picoke.logging.JSONFormatter` works with standard-library logging handlers.
+
+```python
+import logging
+
+from picoke.logging import JSONFormatter
+
+handler = logging.StreamHandler()
+handler.setFormatter(JSONFormatter())
+logger = logging.getLogger("app")
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+logger.info("processed %d records", 3, extra={"fields": {"worker": "ingest"}})
+```
+
+Each record becomes one compact JSON object with a UTC millisecond `timestamp`,
+`level`, `logger`, and `message`. Exception and stack text are included when
+available. Put structured data in `extra={"fields": ...}`: mappings with string
+keys, lists, strings, booleans, integers, finite floats, and `None` values.
+Unsupported values and circular containers raise during formatting; handlers
+retain their usual error policy. The handler owns the destination, newline,
+and flushing.
+See the [logging benchmarks](bench/README.md#structured-json-logging) for
+the cost of formatting and handler delivery.
+
 ## Python support
 
 Target CPython **3.14 and newer**, with **3.15 as the default** for development
