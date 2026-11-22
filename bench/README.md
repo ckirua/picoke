@@ -1224,3 +1224,312 @@ dependency was added.
 Complete paired samples, cold times, byte parity and picop probe:
 [3.14](results/structured-logging-3.14.json),
 [3.15](results/structured-logging-3.15.json).
+
+### Formatter optimization follow-up
+
+Two same-contract scratch candidates were compared to the installed
+checkpoint on CPython 3.14.7 and 3.15.0rc2, GIL enabled, pinned to CPU 4.
+Each fixture used nine samples of eight alternating blocks, measured with
+thread CPU time. Parity covered nested mappings, shared containers, cycles,
+invalid keys, non-finite floats and unsupported values. Traced peaks were
+also recorded.
+
+| Candidate and target | 3.14 trial/control | 3.15 trial/control | Decision |
+|---|---:|---:|---|
+| Manual UTC timestamp, plain event | 1.020× (3/9 wins) | 1.048× (2/9 wins) | Skip: no repeatable win; several same-code controls were unstable. |
+| Exact `dict`/`list` field specialization, nested event | 0.953× (8/9 wins) | 1.005× (4/9 wins) | Skip: 3.14 same-code control unstable; 3.15 shows no win. |
+
+The exact-container trial retains copying and falls back to the original
+path for subclasses and custom mappings. Reusing a mutable encoder across
+format calls was not trialed: it would change the timing and lookup of
+`json.dumps`/`JSONEncoder` and introduce shared mutable state. No picop
+substitution was identified for these candidates; the previously measured
+`str_concat` timestamp substitution was not repeated. No production
+optimization was retained.
+
+Raw ratios, per-arm times and peaks: [3.14](results/structured-logging-opt-3.14.json),
+[3.15](results/structured-logging-opt-3.15.json). These are exploratory
+single-process comparisons; unstable A/A results do not establish speedups.
+
+## Bounded background binary delivery
+
+`BackgroundWriter` transfers references to immutable bytes through a bounded
+queue to one worker. This avoids copying a payload while it is queued; it does
+not guarantee zero-copy encoding, short-write handling, stream buffering, or
+kernel I/O. The benchmark checks delivered bytes and separately compares
+formatting through ordinary and background logging handlers. The stdlib
+`QueueHandler`/`QueueListener` case has different record preparation and
+shutdown semantics and is labeled separately.
+
+The Python validation path was screened against picop 3.13.0's public
+`bytes_check_exact` and `bytes_len` together. The nine paired microbenchmark
+ratios and host details are in
+[the screening report](results/background-writer-picop-screen.txt).
+The samples were noisy and did not show a reliable gain; no substitution was
+retained. This is not an end-to-end performance claim.
+
+A separate pybind11/C++ prototype built for both ABIs but its first 3.14
+contract test did not complete within 45 seconds. It was rejected without a
+performance comparison; the prototype is not part of the distribution.
+
+The Cython prototype passed the focused writer tests on both ABIs, but was
+not retained: neither target control was stable, its win counts did not meet
+the gate, and some guard medians exceeded 1.05. All 16 binary same-code
+controls on 3.14 and 15 of 16 on 3.15 remained inconclusive after retry.
+
+| CPython | Target candidate / Python median paired ratio | Candidate wins | Retry control within 0.90–1.10 |
+|---|---:|---:|---:|
+| 3.14.7 | 0.918 | 10 / 18 | 8 / 18 |
+| 3.15.0rc2 | 0.967 | 11 / 18 | 6 / 18 |
+
+The target is four producers, 128-byte blocking writes, idle sink. At least
+14 of 18 control ratios were required after retry; none of these target
+figures establish a win. Raw samples: [3.14](results/background-writer-3.14.json),
+[3.15](results/background-writer-3.15.json).
+
+The run used picop 3.13.0, Linux x86-64, an Intel i7-6700 pinned to CPU 4
+with the `powersave` governor, 270 prebuilt items per producer, capacity
+256, and a nominal 1 µs sleep for slow writes. Each timing block used three
+fresh processes per arm. Binary controls used nine pairs and retried with 18
+when unstable; memory samples were collected separately. Reproduction of
+the candidate arm requires rebuilding the disposable prototype for the ABI:
+
+```bash
+PYTHONPATH=/path/to/cython-prototype python3.15 bench/background_writer.py \
+  --workload all --processes 3 --pairs 9 --items 270 --capacity 256 \
+  --slow-delay 0.000001 --affinity 4 --candidate bg_cython_trial:BackgroundWriter
+```
+
+Omit `--candidate` and `PYTHONPATH` to measure the installed writer and
+standard-library baselines alone. CPU affinity does not prevent frequency
+changes or scheduling noise.
+
+## Framed MessagePack versus JSON logging
+
+Both arms encode the same records and use the actual background handlers and
+writer, with an in-memory binary sink. Each sample checks decoded event parity;
+timings include writer startup, producer work, drain and close. Separate
+encoding-only and reader timings appear in the raw reports. JSON uses
+`ensure_ascii=True`; sizes include the JSON newline or the 12-byte binary frame.
+These are not filesystem, `fsync`, multi-process append, or durability tests.
+
+| Event | Producers | JSON bytes / record | Binary bytes / record | 3.14 binary / JSON time | 3.15 binary / JSON time |
+|---|---:|---:|---:|---:|---:|
+| Short | 1 | 161 | 146 | 1.066 | 1.114 |
+| Short | 4 | 161 | 146 | 0.926 | 1.002 |
+| Nested | 1 | 201 | 175 | 1.122 | 1.354 |
+| Nested | 4 | 201 | 175 | 0.975 | 1.089 |
+| Unicode | 1 | 298 | 201 | 1.172 | 1.104 |
+| Unicode | 4 | 298 | 201 | 1.014 | 0.914 |
+
+Sizes are per-record medians; time ratios are paired end-to-end medians. None
+of the six fixtures passed both JSON and binary same-code controls on either
+interpreter, so the timing ratios are **inconclusive**, not speedup or
+regression claims. The size differences apply only to these fixtures.
+
+Linux x86-64, Intel i7-6700, CPU 4 affinity, `powersave` governor, msgpack
+1.2.4, nine alternating paired samples, 400 records per producer, capacity
+256. Each observation used a fresh process. The test interpreters were
+CPython 3.14.7 and 3.15.0rc2. Raw samples and controls:
+[3.14](results/binary-logging-3.14.json),
+[3.15](results/binary-logging-3.15.json).
+
+```bash
+python3.15 bench/binary_logging.py --samples 9 --items 400 --capacity 256 --affinity 4
+```
+
+Picop review: `bytes_concat` is Cython-only and not a Python replacement for
+the framing expressions. Python `bytes_len` and `long_check_exact` were
+screened against the corresponding builtins; the noisy microbenchmarks did
+not establish a win, so neither was retained. Details:
+[picop screening](results/binary-logging-picop-screen.txt).
+
+### Reader and framing optimization follow-up
+
+The reader now handles a complete `bytes` read without allocating a chunk
+list, while preserving short-read and subclass behavior. It also avoids a
+generator for key checks and uses `struct.unpack_from` for frame integers.
+Framing now joins all four pieces once rather than repeatedly concatenating
+the payload.
+
+| Fixture | 3.14 reader CPU ratio | 3.15 reader CPU ratio |
+|---|---:|---:|
+| Short, complete reads | 0.900 | 0.881 |
+| Nested, complete reads | 0.956 | 0.936 |
+| Unicode, complete reads | 0.925 | 0.919 |
+| 32 KiB, complete reads | 0.940 | 0.963 |
+| Short, seven-byte reads | 0.966 | 0.969 |
+| 32 KiB, seven-byte reads | 1.003 | 0.988 |
+
+Ratios are candidate/baseline paired medians; lower is better. These are
+single-thread CPU times for complete `iter_binary_records` calls, not
+filesystem or logging-handler throughput. Same-code CPU controls had medians
+within 0.95–1.05 and at least seven of nine pairs within 0.90–1.10 for the
+listed fixtures. Some wall-clock controls were unstable.
+
+For 32-KiB encoding, paired CPU ratios were 0.944 and 0.962 on 3.14 and
+3.15 respectively; independent repeats were 0.948 and 0.969. Small-record
+CPU ratios ranged from 0.993 to 1.011. These are encoding-only results; the
+background-handler wall-clock controls were unstable and do not establish
+an end-to-end improvement.
+
+The first reader prototype regressed seven-byte reads, and a no-copy
+validation prototype regressed nested records; both were rejected. The
+retained reader and join-based framing passed wire-format and error-path
+tests on both ABIs. Raw samples, including rejected trials and controls:
+[optimization trials](results/binary-logging-opt-trials.json). Linux x86-64,
+Intel i7-6700, CPU 4, `powersave`, CPython 3.14.7 / 3.15.0rc2, picop 3.13.0.
+Nine paired samples each alternate 30 blocks; the large short-read fixture
+uses two records per block, all other fixtures use 20. Reproduce with a
+baseline wheel installed and a candidate source file:
+
+```bash
+taskset -c 4 python bench/binary_logging_opt.py aa short read
+taskset -c 4 python bench/binary_logging_opt.py /path/to/candidate.py short read
+```
+
+### Bounded Cython field validation
+
+The binary codec performs structural materialization and numeric validation
+in Cython, retaining the two-pass error ordering and custom container
+behavior. Cython's optimized type checks are used only for exact built-ins;
+subclasses and objects with dynamic `__class__` use Python's `isinstance`
+semantics. Python recursion frames are retained for recursion-limit
+accounting, and deep traversal falls back to Python before native stack use
+can grow without bound. Encoding and frame construction remain Python.
+Header parsing also avoids a duplicate magic check; `JSONFormatter` continues
+to use its existing Python field materializer.
+
+| Fixture | 3.14 encode CPU ratio | 3.14 reader CPU ratio | 3.15 encode CPU ratio | 3.15 reader CPU ratio |
+|---|---:|---:|---:|---:|
+| Short | 0.936 | 0.850 | 0.913 | 0.887 |
+| Nested | 0.848 | 0.813 | 0.847 | 0.802 |
+| Unicode | 0.932 | 0.870 | 0.902 | 0.867 |
+| 32 KiB | 0.978 | 0.967 | 0.960 | 0.972 |
+
+Ratios are optimized/pre-Cython paired medians; lower is better. Each
+installed-wheel measurement used nine samples of 30 interleaved blocks,
+20 records per block, on GIL-enabled CPython 3.14.7 and 3.15.0rc2. Same-code
+CPU controls had medians in 0.95–1.05 with at least seven of nine ratios in
+0.90–1.10. An independent bounded prototype also favored native validation
+on all nine pairs for the nested encode and reader workloads.
+
+With seven-byte partial reads and 32-KiB records, the corresponding CPU
+ratios were 1.011 on 3.14 and 1.005 on 3.15; the latter's same-code control
+was unstable. These measurements do not establish a partial-read improvement.
+Complete background-handler and cold-import wall-clock controls were unstable
+on most fixtures, so these results do **not** establish a general throughput
+or startup improvement.
+
+An initial unbounded Cython recursion prototype was rejected: it did not
+respect Python's recursion limit. An optimized `isinstance` prototype was
+also rejected because it changed the behavior of dynamic `__class__` proxies.
+The retained implementation switches deep trees and non-exact types back to
+Python; tests cover recursion boundaries, cycles beyond the native depth bound,
+dynamic proxies and 25,000 nested containers with a raised limit. A separate
+compiled parser prototype did not outperform the Python parser and was not
+retained.
+
+Picop `dict_new`, `dict_set`, `list_empty`, `list_append`, `dict_check`,
+`list_check`, and exact-type checks were tested as Cython variants. They
+showed no consistent consumer-workload gain over ordinary Cython containers
+and direct CPython checks, so they were not retained. `dict_set` also required
+an exact-string guard and a generic fallback for `str` subclasses to preserve
+behavior.
+
+Raw timings, controls and rejected candidates:
+[native trials](results/binary-logging-native-trials.json). Linux x86-64,
+Intel i7-6700, CPU 4 affinity, `powersave`, picop 3.13.0 and msgpack 1.2.4.
+The frozen pre-Cython source is retained solely for comparisons:
+
+```bash
+taskset -c 4 python bench/binary_logging_opt.py aa nested encode
+taskset -c 4 python bench/binary_logging_opt.py bench/baselines/binary_logging_python.py nested encode
+```
+
+The runner reports candidate/installed ratios. With the optimized wheel
+installed, the second command reports pre-Cython/optimized; invert its
+paired median to compare with the table above.
+
+### Exact-float validation follow-up
+
+The Cython validator checks exact built-in floats with C `isfinite` after
+conversion to `double`. Non-exact values still use the existing Python
+fallback; structural and numeric validation remain separate passes.
+
+The fixture contains a list of 128 finite floats. Ratios compare the
+optimized installed wheel against the previous Cython wheel, with nine
+paired samples of 30 interleaved blocks and 20 records per block. Lower is
+better.
+
+| Runtime | Encode CPU ratio | Reader CPU ratio |
+|---|---:|---:|
+| CPython 3.14.7 | 0.845 | 0.850 |
+| CPython 3.15.0rc2 | 0.841 | 0.853 |
+
+All nine pairs favored the change for these four measurements; the
+same-code controls met the 0.95–1.05 median and seven-of-nine 0.90–1.10
+criteria. Independent prototype repeats also favored the float-heavy case.
+The 3.15 Unicode reader guard measured 1.022 in the installed-wheel run
+and 1.027–1.036 in two prototype runs, so a small regression on that
+non-float fixture is possible. These measurements do not establish
+background-handler throughput gains or free-threaded behavior.
+
+The structural traversal, Python reader and integer-check candidates did
+not show consistent wins and were not retained. Picop
+`cyfloat.float_as_double_unchecked` was compared against Cython's
+`<double>` conversion for exact floats; direct comparisons did not show a
+repeatable gain, so it was not retained. One early installed-wheel
+comparison accidentally loaded the old extension in both arms; it is
+marked invalid in the raw results, and the corrected comparison loads the
+two binaries separately.
+
+Linux x86-64, Intel i7-6700, CPU 4 affinity, `powersave`, GIL-enabled
+CPython, picop 3.13.0 and msgpack 1.2.4. Raw paired samples, controls and
+rejected candidates: [float trials](results/binary-logging-float-trials.json).
+The benchmark runner also provides `floats` and `numbers` fixture shapes:
+
+```bash
+taskset -c 4 python bench/binary_logging_opt.py aa floats encode
+```
+
+### Fragmented reads and wide records
+
+The reader uses a Cython read loop with an exact-`bytes` length fast path.
+It retains the first full chunk by identity and otherwise joins the chunks
+actually read; it does not preallocate based on the declared frame size.
+Bytes subclasses and dynamic type proxies retain Python checks and length
+behavior. Exact dictionaries with exact string keys use a compiled key
+scan; other records fall back to Python's key validation.
+
+Installed-wheel reader CPU ratios against the preceding implementation:
+
+| Fixture | 3.14 | 3.15 |
+|---|---:|---:|
+| Short record, seven-byte reads | 0.848 | 0.848 |
+| 32 KiB record, seven-byte reads | 0.722 | 0.719 |
+| 128 top-level keys, complete reads | 0.833 | 0.855 |
+
+These are the second of two paired runs; each uses nine samples of 30
+interleaved blocks. The short and wide fixtures use 20 records per block;
+the large short-read fixture uses two. The listed runs had same-code
+controls within the 0.95–1.05 median and seven-of-nine 0.90–1.10 criteria.
+The first 3.14 large short-read control was unstable, so that run is
+inconclusive. Results do not establish background-handler throughput or
+free-threaded performance.
+
+The eager `bytearray(size)` prototype was rejected because it could
+allocate the full declared record size before a truncated stream reaches
+EOF. Native integer conversion and record-mapping prototypes did not show
+consistent wins. Picop `dict_next`, `str_check_exact`, `bytes_check_exact`
+and `bytes_len` variants were also compared against the retained Cython
+paths; direct paired measurements did not show a repeatable advantage.
+
+Linux x86-64, Intel i7-6700, CPU 4 affinity, `powersave`, GIL-enabled
+CPython 3.14.7 and 3.15.0rc2, picop 3.13.0, msgpack 1.2.4. Raw samples and
+rejected candidates: [reader trials](results/binary-logging-reader-trials.json).
+The runner's `wide` shape exercises 128 top-level keys:
+
+```bash
+taskset -c 4 python bench/binary_logging_opt.py aa wide read
+```

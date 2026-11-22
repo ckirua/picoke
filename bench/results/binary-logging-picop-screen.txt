@@ -1,0 +1,4 @@
+picop 3.13.0; Linux x86-64 Intel i7-6700 CPU 4 affinity; nine alternating samples, 300000 calls each, exact bytes payload of 200 bytes and integer size 1048576. Screening microbenchmark only; no A/A calibration and substantial variation. No substitutions retained.
+Median paired candidate/baseline ratios:
+3.14.7: bytes_len / len = 1.4644; long_check_exact / (type(n) is int) = 1.2315.
+3.15.0rc2: bytes_len / len = 1.2482; long_check_exact / (type(n) is int) = 1.1077.

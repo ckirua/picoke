@@ -7,7 +7,9 @@ import logging
 from collections.abc import Mapping
 from datetime import UTC, datetime
 
-__all__ = ("JSONFormatter",)
+from picoke._background_writer import BackgroundWriter
+
+__all__ = ("BackgroundJSONHandler", "BackgroundWriter", "JSONFormatter")
 
 
 def _json_fields(value: object, active: set[int]) -> object:
@@ -68,3 +70,30 @@ class JSONFormatter(logging.Formatter):
             result["fields"] = _json_fields(fields, set())
 
         return json.dumps(result, ensure_ascii=True, separators=(",", ":"), allow_nan=False)
+
+
+class BackgroundJSONHandler(logging.Handler):
+    """Send formatted JSON lines to a caller-owned background writer.
+
+    Worker failures surface on a subsequent writer operation or flush, not
+    necessarily on the logging call that submitted the affected record.
+    Closing this handler neither flushes nor closes the writer.
+    """
+
+    def __init__(self, writer: BackgroundWriter) -> None:
+        super().__init__()
+        self.writer = writer
+        self.setFormatter(JSONFormatter())
+
+    def emit(self, record: logging.LogRecord) -> None:
+        try:
+            payload = (self.format(record) + "\n").encode("utf-8")
+            self.writer.write(payload, block=True)
+        except Exception:
+            self.handleError(record)
+
+    def flush(self) -> None:
+        self.writer.flush()
+
+    def close(self) -> None:
+        super().close()

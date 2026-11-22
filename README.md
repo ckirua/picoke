@@ -184,6 +184,89 @@ and flushing.
 See the [logging benchmarks](bench/README.md#structured-json-logging) for
 the cost of formatting and handler delivery.
 
+For bounded background delivery to a binary stream:
+
+```python
+import logging
+from picoke.logging import BackgroundJSONHandler, BackgroundWriter
+
+with open("events.jsonl", "ab") as stream:
+    with BackgroundWriter(stream, capacity=256, max_item_size=65536) as writer:
+        handler = BackgroundJSONHandler(writer)
+        logger = logging.getLogger("background-example")
+        logger.addHandler(handler)
+        try:
+            logger.setLevel(logging.INFO)
+            logger.info("started", extra={"fields": {"city": "雪"}})
+            handler.flush()
+        finally:
+            logger.removeHandler(handler)
+            handler.close()
+```
+
+`BackgroundWriter` defaults to 1,024 queued items and a maximum item size of
+1,048,576 bytes. Capacity must be a positive exact `int`; the maximum size
+must be a nonnegative exact `int`. Both must fit `Py_ssize_t`. One additional
+item can be in flight. `write(data, block=True)` accepts exact `bytes` and
+waits for capacity; `block=False` returns `False` when full. Oversized items
+raise `ValueError`, even when the queue is full. Accepted items are delivered
+in FIFO admission order. Queue slots retain the original bytes without
+copying; formatting, encoding, short writes, stream buffering and the
+operating system may copy. On a short write the stream must accept a
+`memoryview` for the remainder.
+
+`flush()` waits for earlier admissions and flushes the stream. `close()`
+stops admission, drains and flushes but never closes the caller-owned stream;
+the handler also leaves its writer open when closed. A blocked stream can
+make these operations wait indefinitely; flushing does not guarantee
+durability. A sink failure terminates delivery and is chained as the cause
+of `RuntimeError` on subsequent writer operations or handler flush, potentially
+after the logging call. Construct a new writer after a fork. GIL-enabled
+CPython is required; free-threaded operation has not been validated.
+
+### Append-only binary logs
+
+Install the optional codec with `python3.15 -m pip install 'picoke[binary-logging]'`.
+`BackgroundBinaryHandler` writes versioned, length-prefixed MessagePack
+records with CRC-32 checksums through the same background writer:
+
+```python
+import logging
+from picoke.binary_logging import BackgroundBinaryHandler, iter_binary_records
+from picoke.logging import BackgroundWriter
+
+logger = logging.getLogger("binary-example")
+logger.setLevel(logging.INFO)
+with open("events.pklog", "ab") as stream:
+    with BackgroundWriter(stream, max_item_size=1048588) as writer:
+        handler = BackgroundBinaryHandler(writer)
+        logger.addHandler(handler)
+        try:
+            logger.info("started", extra={"fields": {"city": "雪"}})
+            handler.flush()
+        finally:
+            logger.removeHandler(handler)
+            handler.close()
+
+with open("events.pklog", "rb") as stream:
+    for event in iter_binary_records(stream):
+        print(event)
+```
+
+The framing adds 12 bytes to each MessagePack payload; the writer's maximum
+item size must include that overhead. The reader bounds payloads at 1 MiB by
+default. By default, incomplete frames raise `BinaryLogError`;
+`recover_truncated=True` ignores only an incomplete final frame. Checksum,
+version, size and decoding failures still raise. Repair a truncated tail
+before appending more frames. The handler and reader do not close their
+caller-owned writer or stream.
+
+MessagePack integers are limited to its signed-64/unsigned-64 range. CRC-32
+detects accidental corruption; it does not authenticate records. Use one
+writer per file; append mode does not coordinate concurrent processes or make
+multiple writes atomic. A flush is not `fsync` and does not guarantee crash
+durability. Encoding, framing and downstream I/O may copy data.
+
 ## Python support
 
 Target CPython **3.14 and newer**, with **3.15 as the default** for development
