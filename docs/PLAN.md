@@ -31,6 +31,7 @@ picoke aims to provide practical Python utilities built on picop. Crypto now cov
 - `picoke.ratelimit.TokenBucket` delivers asyncio token-bucket limiting with weighted requests, FIFO ordering, and cancellation without debit. Its Cython implementation uses picop's native monotonic clock; see the [benchmark results](../bench/README.md#cython-implementation). Keep this API independent of future networking utilities.
 - `picoke.queues.ByteRing` provides a bounded in-process byte FIFO without payload copies. Keep async waiting and shared-memory IPC separate; see the [queue benchmarks](../bench/README.md#bounded-byte-fifo).
 - `picoke.io.files` covers JSON, streaming JSON Lines, filtered text lines, TOML, YAML, and bounded ZIP member reads. See the [file I/O contracts](IO_FILES_PLAN.md) for provider choices, limits, and performance verification.
+- `picoke.logging.JSONFormatter` formats structured JSON events for standard-library handlers. Keep sink ownership, background delivery, and transports out of the formatter.
 
 ### 4. Harden and prepare a release
 

@@ -7,6 +7,7 @@ For the project overview and support policy, start with the root [`README.md`](.
 | [`PLAN.md`](PLAN.md) | Scope, milestones, validation criteria, and open decisions |
 | [`CRYPTO_PLAN.md`](CRYPTO_PLAN.md) | Legacy crypto parity, performance comparisons, security gates, and execution plan |
 | [`IO_FILES_PLAN.md`](IO_FILES_PLAN.md) | File API contracts, verification, and optimization gates |
+| [`BINARY_LOGGING_PLAN.md`](BINARY_LOGGING_PLAN.md) | Append-only binary logging format and validation plan |
 | [`RELEASE.md`](RELEASE.md) | Topic branches, working versions, and release checklist |
 | [`LEGACY_IDEAS.md`](LEGACY_IDEAS.md) | Legacy utility inventory, candidate priorities, and migration constraints |
 | [`../AGENTS.md`](../AGENTS.md) | Agent engineering and compatibility contract |

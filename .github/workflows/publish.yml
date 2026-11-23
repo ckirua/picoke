@@ -111,7 +111,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libssl-dev
           sdist=(dist/*.tar.gz)
-          python -m pip install pytest "${sdist[0]}[files]"
+          python -m pip install pytest "${sdist[0]}[files,binary-logging]"
           python -I -m pytest "$GITHUB_WORKSPACE/tests" -q
 
   publish:

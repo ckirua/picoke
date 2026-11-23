@@ -9,6 +9,7 @@ setup(
         [
             Extension("picoke.queues", ["src/picoke/queues.pyx"]),
             Extension("picoke.ratelimit", ["src/picoke/ratelimit.pyx"]),
+            Extension("picoke._binary_logging_native", ["src/picoke/_binary_logging_native.pyx"]),
         ] + [
             Extension(
                 f"picoke.crypto.{module}",

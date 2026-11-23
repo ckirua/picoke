@@ -6,6 +6,13 @@
 - Added JSON, streaming JSON Lines, filtered text lines, TOML, and YAML file helpers under `picoke.io.files`. TOML writing and YAML use optional extras.
 - Added bounded ZIP member reads under `picoke.io.files.zip`, without filesystem extraction.
 - JSON Lines writes reuse one encoder per nonempty call; empty inputs still truncate without creating an encoder.
+- Added `picoke.logging.JSONFormatter` for compact structured events with standard-library logging handlers.
+- Added a bounded background binary writer and structured JSON logging handler with explicit flush, shutdown, and error propagation.
+- Added optional MessagePack-framed append-only structured logging with checksums and a bounded streaming reader.
+- Reduced copying in MessagePack log framing and optimized complete-frame stream reads without changing the file format.
+- Moved binary-log field materialization and validation into a Cython extension while preserving the framed format and field validation semantics.
+- Accelerated finite-float validation in binary logging without changing the wire format or accepted numeric values.
+- Accelerated fragmented binary-log reads and validation of wide record maps while preserving stream and key-type behavior.
 
 ## 0.1.0rc2
 
