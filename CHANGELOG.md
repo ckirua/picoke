@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.1.0rc3
+
 - Added `picoke.queues.ByteRing`, a bounded single-producer, single-consumer FIFO for immutable bytes on GIL-enabled CPython.
 - Added JSON, streaming JSON Lines, filtered text lines, TOML, and YAML file helpers under `picoke.io.files`. TOML writing and YAML use optional extras.
 - Added bounded ZIP member reads under `picoke.io.files.zip`, without filesystem extraction.
