@@ -1533,3 +1533,159 @@ The runner's `wide` shape exercises 128 top-level keys:
 ```bash
 taskset -c 4 python bench/binary_logging_opt.py aa wide read
 ```
+
+## Shared-memory IPC exploratory benchmark
+
+Five samples per backend, 10,000 messages, 128 payload bytes plus a
+16-byte sequence/timestamp, capacity 64, one spawned producer and consumer.
+Each message was checked for sequence and payload. Results are median
+items/second including delivery, validation and child result collection:
+
+| Backend | CPython 3.14 | CPython 3.15 |
+|---|---:|---:|
+| SharedByteRing | 21,704 | 25,578 |
+| multiprocessing.Queue | 30,663 | 28,717 |
+| multiprocessing.Pipe | 65,638 | 69,307 |
+
+The ring busy-spins on full/empty while the stdlib backends block; pipe
+buffering is not equivalent to the bounded ring. These short sequential
+samples are exploratory, not evidence of a speedup. They include Python
+process shutdown and result collection and do not compare crash behavior or
+CPU usage. Linux x86-64, GIL-enabled CPython 3.14.7 and 3.15.0rc2.
+[Raw 3.14 samples](results/ipc-fork-3.14.json) and
+[3.15 samples](results/ipc-fork-3.15.json).
+
+### Same-contract optimization trials
+
+Compared the existing ring with three candidates: removing a redundant
+`bytes()` call on an mmap slice, compiling the full Python implementation,
+and using Cython buffer copies while retaining the Python synchronization.
+Each path kept the same SPSC API, file layout and `flock` synchronization.
+Ratios are candidate/baseline delivery time; lower is better.
+
+| Runtime and payload | Same-code A/A | Remove `bytes()` | Compiled class | Native buffer copy |
+|---|---:|---:|---:|---:|
+| 3.14, 128 B | 0.909 | 0.966 | 0.984 | 0.905 |
+| 3.14, 4 KiB | 1.029 | 0.983 | 1.027 | 1.018 |
+| 3.15, 128 B | 0.972 | 0.967 | 1.037 | 0.988 |
+| 3.15, 4 KiB | 0.952 | 0.999 | 1.008 | 0.990 |
+
+Nine samples per case, 30 alternating blocks per sample, 200 items per
+block and capacity 64; an acknowledgement ensures delivery and exact
+payload/FIFO checks before each block finishes. The 3.14 128-byte A/A
+control was unstable (only five of nine ratios within 0.90–1.10), so that
+row is inconclusive. Other controls met the seven-of-nine criterion, but
+none of the candidates showed a repeatable improvement above observed
+variation. No candidate was retained. Earlier independent-process controls
+were also unstable.
+
+`picop` bytes and buffer helpers were considered for the native prototype;
+none was retained without a measured equivalent consumer-path gain.
+Linux x86-64, GIL-enabled CPython 3.14.7 and 3.15.0rc2. Raw samples:
+[optimization trials](results/ipc-optimization-trials.json). The paired
+benchmark accepts importable baseline and candidate modules; the same module
+on both sides provides an A/A control:
+
+```bash
+python bench/ipc_compare.py --baseline picoke.ipc --candidate picoke.ipc \
+  --size 128 --capacity 64 --count 200 --blocks 30 --pairs 9
+```
+
+### Checked pybind11 slots and alternative IPC experiments
+
+The retained Linux implementation uses C++/pybind11 for checked slot access
+and byte copies, while Python retains the process checks, per-handle thread
+lock and `flock`. It preserves the existing shared format, bounded FIFO and
+copied-`bytes` API. Ratios below compare installed wheels against the frozen
+Python implementation; lower is better.
+
+| Payload | CPython 3.14 | CPython 3.15 |
+|---|---:|---:|
+| 128 B | 0.844 | 0.877 |
+| 4 KiB | 0.793 | 0.836 |
+
+Nine paired samples, 60 alternating blocks per sample, 200 messages per
+block, capacity 64, with an acknowledgement and exact payload/FIFO checks.
+The 3.15/128 B control was unstable on the first run; the table uses a
+retry with 120 blocks per sample, whose A/A median was 0.990 with eight
+of nine ratios within 0.90–1.10. Other listed A/A controls met the same
+median and seven-of-nine criteria. These are paired delivery timings, not
+claims about end-to-end application throughput.
+
+A scratch lock-free atomic SPSC prototype showed lower timings, but uses an
+incompatible shared format and different synchronization, has incomplete
+crash and attach semantics, and is not a production replacement. A borrowed
+memoryview is not a safe zero-copy queue API by itself: derived views can
+outlive the original view and prevent closing or observe a reused slot. No
+zero-copy API is claimed. The host permits `io_uring_setup`, but the current
+queue performs mmap access rather than asynchronous I/O; no `io_uring`
+speedup is established.
+
+Linux x86-64, GIL-enabled CPython 3.14.7 and 3.15.0rc2, pybind11 3.1.0,
+GCC 15.2.0. Raw controls and prototypes: [native IPC trials](results/ipc-native-deep-trials.json).
+To compare against the frozen Python implementation in an environment with
+the optimized wheel installed:
+
+```bash
+PYTHONPATH=bench/baselines python bench/ipc_compare.py \
+  --baseline ipc_python --candidate picoke.ipc --size 128 --capacity 64 \
+  --count 200 --blocks 60 --pairs 9
+```
+
+### Native dispatch and metadata follow-up
+
+Compared the retained pybind11 implementation against two scratch candidates:
+checked branch-based ring-index wrapping and a public-CPython-API FASTCALL
+prototype. The FASTCALL prototype did not implement keyword arguments on the
+private native helpers and was not considered a drop-in replacement.
+Candidate/baseline delivery-time ratios are shown below; lower is better.
+
+| Runtime and payload | Same-code A/A | Metadata candidate | FASTCALL prototype |
+|---|---:|---:|---:|
+| 3.14, 128 B | 1.001 | 0.952 | 0.961 |
+| 3.14, 4 KiB | 0.976 | 0.989 | 0.966 |
+| 3.15, 128 B | 0.962 | 0.982 | 0.989 |
+| 3.15, 4 KiB | 1.023 | 1.023 | 0.970 |
+
+Each case used nine paired samples, 200 messages per block, capacity 64 and
+60 alternating blocks per sample. The 3.14/4 KiB and 3.15/128 B controls
+were retried once at 120 blocks, with candidate runs using the same count.
+The 3.15/128 B retry remained unstable (six of nine ratios in 0.90–1.10),
+so that row is inconclusive. The other controls met the 0.95–1.05 median
+and seven-of-nine criteria. Neither candidate showed a repeatable gain across
+both interpreters; neither was retained.
+
+Moving `flock` or PID checks was not pursued because it could alter Python
+audit/error behavior, fork safety, or serialization with `close()`. Picop's
+Cython-only helpers do not provide a public C extension API for this path;
+no substitution was retained without a measured consumer-path gain. Linux
+x86-64, GIL-enabled CPython 3.14.7 and 3.15.0rc2, GCC 15.2.0, pybind11
+3.1.0. [Raw trials](results/ipc-epoch-trials.json).
+
+### Separate atomic SPSC architecture experiment
+
+A scratch C extension used release/acquire sequence counters in a new shared
+memory format. It copies payloads, requires power-of-two capacity, and has a
+narrower lifecycle and threading contract than `SharedByteRing`. It is not a
+safe drop-in replacement: initialization races, malformed segments, process
+death and lifecycle behavior require further work. The current implementation
+and its `flock` format remain unchanged.
+
+| CPython, 128-byte payload | Same-code control | Atomic / current delivery time |
+|---|---:|---:|
+| 3.14.7 | 1.019 | 0.286 |
+| 3.15.0rc2 | 0.987 | 0.326 |
+
+Nine paired samples per case, 200 messages per block, capacity 64, with 60
+blocks for 3.14 and 120 for 3.15. The first 3.15 control was unstable and was
+retried at 120 blocks. All nine atomic samples were faster on both versions.
+These results measure this workload only and do not establish correctness or
+equivalent behavior. Basic empty/full/FIFO, oversize and 64-bit sequence-wrap
+checks passed on both interpreters. Linux x86-64, GIL-enabled CPython, GCC
+15.2.0. [Raw trials](results/ipc-atomic-architecture-trials.json).
+
+An initial hardened candidate measured delivery-time ratios of 0.388 on
+CPython 3.14 and 0.458 on 3.15 on the same 128-byte workload, with nine of
+nine paired samples faster. These are exploratory: no same-run A/A controls
+were collected, and the separate atomic format has a narrower SPSC contract.
+[Raw candidate trials](results/ipc-atomic-candidate-trials.json).

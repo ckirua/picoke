@@ -1,0 +1,279 @@
+{
+  "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+  "implementation": "CPython",
+  "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "cpu_count": 8,
+  "gil_enabled": true,
+  "picoke": "0.1.0rc3",
+  "arguments": {
+    "count": 10000,
+    "payload_size": 128,
+    "capacity": 64,
+    "samples": 5,
+    "backends": [
+      "shared-byte-ring",
+      "queue",
+      "pipe"
+    ]
+  },
+  "method": "one spawned producer and one consumer; child imports/attachment excluded by readiness events; elapsed includes delivery, validation, and result collection; busy-spin on ring full/empty; baselines block in stdlib; latency uses shared monotonic clock; each received sequence and payload is byte-checked",
+  "samples": {
+    "shared-byte-ring": [
+      {
+        "elapsed_ns": 484025595,
+        "producer_ns": 429460674,
+        "items_per_second": 20660.064474483006,
+        "latency_ns": {
+          "median": 1154952.5,
+          "p95": 3761513,
+          "max": 13829782
+        },
+        "producer_full_retries": 18743,
+        "producer_retry_spins": 18743,
+        "consumer_empty_spins": 17514,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 460751286,
+        "producer_ns": 429932401,
+        "items_per_second": 21703.683318639723,
+        "latency_ns": {
+          "median": 1209699.0,
+          "p95": 3532370,
+          "max": 12180282
+        },
+        "producer_full_retries": 21153,
+        "producer_retry_spins": 21153,
+        "consumer_empty_spins": 18980,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 428509145,
+        "producer_ns": 383774718,
+        "items_per_second": 23336.72482065698,
+        "latency_ns": {
+          "median": 1164115.0,
+          "p95": 3879566,
+          "max": 8352475
+        },
+        "producer_full_retries": 17182,
+        "producer_retry_spins": 17182,
+        "consumer_empty_spins": 13066,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 379222934,
+        "producer_ns": 325524958,
+        "items_per_second": 26369.713177737292,
+        "latency_ns": {
+          "median": 1021330.5,
+          "p95": 3667889,
+          "max": 8275497
+        },
+        "producer_full_retries": 13382,
+        "producer_retry_spins": 13382,
+        "consumer_empty_spins": 8531,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 621991582,
+        "producer_ns": 583686155,
+        "items_per_second": 16077.38800555021,
+        "latency_ns": {
+          "median": 1463504.0,
+          "p95": 5722672,
+          "max": 12737416
+        },
+        "producer_full_retries": 38477,
+        "producer_retry_spins": 38477,
+        "consumer_empty_spins": 31207,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      }
+    ],
+    "queue": [
+      {
+        "elapsed_ns": 300982409,
+        "producer_ns": 259803720,
+        "items_per_second": 33224.53306565169,
+        "latency_ns": {
+          "median": 1323956.0,
+          "p95": 2736705,
+          "max": 4296713
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 326126065,
+        "producer_ns": 281779279,
+        "items_per_second": 30662.989172607224,
+        "latency_ns": {
+          "median": 1378851.0,
+          "p95": 3220113,
+          "max": 7458871
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 311576194,
+        "producer_ns": 267217025,
+        "items_per_second": 32094.87821139506,
+        "latency_ns": {
+          "median": 1304359.5,
+          "p95": 2887240,
+          "max": 6351340
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 345274658,
+        "producer_ns": 303645290,
+        "items_per_second": 28962.449946152723,
+        "latency_ns": {
+          "median": 1534125.0,
+          "p95": 3243237,
+          "max": 7305260
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 326763906,
+        "producer_ns": 280881715,
+        "items_per_second": 30603.135218979787,
+        "latency_ns": {
+          "median": 1322493.0,
+          "p95": 3001985,
+          "max": 4782791
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      }
+    ],
+    "pipe": [
+      {
+        "elapsed_ns": 157851440,
+        "producer_ns": 126034322,
+        "items_per_second": 63350.704941304306,
+        "latency_ns": {
+          "median": 4562548.5,
+          "p95": 8122465,
+          "max": 9972568
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 144890120,
+        "producer_ns": 97845127,
+        "items_per_second": 69017.81846822958,
+        "latency_ns": {
+          "median": 3021185.0,
+          "p95": 7806907,
+          "max": 9122519
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 173504310,
+        "producer_ns": 121249875,
+        "items_per_second": 57635.45585697554,
+        "latency_ns": {
+          "median": 4961901.0,
+          "p95": 6784504,
+          "max": 7716924
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 152349849,
+        "producer_ns": 120075158,
+        "items_per_second": 65638.39784311174,
+        "latency_ns": {
+          "median": 4113139.0,
+          "p95": 6844606,
+          "max": 7625934
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      },
+      {
+        "elapsed_ns": 106733921,
+        "producer_ns": 76788490,
+        "items_per_second": 93690.926992179,
+        "latency_ns": {
+          "median": 2117560.0,
+          "p95": 3510085,
+          "max": 4342226
+        },
+        "producer_full_retries": 0,
+        "producer_retry_spins": 0,
+        "consumer_empty_spins": 0,
+        "verified_items": 10000,
+        "verified_payload_bytes": 1280000
+      }
+    ]
+  },
+  "medians": {
+    "shared-byte-ring": {
+      "elapsed_ns": 460751286,
+      "producer_ns": 429460674,
+      "items_per_second": 21703.683318639723,
+      "producer_full_retries": 18743,
+      "producer_retry_spins": 18743,
+      "consumer_empty_spins": 17514
+    },
+    "queue": {
+      "elapsed_ns": 326126065,
+      "producer_ns": 280881715,
+      "items_per_second": 30662.989172607224,
+      "producer_full_retries": 0,
+      "producer_retry_spins": 0,
+      "consumer_empty_spins": 0
+    },
+    "pipe": {
+      "elapsed_ns": 152349849,
+      "producer_ns": 120075158,
+      "items_per_second": 65638.39784311174,
+      "producer_full_retries": 0,
+      "producer_retry_spins": 0,
+      "consumer_empty_spins": 0
+    }
+  }
+}

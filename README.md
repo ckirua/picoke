@@ -11,12 +11,13 @@ With CPython 3.15 (or 3.14), install from a checkout:
 python3.15 -m pip install .
 ```
 
-Source builds require a C compiler, the target interpreter's development
+Source builds require C and C++ compilers, the target interpreter's development
 headers, and OpenSSL development headers (`openssl/evp.h`) and the libcrypto
 library discoverable by the compiler and linker. The isolated build installs
-Cython and picop's Cython declarations; it does not install these system
-development dependencies. Base64 encoding and Keccak-256 link libcrypto;
-dynamically linked builds need a compatible libcrypto shared library.
+Cython, pybind11, and picop's Cython declarations; it does not install these
+system development dependencies. Base64 encoding and Keccak-256 link
+libcrypto; dynamically linked builds need a compatible libcrypto shared
+library.
 Large Base64 decodes use the `pybase64` runtime dependency on CPython 3.14
 and 3.15; its libbase64 backend selects available SIMD implementations.
 
@@ -126,6 +127,45 @@ exact `bytes`. Oversized items raise `ValueError` even when the ring is full.
 The ring allocates its reference slots upfront and retains immutable bytes
 without copying them. Popped bytes remain valid after the slot is reused.
 See the [queue benchmarks](bench/README.md#bounded-byte-fifo) for tradeoffs.
+
+## Shared-memory IPC
+
+```python
+from picoke.ipc import SharedByteRing
+
+ring = SharedByteRing.create(capacity=64, max_item_size=1024)
+try:
+    peer = SharedByteRing.attach(ring.name)  # May be in another process.
+    try:
+        assert ring.try_push(b"message")
+        assert peer.try_pop() == b"message"
+    finally:
+        peer.close()
+finally:
+    ring.close()
+    ring.unlink()
+```
+
+`SharedByteRing` is a Linux-only, bounded single-producer/single-consumer
+queue backed by `/dev/shm`. Payloads are copied into and out of fixed-size
+slots. `try_push` returns `False` when full; `try_pop` returns `None` when
+empty, and `b""` is a valid item. File locks serialize transitions across
+processes; calls can wait for lock acquisition even though they do not wait
+for queue space or data. Closing detaches a handle; unlinking removes the
+name but leaves existing attachments usable. After `fork`, attach a new handle
+by name rather than using the inherited one. A process crash during an update
+may leave the ring unusable. See the [IPC plan](docs/IPC_PLAN.md).
+
+An experimental `AtomicSharedByteRing` is available separately on Linux
+x86-64 with GIL-enabled CPython. It uses a distinct format and requires a
+power-of-two capacity, one producer and one consumer. Payloads are copied;
+no process-crash recovery is guaranteed. All participants and `/dev/shm`
+must be trusted: truncating a live mapping can cause SIGBUS, and sufficient
+shared-memory capacity is required. See the [IPC plan](docs/IPC_PLAN.md)
+for validation status and lifecycle constraints.
+Creation requires `O_TMPFILE` support on `/dev/shm` and a mounted `/proc`.
+If the creator dies after publication, the named ring may require operator
+cleanup.
 
 ## File I/O
 

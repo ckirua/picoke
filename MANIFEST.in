@@ -2,3 +2,5 @@ include src/picoke/crypto/*.pyx
 include src/picoke/queues.pyx
 include src/picoke/ratelimit.pyx
 include src/picoke/_binary_logging_native.pyx
+include src/picoke/_ipc_native.cpp
+include src/picoke/_atomic_ipc.cpp
