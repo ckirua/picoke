@@ -167,6 +167,18 @@ Creation requires `O_TMPFILE` support on `/dev/shm` and a mounted `/proc`.
 If the creator dies after publication, the named ring may require operator
 cleanup.
 
+The experimental `RecoverableAtomicSharedByteRing` and
+`AutoRecoveringAtomicSharedByteRing` use a separate shared format and require
+explicit `claim("producer")` and `claim("consumer")` calls before operating.
+Claims are nonblocking and exclusive per role. After a crash, the manual
+variant requires `recover(role)`; the automatic variant recovers when a
+replacement calls `claim(role)`. Release roles when finished, or close the
+handle to release them. A consumer killed after removal may lose an item
+before the application processes it: recovery does not provide exactly-once
+processing. These variants share the atomic ring's platform and trust
+limitations and also require Linux OFD locks. See the
+[IPC plan](docs/IPC_PLAN.md) for the recovery protocol.
+
 ## File I/O
 
 ```python

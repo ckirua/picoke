@@ -79,3 +79,77 @@ then killed it: before publication no name remained; after publication an
 attacher could use the fully initialized ring. This does not test interruption
 inside native slot copying or promise recovery when a participant dies during
 an operation.
+
+### Recoverable atomic rings
+
+`RecoverableAtomicSharedByteRing` and `AutoRecoveringAtomicSharedByteRing`
+use the separate `PICORCV1` format. A participant claims its producer or
+consumer role before use and releases it after use. Each role has an
+independent nonblocking OFD lock; a competing claim raises `RoleBusyError`.
+The manual variant raises `RecoveryRequiredError` on a dirty role and
+requires `recover(role)` to validate and claim it. The automatic variant
+validates and recovers a dirty role on `claim(role)`. Recovery does not
+forcibly evict a live or stopped holder. Inherited handles cannot be used
+after fork; unmanaged forks or passed descriptors can delay lock release.
+
+Producer publication and consumer removal occur at their respective sequence
+stores. A producer interrupted before publication leaves no item; after
+publication the complete item remains. A consumer interrupted before
+removal leaves the item queued; after removal it is gone, even if the
+application never receives it. This is not exactly-once processing.
+Participants must be trusted, and the truncation, shared-memory capacity,
+platform, `O_TMPFILE`, and `/proc` limitations above also apply. OFD locks
+must be supported; failures are not replaced with weaker locking.
+
+On Linux x86-64 GIL-enabled CPython 3.14.7 and 3.15.0rc2, isolated
+instrumented-wheel IPC suites passed 71 tests per interpreter, including
+native publication, copy and sequence-store interruption. Normal-wheel
+full suites passed 700 tests per interpreter, with 22 instrumented-only
+cases skipped. These results do not establish support for other platforms,
+free-threaded builds, or untrusted participants.
+
+Picop review: **SKIP** for native atomics, OFD syscalls and shared-memory
+copies, which have no equivalent public picop C interface; **UNMEASURED**
+for Python role/type/length checks, so no unmeasured substitutions were
+introduced.
+
+Paired SPSC traffic benchmarks used nine alternating samples per fixture,
+128-byte and 4-KiB payloads, both interpreters, and the flock and atomic
+baselines. All recoverable-class same-class controls remained outside the
+predefined stability threshold after doubling the blocks. Comparisons are
+therefore inconclusive; no speedup or parity is claimed. Raw traffic samples
+are in `bench/results/ipc-recovery-paired.json`; an additional run, including
+separate creation, attachment, claim, release and close timings, is in
+`bench/results/ipc-recovery-lifecycle.json`.
+
+An additional pinned-CPU run is recorded in
+`bench/results/ipc-recovery-affinity.json`. Most same-class controls still
+failed the predefined stability threshold, even after retry. Comparisons
+without stable controls remain inconclusive.
+
+The subsequent independent review led to bounded counter-snapshot retries,
+rejection of operations on failed roles, additional lifecycle and crash
+tests, and rebuilding the extension when the test-hook build mode changes.
+On each interpreter, the updated normal-wheel suite passed 706 tests with
+24 hook-only cases skipped; the instrumented IPC suite passed 79 tests.
+Switching the same build tree between hooks, normal, and hooks was verified.
+Final-binary same-class controls are in
+`bench/results/ipc-recovery-final-controls.json`. None of the recoverable
+ring controls met the stability threshold, including retries, so performance
+comparisons remain inconclusive. The recoverable APIs remain experimental.
+
+Longer final-binary runs used nine pairs, 1,000 messages per block, 30
+measured blocks per pair, five warmup blocks, and topology-aware affinity.
+An unstable control was retried once with 60 blocks. All 16 interpreter,
+payload and class controls met the original stability criterion in the
+initial run or retry. Raw control and comparison samples are in
+`bench/results/ipc-recovery-long-samples.json`.
+
+The recoverable variants' median elapsed-time ratios relative to
+`AtomicSharedByteRing` ranged from 0.931 to 1.043 across the two
+interpreters and payloads; individual paired ratios varied more widely.
+Relative to `SharedByteRing`, median ratios were 0.260–0.300. Ratios below
+one mean less time for the same copied-byte traffic. These are SPSC
+workload-specific observations, not a general parity guarantee. The
+recoverable queues remain experimental because their role protocol and
+crash behavior add operational constraints.

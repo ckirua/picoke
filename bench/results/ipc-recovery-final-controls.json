@@ -1,0 +1,4482 @@
+{
+  "3.14-128-AtomicSharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 18494285,
+        "candidate_ns": 17443550,
+        "ratio": 0.9431859625824951
+      },
+      {
+        "baseline_ns": 17127565,
+        "candidate_ns": 16756578,
+        "ratio": 0.9783397698388533
+      },
+      {
+        "baseline_ns": 17331364,
+        "candidate_ns": 18277244,
+        "ratio": 1.0545762006960329
+      },
+      {
+        "baseline_ns": 17236012,
+        "candidate_ns": 17172457,
+        "ratio": 0.9963126621169677
+      },
+      {
+        "baseline_ns": 22303739,
+        "candidate_ns": 17241750,
+        "ratio": 0.7730430310361863
+      },
+      {
+        "baseline_ns": 18687762,
+        "candidate_ns": 28160607,
+        "ratio": 1.5069009868597427
+      },
+      {
+        "baseline_ns": 19822556,
+        "candidate_ns": 24729571,
+        "ratio": 1.2475470368200752
+      },
+      {
+        "baseline_ns": 17243934,
+        "candidate_ns": 17469181,
+        "ratio": 1.013062390519472
+      },
+      {
+        "baseline_ns": 20993579,
+        "candidate_ns": 17485730,
+        "ratio": 0.8329084812075159
+      }
+    ],
+    "median_ratio": 0.9963126621169677,
+    "same_class_control": {
+      "median_ratio": 0.9963126621169677,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          6301319,
+          47391
+        ],
+        "close_ns": [
+          26407,
+          19056
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            6529906,
+            34743
+          ],
+          "claim_ns": [
+            1543,
+            835
+          ],
+          "release_ns": [
+            3101,
+            1733
+          ],
+          "close_ns": [
+            20662,
+            20299
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8119860,
+            40723
+          ],
+          "claim_ns": [
+            1485,
+            772
+          ],
+          "release_ns": [
+            2702,
+            1038
+          ],
+          "close_ns": [
+            24110,
+            12775
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-AtomicSharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 8876062,
+        "candidate_ns": 13321651,
+        "ratio": 1.500851503741186
+      },
+      {
+        "baseline_ns": 7688411,
+        "candidate_ns": 8565339,
+        "ratio": 1.1140584185730966
+      },
+      {
+        "baseline_ns": 7970793,
+        "candidate_ns": 7752441,
+        "ratio": 0.9726059878860234
+      },
+      {
+        "baseline_ns": 11463362,
+        "candidate_ns": 8541251,
+        "ratio": 0.7450912742701487
+      },
+      {
+        "baseline_ns": 11926475,
+        "candidate_ns": 8094445,
+        "ratio": 0.6786955072643006
+      },
+      {
+        "baseline_ns": 11256237,
+        "candidate_ns": 11082121,
+        "ratio": 0.9845315979043441
+      },
+      {
+        "baseline_ns": 9987453,
+        "candidate_ns": 8577147,
+        "ratio": 0.8587922266067235
+      },
+      {
+        "baseline_ns": 7779802,
+        "candidate_ns": 8815886,
+        "ratio": 1.1331761399583178
+      },
+      {
+        "baseline_ns": 7955957,
+        "candidate_ns": 8720936,
+        "ratio": 1.0961517263102352
+      }
+    ],
+    "median_ratio": 0.9845315979043441,
+    "same_class_control": {
+      "median_ratio": 0.9845315979043441,
+      "within_0_90_1_10": 3,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7029634,
+          65755
+        ],
+        "close_ns": [
+          17640,
+          9021
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            14153705,
+            41656
+          ],
+          "claim_ns": [
+            1481,
+            875
+          ],
+          "release_ns": [
+            3287,
+            1048
+          ],
+          "close_ns": [
+            21736,
+            13682
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8623555,
+            45113
+          ],
+          "claim_ns": [
+            1489,
+            913
+          ],
+          "release_ns": [
+            3531,
+            1380
+          ],
+          "close_ns": [
+            18481,
+            11483
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-AutoRecoveringAtomicSharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 21016065,
+        "candidate_ns": 26573138,
+        "ratio": 1.2644202423241457
+      },
+      {
+        "baseline_ns": 23034677,
+        "candidate_ns": 22703892,
+        "ratio": 0.9856396944485047
+      },
+      {
+        "baseline_ns": 20126520,
+        "candidate_ns": 18962522,
+        "ratio": 0.942165958148751
+      },
+      {
+        "baseline_ns": 30883924,
+        "candidate_ns": 26207185,
+        "ratio": 0.848570440725084
+      },
+      {
+        "baseline_ns": 28952020,
+        "candidate_ns": 36514912,
+        "ratio": 1.2612215658872852
+      },
+      {
+        "baseline_ns": 34519553,
+        "candidate_ns": 35429955,
+        "ratio": 1.0263735164820935
+      },
+      {
+        "baseline_ns": 28157035,
+        "candidate_ns": 28114549,
+        "ratio": 0.9984911053312254
+      },
+      {
+        "baseline_ns": 24748443,
+        "candidate_ns": 22853984,
+        "ratio": 0.9234513864165111
+      },
+      {
+        "baseline_ns": 27329012,
+        "candidate_ns": 20296856,
+        "ratio": 0.7426853191765586
+      }
+    ],
+    "median_ratio": 0.9856396944485047,
+    "same_class_control": {
+      "median_ratio": 0.9856396944485047,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8298577,
+          55953
+        ],
+        "close_ns": [
+          20564,
+          10582
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            8079729,
+            48139
+          ],
+          "claim_ns": [
+            27597,
+            15814
+          ],
+          "release_ns": [
+            16502,
+            8948
+          ],
+          "close_ns": [
+            17701,
+            12123
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            16147258,
+            41475
+          ],
+          "claim_ns": [
+            25037,
+            15578
+          ],
+          "release_ns": [
+            17766,
+            9058
+          ],
+          "close_ns": [
+            15516,
+            11586
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-AutoRecoveringAtomicSharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 10283685,
+        "candidate_ns": 14041795,
+        "ratio": 1.3654439045925657
+      },
+      {
+        "baseline_ns": 10077985,
+        "candidate_ns": 11361557,
+        "ratio": 1.1273639522186232
+      },
+      {
+        "baseline_ns": 12969424,
+        "candidate_ns": 11825906,
+        "ratio": 0.9118297003783669
+      },
+      {
+        "baseline_ns": 7390426,
+        "candidate_ns": 8554152,
+        "ratio": 1.1574639946330563
+      },
+      {
+        "baseline_ns": 18980946,
+        "candidate_ns": 12160809,
+        "ratio": 0.640685084926747
+      },
+      {
+        "baseline_ns": 13955091,
+        "candidate_ns": 15368365,
+        "ratio": 1.1012730049556825
+      },
+      {
+        "baseline_ns": 14397636,
+        "candidate_ns": 12209249,
+        "ratio": 0.8480037278342083
+      },
+      {
+        "baseline_ns": 13409776,
+        "candidate_ns": 13967916,
+        "ratio": 1.0416218734749931
+      },
+      {
+        "baseline_ns": 10007532,
+        "candidate_ns": 11214803,
+        "ratio": 1.1206362367864524
+      }
+    ],
+    "median_ratio": 1.1012730049556825,
+    "same_class_control": {
+      "median_ratio": 1.1012730049556825,
+      "within_0_90_1_10": 2,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7508371,
+          63106
+        ],
+        "close_ns": [
+          25131,
+          18527
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            17024186,
+            40520
+          ],
+          "claim_ns": [
+            24108,
+            14491
+          ],
+          "release_ns": [
+            17285,
+            9706
+          ],
+          "close_ns": [
+            18047,
+            12687
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            11601279,
+            45639
+          ],
+          "claim_ns": [
+            24335,
+            17705
+          ],
+          "release_ns": [
+            12627,
+            7616
+          ],
+          "close_ns": [
+            12935,
+            12251
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-RecoverableAtomicSharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 42787295,
+        "candidate_ns": 30369907,
+        "ratio": 0.7097879639271424
+      },
+      {
+        "baseline_ns": 21749604,
+        "candidate_ns": 26476969,
+        "ratio": 1.217354072285638
+      },
+      {
+        "baseline_ns": 23861831,
+        "candidate_ns": 17523753,
+        "ratio": 0.7343842557597529
+      },
+      {
+        "baseline_ns": 22297553,
+        "candidate_ns": 20553748,
+        "ratio": 0.9217938847370382
+      },
+      {
+        "baseline_ns": 25825773,
+        "candidate_ns": 18908782,
+        "ratio": 0.7321671262269671
+      },
+      {
+        "baseline_ns": 25475735,
+        "candidate_ns": 23892336,
+        "ratio": 0.9378467785129654
+      },
+      {
+        "baseline_ns": 31381784,
+        "candidate_ns": 36461395,
+        "ratio": 1.1618649532480372
+      },
+      {
+        "baseline_ns": 44661477,
+        "candidate_ns": 32363138,
+        "ratio": 0.7246320581829392
+      },
+      {
+        "baseline_ns": 26399363,
+        "candidate_ns": 27922001,
+        "ratio": 1.0576770734960537
+      }
+    ],
+    "median_ratio": 0.9217938847370382,
+    "same_class_control": {
+      "median_ratio": 0.9217938847370382,
+      "within_0_90_1_10": 3,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7590963,
+          47998
+        ],
+        "close_ns": [
+          24941,
+          14254
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            12025529,
+            48177
+          ],
+          "claim_ns": [
+            24127,
+            16227
+          ],
+          "release_ns": [
+            15906,
+            10525
+          ],
+          "close_ns": [
+            28436,
+            16618
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            11031745,
+            44530
+          ],
+          "claim_ns": [
+            25796,
+            16783
+          ],
+          "release_ns": [
+            12530,
+            8149
+          ],
+          "close_ns": [
+            13272,
+            12465
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-RecoverableAtomicSharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 15788346,
+        "candidate_ns": 9721191,
+        "ratio": 0.6157194046798823
+      },
+      {
+        "baseline_ns": 11405333,
+        "candidate_ns": 12741255,
+        "ratio": 1.1171313454854848
+      },
+      {
+        "baseline_ns": 9647254,
+        "candidate_ns": 7901506,
+        "ratio": 0.8190419781629052
+      },
+      {
+        "baseline_ns": 10528409,
+        "candidate_ns": 11732101,
+        "ratio": 1.1143280053045053
+      },
+      {
+        "baseline_ns": 9611916,
+        "candidate_ns": 9967938,
+        "ratio": 1.0370396495350147
+      },
+      {
+        "baseline_ns": 8570071,
+        "candidate_ns": 9441764,
+        "ratio": 1.1017136264098628
+      },
+      {
+        "baseline_ns": 8915406,
+        "candidate_ns": 8565161,
+        "ratio": 0.9607146326258165
+      },
+      {
+        "baseline_ns": 8158907,
+        "candidate_ns": 9173677,
+        "ratio": 1.1243757282685045
+      },
+      {
+        "baseline_ns": 8090596,
+        "candidate_ns": 9506836,
+        "ratio": 1.175047672631287
+      }
+    ],
+    "median_ratio": 1.1017136264098628,
+    "same_class_control": {
+      "median_ratio": 1.1017136264098628,
+      "within_0_90_1_10": 2,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          12263234,
+          69311
+        ],
+        "close_ns": [
+          18149,
+          9303
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            11673626,
+            52103
+          ],
+          "claim_ns": [
+            22968,
+            15750
+          ],
+          "release_ns": [
+            18222,
+            18208
+          ],
+          "close_ns": [
+            23601,
+            14129
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            6152541,
+            47109
+          ],
+          "claim_ns": [
+            25960,
+            16797
+          ],
+          "release_ns": [
+            12285,
+            8273
+          ],
+          "close_ns": [
+            16877,
+            10997
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-SharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 63892914,
+        "candidate_ns": 62358705,
+        "ratio": 0.9759878067229802
+      },
+      {
+        "baseline_ns": 67622195,
+        "candidate_ns": 57912040,
+        "ratio": 0.8564057999004617
+      },
+      {
+        "baseline_ns": 75455989,
+        "candidate_ns": 72645694,
+        "ratio": 0.9627558390361831
+      },
+      {
+        "baseline_ns": 60708503,
+        "candidate_ns": 59012330,
+        "ratio": 0.9720603718395099
+      },
+      {
+        "baseline_ns": 68315957,
+        "candidate_ns": 65097111,
+        "ratio": 0.9528829552954956
+      },
+      {
+        "baseline_ns": 66786814,
+        "candidate_ns": 56993629,
+        "ratio": 0.8533664893791759
+      },
+      {
+        "baseline_ns": 82909069,
+        "candidate_ns": 79855981,
+        "ratio": 0.9631754639531653
+      },
+      {
+        "baseline_ns": 71428905,
+        "candidate_ns": 71071917,
+        "ratio": 0.9950021913397664
+      },
+      {
+        "baseline_ns": 69389773,
+        "candidate_ns": 71330952,
+        "ratio": 1.0279750014458182
+      }
+    ],
+    "median_ratio": 0.9631754639531653,
+    "same_class_control": {
+      "median_ratio": 0.9631754639531653,
+      "within_0_90_1_10": 7,
+      "stable": true,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8495769,
+          89173
+        ],
+        "close_ns": [
+          25180,
+          13104
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            8975449,
+            62178
+          ],
+          "claim_ns": [
+            1659,
+            858
+          ],
+          "release_ns": [
+            4117,
+            1168
+          ],
+          "close_ns": [
+            23525,
+            16098
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            15507559,
+            84294
+          ],
+          "claim_ns": [
+            1553,
+            1013
+          ],
+          "release_ns": [
+            2953,
+            1460
+          ],
+          "close_ns": [
+            125117,
+            15260
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-128-SharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 45419169,
+        "candidate_ns": 31045787,
+        "ratio": 0.6835393003337423
+      },
+      {
+        "baseline_ns": 32774498,
+        "candidate_ns": 32542287,
+        "ratio": 0.9929148876666242
+      },
+      {
+        "baseline_ns": 42826611,
+        "candidate_ns": 46314589,
+        "ratio": 1.0814441749780295
+      },
+      {
+        "baseline_ns": 35498410,
+        "candidate_ns": 30247937,
+        "ratio": 0.8520927275334303
+      },
+      {
+        "baseline_ns": 43308769,
+        "candidate_ns": 36239280,
+        "ratio": 0.836765413489356
+      },
+      {
+        "baseline_ns": 24241493,
+        "candidate_ns": 24142887,
+        "ratio": 0.9959323462461657
+      },
+      {
+        "baseline_ns": 29988966,
+        "candidate_ns": 28019857,
+        "ratio": 0.9343388831745649
+      },
+      {
+        "baseline_ns": 40645925,
+        "candidate_ns": 31401391,
+        "ratio": 0.7725593894098854
+      },
+      {
+        "baseline_ns": 35016493,
+        "candidate_ns": 33414778,
+        "ratio": 0.9542582690962227
+      }
+    ],
+    "median_ratio": 0.9343388831745649,
+    "same_class_control": {
+      "median_ratio": 0.9343388831745649,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8519812,
+          93332
+        ],
+        "close_ns": [
+          20055,
+          10078
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7617750,
+            73663
+          ],
+          "claim_ns": [
+            1823,
+            1020
+          ],
+          "release_ns": [
+            3168,
+            1223
+          ],
+          "close_ns": [
+            21833,
+            15139
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8067256,
+            65589
+          ],
+          "claim_ns": [
+            1795,
+            1075
+          ],
+          "release_ns": [
+            2179,
+            1427
+          ],
+          "close_ns": [
+            18245,
+            16165
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-AtomicSharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 38697780,
+        "candidate_ns": 30895208,
+        "ratio": 0.7983715861736771
+      },
+      {
+        "baseline_ns": 41662639,
+        "candidate_ns": 26765865,
+        "ratio": 0.6424428610967251
+      },
+      {
+        "baseline_ns": 44292571,
+        "candidate_ns": 44663018,
+        "ratio": 1.0083636373241915
+      },
+      {
+        "baseline_ns": 39377006,
+        "candidate_ns": 47533610,
+        "ratio": 1.2071412945920774
+      },
+      {
+        "baseline_ns": 65953296,
+        "candidate_ns": 51535797,
+        "ratio": 0.7813983549813796
+      },
+      {
+        "baseline_ns": 37593562,
+        "candidate_ns": 44876205,
+        "ratio": 1.1937204833104136
+      },
+      {
+        "baseline_ns": 41925349,
+        "candidate_ns": 37609177,
+        "ratio": 0.8970510179891407
+      },
+      {
+        "baseline_ns": 41237546,
+        "candidate_ns": 40070935,
+        "ratio": 0.9717099800264545
+      },
+      {
+        "baseline_ns": 39038136,
+        "candidate_ns": 46013795,
+        "ratio": 1.1786883215940434
+      }
+    ],
+    "median_ratio": 0.9717099800264545,
+    "same_class_control": {
+      "median_ratio": 0.9717099800264545,
+      "within_0_90_1_10": 2,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7095297,
+          49310
+        ],
+        "close_ns": [
+          25768,
+          14054
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            5048385,
+            31511
+          ],
+          "claim_ns": [
+            1165,
+            740
+          ],
+          "release_ns": [
+            3378,
+            1080
+          ],
+          "close_ns": [
+            34006,
+            26771
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            11826606,
+            37980
+          ],
+          "claim_ns": [
+            1475,
+            992
+          ],
+          "release_ns": [
+            2964,
+            1049
+          ],
+          "close_ns": [
+            37322,
+            29555
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-AtomicSharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 18873967,
+        "candidate_ns": 12209217,
+        "ratio": 0.6468813366050709
+      },
+      {
+        "baseline_ns": 10199535,
+        "candidate_ns": 11464377,
+        "ratio": 1.1240097710336794
+      },
+      {
+        "baseline_ns": 9106122,
+        "candidate_ns": 10728131,
+        "ratio": 1.1781229155506592
+      },
+      {
+        "baseline_ns": 11651633,
+        "candidate_ns": 14617779,
+        "ratio": 1.2545691234868108
+      },
+      {
+        "baseline_ns": 13893131,
+        "candidate_ns": 16632849,
+        "ratio": 1.1971994649730144
+      },
+      {
+        "baseline_ns": 19296380,
+        "candidate_ns": 19737902,
+        "ratio": 1.0228810792490612
+      },
+      {
+        "baseline_ns": 16716333,
+        "candidate_ns": 15519431,
+        "ratio": 0.9283992488065415
+      },
+      {
+        "baseline_ns": 18457119,
+        "candidate_ns": 18540404,
+        "ratio": 1.0045123510337663
+      },
+      {
+        "baseline_ns": 18677778,
+        "candidate_ns": 20147885,
+        "ratio": 1.0787088806816314
+      }
+    ],
+    "median_ratio": 1.0787088806816314,
+    "same_class_control": {
+      "median_ratio": 1.0787088806816314,
+      "within_0_90_1_10": 4,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7459552,
+          61621
+        ],
+        "close_ns": [
+          22031,
+          11447
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            14229463,
+            40874
+          ],
+          "claim_ns": [
+            1571,
+            963
+          ],
+          "release_ns": [
+            3239,
+            1315
+          ],
+          "close_ns": [
+            33656,
+            29366
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            6600496,
+            37822
+          ],
+          "claim_ns": [
+            1385,
+            1016
+          ],
+          "release_ns": [
+            2108,
+            1081
+          ],
+          "close_ns": [
+            32607,
+            26321
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-AutoRecoveringAtomicSharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 20845774,
+        "candidate_ns": 20863955,
+        "ratio": 1.000872167183622
+      },
+      {
+        "baseline_ns": 26443443,
+        "candidate_ns": 23488203,
+        "ratio": 0.8882429946811389
+      },
+      {
+        "baseline_ns": 24797365,
+        "candidate_ns": 24626616,
+        "ratio": 0.9931142280641512
+      },
+      {
+        "baseline_ns": 18914009,
+        "candidate_ns": 19245161,
+        "ratio": 1.0175082923985073
+      },
+      {
+        "baseline_ns": 24377669,
+        "candidate_ns": 20414312,
+        "ratio": 0.8374185407144547
+      },
+      {
+        "baseline_ns": 19917457,
+        "candidate_ns": 21845498,
+        "ratio": 1.0968015645772449
+      },
+      {
+        "baseline_ns": 21254379,
+        "candidate_ns": 22177509,
+        "ratio": 1.043432461611793
+      },
+      {
+        "baseline_ns": 19186741,
+        "candidate_ns": 25506727,
+        "ratio": 1.3293934076662628
+      },
+      {
+        "baseline_ns": 25922306,
+        "candidate_ns": 23175891,
+        "ratio": 0.8940520569427736
+      }
+    ],
+    "median_ratio": 1.000872167183622,
+    "same_class_control": {
+      "median_ratio": 1.000872167183622,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          6376327,
+          64255
+        ],
+        "close_ns": [
+          24140,
+          10275
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            4575693,
+            26429
+          ],
+          "claim_ns": [
+            17991,
+            9952
+          ],
+          "release_ns": [
+            11375,
+            7994
+          ],
+          "close_ns": [
+            22596,
+            19259
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            7714997,
+            40664
+          ],
+          "claim_ns": [
+            24383,
+            17156
+          ],
+          "release_ns": [
+            13568,
+            9863
+          ],
+          "close_ns": [
+            29792,
+            27258
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-AutoRecoveringAtomicSharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 54340126,
+        "candidate_ns": 11999714,
+        "ratio": 0.22082602458448478
+      },
+      {
+        "baseline_ns": 10683074,
+        "candidate_ns": 14946989,
+        "ratio": 1.3991280973996811
+      },
+      {
+        "baseline_ns": 9376899,
+        "candidate_ns": 9335322,
+        "ratio": 0.9955660181473641
+      },
+      {
+        "baseline_ns": 9206295,
+        "candidate_ns": 9489448,
+        "ratio": 1.0307564552298183
+      },
+      {
+        "baseline_ns": 10068816,
+        "candidate_ns": 10676181,
+        "ratio": 1.0603213923067023
+      },
+      {
+        "baseline_ns": 12792794,
+        "candidate_ns": 17657497,
+        "ratio": 1.3802690014394041
+      },
+      {
+        "baseline_ns": 13776923,
+        "candidate_ns": 10912940,
+        "ratio": 0.7921173690235476
+      },
+      {
+        "baseline_ns": 15686978,
+        "candidate_ns": 12510559,
+        "ratio": 0.7975123698139948
+      },
+      {
+        "baseline_ns": 14751304,
+        "candidate_ns": 10018242,
+        "ratio": 0.679142806629163
+      }
+    ],
+    "median_ratio": 0.9955660181473641,
+    "same_class_control": {
+      "median_ratio": 0.9955660181473641,
+      "within_0_90_1_10": 3,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          5262096,
+          47052
+        ],
+        "close_ns": [
+          22653,
+          14824
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            8565936,
+            41327
+          ],
+          "claim_ns": [
+            30855,
+            17020
+          ],
+          "release_ns": [
+            16407,
+            10940
+          ],
+          "close_ns": [
+            36618,
+            29864
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            7207426,
+            36970
+          ],
+          "claim_ns": [
+            21609,
+            14895
+          ],
+          "release_ns": [
+            14317,
+            9197
+          ],
+          "close_ns": [
+            28254,
+            23885
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-RecoverableAtomicSharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 26071521,
+        "candidate_ns": 25006892,
+        "ratio": 0.9591650598367468
+      },
+      {
+        "baseline_ns": 22815641,
+        "candidate_ns": 25513166,
+        "ratio": 1.1182313922278142
+      },
+      {
+        "baseline_ns": 26617748,
+        "candidate_ns": 24126040,
+        "ratio": 0.906389225715113
+      },
+      {
+        "baseline_ns": 20066284,
+        "candidate_ns": 19259148,
+        "ratio": 0.9597765086948834
+      },
+      {
+        "baseline_ns": 21094852,
+        "candidate_ns": 20629340,
+        "ratio": 0.9779324358379001
+      },
+      {
+        "baseline_ns": 24157661,
+        "candidate_ns": 20477940,
+        "ratio": 0.847678920570994
+      },
+      {
+        "baseline_ns": 24009610,
+        "candidate_ns": 26480353,
+        "ratio": 1.1029064195545033
+      },
+      {
+        "baseline_ns": 19662614,
+        "candidate_ns": 21489448,
+        "ratio": 1.0929090099617478
+      },
+      {
+        "baseline_ns": 22957824,
+        "candidate_ns": 19790075,
+        "ratio": 0.8620187610114965
+      }
+    ],
+    "median_ratio": 0.9597765086948834,
+    "same_class_control": {
+      "median_ratio": 0.9597765086948834,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7968929,
+          58167
+        ],
+        "close_ns": [
+          19313,
+          9585
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7743329,
+            47764
+          ],
+          "claim_ns": [
+            25467,
+            15251
+          ],
+          "release_ns": [
+            14147,
+            10537
+          ],
+          "close_ns": [
+            28748,
+            29372
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            9907636,
+            45021
+          ],
+          "claim_ns": [
+            24800,
+            16252
+          ],
+          "release_ns": [
+            11244,
+            10545
+          ],
+          "close_ns": [
+            28449,
+            26130
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-RecoverableAtomicSharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 11458034,
+        "candidate_ns": 10432103,
+        "ratio": 0.9104618645746732
+      },
+      {
+        "baseline_ns": 14304528,
+        "candidate_ns": 14178815,
+        "ratio": 0.9912116638871272
+      },
+      {
+        "baseline_ns": 12033871,
+        "candidate_ns": 12877189,
+        "ratio": 1.0700786970377196
+      },
+      {
+        "baseline_ns": 21274475,
+        "candidate_ns": 20409310,
+        "ratio": 0.9593331915358664
+      },
+      {
+        "baseline_ns": 15257358,
+        "candidate_ns": 13270471,
+        "ratio": 0.8697751602865974
+      },
+      {
+        "baseline_ns": 12670763,
+        "candidate_ns": 10149826,
+        "ratio": 0.801042999541543
+      },
+      {
+        "baseline_ns": 10298539,
+        "candidate_ns": 9796155,
+        "ratio": 0.9512179348934834
+      },
+      {
+        "baseline_ns": 10044718,
+        "candidate_ns": 12126264,
+        "ratio": 1.2072279181954138
+      },
+      {
+        "baseline_ns": 10136063,
+        "candidate_ns": 9493667,
+        "ratio": 0.9366227301468035
+      }
+    ],
+    "median_ratio": 0.9512179348934834,
+    "same_class_control": {
+      "median_ratio": 0.9512179348934834,
+      "within_0_90_1_10": 6,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8187611,
+          70108
+        ],
+        "close_ns": [
+          24480,
+          14965
+        ]
+      },
+      "workers": [
+        {
+          "role": "producer",
+          "attach_ns": [
+            13876620,
+            37046
+          ],
+          "claim_ns": [
+            20504,
+            15661
+          ],
+          "release_ns": [
+            12839,
+            9340
+          ],
+          "close_ns": [
+            28755,
+            38630
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        },
+        {
+          "role": "consumer",
+          "attach_ns": [
+            8037731,
+            43970
+          ],
+          "claim_ns": [
+            24827,
+            17356
+          ],
+          "release_ns": [
+            13394,
+            12179
+          ],
+          "close_ns": [
+            32465,
+            27715
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-SharedByteRing-retry.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 98921161,
+        "candidate_ns": 95109881,
+        "ratio": 0.9614715399468472
+      },
+      {
+        "baseline_ns": 93714546,
+        "candidate_ns": 83225834,
+        "ratio": 0.8880780791489936
+      },
+      {
+        "baseline_ns": 98458224,
+        "candidate_ns": 109519189,
+        "ratio": 1.112341707483978
+      },
+      {
+        "baseline_ns": 67407272,
+        "candidate_ns": 73023288,
+        "ratio": 1.0833146904387407
+      },
+      {
+        "baseline_ns": 73305366,
+        "candidate_ns": 89993654,
+        "ratio": 1.2276543848099741
+      },
+      {
+        "baseline_ns": 73331989,
+        "candidate_ns": 82565805,
+        "ratio": 1.1259179810328068
+      },
+      {
+        "baseline_ns": 89212667,
+        "candidate_ns": 80929786,
+        "ratio": 0.9071557741906763
+      },
+      {
+        "baseline_ns": 97307639,
+        "candidate_ns": 94459204,
+        "ratio": 0.9707275294183224
+      },
+      {
+        "baseline_ns": 86929666,
+        "candidate_ns": 85096262,
+        "ratio": 0.9789093403395798
+      }
+    ],
+    "median_ratio": 0.9789093403395798,
+    "same_class_control": {
+      "median_ratio": 0.9789093403395798,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7317815,
+          77254
+        ],
+        "close_ns": [
+          26655,
+          16090
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7783340,
+            64509
+          ],
+          "claim_ns": [
+            2054,
+            885
+          ],
+          "release_ns": [
+            4280,
+            1579
+          ],
+          "close_ns": [
+            40361,
+            33810
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            12518102,
+            66433
+          ],
+          "claim_ns": [
+            1745,
+            975
+          ],
+          "release_ns": [
+            2359,
+            1123
+          ],
+          "close_ns": [
+            28640,
+            24500
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.14-4096-SharedByteRing.json": {
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 127556234,
+        "candidate_ns": 54060533,
+        "ratio": 0.4238172553761661
+      },
+      {
+        "baseline_ns": 32612997,
+        "candidate_ns": 42812696,
+        "ratio": 1.3127495151702862
+      },
+      {
+        "baseline_ns": 48210559,
+        "candidate_ns": 53652733,
+        "ratio": 1.1128834453050005
+      },
+      {
+        "baseline_ns": 38195349,
+        "candidate_ns": 53588568,
+        "ratio": 1.4030129165726435
+      },
+      {
+        "baseline_ns": 51594993,
+        "candidate_ns": 53206010,
+        "ratio": 1.0312242895352268
+      },
+      {
+        "baseline_ns": 64761536,
+        "candidate_ns": 64582746,
+        "ratio": 0.9972392563388244
+      },
+      {
+        "baseline_ns": 44822063,
+        "candidate_ns": 47722180,
+        "ratio": 1.0647028897353519
+      },
+      {
+        "baseline_ns": 47694498,
+        "candidate_ns": 40576022,
+        "ratio": 0.8507484867541745
+      },
+      {
+        "baseline_ns": 38259005,
+        "candidate_ns": 41945256,
+        "ratio": 1.0963498920058166
+      }
+    ],
+    "median_ratio": 1.0647028897353519,
+    "same_class_control": {
+      "median_ratio": 1.0647028897353519,
+      "within_0_90_1_10": 4,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7099684,
+          71973
+        ],
+        "close_ns": [
+          25609,
+          14274
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7171478,
+            64721
+          ],
+          "claim_ns": [
+            1347,
+            1064
+          ],
+          "release_ns": [
+            2801,
+            1192
+          ],
+          "close_ns": [
+            38743,
+            30519
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            6576552,
+            49278
+          ],
+          "claim_ns": [
+            1885,
+            917
+          ],
+          "release_ns": [
+            2411,
+            1186
+          ],
+          "close_ns": [
+            29958,
+            26853
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-AtomicSharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 26788915,
+        "candidate_ns": 26708719,
+        "ratio": 0.9970063737183832
+      },
+      {
+        "baseline_ns": 21899849,
+        "candidate_ns": 22312813,
+        "ratio": 1.018856933671095
+      },
+      {
+        "baseline_ns": 28053401,
+        "candidate_ns": 28638212,
+        "ratio": 1.020846349431928
+      },
+      {
+        "baseline_ns": 31224562,
+        "candidate_ns": 26497525,
+        "ratio": 0.8486115834066784
+      },
+      {
+        "baseline_ns": 22702115,
+        "candidate_ns": 21052993,
+        "ratio": 0.9273582219101613
+      },
+      {
+        "baseline_ns": 27126913,
+        "candidate_ns": 28490044,
+        "ratio": 1.0502501335113215
+      },
+      {
+        "baseline_ns": 25620088,
+        "candidate_ns": 22628164,
+        "ratio": 0.8832196048663065
+      },
+      {
+        "baseline_ns": 30055447,
+        "candidate_ns": 22973966,
+        "ratio": 0.7643861027919499
+      },
+      {
+        "baseline_ns": 16228540,
+        "candidate_ns": 18643120,
+        "ratio": 1.1487860275785746
+      }
+    ],
+    "median_ratio": 0.9970063737183832,
+    "same_class_control": {
+      "median_ratio": 0.9970063737183832,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7791631,
+          56466
+        ],
+        "close_ns": [
+          31904,
+          14005
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            13099560,
+            39378
+          ],
+          "claim_ns": [
+            1864,
+            1018
+          ],
+          "release_ns": [
+            4008,
+            1186
+          ],
+          "close_ns": [
+            22100,
+            15387
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            12317659,
+            36639
+          ],
+          "claim_ns": [
+            1493,
+            771
+          ],
+          "release_ns": [
+            2859,
+            1238
+          ],
+          "close_ns": [
+            15015,
+            11172
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-AtomicSharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 17142237,
+        "candidate_ns": 14632582,
+        "ratio": 0.8535981622468526
+      },
+      {
+        "baseline_ns": 14808838,
+        "candidate_ns": 9571389,
+        "ratio": 0.6463295094456432
+      },
+      {
+        "baseline_ns": 16800938,
+        "candidate_ns": 21966363,
+        "ratio": 1.3074486079289145
+      },
+      {
+        "baseline_ns": 10019129,
+        "candidate_ns": 9933154,
+        "ratio": 0.9914189147579595
+      },
+      {
+        "baseline_ns": 11785155,
+        "candidate_ns": 11748429,
+        "ratio": 0.9968837066631707
+      },
+      {
+        "baseline_ns": 9816674,
+        "candidate_ns": 10961340,
+        "ratio": 1.116604259242998
+      },
+      {
+        "baseline_ns": 7631090,
+        "candidate_ns": 8112444,
+        "ratio": 1.0630780137568814
+      },
+      {
+        "baseline_ns": 8253099,
+        "candidate_ns": 10970114,
+        "ratio": 1.329211487709041
+      },
+      {
+        "baseline_ns": 13718569,
+        "candidate_ns": 13361170,
+        "ratio": 0.9739477929512911
+      }
+    ],
+    "median_ratio": 0.9968837066631707,
+    "same_class_control": {
+      "median_ratio": 0.9968837066631707,
+      "within_0_90_1_10": 4,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8826998,
+          65631
+        ],
+        "close_ns": [
+          20240,
+          16704
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            13979265,
+            41870
+          ],
+          "claim_ns": [
+            1939,
+            962
+          ],
+          "release_ns": [
+            4192,
+            1517
+          ],
+          "close_ns": [
+            20736,
+            14987
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            6782531,
+            41415
+          ],
+          "claim_ns": [
+            1594,
+            978
+          ],
+          "release_ns": [
+            2214,
+            1159
+          ],
+          "close_ns": [
+            18159,
+            12387
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-AutoRecoveringAtomicSharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 34596974,
+        "candidate_ns": 22506691,
+        "ratio": 0.6505392928294828
+      },
+      {
+        "baseline_ns": 17967348,
+        "candidate_ns": 16355951,
+        "ratio": 0.9103152563194078
+      },
+      {
+        "baseline_ns": 18610564,
+        "candidate_ns": 20574572,
+        "ratio": 1.1055318903822582
+      },
+      {
+        "baseline_ns": 19803279,
+        "candidate_ns": 17278427,
+        "ratio": 0.8725033364424144
+      },
+      {
+        "baseline_ns": 19660524,
+        "candidate_ns": 17816118,
+        "ratio": 0.9061873427178238
+      },
+      {
+        "baseline_ns": 23733606,
+        "candidate_ns": 22282133,
+        "ratio": 0.9388431323921026
+      },
+      {
+        "baseline_ns": 21025353,
+        "candidate_ns": 25731877,
+        "ratio": 1.2238499396419171
+      },
+      {
+        "baseline_ns": 19679874,
+        "candidate_ns": 22313503,
+        "ratio": 1.1338234685852155
+      },
+      {
+        "baseline_ns": 17714524,
+        "candidate_ns": 18234955,
+        "ratio": 1.029378774162941
+      }
+    ],
+    "median_ratio": 0.9388431323921026,
+    "same_class_control": {
+      "median_ratio": 0.9388431323921026,
+      "within_0_90_1_10": 4,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          7581377,
+          64337
+        ],
+        "close_ns": [
+          25660,
+          14548
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7937784,
+            42793
+          ],
+          "claim_ns": [
+            23574,
+            16948
+          ],
+          "release_ns": [
+            15803,
+            9545
+          ],
+          "close_ns": [
+            15102,
+            12255
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8141903,
+            41945
+          ],
+          "claim_ns": [
+            23901,
+            16018
+          ],
+          "release_ns": [
+            14558,
+            9751
+          ],
+          "close_ns": [
+            16012,
+            12831
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-AutoRecoveringAtomicSharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 28233331,
+        "candidate_ns": 9522468,
+        "ratio": 0.33727752492258173
+      },
+      {
+        "baseline_ns": 9014715,
+        "candidate_ns": 7921074,
+        "ratio": 0.8786826871398596
+      },
+      {
+        "baseline_ns": 9558681,
+        "candidate_ns": 8634402,
+        "ratio": 0.9033047551225949
+      },
+      {
+        "baseline_ns": 13557886,
+        "candidate_ns": 10021541,
+        "ratio": 0.7391669320718584
+      },
+      {
+        "baseline_ns": 9020793,
+        "candidate_ns": 8056059,
+        "ratio": 0.8930544132871688
+      },
+      {
+        "baseline_ns": 8492745,
+        "candidate_ns": 10431090,
+        "ratio": 1.2282353938567565
+      },
+      {
+        "baseline_ns": 8937454,
+        "candidate_ns": 11108479,
+        "ratio": 1.2429131383501386
+      },
+      {
+        "baseline_ns": 7939579,
+        "candidate_ns": 7907562,
+        "ratio": 0.9959674184235713
+      },
+      {
+        "baseline_ns": 12775899,
+        "candidate_ns": 8981598,
+        "ratio": 0.7030110366401613
+      }
+    ],
+    "median_ratio": 0.8930544132871688,
+    "same_class_control": {
+      "median_ratio": 0.8930544132871688,
+      "within_0_90_1_10": 2,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          6857135,
+          71081
+        ],
+        "close_ns": [
+          20609,
+          9514
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7942027,
+            44106
+          ],
+          "claim_ns": [
+            23528,
+            16518
+          ],
+          "release_ns": [
+            14939,
+            9458
+          ],
+          "close_ns": [
+            16709,
+            11206
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            9431220,
+            35635
+          ],
+          "claim_ns": [
+            21685,
+            14254
+          ],
+          "release_ns": [
+            13663,
+            8226
+          ],
+          "close_ns": [
+            13721,
+            12140
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-RecoverableAtomicSharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 30675081,
+        "candidate_ns": 30019576,
+        "ratio": 0.9786307002742715
+      },
+      {
+        "baseline_ns": 21665453,
+        "candidate_ns": 25432643,
+        "ratio": 1.1738800476500537
+      },
+      {
+        "baseline_ns": 19252124,
+        "candidate_ns": 19478305,
+        "ratio": 1.011748366050416
+      },
+      {
+        "baseline_ns": 23602869,
+        "candidate_ns": 25677954,
+        "ratio": 1.087916642675939
+      },
+      {
+        "baseline_ns": 26606934,
+        "candidate_ns": 26465904,
+        "ratio": 0.9946995020170306
+      },
+      {
+        "baseline_ns": 16289728,
+        "candidate_ns": 18992125,
+        "ratio": 1.165895771863103
+      },
+      {
+        "baseline_ns": 18886659,
+        "candidate_ns": 23180751,
+        "ratio": 1.2273611230022208
+      },
+      {
+        "baseline_ns": 22210284,
+        "candidate_ns": 21791624,
+        "ratio": 0.9811501734962056
+      },
+      {
+        "baseline_ns": 16597118,
+        "candidate_ns": 16281726,
+        "ratio": 0.9809971827638991
+      }
+    ],
+    "median_ratio": 1.011748366050416,
+    "same_class_control": {
+      "median_ratio": 1.011748366050416,
+      "within_0_90_1_10": 6,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          6052035,
+          57741
+        ],
+        "close_ns": [
+          25189,
+          13684
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            11338900,
+            37790
+          ],
+          "claim_ns": [
+            22716,
+            14124
+          ],
+          "release_ns": [
+            19059,
+            11141
+          ],
+          "close_ns": [
+            16338,
+            13657
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            16193709,
+            55973
+          ],
+          "claim_ns": [
+            24513,
+            15519
+          ],
+          "release_ns": [
+            10993,
+            7022
+          ],
+          "close_ns": [
+            12031,
+            9656
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-RecoverableAtomicSharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 11573908,
+        "candidate_ns": 17879368,
+        "ratio": 1.544799561219944
+      },
+      {
+        "baseline_ns": 8198070,
+        "candidate_ns": 8354218,
+        "ratio": 1.019046922019451
+      },
+      {
+        "baseline_ns": 8421181,
+        "candidate_ns": 9679677,
+        "ratio": 1.1494441219111666
+      },
+      {
+        "baseline_ns": 8379227,
+        "candidate_ns": 11405918,
+        "ratio": 1.3612136298491495
+      },
+      {
+        "baseline_ns": 8431600,
+        "candidate_ns": 8376311,
+        "ratio": 0.9934426443379667
+      },
+      {
+        "baseline_ns": 8700134,
+        "candidate_ns": 8337245,
+        "ratio": 0.9582892631308897
+      },
+      {
+        "baseline_ns": 8246223,
+        "candidate_ns": 7590173,
+        "ratio": 0.9204423649469582
+      },
+      {
+        "baseline_ns": 9900824,
+        "candidate_ns": 8452486,
+        "ratio": 0.8537154079296835
+      },
+      {
+        "baseline_ns": 12776381,
+        "candidate_ns": 11547247,
+        "ratio": 0.9037963880382089
+      }
+    ],
+    "median_ratio": 0.9934426443379667,
+    "same_class_control": {
+      "median_ratio": 0.9934426443379667,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          6052268,
+          44784
+        ],
+        "close_ns": [
+          17217,
+          8525
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            13586217,
+            43048
+          ],
+          "claim_ns": [
+            24476,
+            16064
+          ],
+          "release_ns": [
+            15511,
+            9695
+          ],
+          "close_ns": [
+            14643,
+            12190
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            4742374,
+            25793
+          ],
+          "claim_ns": [
+            17332,
+            10234
+          ],
+          "release_ns": [
+            13746,
+            9443
+          ],
+          "close_ns": [
+            15161,
+            12760
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-SharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 60210638,
+        "candidate_ns": 65684544,
+        "ratio": 1.090912605842177
+      },
+      {
+        "baseline_ns": 58302275,
+        "candidate_ns": 63786016,
+        "ratio": 1.0940570672413727
+      },
+      {
+        "baseline_ns": 52147233,
+        "candidate_ns": 61444091,
+        "ratio": 1.1782809454146876
+      },
+      {
+        "baseline_ns": 60659300,
+        "candidate_ns": 74193110,
+        "ratio": 1.2231118723757115
+      },
+      {
+        "baseline_ns": 79557219,
+        "candidate_ns": 72840141,
+        "ratio": 0.9155692206888227
+      },
+      {
+        "baseline_ns": 66305538,
+        "candidate_ns": 65041633,
+        "ratio": 0.9809381683925105
+      },
+      {
+        "baseline_ns": 67634148,
+        "candidate_ns": 70547149,
+        "ratio": 1.043069974061032
+      },
+      {
+        "baseline_ns": 65621943,
+        "candidate_ns": 59504678,
+        "ratio": 0.9067801908882825
+      },
+      {
+        "baseline_ns": 71657915,
+        "candidate_ns": 70651462,
+        "ratio": 0.9859547546143368
+      }
+    ],
+    "median_ratio": 1.043069974061032,
+    "same_class_control": {
+      "median_ratio": 1.043069974061032,
+      "within_0_90_1_10": 7,
+      "stable": true,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          5603575,
+          58265
+        ],
+        "close_ns": [
+          19890,
+          10656
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            10876173,
+            65940
+          ],
+          "claim_ns": [
+            1666,
+            1316
+          ],
+          "release_ns": [
+            3381,
+            1180
+          ],
+          "close_ns": [
+            19836,
+            10672
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            6180727,
+            66686
+          ],
+          "claim_ns": [
+            1530,
+            873
+          ],
+          "release_ns": [
+            3053,
+            1242
+          ],
+          "close_ns": [
+            58548,
+            15834
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-128-SharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 128,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 35782683,
+        "candidate_ns": 32545744,
+        "ratio": 0.9095389521238527
+      },
+      {
+        "baseline_ns": 39297337,
+        "candidate_ns": 31038196,
+        "ratio": 0.7898294991337453
+      },
+      {
+        "baseline_ns": 36742377,
+        "candidate_ns": 36489699,
+        "ratio": 0.9931229816731781
+      },
+      {
+        "baseline_ns": 26598884,
+        "candidate_ns": 28954188,
+        "ratio": 1.0885489782202893
+      },
+      {
+        "baseline_ns": 56664220,
+        "candidate_ns": 39041124,
+        "ratio": 0.6889907599539886
+      },
+      {
+        "baseline_ns": 32458468,
+        "candidate_ns": 27631821,
+        "ratio": 0.8512977568750318
+      },
+      {
+        "baseline_ns": 29415312,
+        "candidate_ns": 36193144,
+        "ratio": 1.230418497685831
+      },
+      {
+        "baseline_ns": 32084469,
+        "candidate_ns": 38482426,
+        "ratio": 1.1994097829700718
+      },
+      {
+        "baseline_ns": 31429641,
+        "candidate_ns": 38554745,
+        "ratio": 1.2267001395275243
+      }
+    ],
+    "median_ratio": 0.9931229816731781,
+    "same_class_control": {
+      "median_ratio": 0.9931229816731781,
+      "within_0_90_1_10": 3,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          5279798,
+          66806
+        ],
+        "close_ns": [
+          17786,
+          10270
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            5232842,
+            39892
+          ],
+          "claim_ns": [
+            1191,
+            684
+          ],
+          "release_ns": [
+            3750,
+            1343
+          ],
+          "close_ns": [
+            32796,
+            17317
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            7719022,
+            62161
+          ],
+          "claim_ns": [
+            1542,
+            1306
+          ],
+          "release_ns": [
+            2264,
+            1283
+          ],
+          "close_ns": [
+            17484,
+            14418
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-AtomicSharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 21507312,
+        "candidate_ns": 22331862,
+        "ratio": 1.0383381242621115
+      },
+      {
+        "baseline_ns": 27947932,
+        "candidate_ns": 31044866,
+        "ratio": 1.1108108463982236
+      },
+      {
+        "baseline_ns": 21375500,
+        "candidate_ns": 24460355,
+        "ratio": 1.144317325910505
+      },
+      {
+        "baseline_ns": 22366439,
+        "candidate_ns": 21776167,
+        "ratio": 0.9736090309235189
+      },
+      {
+        "baseline_ns": 21570322,
+        "candidate_ns": 19542948,
+        "ratio": 0.9060109533830788
+      },
+      {
+        "baseline_ns": 24631345,
+        "candidate_ns": 21813966,
+        "ratio": 0.8856181422492356
+      },
+      {
+        "baseline_ns": 26480555,
+        "candidate_ns": 28158482,
+        "ratio": 1.0633644951927934
+      },
+      {
+        "baseline_ns": 26902591,
+        "candidate_ns": 26506318,
+        "ratio": 0.9852700804915036
+      },
+      {
+        "baseline_ns": 24824379,
+        "candidate_ns": 25509536,
+        "ratio": 1.0276001667554302
+      }
+    ],
+    "median_ratio": 1.0276001667554302,
+    "same_class_control": {
+      "median_ratio": 1.0276001667554302,
+      "within_0_90_1_10": 6,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8560678,
+          66982
+        ],
+        "close_ns": [
+          20459,
+          8925
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            9597221,
+            39648
+          ],
+          "claim_ns": [
+            1708,
+            907
+          ],
+          "release_ns": [
+            3519,
+            1397
+          ],
+          "close_ns": [
+            45404,
+            33533
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            7996022,
+            43151
+          ],
+          "claim_ns": [
+            1907,
+            922
+          ],
+          "release_ns": [
+            3675,
+            1282
+          ],
+          "close_ns": [
+            67658,
+            37379
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-AtomicSharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AtomicSharedByteRing",
+      "candidate_class": "AtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 13377399,
+        "candidate_ns": 11701461,
+        "ratio": 0.8747186953158832
+      },
+      {
+        "baseline_ns": 12655726,
+        "candidate_ns": 13750425,
+        "ratio": 1.086498317046371
+      },
+      {
+        "baseline_ns": 14056436,
+        "candidate_ns": 16511751,
+        "ratio": 1.1746755009591336
+      },
+      {
+        "baseline_ns": 11731280,
+        "candidate_ns": 12396502,
+        "ratio": 1.056704980189715
+      },
+      {
+        "baseline_ns": 13038660,
+        "candidate_ns": 12186287,
+        "ratio": 0.9346272546411978
+      },
+      {
+        "baseline_ns": 9027998,
+        "candidate_ns": 8314584,
+        "ratio": 0.9209776076600814
+      },
+      {
+        "baseline_ns": 9927380,
+        "candidate_ns": 10894127,
+        "ratio": 1.0973818872653207
+      },
+      {
+        "baseline_ns": 11203949,
+        "candidate_ns": 12833494,
+        "ratio": 1.1454438073575666
+      },
+      {
+        "baseline_ns": 11058646,
+        "candidate_ns": 9789172,
+        "ratio": 0.8852052954764986
+      }
+    ],
+    "median_ratio": 1.056704980189715,
+    "same_class_control": {
+      "median_ratio": 1.056704980189715,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AtomicSharedByteRing",
+        "AtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8867460,
+          66264
+        ],
+        "close_ns": [
+          22977,
+          14476
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            11964979,
+            32680
+          ],
+          "claim_ns": [
+            1359,
+            802
+          ],
+          "release_ns": [
+            4542,
+            1362
+          ],
+          "close_ns": [
+            40077,
+            30784
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8492682,
+            38343
+          ],
+          "claim_ns": [
+            1618,
+            1096
+          ],
+          "release_ns": [
+            2109,
+            1207
+          ],
+          "close_ns": [
+            43982,
+            30488
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-AutoRecoveringAtomicSharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 26557572,
+        "candidate_ns": 24083780,
+        "ratio": 0.9068517257526404
+      },
+      {
+        "baseline_ns": 24284422,
+        "candidate_ns": 20257092,
+        "ratio": 0.8341599400636343
+      },
+      {
+        "baseline_ns": 20865508,
+        "candidate_ns": 23389077,
+        "ratio": 1.1209445272072935
+      },
+      {
+        "baseline_ns": 23216290,
+        "candidate_ns": 21568337,
+        "ratio": 0.9290173839144842
+      },
+      {
+        "baseline_ns": 23947432,
+        "candidate_ns": 25740824,
+        "ratio": 1.0748886978779186
+      },
+      {
+        "baseline_ns": 23602603,
+        "candidate_ns": 20836679,
+        "ratio": 0.8828127558642579
+      },
+      {
+        "baseline_ns": 22495360,
+        "candidate_ns": 25448236,
+        "ratio": 1.1312660033002362
+      },
+      {
+        "baseline_ns": 19573886,
+        "candidate_ns": 19893462,
+        "ratio": 1.016326650722294
+      },
+      {
+        "baseline_ns": 20122972,
+        "candidate_ns": 22481570,
+        "ratio": 1.117209227344748
+      }
+    ],
+    "median_ratio": 1.016326650722294,
+    "same_class_control": {
+      "median_ratio": 1.016326650722294,
+      "within_0_90_1_10": 4,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8589970,
+          61981
+        ],
+        "close_ns": [
+          23348,
+          14563
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7440252,
+            43998
+          ],
+          "claim_ns": [
+            25190,
+            16915
+          ],
+          "release_ns": [
+            12032,
+            8191
+          ],
+          "close_ns": [
+            23745,
+            20391
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            10120072,
+            44161
+          ],
+          "claim_ns": [
+            23200,
+            15652
+          ],
+          "release_ns": [
+            12423,
+            9622
+          ],
+          "close_ns": [
+            27681,
+            33891
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-AutoRecoveringAtomicSharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "AutoRecoveringAtomicSharedByteRing",
+      "candidate_class": "AutoRecoveringAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 11973954,
+        "candidate_ns": 10277111,
+        "ratio": 0.8582888325777768
+      },
+      {
+        "baseline_ns": 11939398,
+        "candidate_ns": 9936777,
+        "ratio": 0.832267841309922
+      },
+      {
+        "baseline_ns": 16115391,
+        "candidate_ns": 15517924,
+        "ratio": 0.9629256901058125
+      },
+      {
+        "baseline_ns": 10889853,
+        "candidate_ns": 10126588,
+        "ratio": 0.9299104404806934
+      },
+      {
+        "baseline_ns": 9516478,
+        "candidate_ns": 9946246,
+        "ratio": 1.0451604049313201
+      },
+      {
+        "baseline_ns": 12667779,
+        "candidate_ns": 13157059,
+        "ratio": 1.0386239766260525
+      },
+      {
+        "baseline_ns": 13469353,
+        "candidate_ns": 13269254,
+        "ratio": 0.9851441268188605
+      },
+      {
+        "baseline_ns": 9550503,
+        "candidate_ns": 10579341,
+        "ratio": 1.1077260538005171
+      },
+      {
+        "baseline_ns": 9559161,
+        "candidate_ns": 10963374,
+        "ratio": 1.1468970969314147
+      }
+    ],
+    "median_ratio": 0.9851441268188605,
+    "same_class_control": {
+      "median_ratio": 0.9851441268188605,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "AutoRecoveringAtomicSharedByteRing",
+        "AutoRecoveringAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          5337817,
+          49733
+        ],
+        "close_ns": [
+          18693,
+          8484
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7380748,
+            45741
+          ],
+          "claim_ns": [
+            19980,
+            13363
+          ],
+          "release_ns": [
+            16829,
+            9499
+          ],
+          "close_ns": [
+            43156,
+            26891
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            10904738,
+            42924
+          ],
+          "claim_ns": [
+            22370,
+            16291
+          ],
+          "release_ns": [
+            13357,
+            10848
+          ],
+          "close_ns": [
+            29436,
+            31145
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-RecoverableAtomicSharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 22747601,
+        "candidate_ns": 20562591,
+        "ratio": 0.9039454753932074
+      },
+      {
+        "baseline_ns": 19315036,
+        "candidate_ns": 19817884,
+        "ratio": 1.0260340182643202
+      },
+      {
+        "baseline_ns": 19441544,
+        "candidate_ns": 22900543,
+        "ratio": 1.1779179163959406
+      },
+      {
+        "baseline_ns": 23662581,
+        "candidate_ns": 25017258,
+        "ratio": 1.0572497564826087
+      },
+      {
+        "baseline_ns": 24788334,
+        "candidate_ns": 28216956,
+        "ratio": 1.1383159513664776
+      },
+      {
+        "baseline_ns": 19390139,
+        "candidate_ns": 21396238,
+        "ratio": 1.1034597534344648
+      },
+      {
+        "baseline_ns": 26150130,
+        "candidate_ns": 23797852,
+        "ratio": 0.9100471775857328
+      },
+      {
+        "baseline_ns": 18884163,
+        "candidate_ns": 19057528,
+        "ratio": 1.0091804439518977
+      },
+      {
+        "baseline_ns": 20812636,
+        "candidate_ns": 19434281,
+        "ratio": 0.9337731654942699
+      }
+    ],
+    "median_ratio": 1.0260340182643202,
+    "same_class_control": {
+      "median_ratio": 1.0260340182643202,
+      "within_0_90_1_10": 6,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8747397,
+          72487
+        ],
+        "close_ns": [
+          24505,
+          15575
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            6564896,
+            35543
+          ],
+          "claim_ns": [
+            21003,
+            13030
+          ],
+          "release_ns": [
+            16710,
+            11785
+          ],
+          "close_ns": [
+            35368,
+            27036
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            10068444,
+            44109
+          ],
+          "claim_ns": [
+            24751,
+            16059
+          ],
+          "release_ns": [
+            13967,
+            10883
+          ],
+          "close_ns": [
+            31432,
+            32436
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-RecoverableAtomicSharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "RecoverableAtomicSharedByteRing",
+      "candidate_class": "RecoverableAtomicSharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 16742493,
+        "candidate_ns": 11516735,
+        "ratio": 0.6878745596608582
+      },
+      {
+        "baseline_ns": 10247439,
+        "candidate_ns": 9774459,
+        "ratio": 0.9538440775300053
+      },
+      {
+        "baseline_ns": 9077354,
+        "candidate_ns": 9829301,
+        "ratio": 1.0828376859600275
+      },
+      {
+        "baseline_ns": 8850426,
+        "candidate_ns": 9077134,
+        "ratio": 1.025615490147028
+      },
+      {
+        "baseline_ns": 9503850,
+        "candidate_ns": 9757580,
+        "ratio": 1.0266976014983402
+      },
+      {
+        "baseline_ns": 17619734,
+        "candidate_ns": 10518957,
+        "ratio": 0.5969986266535011
+      },
+      {
+        "baseline_ns": 9491779,
+        "candidate_ns": 14344980,
+        "ratio": 1.5113057309909976
+      },
+      {
+        "baseline_ns": 10755218,
+        "candidate_ns": 9407243,
+        "ratio": 0.8746678124051042
+      },
+      {
+        "baseline_ns": 9265270,
+        "candidate_ns": 9415070,
+        "ratio": 1.0161679044431517
+      }
+    ],
+    "median_ratio": 1.0161679044431517,
+    "same_class_control": {
+      "median_ratio": 1.0161679044431517,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "RecoverableAtomicSharedByteRing",
+        "RecoverableAtomicSharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          9227800,
+          75042
+        ],
+        "close_ns": [
+          26181,
+          21015
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7930942,
+            41899
+          ],
+          "claim_ns": [
+            22595,
+            16188
+          ],
+          "release_ns": [
+            11554,
+            7718
+          ],
+          "close_ns": [
+            24347,
+            18560
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            7727130,
+            52474
+          ],
+          "claim_ns": [
+            25838,
+            17610
+          ],
+          "release_ns": [
+            13802,
+            9608
+          ],
+          "close_ns": [
+            31347,
+            29593
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-SharedByteRing-retry.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 20,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 59486884,
+        "candidate_ns": 70029112,
+        "ratio": 1.1772193682224135
+      },
+      {
+        "baseline_ns": 67041943,
+        "candidate_ns": 68190668,
+        "ratio": 1.01713442284929
+      },
+      {
+        "baseline_ns": 78962648,
+        "candidate_ns": 82907283,
+        "ratio": 1.0499557081722994
+      },
+      {
+        "baseline_ns": 68608140,
+        "candidate_ns": 76241157,
+        "ratio": 1.1112552679609153
+      },
+      {
+        "baseline_ns": 75710085,
+        "candidate_ns": 67849964,
+        "ratio": 0.8961813211542425
+      },
+      {
+        "baseline_ns": 63688066,
+        "candidate_ns": 69003798,
+        "ratio": 1.0834651188811417
+      },
+      {
+        "baseline_ns": 71866875,
+        "candidate_ns": 72637126,
+        "ratio": 1.010717747223599
+      },
+      {
+        "baseline_ns": 65981202,
+        "candidate_ns": 69565569,
+        "ratio": 1.0543240633900546
+      },
+      {
+        "baseline_ns": 72530670,
+        "candidate_ns": 74225914,
+        "ratio": 1.0233727883666317
+      }
+    ],
+    "median_ratio": 1.0499557081722994,
+    "same_class_control": {
+      "median_ratio": 1.0499557081722994,
+      "within_0_90_1_10": 6,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          8499296,
+          93585
+        ],
+        "close_ns": [
+          30418,
+          15862
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7699657,
+            60759
+          ],
+          "claim_ns": [
+            2018,
+            1117
+          ],
+          "release_ns": [
+            3367,
+            1516
+          ],
+          "close_ns": [
+            34043,
+            27171
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8251212,
+            69086
+          ],
+          "claim_ns": [
+            1718,
+            1101
+          ],
+          "release_ns": [
+            2468,
+            1492
+          ],
+          "close_ns": [
+            32592,
+            31912
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "3.15-4096-SharedByteRing.json": {
+    "python": "3.15.0rc2 (main, Sep  1 2026, 14:19:35) [Clang 22.1.3 ]",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "args": {
+      "baseline": "picoke.ipc",
+      "candidate": "picoke.ipc",
+      "baseline_class": "SharedByteRing",
+      "candidate_class": "SharedByteRing",
+      "size": 4096,
+      "capacity": 64,
+      "count": 200,
+      "blocks": 10,
+      "pairs": 9,
+      "cpu_affinity": "auto"
+    },
+    "cpu_affinity": {
+      "requested": "auto",
+      "allowed_cpus": [
+        0,
+        1
+      ]
+    },
+    "samples": [
+      {
+        "baseline_ns": 29846342,
+        "candidate_ns": 31912658,
+        "ratio": 1.0692318006675658
+      },
+      {
+        "baseline_ns": 43051522,
+        "candidate_ns": 38866427,
+        "ratio": 0.9027886865416744
+      },
+      {
+        "baseline_ns": 27334743,
+        "candidate_ns": 28166879,
+        "ratio": 1.0304424299873607
+      },
+      {
+        "baseline_ns": 35135916,
+        "candidate_ns": 37962215,
+        "ratio": 1.0804390299658049
+      },
+      {
+        "baseline_ns": 39021668,
+        "candidate_ns": 30863836,
+        "ratio": 0.7909409715648239
+      },
+      {
+        "baseline_ns": 46046386,
+        "candidate_ns": 39819318,
+        "ratio": 0.864765325991056
+      },
+      {
+        "baseline_ns": 34136423,
+        "candidate_ns": 34381856,
+        "ratio": 1.007189769121387
+      },
+      {
+        "baseline_ns": 41082666,
+        "candidate_ns": 32330502,
+        "ratio": 0.7869621216889868
+      },
+      {
+        "baseline_ns": 29501632,
+        "candidate_ns": 34616177,
+        "ratio": 1.1733648158854397
+      }
+    ],
+    "median_ratio": 1.007189769121387,
+    "same_class_control": {
+      "median_ratio": 1.007189769121387,
+      "within_0_90_1_10": 5,
+      "stable": false,
+      "criterion": "median 0.95-1.05 and >=7/9 samples 0.90-1.10"
+    },
+    "setup_timings": {
+      "classes": [
+        "SharedByteRing",
+        "SharedByteRing"
+      ],
+      "parent": {
+        "role": "parent",
+        "create_ns": [
+          6575168,
+          87812
+        ],
+        "close_ns": [
+          28894,
+          27610
+        ]
+      },
+      "workers": [
+        {
+          "role": "consumer",
+          "attach_ns": [
+            7274184,
+            47421
+          ],
+          "claim_ns": [
+            1488,
+            800
+          ],
+          "release_ns": [
+            2656,
+            1065
+          ],
+          "close_ns": [
+            28499,
+            33636
+          ],
+          "cpu_affinity": [
+            0
+          ]
+        },
+        {
+          "role": "producer",
+          "attach_ns": [
+            8171730,
+            61547
+          ],
+          "claim_ns": [
+            1827,
+            1028
+          ],
+          "release_ns": [
+            2294,
+            1151
+          ],
+          "close_ns": [
+            29367,
+            25027
+          ],
+          "cpu_affinity": [
+            1
+          ]
+        }
+      ]
+    }
+  }
+}

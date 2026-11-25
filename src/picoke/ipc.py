@@ -223,4 +223,9 @@ class SharedByteRing:
 
 if (sys.platform == "linux" and os.uname().machine in ("x86_64", "amd64")
         and (not hasattr(sys, "_is_gil_enabled") or sys._is_gil_enabled())):
-    from ._atomic_ipc import AtomicSharedByteRing
+    from ._atomic_ipc import (
+        AtomicSharedByteRing,
+        AutoRecoveringAtomicSharedByteRing,
+        RecoverableAtomicSharedByteRing,
+    )
+    from ._atomic_ipc_native import RoleBusyError, RecoveryRequiredError
