@@ -32,6 +32,8 @@ picoke aims to provide practical Python utilities built on picop. Crypto now cov
 - `picoke.queues.ByteRing` provides a bounded in-process byte FIFO without payload copies. Keep async waiting and shared-memory IPC separate; see the [queue benchmarks](../bench/README.md#bounded-byte-fifo).
 - `picoke.io.files` covers JSON, streaming JSON Lines, filtered text lines, TOML, YAML, and bounded ZIP member reads. See the [file I/O contracts](IO_FILES_PLAN.md) for provider choices, limits, and performance verification.
 - `picoke.logging.JSONFormatter` formats structured JSON events for standard-library handlers. Keep sink ownership, background delivery, and transports out of the formatter.
+- `picoke.ipc.SharedByteRing` provides a Linux shared-memory SPSC byte queue; see the [IPC plan](IPC_PLAN.md) for lifecycle and validation limits.
+- HTTP and WebSocket clients are planned, not implemented; see the [network plan](NETWORK_PLAN.md).
 
 ### 4. Harden and prepare a release
 

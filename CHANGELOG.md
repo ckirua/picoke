@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Added `picoke.ipc.SharedByteRing`, a bounded Linux shared-memory SPSC byte queue with explicit close and unlink.
+- Accelerated shared-memory slot operations with a checked pybind11 extension while retaining process locks and copied-byte ownership.
+- Added experimental `picoke.ipc.AtomicSharedByteRing`, a copied-byte SPSC ring for Linux x86-64 GIL-enabled CPython with a distinct atomic shared-memory format.
+- Added experimental recoverable atomic SPSC rings with explicit role ownership and manual or automatic recovery after process termination.
+
 ## 0.1.0rc3
 
 - Added `picoke.queues.ByteRing`, a bounded single-producer, single-consumer FIFO for immutable bytes on GIL-enabled CPython.

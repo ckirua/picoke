@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=77", "Cython>=3.3.1,<4", "picop>=3.13,<4"]
+requires = ["setuptools>=77", "Cython>=3.3.1,<4", "picop>=3.13,<4", "pybind11>=3.1,<4"]
 build-backend = "setuptools.build_meta"
 
 [project]
